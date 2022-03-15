@@ -1,0 +1,110 @@
+plugins {
+	id 'org.springframework.boot' version '2.6.4'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
+	id 'java'
+}
+
+group = 'com.nanuri.work'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+/* 보안 패치 - log4j2.version 2.17.0 으로 명시
+ * - 출처: https://www.krcert.or.kr/data/secNoticeView.do?bulletin_writing_sequence=36389
+ */
+ext['log4j2.version'] = '2.17.0'
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter'
+	implementation 'org.springframework.boot:spring-boot-starter-aop'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-webflux'
+	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.0'
+	implementation 'org.springframework.session:spring-session-core'
+	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+	
+	implementation 'org.springframework.security:spring-security-crypto:5.5.0'
+	
+	implementation 'com.google.guava:guava:30.1.1-jre'
+	implementation group: 'com.github.zhanhb', name: 'thymeleaf-layout-dialect', version: '2.4.1'
+	
+	implementation 'org.apache.commons:commons-lang3'
+	implementation 'javax.servlet:jstl'
+    implementation 'commons-io:commons-io:2.6'
+    
+    implementation 'org.apache.httpcomponents:httpclient:4.5'
+    implementation 'io.jsonwebtoken:jjwt-api:0.11.2'
+    implementation 'io.jsonwebtoken:jjwt-impl:0.11.2'
+    implementation 'io.jsonwebtoken:jjwt-jackson:0.11.2'
+    
+    implementation 'com.google.guava:guava:30.1.1-jre'
+    
+    implementation 'com.querydsl:querydsl-jpa'
+    implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.5.8'
+    
+    implementation 'io.springfox:springfox-swagger2:2.9.2'
+    implementation 'io.springfox:springfox-swagger-ui:2.9.2'
+    
+    /** firebase **/
+    implementation 'com.google.firebase:firebase-admin:8.1.0'
+    
+    /** image thumbnail */
+	implementation 'net.coobird:thumbnailator:0.4.14'
+	
+    // https://mvnrepository.com/artifact/ch.simas.qlrm/qlrm
+	implementation 'ch.simas.qlrm:qlrm:1.7.1'
+	
+	/** excel **/
+    implementation group: 'org.apache.poi', name: 'poi', version: '5.0.0'        // HSSFWorkbook 사용가능
+    implementation group: 'org.apache.poi', name: 'poi-ooxml', version: '5.0.0'  // XSSFWorkbook 사용가능
+	
+	implementation 'org.mybatis:mybatis-typehandlers-jsr310:1.0.2'
+	implementation 'org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:1.16' /* Log4jdbc */
+	
+	compileOnly 'org.projectlombok:lombok'
+	compileOnly 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
+	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.security:spring-security-test'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
+/* querydsl setting */
+def querydslDir = "$buildDir/generated/querydsl"
+
+querydsl {
+    jpa = true
+    querydslSourcesDir = querydslDir
+}
+
+sourceSets {
+    main.java.srcDir querydslDir
+}
+
+configurations {
+    querydsl.extendsFrom compileClasspath
+}
+
+compileQuerydsl {
+    options.annotationProcessorPath = configurations.querydsl
+}
