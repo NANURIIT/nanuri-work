@@ -1,5 +1,5 @@
 # nanuri-work
-NANURI IT Corp In-house Systeml
+NANURI IT Corp In-house System
 
 ### Git Strategy
 
