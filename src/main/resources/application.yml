@@ -24,7 +24,7 @@ spring:
   application:
     name: NANURI IT Corp In-house System 
   datasource:
-    url: jdbc:log4jdbc:mysql://172.30.1.32:3306/work?serverTimezone=Asia/Seoul
+    url: jdbc:log4jdbc:mysql://nanuriit.com:7706/work?serverTimezone=Asia/Seoul
     username: work
     password: Nanuriwork1!
     driver-class-name: com.mysql.cj.jdbc.Driver
