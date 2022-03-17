@@ -1,0 +1,74 @@
+/****************** default ******************/
+html, body  {height: inherit;}
+dl, ol, ul {margin: 0; padding: 0; list-style: none;}
+a {color: inherit;}
+
+.moeal-dialog .modal-title {font-size: 24px;}
+.modal-alam {z-index: 2150 !important;}
+
+table.list {min-width: 200px;}
+table.list.lg {min-width: 480px;}
+table.list th {text-align: right;}
+table.list td {text-align: left; padding: .5rem;}
+table tr.yellow {background-color: #fcf8e3;}
+table tr.sky, .container .ibox-title.sky {background-color: #d9edf7;}
+.container .ibox-title.green {background-color: #dff0d8;}
+table tr.success {background-color: #d9edf7; cursor: pointer; font-weight: bold;}
+table .img-wrap {display: flex; cursor: pointer;}
+table .img-wrap .img {width: 50px; height: 50px;}
+.point02 {color: #d43f3a; font-weight: bold;}
+.point03 {text-decoration: underline;}
+
+.tilde {padding: .5em;}
+.form-control.date {width: 110px;}
+.pagination {justify-content: center; padding: 1em 0;}
+.check:before {content: "✔"; font-size: 1.25em; color:green; position: absolute;}
+.btn-group .active {color: #fff !important; background-color: #1c84c6; border-color: #1c84c6;}
+
+.loginscreen.center {position: absolute; top: 50%; left: 50%;}
+
+
+/****************** GNB ******************/
+.GNB-stage {background-color: #2F4050; color: #fff; }
+.GNB-stage .navi-wrapper {position: relative; max-width: 1200px; margin: 0 auto; padding: 0 1em; display: flex; justify-content: space-between; align-items: center;}
+.GNB-stage .navi-wrapper > * {display: flex; align-items: center; text-align: center;}
+.GNB-stage .navi-wrap .navi a {padding: 1.5em; color: #a7b1c2; font-weight: 600;}
+.GNB-stage .navi-wrap .navi a.active {color: #fff; background-color: #293846; border-bottom: 4px solid #19aa8d; height: 100%;}
+.GNB-stage .user-wrap .user-wrap {position: relative;}
+.GNB-stage .user-wrap .user {padding: 1em 2em; text-align: right; cursor: pointer;}
+.GNB-stage .user-wrap.active {background-color: #293846;}
+.GNB-stage .sub-wrap {position: absolute; top: 65px; width: 120px; background-color: #293846; z-index: 9; display: none;}
+.GNB-stage .sub-wrap .sub {padding: 1em;}
+.GNB-stage .sub-wrap .sub a:hover {color: #19aa8d; }
+
+.container {margin: 1em auto; padding: 1em; position: relative;}
+.container h1 {margin: 0; padding: 3rem 0; font-weight: bold;}
+.container .ibox-title {background-color: #e3e6e7; color: #000; font-weight: bold; padding: .25em 1em; display: flex; justify-content: space-between; align-items: center;}
+
+.tab-wrapper {padding: 1em 0; display: flex ;}
+.tab-wrapper li a {padding: 1em; background-color: #a7b1c2; color: #fff; margin-right: .325em; font-weight: 600;}
+.tab-wrapper li a.active {background-color: #2F4050; }
+
+.top-wrapper {display: flex; justify-content: space-between; align-items: center;}
+.bottom-wrapper .ibox-title a {font-size: 1.25em;}
+.bottom-wrapper .ibox-title a:hover {color: #fff;}
+
+.sort-wrapper form > * , .sort-wrapper .form-inline label {margin-right: .5em;}
+
+.operation-wrap {min-width: 300px; margin: 1em 0;}
+
+
+/****************** calendar ******************/
+.total-wrapper .ibox {cursor: pointer;}
+.total-wrapper .ibox-waiting.active .ibox-title {border: 1px solid #ffc107; border-bottom: none;}
+.total-wrapper .ibox-waiting.active .ibox-content {border: 1px solid #ffc107; border-top: none;}
+.total-wrapper .ibox-success.active .ibox-title {border: 1px solid #28a745; border-bottom: none;}
+.total-wrapper .ibox-success.active .ibox-content {border: 1px solid #28a745; border-top: none;}
+.total-wrapper .ibox-after.active .ibox-title {border: 1px solid #0d6efd; border-bottom: none;}
+.total-wrapper .ibox-after.active .ibox-content {border: 1px solid #0d6efd; border-top: none;}
+
+.render-range {padding-left: 12px; padding-right: 12px; font-size: 19px; vertical-align: middle;}
+#calendar-wrap {position: relative; width: 100%;}
+#calendar {position: static !important; width: 100%;}
+
+#menu-navi {margin: 0px auto; display: block; width: 240px;}

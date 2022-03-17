@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+
+    <meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>MSP - 관리자 | 로그인</title>
+
+	<!-- css -->
+	<link th:href="@{/css/plugins/bootstrap/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/font-awesome/css/font-awesome.css}" rel="stylesheet">
+    <link th:href="@{/css/plugins/animate/animate.css}" rel="stylesheet">
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+    <link th:href="@{/css/common.css}" rel="stylesheet">
+
+	<!-- scripts -->
+	<script th:src="@{/js/plugins/jquery/jquery-3.6.0.min.js}"></script>
+	<script th:src="@{/js/plugins/popper/popper.min.js}"></script>
+	<script th:src="@{/js/plugins/bootstrap/bootstrap.js}"></script>
+
+</head>
+
+<body class="gray-bg">
+
+	<!-- 로그인 st -->
+	<div class="loginscreen middle-box center text-center pt-0  animated fadeInDown">
+		<form style="transform: translate(-50%, -50%);">
+			<div class="form-group">
+				<span th:text="${username}" class="alert alert-danger"></span>
+			</div>
+			<div class="form-group">
+				<span th:text="${exception}" class="alert alert-danger"></span>
+			</div>
+		</form>
+	</div>
+	<!-- 로그인 ed -->
+
+</body>
+
+</html>
