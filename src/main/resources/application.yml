@@ -27,7 +27,7 @@ spring:
     url: jdbc:log4jdbc:mysql://nanuriit.com:7706/work?serverTimezone=Asia/Seoul
     username: work
     password: Nanuriwork1!
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
     hikari:
       maximum-pool-size: 5
       minimum-idle: 1
