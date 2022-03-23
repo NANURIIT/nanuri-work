@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nanuri.work.business.board.mapper.BoardMapper">
+
+	<sql id="boardColumns"> 
+		seq_no, 
+		rgmn_nm, 
+		rg_dtm, 
+		mdfp_nm, 
+		mod_dtm, 
+		del_yn, 
+		bult_typ_cd, 
+		bult_titl_nm, 
+		brcn, 
+		inq_cn
+	</sql>
+	
+	<insert id="insertBoard" parameterType="com.nanuri.work.business.board.dto.BoardDTO">
+		INSERT INTO blbd(
+			rgmn_nm,
+			bult_typ_cd,
+			bult_titl_nm,
+			brcn
+		) VALUES(
+			#{rgmnNm}, 
+			#{bultTypCd}, 
+			#{bultTitlNm}, 
+			#{brcn}
+		)
+	</insert>
+	
+	<select id="selectBoardList" resultType="com.nanuri.work.business.board.dto.BoardDTO">
+		SELECT
+			  <include refid="boardColumns" />
+		  FROM blbd 
+	  ORDER BY seq_no DESC
+	</select>
+	
+	<select id="selectBoardDetail" parameterType="long" resultType="com.nanuri.work.business.board.dto.BoardDTO">
+		SELECT 
+			<include refid="boardColumns" />
+		  FROM blbd
+		 WHERE seq_no = #{seqNo}
+	</select>
+	
+	<update id="updateInqCn" parameterType="long">
+		UPDATE blbd
+		   SET inq_cn = inq_cn + 1
+		 WHERE seq_no = #{seqNo}
+	</update>
+	
+	<update id="updateBoard" parameterType="com.nanuri.work.business.board.dto.BoardDTO">
+		UPDATE blbd
+		   SET mdfp_nm = #{mdfpNm}, 
+		       bult_typ_cd = #{bultTypCd},
+		       bult_titl_nm = #{bultTitlNm}, 
+		       brcn = #{brcn}
+		 WHERE seq_no = #{seqNo}
+	</update>
+	
+	<update id="deleteBoard" parameterType="long">
+		UPDATE blbd
+		   SET del_yn = 'Y', 
+		       mdfp_nm = #{mdfpNm}
+		 WHERE seq_no = #{seqNo}
+	</update>
+	
+	<select id="selectTotalCountBoard" resultType="int">
+		SELECT COUNT(*) 	AS totalCount
+		  FROM blbd
+	</select>
+	
+</mapper>

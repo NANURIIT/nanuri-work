@@ -9,7 +9,7 @@
 		     , user_phone_no		/* 휴대전화번호 */
 		     , user_password		/* 비밀번호 */
 		     , account_activ_yn		/* 계정활성화여부 */
-		  FROM tb_user_mm
+		  FROM tb_mem_mm
 		 WHERE user_id = #{userId}
 	</select>
 
