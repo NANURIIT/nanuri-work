@@ -1,0 +1,41 @@
+body {
+    background: #f5f5f5;
+}
+.list_container {
+    background: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+.list_container .list_title {
+    position: relative;
+}
+.list_container .list_title .list_title_text {
+    font-weight: bold;
+}
+.list_container .list_title .list_title_add {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 14px;
+}
+.list_container .list_info {
+    background: #f3f3f3;
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 15px;
+    margin-top: 15px;
+}
+.list_container .list_info .list_info_desc {
+    padding-top: 5px;
+    color: #999;
+    font-size: 13px;
+}
+.list_container .list_info .list_info_set {
+    padding-top: 10px;
+    text-align: right;
+}
+.list_container .list_info .list_info_set > button {
+    font-size: 13px;
+    margin: 0 3px;
+}

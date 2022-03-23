@@ -1,0 +1,157 @@
+.wrap {
+    position: relative;
+}
+.form_box {
+    padding-top: 20px;
+}
+.form_box_first {
+    padding-top: 0;
+}
+.form_box .form_title {
+    padding: 10px 0 10px;
+}
+.form_box .education_select {
+    width: 100%;
+    padding: 10px 5px;
+}
+.form_box .school_box {
+    position: relative;
+}
+.form_box .school_box::after {
+    content: '';
+    display: block;
+    clear: both;
+}
+.form_box .school_box > div {
+    width: 100%;
+    padding-right: 40px;
+    height: 40px;
+    border: 1px solid #333;
+    background-color: #fff;
+}
+.form_box .school_box > button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+
+.form_box .school_period::after {
+    content: '';
+    display: block;
+    clear: both;
+}
+.form_box .school_period .period_box .input_line {
+    float: left;
+    width: 24%;
+}
+.form_box .school_period .period_box .input_line .input_box {
+    width: 100%;
+    height: 40px;
+}
+.form_box .school_period .period_box .input_line > select {
+    width: 100%;
+    height: 40px;
+    padding: 0;
+}
+.form_box .school_period .period_box .input_line + .input_line {
+    margin-left: -1px;
+}
+.form_box .school_period span {
+    display: inline-block;
+    width: 4%;
+    float: left;
+    padding-top: 11px;
+    text-align: center;
+}
+
+.form_box .major_box::after {
+    content: '';
+    display: block;
+    clear: both;
+}
+.form_box .major_box > select {
+    padding: 10px 5px;
+}
+.form_box .major_box + .major_box {
+    padding-top: 10px;
+}
+.form_box .major_box > .input_box {
+    width: 100%;
+    padding: 10px 5px;
+}
+.form_box .major_box .major_title {
+    width: 38%;
+    float: left;
+}
+.form_box .major_box .major_line {
+    width: 60%;
+    margin-left: 2%;
+}
+
+.save_box .save_button > button {
+    margin-top: 50px;
+    width: 100%;
+    padding: 10px 0;
+    background: #333;
+    color: #fff;
+}
+
+
+/*팝업*/
+.popup_back {
+    z-index: 50;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0.7);
+}
+.popup_box {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 90%;
+    padding: 40px 20px 20px 20px;
+    background-color: #fff;
+    transform: translate(-50%,-50%);
+    text-align: center;
+    z-index: 999;
+}
+ .popup_close {
+    position: absolute;
+    top: 8px;
+    right: 5px;
+    display: inline-block;
+    background: url("../images/ico_close.png") no-repeat;
+    width: 17px;
+    height: 17px;
+    background-size: 100% 100%;
+}
+.popup_box .search_box {
+    position: relative;
+    margin-bottom: 9px;
+}
+.popup_box .search_box > input {
+    width: 100%;
+    padding-right: 40px;
+    height: 40px;
+}
+.popup_box .search_box > button {
+    position: absolute;
+    top: 9px;
+    right: 10px;
+}
+.popup_box .search_list {
+    max-height: 205px;
+    overflow: scroll;
+}
+.popup_box .search_list .list_box > button {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    padding: 10px 3px;
+    text-align: left;
+    font-size: 13px;
+}
