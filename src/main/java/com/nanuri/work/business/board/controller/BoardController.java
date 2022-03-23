@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.nanuri.work.business.board.dto.BoardDTO;
 import com.nanuri.work.business.board.service.BoardService;
-import com.nanuri.work.com.security.AuthenticationFacade;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -26,9 +25,6 @@ public class BoardController {
 
 	@Autowired
 	private BoardService boardService;
-
-	@Autowired
-	private AuthenticationFacade facade;
 
 	@GetMapping(value = "/notice")
 	public String getNoticePage() {

@@ -35,6 +35,7 @@
 		  FROM blbd 
 		 WHERE bult_typ_cd = #{bultTypCd} 
 	  ORDER BY seq_no DESC
+	     LIMIT #{paginationInfo.firstRecordIndex}, #{recordsPerPage} 
 	</select>
 	
 	<select id="selectBoardDetail" parameterType="long" resultType="com.nanuri.work.business.board.dto.BoardDTO">
