@@ -3,15 +3,14 @@
 
 /** onload **/
 $(function () {
-    let link = document.location.href;
-    let mode = link.includes('?seqNo=') ? 'M' : 'W';    // 작성인지 수정인지 모드 설정
-
+    let seqNo = new URL(document.location.href).searchParams.get('seqNo'); // seqNo세팅
+    let mode = seqNo != null ? 'M' : 'W';    // 작성인지 수정인지 모드 설정
     if(mode == 'M'){
-        let seqNo = link.substring(link.length-1, link.length); // seqNo세팅
         getBoardDetail(seqNo);
     }
 
-    $(document).on('click', '.qna_register', function () {
+    // 등록버튼 클릭
+    $(document).on('click', '#noticeRegister', function () {
         let params = {
             bultTitlNm: $('#noticeTitle').val(),
             bultTypCd: 'NOTICE',
@@ -20,10 +19,15 @@ $(function () {
         if(mode == 'W'){   
             registerNotice(params);
         } else if(mode == 'M'){
-            params.seqNo = link.substring(link.length-1, link.length);
+            params.seqNo = seqNo;
             registerNotice(params);
         }
         
+    });
+
+    // 취소버튼 클릭
+    $(document).on('click', '#cancel', function(){
+        history.go(-1);
     });
 });
 

@@ -36,7 +36,7 @@ public class BoardController {
 		return "business/board/notice_write";
 	}
 
-	@GetMapping(value = "noticeDetail/{seqNo}")
+	@GetMapping(value = "noticeDetail")
 	public String getNoticeDetail() {
 		return "business/board/notice_detail";
 	}

@@ -3,8 +3,7 @@
 
 /** onload **/
 $(function(){
-    let link = document.location.href;
-    let seqNo = link.substring(link.length-1, link.length);
+    let seqNo = new URL(document.location.href).searchParams.get('seqNo');
 
     getBoardDetail(seqNo);
 
