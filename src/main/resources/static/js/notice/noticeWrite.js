@@ -27,7 +27,7 @@ $(function () {
     });
 });
 
-function registerNotice(params) {
+var registerNotice = function(params) {
 
     if (isEmpty(params.bultTitlNm)) {
         openPopup({
@@ -65,7 +65,7 @@ function registerNotice(params) {
     }
 }
 
-function getBoardDetail(seqNo){
+ var getBoardDetail = function(seqNo){
     ajaxCall({
         method : 'GET', 
         url : '/admin/boardDetail/' + seqNo, 
@@ -73,7 +73,7 @@ function getBoardDetail(seqNo){
     })
 }
 
-function getBoardDetailCB(object){
+var getBoardDetailCB = function(object){
     $('#noticeTitle').val(object.bultTitlNm);
     $('#noticeContent').val(object.brcn);
 }

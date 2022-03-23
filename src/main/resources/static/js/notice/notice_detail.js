@@ -13,7 +13,7 @@ $(function(){
     })
 });
 
-function getBoardDetail(seqNo){
+var getBoardDetail = function(seqNo){
     ajaxCall({
         method : 'GET', 
         url : '/admin/boardDetail/' + seqNo, 
@@ -21,7 +21,7 @@ function getBoardDetail(seqNo){
     });
 }
 
-function getBoardDetailCB(object){
+var getBoardDetailCB = function(object){
     let BOARD_DETAIL_HTML = '';
 
     BOARD_DETAIL_HTML += '<tr>';

@@ -6,7 +6,7 @@ $(function(){
     searchBoardList();
 });
 
-function searchBoardList(){
+var searchBoardList = function(){
     let param = {bultTypCd : "NOTICE"};
     ajaxCall({
         method : 'GET', 
@@ -16,7 +16,7 @@ function searchBoardList(){
     })
 }
 
-function searchBoardListCB(object){
+var searchBoardListCB = function(object){
     console.log(object);
     let BOARD_LIST_HTML = '';
 
