@@ -8,30 +8,47 @@ import org.springframework.stereotype.Service;
 
 import com.nanuri.work.business.board.dto.BoardDTO;
 import com.nanuri.work.business.board.mapper.BoardMapper;
+import com.nanuri.work.business.common.paging.PaginationInfo;
+import com.nanuri.work.com.security.AuthenticationFacade;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class BoardService {
 
 	@Autowired
 	private BoardMapper boardMapper;
 	
+	@Autowired
+	private AuthenticationFacade facade;
+	
 	public boolean registerBoard(BoardDTO params) {
 		int queryResult = 0;
 		
 		if(params.getSeqNo() != null) {
+			params.setMdfpNm(facade.getDetails().getUsername());
 			queryResult = boardMapper.updateBoard(params);
 		} else {
+			params.setRgmnNm(facade.getDetails().getUsername());
 			queryResult = boardMapper.insertBoard(params);
 		}
 		
 		return (queryResult > 0);
 	}
 	
-	public List<BoardDTO> getBoardList() {
+	public List<BoardDTO> getBoardList(BoardDTO params) {
 		List<BoardDTO> boardList = Collections.emptyList();
 		
-		if(boardMapper.selectTotalCountBoard() > 0 ) {
-			boardList = boardMapper.selectBoardList();
+		int boardTotalCount = boardMapper.selectTotalCountBoard(params);
+		
+		PaginationInfo paginationInfo = new PaginationInfo(params);
+		paginationInfo.setTotalPageCount(boardTotalCount);
+		
+		params.setPaginationInfo(paginationInfo);
+		
+		if(boardTotalCount > 0 ) {
+			boardList = boardMapper.selectBoardList(params);
 		}
 		
 		return boardList;

@@ -3,13 +3,14 @@ package com.nanuri.work.business.board.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.nanuri.work.business.board.dto.BoardDTO;
@@ -35,7 +36,7 @@ public class BoardController {
 	}
 
 	@GetMapping(value = "/noticeWrite")
-	public String getNoticeWritePage() {
+	public String getNoticeWritePage(@RequestParam(value = "seqNo", required = false) Long seqNo) {
 		return "business/board/notice_write";
 	}
 
@@ -47,8 +48,6 @@ public class BoardController {
 	@ResponseBody
 	@PostMapping(value = "/boardWrite")
 	public String registerBoard(@RequestBody BoardDTO params) {
-
-		params.setRgmnNm(facade.getDetails().getUsername());
 		
 		String message = "";
 
@@ -67,8 +66,8 @@ public class BoardController {
 	
 	@ResponseBody
 	@GetMapping(value = "/boardList")
-	public List<BoardDTO> getBoardList() {
-		return boardService.getBoardList();
+	public List<BoardDTO> getBoardList(@ModelAttribute("params") BoardDTO params) {
+		return boardService.getBoardList(params);
 	}
 	
 	@ResponseBody

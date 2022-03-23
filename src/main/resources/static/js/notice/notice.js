@@ -7,14 +7,17 @@ $(function(){
 });
 
 function searchBoardList(){
+    let param = {bultTypCd : "NOTICE"};
     ajaxCall({
         method : 'GET', 
         url : '/admin/boardList',
-        success : showBoardList
+        data : param,
+        success : searchBoardListCB
     })
 }
 
-function showBoardList(object){
+function searchBoardListCB(object){
+    console.log(object);
     let BOARD_LIST_HTML = '';
 
     for(let i = 0; i < object.length; i++) {

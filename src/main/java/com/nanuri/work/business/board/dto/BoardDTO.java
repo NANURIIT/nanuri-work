@@ -1,6 +1,6 @@
 package com.nanuri.work.business.board.dto;
 
-import com.nanuri.work.business.common.dto.CommonDTO;
+import com.nanuri.work.business.common.paging.CommonDTO;
 
 import lombok.Getter;
 import lombok.Setter;

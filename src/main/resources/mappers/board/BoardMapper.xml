@@ -29,10 +29,11 @@
 		)
 	</insert>
 	
-	<select id="selectBoardList" resultType="com.nanuri.work.business.board.dto.BoardDTO">
+	<select id="selectBoardList" parameterType="com.nanuri.work.business.board.dto.BoardDTO" resultType="com.nanuri.work.business.board.dto.BoardDTO">
 		SELECT
 			  <include refid="boardColumns" />
 		  FROM blbd 
+		 WHERE bult_typ_cd = #{bultTypCd} 
 	  ORDER BY seq_no DESC
 	</select>
 	
@@ -65,9 +66,10 @@
 		 WHERE seq_no = #{seqNo}
 	</update>
 	
-	<select id="selectTotalCountBoard" resultType="int">
+	<select id="selectTotalCountBoard" parameterType="com.nanuri.work.business.board.dto.BoardDTO" resultType="int">
 		SELECT COUNT(*) 	AS totalCount
 		  FROM blbd
+		 WHERE bult_typ_cd = #{bultTypCd}
 	</select>
 	
 </mapper>
