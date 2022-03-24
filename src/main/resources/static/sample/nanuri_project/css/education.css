@@ -1,27 +1,9 @@
-.wrap {
-    position: relative;
-}
-.form_box {
-    padding-top: 15px;
-}
-.form_box_first {
-    padding-top: 0;
-}
-.form_box .form_title {
-    padding: 10px 0 10px;
-    font-weight: bold;
-}
 .form_box .education_select {
     width: 100%;
     height: 40px;
 }
 .form_box .school_box {
     position: relative;
-}
-
-.input_box {
-    width: 100%;
-    height: 40px;
 }
 .form_box .school_period::after {
     content: '';
