@@ -1,7 +1,6 @@
 package com.nanuri.work.business.board.controller;
 
 import java.util.HashMap;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -64,6 +63,7 @@ public class BoardController {
 	@ResponseBody
 	@GetMapping(value = "/boardList")
 	public HashMap<String, Object> getBoardList(@ModelAttribute("params") BoardDTO params) {
+		log.debug("params : " + params);
 		return boardService.getBoardList(params);
 	}
 	
