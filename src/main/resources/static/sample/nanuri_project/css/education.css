@@ -29,13 +29,3 @@
     padding-top: 11px;
     text-align: center;
 }
-
-
-.save_box .save_button > button {
-    margin-top: 50px;
-    width: 100%;
-    padding: 10px 0;
-    background: #333;
-    color: #fff;
-    font-size: 15px;
-}
