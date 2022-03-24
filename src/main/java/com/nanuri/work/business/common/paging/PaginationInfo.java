@@ -35,14 +35,14 @@ public class PaginationInfo {
 	private boolean hasNextPage;
 
 	public PaginationInfo(Criteria criteria) {
-		if (criteria.getCurrentPageNo() < 1) {
-			criteria.setCurrentPageNo(1);
+		if (criteria.getThisPageNo() < 1) {
+			criteria.setThisPageNo(1);
 		}
-		if (criteria.getRecordsPerPage() < 1 || criteria.getRecordsPerPage() > 100) {
-			criteria.setRecordsPerPage(10);
+		if (criteria.getPageDivNo() < 1 || criteria.getPageDivNo() > 100) {
+			criteria.setPageDivNo(10);
 		}
-		if (criteria.getPageSize() < 5 || criteria.getPageSize() > 20) {
-			criteria.setPageSize(10);
+		if (criteria.getPageViewNo() < 5 || criteria.getPageViewNo() > 20) {
+			criteria.setPageViewNo(10);
 		}
 
 		this.criteria = criteria;
@@ -59,31 +59,31 @@ public class PaginationInfo {
 	private void calculation() {
 
 		/* 전체 페이지 수 (현재 페이지 번호가 전체 페이지 수보다 크면 현재 페이지 번호에 전체 페이지 수를 저장) */
-		totalPageCount = ((totalRecordCount - 1) / criteria.getRecordsPerPage()) + 1;
-		if (criteria.getCurrentPageNo() > totalPageCount) {
-			criteria.setCurrentPageNo(totalPageCount);
+		totalPageCount = ((totalRecordCount - 1) / criteria.getPageDivNo()) + 1;
+		if (criteria.getThisPageNo() > totalPageCount) {
+			criteria.setThisPageNo(totalPageCount);
 		}
 
 		/* 페이지 리스트의 첫 페이지 번호 */
-		firstPage = ((criteria.getCurrentPageNo() - 1) / criteria.getPageSize()) * criteria.getPageSize() + 1;
+		firstPage = ((criteria.getThisPageNo() - 1) / criteria.getPageViewNo()) * criteria.getPageViewNo() + 1;
 
 		/* 페이지 리스트의 마지막 페이지 번호 (마지막 페이지가 전체 페이지 수보다 크면 마지막 페이지에 전체 페이지 수를 저장) */
-		lastPage = firstPage + criteria.getPageSize() - 1;
+		lastPage = firstPage + criteria.getPageViewNo() - 1;
 		if (lastPage > totalPageCount) {
 			lastPage = totalPageCount;
 		}
 
 		/* SQL의 조건절에 사용되는 첫 RNUM */
-		firstRecordIndex = (criteria.getCurrentPageNo() - 1) * criteria.getRecordsPerPage();
+		firstRecordIndex = (criteria.getThisPageNo() - 1) * criteria.getPageDivNo();
 
 		/* SQL의 조건절에 사용되는 마지막 RNUM */
-		lastRecordIndex = criteria.getCurrentPageNo() * criteria.getRecordsPerPage();
+		lastRecordIndex = criteria.getThisPageNo() * criteria.getPageDivNo();
 
 		/* 이전 페이지 존재 여부 */
 		hasPreviousPage = firstPage != 1;
 
 		/* 다음 페이지 존재 여부 */
-		hasNextPage = (lastPage * criteria.getRecordsPerPage()) < totalRecordCount;
+		hasNextPage = (lastPage * criteria.getPageDivNo()) < totalRecordCount;
 	}
 
 }

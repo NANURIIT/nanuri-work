@@ -73,11 +73,9 @@ var registerNotice = function(params) {
     ajaxCall({
         method : 'GET', 
         url : '/admin/boardDetail/' + seqNo, 
-        success : getBoardDetailCB
+        success : function(object){
+            $('#noticeTitle').val(object.bultTitlNm);
+            $('#noticeContent').val(object.brcn);
+        }
     })
-}
-
-var getBoardDetailCB = function(object){
-    $('#noticeTitle').val(object.bultTitlNm);
-    $('#noticeContent').val(object.brcn);
 }

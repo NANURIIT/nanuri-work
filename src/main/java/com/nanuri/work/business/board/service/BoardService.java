@@ -1,6 +1,7 @@
 package com.nanuri.work.business.board.service;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,21 +38,20 @@ public class BoardService {
 		return (queryResult > 0);
 	}
 	
-	public List<BoardDTO> getBoardList(BoardDTO params) {
-		List<BoardDTO> boardList = Collections.emptyList();
-		
+	public HashMap<String, Object> getBoardList(BoardDTO params) {
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
 		int boardTotalCount = boardMapper.selectTotalCountBoard(params);
 		
 		PaginationInfo paginationInfo = new PaginationInfo(params);
-		paginationInfo.setTotalPageCount(boardTotalCount);
+		paginationInfo.setTotalRecordCount(boardTotalCount);
 		
 		params.setPaginationInfo(paginationInfo);
 		
 		if(boardTotalCount > 0 ) {
-			boardList = boardMapper.selectBoardList(params);
+			resultMap.put("boardTotalCount", boardTotalCount);
+			resultMap.put("boardList", boardMapper.selectBoardList(params));
 		}
-		
-		return boardList;
+		return resultMap;
 	}
 	
 	public BoardDTO getBoardDetail(Long seqNo) {

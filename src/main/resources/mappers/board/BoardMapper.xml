@@ -33,9 +33,10 @@
 		SELECT
 			  <include refid="boardColumns" />
 		  FROM blbd 
-		 WHERE bult_typ_cd = #{bultTypCd} 
+		 WHERE bult_typ_cd = #{bultTypCd}
+		   AND del_yn = 'N' 
 	  ORDER BY seq_no DESC
-	     LIMIT #{paginationInfo.firstRecordIndex}, #{recordsPerPage} 
+	     LIMIT #{paginationInfo.firstRecordIndex}, #{pageDivNo} 
 	</select>
 	
 	<select id="selectBoardDetail" parameterType="long" resultType="com.nanuri.work.business.board.dto.BoardDTO">
