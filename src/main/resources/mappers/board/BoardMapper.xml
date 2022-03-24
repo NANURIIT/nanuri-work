@@ -109,7 +109,7 @@
 		 WHERE seq_no = #{seqNo}
 	</update>
 	
-	<update id="deleteBoard" parameterType="long">
+	<update id="deleteBoard" parameterType="com.nanuri.work.business.board.dto.BoardDTO">
 		UPDATE blbd
 		   SET del_yn = 'Y', 
 		       mdfp_nm = #{mdfpNm}

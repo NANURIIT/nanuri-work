@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="ko">
-    <!-- 공통 헤드 -->
-    <head th:replace="layout/head :: headFragment"></head>
+<!-- 공통헤드 -->
+<head th:replace="layout/head :: headFragment"></head>
 
-    <link rel="stylesheet" th:href="@{/sample/admin/css/notice.css}">
-
-    <script th:src="@{https://code.jquery.com/ui/1.13.1/jquery-ui.js}"></script>
+<script th:src="@{https://code.jquery.com/ui/1.13.1/jquery-ui.js}"></script>
+<link rel="stylesheet" th:href="@{/sample/admin/css/notice.css}">
 <body>
     <div class="wrapper">
         <header th:replace="/layout/header :: headerFragment"></header>
@@ -14,7 +13,7 @@
             <div class="sub_wrap notice_wrap">
                 <div class="sub_container notice_container">
                     <div class="condition_wrap">
-                        <div class="condition_input">
+                        <!--<div class="condition_input">
                             <input type="checkbox" id="check1"><label for="check1">조건1</label>
                             <input type="checkbox" id="check2"><label for="check2">조건2</label>
                             <input type="checkbox" id="check3"><label for="check3">조건3</label>
@@ -43,6 +42,20 @@
                                     </div>
                                 </form>
                             </div>
+                        </div>-->
+                        <div class="notice_search notice_search_option">
+                            <form action="#">
+                                <div class="notice_search_box">
+                                    <select name="date">
+                                        <option value="이름">이름</option>
+                                        <option value="전화번호">전화번호</option>
+                                        <option value="이메일">이메일</option>
+                                        <option value="최종등록일">최종등록일</option>
+                                    </select>
+                                    <input name="notice_search" type="text">
+                                    <a href="#">검색</a>
+                                </div>
+                            </form>
                         </div>
                     </div>
                     <div class="submain_title notice_title">
@@ -50,20 +63,31 @@
                     </div>
                     <div class="notice_list file_down_list">
                         <div class="file_down_wrap">
-                            <button>전체 다운로드</button>
-                            <button>선택 다운로드</button>
+                            <button>전체 프로필파일 다운로드</button>
+                            <button>선택 프로필파일 다운로드</button>
                         </div>
                         <table>
                             <colgroup>
+                                <col style="width: 5%;">
+                                <col style="width: 5%;">
+                                <col style="width: 5%;">
+                                <col style="width: 10%;">
+                                <col style="width: 15%;">
+                                <col style="width: 10%;">
+                                <col style="width: auto;">
                                 <col style="width: 10%;">
                                 <col style="width: 10%;">
-                                <col style="width: 60%;">
                             </colgroup>
                             <thead>
                                 <tr>
                                     <th scope="col">선택</th>
-                                    <th scope="col">직위</th>
                                     <th scope="col">이름</th>
+                                    <th scope="col">직급</th>
+                                    <th>전화번호</th>
+                                    <th>이메일</th>
+                                    <th>최종학력</th>
+                                    <th>주소</th>
+                                    <th>최종등록일</th>
                                     <th>프로필 파일</th>
                                 </tr>
                             </thead>
@@ -72,11 +96,16 @@
                                     <td>
                                         <input type="checkbox">
                                     </td>
-                                    <td>사원</td>
                                     <td>홍길동</td>
+                                    <td>사원</td>
+                                    <td>010-1234-5678</td>
+                                    <td>nanuri@nanuri.com</td>
+                                    <td>대학교</td>
+                                    <td>서울시 영등포구 선유로 49길 4 SK1타워 805호</td>
+                                    <td>2022-03-23</td>
                                     <td>
                                         <a class="download_link" href="#" download="">
-                                            <img th:src="@{/sample/admin/images/ico_download.png}" alt="">
+                                            <img src="../../images/ico_download.png" alt="">
                                         </a>
                                     </td>
                                 </tr>
@@ -84,11 +113,16 @@
                                     <td>
                                         <input type="checkbox">
                                     </td>
-                                    <td>사원</td>
                                     <td>홍길동</td>
+                                    <td>사원</td>
+                                    <td>010-1234-5678</td>
+                                    <td>nanuri@nanuri.com</td>
+                                    <td>대학교</td>
+                                    <td>서울시 영등포구 선유로 49길 4 SK1타워 805호</td>
+                                    <td>2022-03-23</td>
                                     <td>
                                         <a class="download_link" href="#" download="">
-                                            <img th:src="@{/sample/admin/images/ico_download.png}" alt="">
+                                            <img src="../../images/ico_download.png" alt="">
                                         </a>
                                     </td>
                                 </tr>
@@ -96,23 +130,16 @@
                                     <td>
                                         <input type="checkbox">
                                     </td>
-                                    <td>사원</td>
                                     <td>홍길동</td>
+                                    <td>사원</td>
+                                    <td>010-1234-5678</td>
+                                    <td>nanuri@nanuri.com</td>
+                                    <td>대학교</td>
+                                    <td>서울시 영등포구 선유로 49길 4 SK1타워 805호</td>
+                                    <td>2022-03-23</td>
                                     <td>
                                         <a class="download_link" href="#" download="">
-                                            <img th:src="@{/sample/admin/images/ico_download.png}" alt="">
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <input type="checkbox">
-                                    </td>
-                                    <td>사원</td>
-                                    <td>홍길동</td>
-                                    <td>
-                                        <a class="download_link" href="#" download="">
-                                            <img th:src="@{/sample/admin/images/ico_download.png}" alt="">
+                                            <img src="../../images/ico_download.png" alt="">
                                         </a>
                                     </td>
                                 </tr>
@@ -174,7 +201,7 @@
             </div>
         </div>
     </div>
-    <script th:inline="javascript">
+    <script>
         $.datepicker.setDefaults({
             dateFormat: 'yymmdd',
             prevText: '이전 달',

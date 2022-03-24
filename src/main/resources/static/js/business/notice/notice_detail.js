@@ -7,9 +7,16 @@ $(function () {
 
     getBoardDetail(seqNo);
 
+    // 수정버튼 클릭
     $(document).on('click', '#modifyBoard', function () {
         location.href = '/admin/noticeWrite?seqNo=' + seqNo;
-    })
+    });
+
+    // 삭제버튼 클릭
+    $(document).on('click', '#deleteBoard', function(){
+        console.log(typeof(seqNo));
+        confirmDelete(seqNo);
+    });
 });
 
 var getBoardDetail = function (seqNo) {
@@ -39,4 +46,50 @@ var getBoardDetail = function (seqNo) {
             $('.notice_detail > table > tbody').html(BOARD_DETAIL_HTML);
         }
     });
+}
+
+/**
+ * 게시글 삭제 확인팝업 함수
+ * @param {Number} seqNo 게시글 번호
+ */
+var confirmDelete = function(seqNo){
+    openPopup({    
+        title : '삭제', 
+        text : '정말 삭제하시겠습니까?', 
+        type : 'warning', 
+        callback : function(){
+            $(document).on('click', '.confirm', function(){
+                deleteBoard(seqNo)
+            });
+        }
+    });
+}
+
+/**
+ * 게시글 삭제 함수
+ * @param {Number} seqNo 게시글 번호
+ */
+var deleteBoard = function(seqNo){
+    ajaxCall({
+        method : 'DELETE', 
+        url : '/admin/boardDelete', 
+        data : {seqNo : seqNo}, 
+        success : deleteBoardCB
+    });
+}
+
+/**
+ * 게시글 삭제 콜백 함수
+ */
+var deleteBoardCB = function(){
+    openPopup({
+        title : '성공', 
+        text : '삭제완료했습니다.', 
+        type : 'success', 
+        callback : function(){
+            $(document).on('click', '.confirm', function(){
+                history.go(-1);
+            });
+        }
+    })
 }

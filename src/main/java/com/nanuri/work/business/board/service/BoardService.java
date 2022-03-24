@@ -57,13 +57,14 @@ public class BoardService {
 		return boardMapper.selectBoardDetail(seqNo);
 	}
 	
-	public boolean deleteBoard(Long seqNo) {
+	public boolean deleteBoard(BoardDTO params) {
 		int queryResult = 0;
 		
-		BoardDTO board = boardMapper.selectBoardDetail(seqNo);
+		BoardDTO board = boardMapper.selectBoardDetail(params.getSeqNo());
 		
 		if(board != null && "N".equals(board.getDelYn())) {
-			queryResult = boardMapper.deleteBoard(seqNo);
+			params.setMdfpNm(facade.getDetails().getUsername());
+			queryResult = boardMapper.deleteBoard(params);
 		}
 		
 		return (queryResult == 1) ? true : false;
