@@ -34,18 +34,18 @@ public class Criteria {
 		this.pageViewNo = 5;
 	}
 
-	public String makeQueryString(int pageNo) {
-
-		UriComponents uriComponents = UriComponentsBuilder.newInstance()
-				.queryParam("thisPageNo", pageNo)
-				.queryParam("pageDivNo", pageDivNo)
-				.queryParam("pageViewNo", pageViewNo)
-				.queryParam("searchType", searchType)
-				.queryParam("searchKeyword", searchKeyword)
-				.build()
-				.encode();
-
-		return uriComponents.toUriString();
-	}
+//	public String makeQueryString(int pageNo) {
+//
+//		UriComponents uriComponents = UriComponentsBuilder.newInstance()
+//				.queryParam("thisPageNo", pageNo)
+//				.queryParam("pageDivNo", pageDivNo)
+//				.queryParam("pageViewNo", pageViewNo)
+//				.queryParam("searchType", searchType)
+//				.queryParam("searchKeyword", searchKeyword)
+//				.build()
+//				.encode();
+//
+//		return uriComponents.toUriString();
+//	}
 
 }
