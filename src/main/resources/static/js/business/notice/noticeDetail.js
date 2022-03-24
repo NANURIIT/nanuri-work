@@ -1,4 +1,4 @@
-/** common **/
+/** noticeDetail **/
 'use strict';
 
 /** onload **/
@@ -19,6 +19,10 @@ $(function () {
     });
 });
 
+/**
+ * 게시글 상세내용 호출 함수
+ * @param {Number} seqNo 
+ */
 var getBoardDetail = function (seqNo) {
     ajaxCall({
         method: 'GET',
@@ -91,5 +95,5 @@ var deleteBoardCB = function(){
                 history.go(-1);
             });
         }
-    })
+    });
 }

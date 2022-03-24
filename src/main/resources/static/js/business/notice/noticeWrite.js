@@ -1,10 +1,10 @@
-/** common **/
+/** noticeWrite **/
 'use strict';
 
 /** onload **/
 $(function () {
     let seqNo = new URL(document.location.href).searchParams.get('seqNo'); // seqNo세팅
-    let mode = seqNo != null ? 'M' : 'W';    // 작성인지 수정인지 모드 설정
+    let mode = seqNo != null ? 'M' : 'W';                                  // 작성인지 수정인지 모드 설정
     if(mode == 'M'){
         getBoardDetail(seqNo);
     }
@@ -31,8 +31,13 @@ $(function () {
     });
 });
 
+/**
+ * 게시글 등록 함수
+ * @param {String} params.bultTitlNm 게시글 제목
+ * @param {String} params.bultTypCd  게시글 타입
+ * @param {String} params.brcn       게시글 내용
+ */
 var registerNotice = function(params) {
-
     if (isEmpty(params.bultTitlNm)) {
         openPopup({
             title: '실패',
@@ -69,7 +74,11 @@ var registerNotice = function(params) {
     }
 }
 
- var getBoardDetail = function(seqNo){
+/**
+ * 수정모드일 때 게시글 내용 호출 함수
+ * @param {Number} seqNo 게시글 번호
+ */
+var getBoardDetail = function(seqNo){
     ajaxCall({
         method : 'GET', 
         url : '/admin/boardDetail/' + seqNo, 

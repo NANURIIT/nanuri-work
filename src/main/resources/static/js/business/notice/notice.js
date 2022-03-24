@@ -1,4 +1,4 @@
-/** common **/
+/** notice **/
 'use strict';
 
 /** onload **/
@@ -22,6 +22,10 @@ let param = {
     pageViewNo: 10
 };
 
+/**
+ * 게시글 리스트 호출 함수
+ * @param {Number} pageNo 
+ */
 var searchBoardList = function (pageNo) {
     param.thisPageNo = pageNo;
     ajaxCall({
