@@ -1,0 +1,42 @@
+.wrap {
+    padding: 100px 15px 50px 15px;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+}
+.form_box {
+    padding-top: 15px;
+}
+.form_box_first {
+    padding-top: 0;
+}
+.form_box .form_title {
+    padding: 10px 0 10px;
+    font-weight: bold;
+}
+.input_box {
+    width: 100%;
+    height: 40px;
+}
+
+.save_box .save_button > button {
+    margin-top: 50px;
+    width: 100%;
+    padding: 10px 0;
+    background: #333;
+    color: #fff;
+    font-size: 15px;
+}
+
+.blind {
+    overflow: hidden;
+    border: 0;
+    clip: rect(1px, 1px, 1px, 1px);
+    clip-path: inset(50%);
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    position: absolute;
+    top: -99999px;
+}

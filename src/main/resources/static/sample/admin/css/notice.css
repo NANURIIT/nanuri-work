@@ -107,6 +107,9 @@
     text-align: center;
     margin-top: 80px;
 }
+.submain_wrap .notice_wrap .notice_container .notice_search_option form .notice_search_box {
+    margin-top: 0;
+}
 .submain_wrap .notice_wrap .notice_container .notice_search form > div > select {
     width: 100px;
     height: 38px;
