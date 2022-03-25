@@ -27,7 +27,11 @@
     color: #fff;
     font-size: 15px;
 }
-
+.form_select {
+    width: 100%;
+    height: 40px;
+    padding: 0;
+}
 .blind {
     overflow: hidden;
     border: 0;
