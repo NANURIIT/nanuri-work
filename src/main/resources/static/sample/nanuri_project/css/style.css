@@ -13,8 +13,7 @@ body {
 .list_container .list_title .list_title_text {
     font-weight: bold;
 }
-.list_container .list_title .list_title_add,
-.list_container .list_title .list_title_edit {
+.list_container .list_title .list_title_add {
     position: absolute;
     top: 0;
     right: 0;
@@ -40,18 +39,6 @@ body {
     position: absolute;
     left: 5px;
 }
-.list_container .list_title .list_title_edit::after {
-    content: '';
-    position: absolute;
-    top: 2px;
-    right: 3px;
-    width: 9px;
-    height: 9px;
-    border-top: 2px solid #000;
-    border-right: 2px solid #000;
-    transform: rotate(45deg);
-}
-
 .list_container .list_info {
     background: #f3f3f3;
     padding: 15px;
