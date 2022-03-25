@@ -15,9 +15,16 @@
         <form>
             <div class="form_box">
                 <div class="form_title">소속구분</div>
+                <!--20220325 수정 s-->
                 <div>
-                    <input class="input_box" type="text" name="division_name" placeholder="소속구분 입력">
+                    <select class="form_select" name="division_name">
+                        <option value="나누리직원" selected>나누리직원</option>
+                        <option value="프리랜서">프리랜서</option>
+                        <option value="협력업체">협력업체</option>
+                        <option value="기타">기타</option>
+                    </select>
                 </div>
+                <!--20220325 수정 f-->
             </div>
             <div class="form_box">
                 <div class="form_title">소속</div>
@@ -25,6 +32,14 @@
                     <input class="input_box" type="text" name="department_name" placeholder="소속 입력">
                 </div>
             </div>
+            <!--20220325 수정 s-->
+            <div class="form_box">
+                <div class="form_title">우편번호</div>
+                <div>
+                    <input class="input_box" type="text" name="zip_code" placeholder="우편번호 입력">
+                </div>
+            </div>
+            <!--20220325 수정 f-->
             <div class="form_box">
                 <div class="form_title">주소</div>
                 <div>
