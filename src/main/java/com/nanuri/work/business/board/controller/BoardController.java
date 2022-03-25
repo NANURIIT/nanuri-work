@@ -31,7 +31,7 @@ public class BoardController {
 	public String getNoticePage() {
 		return "business/board/notice";
 	}
-
+	
 	@GetMapping(value = "/noticeWrite")
 	public String getNoticeWritePage(@RequestParam(value = "seqNo", required = false) Long seqNo) {
 		return "business/board/notice_write";

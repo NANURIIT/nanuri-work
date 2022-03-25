@@ -14,7 +14,6 @@ $(function () {
 
     // 삭제버튼 클릭
     $(document).on('click', '#deleteBoard', function(){
-        console.log(typeof(seqNo));
         confirmDelete(seqNo);
     });
 });
@@ -41,8 +40,8 @@ var getBoardDetail = function (seqNo) {
             BOARD_DETAIL_HTML += '          <li>' + object.rgDtm.substring(0, 11) + '</li>';                // 작성일
             BOARD_DETAIL_HTML += '      </ul>';
             BOARD_DETAIL_HTML += '  </td>';
-
             BOARD_DETAIL_HTML += '</tr>';
+            
             BOARD_DETAIL_HTML += '<tr>';
             BOARD_DETAIL_HTML += '  <td  class="notice_detail_desc">' + object.brcn + '</td>'               // 글 내용
             BOARD_DETAIL_HTML += '</tr>';
