@@ -237,15 +237,18 @@ var setPage = function (option) {
 		pageNext = totalPageNo;
 	}
 
-	pageHtml += '<button type="button" class="btn btn-white pagePrev" onclick="'+option.functionNm+'('+pagePrev+');"><i class="fa fa-chevron-left"></i></button>';
+	pageHtml += '<a class="list_prev" href="#" onclick="'+option.functionNm+'('+pagePrev+');"><</a>';
+	pageHtml += '<ul>'
+	
 	for(var i=forStartNo; i<forEndNo; i++){
 		if((i+1) == option.thisPageNo){
-			pageHtml += '<button class="btn btn-primary active" onclick="'+option.functionNm+'('+(i+1)+');">'+(i+1)+'</button>';
+			pageHtml += '<li><a onclick="'+option.functionNm+'('+(i+1)+');">'+(i+1)+'</a></li>';
 		}else{
-			pageHtml += '<button class="btn btn-primary" onclick="'+option.functionNm+'('+(i+1)+');">'+(i+1)+'</button>';
+			pageHtml += '<li><a onclick="'+option.functionNm+'('+(i+1)+');">'+(i+1)+'</a></li>';
 		}
 	}
-	pageHtml += '<button type="button" class="btn btn-white pageNext"  onclick="'+option.functionNm+'('+pageNext+');"><i class="fa fa-chevron-right"></i></button>';
+	pageHtml += '</ul>'
+	pageHtml += '<a class="product_list_next" onclick="'+option.functionNm+'('+pageNext+');" href="#">></a>';
 
 	$('#'+option.htmlNm).html(pageHtml);
 	$('#'+option.htmlNm).show();

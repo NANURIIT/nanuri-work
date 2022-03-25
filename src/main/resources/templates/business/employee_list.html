@@ -1,47 +1,13 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <title>나누리</title>
-    <link rel="stylesheet" href="../../css/reset.css">
-    <link rel="stylesheet" href="../../css/common.css">
-    <link rel="stylesheet" href="../../css/header.css">
-    <link rel="stylesheet" href="../../css/notice.css">
-    <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="/resources/demos/style.css"> -->
+<!-- 공통헤드 -->
+<head th:replace="layout/head :: headFragment"></head>
 
-    <script src="../../js/jquery-3.6.0.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
-</head>
+<script th:src="@{https://code.jquery.com/ui/1.13.1/jquery-ui.js}"></script>
+<link rel="stylesheet" th:href="@{/sample/admin/css/notice.css}">
 <body>
     <div class="wrapper">
-        <header class="header">
-            <div class="top_area main_top_area">
-                <!--<div class="logo_wrap">
-                    <div class="main_logo">
-                        <a href="#">
-                            로고영역
-                            &lt;!&ndash;<img src="" alt="logo">&ndash;&gt;
-                        </a>
-                    </div>
-                </div>-->
-                <div class="gnb_wrap">
-                    <div class="main_gnb">
-                        <ul>
-                            <li class="gnb_menu">
-                                <a href="employee_list.html">직원 목록</a>
-                            </li>
-                            <li class="gnb_menu">
-                                <a href="notice.html">공지사항</a>
-                            </li>
-                            <li class="gnb_menu">
-                                <a href="notice_write.html">공지사항 등록</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </header>
+        <header th:replace="/layout/header :: headerFragment"></header>
 
         <div class="submain_wrap">
             <div class="sub_wrap notice_wrap">
@@ -139,7 +105,7 @@
                                     <td>2022-03-23</td>
                                     <td>
                                         <a class="download_link" href="#" download="">
-                                            <img src="../../images/ico_download.png" alt="">
+                                            <img th:src="@{/sample/admin/images/ico_download.png}" alt="">
                                         </a>
                                     </td>
                                 </tr>
@@ -156,7 +122,7 @@
                                     <td>2022-03-23</td>
                                     <td>
                                         <a class="download_link" href="#" download="">
-                                            <img src="../../images/ico_download.png" alt="">
+                                            <img th:src="@{/sample/admin/images/ico_download.png}" alt="">
                                         </a>
                                     </td>
                                 </tr>
@@ -173,7 +139,7 @@
                                     <td>2022-03-23</td>
                                     <td>
                                         <a class="download_link" href="#" download="">
-                                            <img src="../../images/ico_download.png" alt="">
+                                            <img th:src="@{/sample/admin/images/ico_download.png}" alt="">
                                         </a>
                                     </td>
                                 </tr>

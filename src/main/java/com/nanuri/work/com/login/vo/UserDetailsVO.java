@@ -16,8 +16,8 @@ import lombok.Setter;
 public class UserDetailsVO implements UserDetails {
 	
 	private String userId;					/* 운영자ID */
-	private String userName;				/* 운영자명 */
-	private String userPhoneNo;				/* 운영자휴대전화번호 */
+	private String userNm;					/* 운영자명 */
+	private String telNo;					/* 운영자휴대전화번호 */
 	private String userPassword;			/* 비밀번호 */
 	private String accountActivYn;			/* 계정활성화여부 */
 
@@ -38,7 +38,7 @@ public class UserDetailsVO implements UserDetails {
 
     @Override
     public String getUsername() {
-        return this.userName;
+        return this.userNm;
     }
 
     @Override
