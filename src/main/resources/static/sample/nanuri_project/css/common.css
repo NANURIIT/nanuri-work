@@ -4,7 +4,7 @@
     height: 100%;
     box-sizing: border-box;
 }
-.form_box {
+.form_box + .form_box {
     padding-top: 15px;
 }
 .form_box_first {
