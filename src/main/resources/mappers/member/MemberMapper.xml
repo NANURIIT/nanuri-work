@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nanuri.work.business.member.mapper.MemberMapper">
+
+	<select id="selectCommonCodeList" parameterType="com.nanuri.work.business.member.dto.CommonCodeDTO" resultType="com.nanuri.work.business.member.dto.CommonCodeDTO">
+		SELECT ds_cd, 
+			   dtl_cd, 
+			   ds_cd_nm, 
+			   dtl_cnm
+		  FROM comn_cd
+    	 WHERE ds_cd = #{dsCd}
+	  ORDER BY sort_seqn
+	</select>
+	
+	<insert id="insertSchoolCareer" parameterType="com.nanuri.work.business.member.dto.SchoolCareerDTO">
+		INSERT INTO mem_scca(
+			rgmn_nm, 
+			user_id, 
+			scca_ds_cd, 
+			majr_nm, 
+			schl_nm, 
+			etis_ym, 
+			grdu_ym
+		) VALUES (
+			#{rgmnNm}, 
+			#{userId}, 
+			#{sccaDsCd}, 
+			#{majrNm}, 
+			#{schlNm}, 
+			#{etisYm}, 
+			#{grduYm}
+		)
+	</insert>
+	
+	<select id="selectSchoolCareerList" parameterType="string" resultType="com.nanuri.work.business.member.dto.SchoolCareerDTO">
+		SELECT scca_ds_cd, 
+			   majr_nm, 
+			   schl_nm, 
+			   etis_ym, 
+			   grdu_ym
+		  FROM mem_scca
+		 WHERE user_id = #{userId}
+	</select>
+	
+	<select id="selectSchoolCareerDetail" parameterType="long">
+		SELECT scca_ds_cd, 
+			   majr_nm, 
+			   schl_nm, 
+			   etis_ym, 
+			   grdu_ym
+		  FROM mem_scca
+		 WHERE seq_no = #{seqNo}
+	</select>
+	
+	<update id="deleteSchoolCareer" parameterType="com.nanuri.work.business.member.dto.SchoolCareerDTO">
+		UPDATE mem_scca
+   		   SET del_yn = 'Y'
+   		 WHERE seq_no = #{seqNo}
+	</update>
+	
+</mapper>

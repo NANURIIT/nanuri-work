@@ -2,18 +2,39 @@ package com.nanuri.work.business.member.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-@RequestMapping(value = "/admin")
 @Controller
 public class MemberController {
 
-	@GetMapping(value = "/employeeList")
+	@GetMapping(value = "/admin/employeeList")
 	public String getEmployeeListPage() {
 		return "business/employee_list";
+	}
+	
+	@GetMapping(value = "/employee/index")
+	public String getEmployeeIndexPage() {
+		return "business/employee/index";
+	}
+	
+	/**
+	 * 기본정보 입력
+	 * @return
+	 */
+	@GetMapping(value = "/employee/basicInfoWrite")
+	public String getBasicInfoWritePage() {
+		return "business/employee/basic_add";
+	}
+	
+	/**
+	 * 학력 입력
+	 * @return
+	 */
+	@GetMapping(value = "/employee/schoolCareerWrite")
+	public String getSchoolCareerWritePage() {
+		return "business/employee/education_add";
 	}
 	
 }
