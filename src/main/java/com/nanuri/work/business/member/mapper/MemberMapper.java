@@ -14,6 +14,7 @@ public interface MemberMapper {
 	public List<CommonCodeDTO> selectCommonCodeList(CommonCodeDTO params); 
 	public List<SchoolCareerDTO> selectSchoolCareerList(String userId);
 	public SchoolCareerDTO selectSchoolCareerDetail(Long seqNo);
+	public int updateSchoolCareer(SchoolCareerDTO params);
 	public int deleteSchoolCareer(SchoolCareerDTO params);
 	
 }

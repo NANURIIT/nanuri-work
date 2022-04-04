@@ -33,24 +33,40 @@
 	</insert>
 	
 	<select id="selectSchoolCareerList" parameterType="string" resultType="com.nanuri.work.business.member.dto.SchoolCareerDTO">
-		SELECT scca_ds_cd, 
+		SELECT seq_no,
+			   scca_ds_cd, 
 			   majr_nm, 
 			   schl_nm, 
 			   etis_ym, 
 			   grdu_ym
 		  FROM mem_scca
 		 WHERE user_id = #{userId}
+		   AND del_yn = 'N'
 	</select>
 	
-	<select id="selectSchoolCareerDetail" parameterType="long">
-		SELECT scca_ds_cd, 
+	<select id="selectSchoolCareerDetail" parameterType="long" resultType="com.nanuri.work.business.member.dto.SchoolCareerDTO">
+		SELECT seq_no,
+			   scca_ds_cd, 
 			   majr_nm, 
 			   schl_nm, 
 			   etis_ym, 
-			   grdu_ym
+			   grdu_ym, 
+			   del_yn
 		  FROM mem_scca
 		 WHERE seq_no = #{seqNo}
+		   AND del_yn = 'N'
 	</select>
+	
+	<update id="updateSchoolCareer" parameterType="com.nanuri.work.business.member.dto.SchoolCareerDTO">
+		UPDATE mem_scca
+		   SET mdfp_nm = #{mdfpNm}, 
+		       scca_ds_cd = #{sccaDsCd}, 
+		       majr_nm = #{majrNm}, 
+		       schl_nm = #{schlNm}, 
+		       etis_ym = #{etisYm}, 
+		       grdu_ym = #{grduYm}
+ 		 WHERE seq_no = #{seqNo}
+	</update>
 	
 	<update id="deleteSchoolCareer" parameterType="com.nanuri.work.business.member.dto.SchoolCareerDTO">
 		UPDATE mem_scca

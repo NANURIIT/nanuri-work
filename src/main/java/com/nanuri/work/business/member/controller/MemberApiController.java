@@ -3,8 +3,10 @@ package com.nanuri.work.business.member.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -49,5 +51,15 @@ public class MemberApiController {
 	@GetMapping(value = "/schoolCareerList")
 	public List<SchoolCareerDTO> getSchoolCareerList(){
 		return memberService.getSchoolCareerList();
+	}
+	
+	@GetMapping(value = "/schoolCareerDetail/{seqNo}")
+	public SchoolCareerDTO schoolCareerDetail(@PathVariable(value = "seqNo", required = true) Long seqNo) {		
+		return memberService.getSchoolCareerDetail(seqNo);
+	}
+	
+	@DeleteMapping(value = "/schoolCareerDelete")
+	public boolean deleteSchoolCareer(@RequestBody SchoolCareerDTO params) {
+		return memberService.deleteSchoolCareer(params);
 	}
 }

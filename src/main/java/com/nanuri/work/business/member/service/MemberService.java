@@ -28,6 +28,7 @@ public class MemberService {
 		
 		if(params.getSeqNo() != null) {
 			params.setMdfpNm(facade.getDetails().getUsername());
+			queryResult = memberMapper.updateSchoolCareer(params);
 		} else {
 			params.setRgmnNm(facade.getDetails().getUsername());
 			params.setUserId(facade.getDetails().getUserId());
@@ -52,6 +53,10 @@ public class MemberService {
 		}
 		
 		return (queryResult == 1) ? true : false;
+	}
+	 
+	public SchoolCareerDTO getSchoolCareerDetail(Long seqNo) {
+		return memberMapper.selectSchoolCareerDetail(seqNo);
 	}
 	
 }
