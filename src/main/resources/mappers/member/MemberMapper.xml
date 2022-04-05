@@ -83,25 +83,74 @@
 	
 	<!-- 자격증 -->
 	<!-- 자격증 입력 -->
-	<insert id="insertCerticate">
+	<insert id="insertCertificate" parameterType="com.nanuri.work.business.member.dto.CertificateDTO">
 		INSERT INTO mem_qlfc (
 			rgmn_nm, 
-			user_id, 				/* 사용자 ID */
-			qlfc_ds_cd, 			/* 자격증 구분 코드 */
-			qlfc_nm, 				/* 자격증명 */
-			pbcpl_nm, 				/* 발행처 */
-			acq_dt, 				/* 취득일자 */
-			vld_Dt, 				/* 유효일자 */
-			updt_dt 				/* 갱신일자 */
+			user_id,
+			qlfc_ds_cd,
+			qlfc_nm,
+			pbcpl_nm,
+			acq_dt,
+			vld_dt,
+			updt_dt
+		) VALUES (
+			#{rgmnNm}, 
+			#{userId}, 
+			#{qlfcDsCd}, 
+			#{qlfcNm}, 
+			#{pbcplNm}, 
+			#{acqDt}, 
+			#{vldDt}, 
+			#{updtDt}
 		)
 	</insert>
 	
 	<!-- 자격증 리스트 출력 -->
+	<select id="selectCertificateList" parameterType="string" resultType="com.nanuri.work.business.member.dto.CertificateDTO">
+		SELECT seq_no, 
+			   qlfc_ds_Cd, 
+			   qlfc_nm, 
+			   pbcpl_nm, 
+			   acq_dt, 
+			   vld_dt, 
+			   updt_dt
+		  FROM mem_qlfc
+		 WHERE user_id = #{userId}
+		   AND del_yn = 'N'
+	</select>
 	
 	<!-- 자격증 상세 출력 -->
+	<select id="selectCertificateDetail" parameterType="long" resultType="com.nanuri.work.business.member.dto.CertificateDTO">
+		SELECT seq_no, 
+			   qlfc_ds_Cd, 
+			   qlfc_nm, 
+			   pbcpl_nm, 
+			   acq_dt, 
+			   vld_dt, 
+			   updt_dt, 
+			   del_yn
+		  FROM mem_qlfc
+		 WHERE seq_no = #{seqNo}
+		   AND del_yn = 'N'
+	</select>
 	
 	<!-- 자격증 수정 -->
+	<update id="updateCertificate" parameterType="com.nanuri.work.business.member.dto.CertificateDTO">
+		UPDATE mem_qlfc
+		   SET mdfp_nm = #{mdfpNm},
+		       qlfc_ds_cd = #{qlfcDsCd},
+			   qlfc_nm = #{qlfcNm},
+			   pbcpl_nm = #{pbcplNm},
+			   acq_dt = #{acqDt},
+			   vld_dt = #{vldDt},
+			   updt_dt = #{updtDt}
+	</update>
 	
 	<!-- 자격증 삭제 -->
+	<update id="deleteCertificate" parameterType="com.nanuri.work.business.member.dto.CertificateDTO">
+		UPDATE mem_qlfc
+		   SET del_yn = 'Y'
+		 WHERE seq_no = #{seqNo}
+	</update>
 	
 </mapper>

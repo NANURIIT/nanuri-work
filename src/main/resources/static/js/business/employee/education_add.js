@@ -32,6 +32,9 @@ $(function () {
     });
 });
 
+/**
+ * 공통코드 호출
+ */
 var getCommonCode = function () {
     ajaxCall({
         method: 'GET',
@@ -47,6 +50,14 @@ var getCommonCode = function () {
     });
 }
 
+/**
+ * 학력등록
+ * @param {string} params.sccaDsCd 학력구분코드
+ * @param {string} params.majrNm   전공
+ * @param {string} params.schlNm   학교명
+ * @param {string} params.etisYm   입학년월
+ * @param {string} params.grduYm   졸업년월
+ */
 var registerSchoolCareer = function(params){
 
     if (isEmpty(params.schlNm)) {
@@ -60,7 +71,7 @@ var registerSchoolCareer = function(params){
                 });
             }
         });
-    } else if (dateInvalidation(params.etisYm) == false) {
+    } else if (dateValidation(params.etisYm) == false) {
         openPopup({
             title: '실패',
             text: '입학년월을 확인해주세요.',
@@ -71,7 +82,7 @@ var registerSchoolCareer = function(params){
                 });
             }
         });
-    } else if (dateInvalidation(params.grduYm) == false) {
+    } else if (dateValidation(params.grduYm) == false) {
         openPopup({
             title: '실패',
             text: '졸업년월을 확인해주세요.',
@@ -110,6 +121,10 @@ var registerSchoolCareer = function(params){
     }
 }
 
+/**
+ * 학력 상세 조회
+ * @param {number} seqNo 일련번호
+ */
 var getSchoolCareerDetail = function(seqNo){
     ajaxCall({
         method : 'GET', 
@@ -124,7 +139,12 @@ var getSchoolCareerDetail = function(seqNo){
     });
 }
 
-var dateInvalidation = function (date) {
+/**
+ * 날짜 유효성 검사
+ * @param {string} date 날짜
+ * @returns {boolean} 유효성 검사 결과
+ */
+var dateValidation = function (date) {
     if (isEmpty(date)) {
         return false;
     }else if(isNaN(date)){
