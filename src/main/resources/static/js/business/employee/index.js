@@ -10,6 +10,9 @@ $(function () {
     // 자격증 리스트 호출
     getCertificateList();
 
+    // 회사소속이력 리스트 호출
+    getWorkhistoryList();
+
     // 프로젝트 이력 리스트 호출
     getCareerhistoryList();
 
@@ -84,7 +87,7 @@ var getCertificateList = function () {
                 CERTIFICATE_HTML += '<div class="list_info">';
                 CERTIFICATE_HTML += '   <div class="list_info_title">' + tmpRow.qlfcNm + '</div>';
                 CERTIFICATE_HTML += '   <div class="list_info_desc">' + addDot(tmpRow.acqDt) + '</div>';
-                CERTIFICATE_HTML += '   <div class="list_info_desc">'+tmpRow.pbcplNm+'</div>';
+                CERTIFICATE_HTML += '   <div class="list_info_desc">' + tmpRow.pbcplNm + '</div>';
                 CERTIFICATE_HTML += '   <div class="list_info_set">';
                 CERTIFICATE_HTML += '       <button onclick="location.href=\'/employee/certificateWrite?seqNo=' + tmpRow.seqNo + '\'">수정</button>';
                 CERTIFICATE_HTML += '       <button class="deleteCertificate" id="' + tmpRow.seqNo + '">삭제</button>';
@@ -113,18 +116,18 @@ var deleteCertificate = function (params) {
 /**
  * 프로젝트이력 리스트 호출
  */
-var getCareerhistoryList = function(){
+var getCareerhistoryList = function () {
     ajaxCall({
-        method : 'GET', 
-        url : '/employee/careerhistoryist', 
-        success : function(object){
+        method: 'GET',
+        url: '/employee/careerhistoryist',
+        success: function (object) {
             let CAREER_HISTORY_HTML = '';
-            for(let i = 0; i < object.length; i++){
+            for (let i = 0; i < object.length; i++) {
                 let tmpRow = object[i];
                 CAREER_HISTORY_HTML += '<div class="list_info">';
-                CAREER_HISTORY_HTML += '    <div class="list_info_title">'+tmpRow.blgCoNm+'</div>';
-                CAREER_HISTORY_HTML += '    <div class="list_info_desc">'+addDot(tmpRow.bzStYm)+' ~ '+addDot(tmpRow.bzEdYm)+'</div>';
-                CAREER_HISTORY_HTML += '    <div class="list_info_desc">'+tmpRow.dtlCnm+', '+tmpRow.chrgBsnNm+'</div>';
+                CAREER_HISTORY_HTML += '    <div class="list_info_title">' + tmpRow.blgCoNm + '</div>';
+                CAREER_HISTORY_HTML += '    <div class="list_info_desc">' + addDot(tmpRow.bzStYm) + ' ~ ' + addDot(tmpRow.bzEdYm) + '</div>';
+                CAREER_HISTORY_HTML += '    <div class="list_info_desc">' + tmpRow.dtlCnm + ', ' + tmpRow.chrgBsnNm + '</div>';
                 CAREER_HISTORY_HTML += '    <div class="list_info_set">';
                 CAREER_HISTORY_HTML += '        <button onclick="location.href=\'/employee/careerhistoryWrite?seqNo=' + tmpRow.seqNo + '\'">수정</button>';
                 CAREER_HISTORY_HTML += '        <button class="deleteCareerhistory" id="' + tmpRow.seqNo + '">삭제</button>';
@@ -137,12 +140,41 @@ var getCareerhistoryList = function(){
     })
 }
 
+/**
+ * 프로젝트 이력 삭제 함수
+ * @param {*} params 
+ */
 var deleteCareerhistory = function (params) {
     ajaxCall({
         method: 'DELETE',
         url: '/employee/careerhistoryDelete',
         data: params,
         success: deleteCB(getCareerhistoryList)
+    })
+}
+
+var getWorkhistoryList = function () {
+    ajaxCall({
+        method: 'GET',
+        url: '/employee/workhistoryist',
+        success: function (object) {
+            let WORK_HISTORY_HTML = '';
+            
+            for(let i = 0; i < object.length; i++){
+                let tmpRow = object[i];
+                WORK_HISTORY_HTML += '<div class="list_info">';
+                WORK_HISTORY_HTML += '  <div class="list_info_title">'+tmpRow.wrkplNm+'</div>';
+                WORK_HISTORY_HTML += '  <div class="list_info_desc">'+addDot(tmpRow.encoYm)+' ~ '+addDot(tmpRow.rtrmYm)+'</div>';
+                WORK_HISTORY_HTML += '  <div class="list_info_desc">경력 1년1개월, '+tmpRow.dtyNm+'</div>';
+                WORK_HISTORY_HTML += '  <div class="list_info_set">';
+                WORK_HISTORY_HTML += '      <button>수정</button>';
+                WORK_HISTORY_HTML += '      <button>삭제</button>';
+                WORK_HISTORY_HTML += '  </div>';
+                WORK_HISTORY_HTML += '</div>';
+            }
+            
+            $('#workhistoryList').html(WORK_HISTORY_HTML);
+        }
     })
 }
 

@@ -47,6 +47,15 @@ public class MemberController {
 	}
 	
 	/**
+	 * 회사소속이력 입력
+	 * @return
+	 */
+	@GetMapping(value = "/employee/workhistoryWrite")
+	public String getWokinghistoryWritePage() {
+		return "business/employee/workhistory_add"; 
+	}
+	
+	/**
 	 * 프로젝트이력 입력
 	 * @return
 	 */

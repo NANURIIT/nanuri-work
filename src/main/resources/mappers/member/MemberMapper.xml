@@ -144,6 +144,7 @@
 			   acq_dt = #{acqDt},
 			   vld_dt = #{vldDt},
 			   updt_dt = #{updtDt}
+		 WHERE seq_no = #{seqNo}
 	</update>
 	
 	<!-- 자격증 삭제 -->
@@ -153,10 +154,77 @@
 		 WHERE seq_no = #{seqNo}
 	</update>
 	
-	<!-- 근무이력 -->
+	<!-- 회사소속이력 -->
+	<!-- 회사소속이력 등록 -->
+	<insert id="insertWorkhistory" parameterType="com.nanuri.work.business.member.dto.WorkhistoryDTO">
+		INSERT INTO mem_svce_hst (
+			rgmn_nm, 
+			user_id, 
+			wrkpl_nm, 
+			enco_ym, 
+			rtrm_ym, 
+			dty_nm, 
+			chrg_bsn_nm
+		) VALUES (
+			#{rgmnNm}, 
+			#{userId}, 
+			#{wrkplNm}, 
+			#{encoYm}, 
+			#{rtrmYm}, 
+			#{dtyNm}, 
+			#{chrgBsnNm}
+		)
+	</insert>
 	
-	<!-- 경력이력 -->	
-	<!-- 경력이력 등록 -->
+	<!-- 회사소속이력 리스트 출력 -->
+	<select id="selectWorkhistoryList" parameterType="string" resultType="com.nanuri.work.business.member.dto.WorkhistoryDTO">
+		SELECT seq_no, 
+			   user_id, 
+			   wrkpl_nm, 
+			   enco_ym, 
+			   rtrm_ym, 
+			   dty_nm, 
+			   chrg_bsn_nm
+		  FROM mem_svce_hst
+		 WHERE del_yn = 'N'
+		   AND user_id = #{userId}
+	</select>
+	
+	<!-- 회사소속이력 상세 출력 -->
+	<select id="selectWorkhistoryDetail" parameterType="long" resultType="com.nanuri.work.business.member.dto.WorkhistoryDTO">
+		SELECT seq_no, 
+			   user_id, 
+			   wrkpl_nm, 
+			   enco_ym, 
+			   rtrm_ym, 
+			   dty_nm, 
+			   chrg_bsn_nm, 
+			   del_yn
+		  FROM mem_svce_hst
+		 WHERE del_yn = 'N'
+		   AND seq_no = #{seqNo}
+	</select>
+	
+	<!-- 회사소속이력 수정 -->
+	<update id="updateWorkhistory" parameterType="com.nanuri.work.business.member.dto.WorkhistoryDTO">
+		UPDATE mem_svce_hst
+		   SET wrkpl_nm = #{wrkplNm},  
+			   enco_ym = #{encoYm}, 
+			   rtrm_ym = #{rtrmYm}, 
+			   dty_nm = #{dtyNm}, 
+			   chrg_bsn_nm = #{chrgBsnNm}
+		 WHERE seq_no = #{seqNo}
+	</update>
+	
+	<!-- 회사소속이력 삭제 -->
+	<update id="deleteWorkhistory" parameterType="com.nanuri.work.business.member.dto.WorkhistoryDTO">
+		UPDATE mem_svce_hst
+		   SET del_yn = 'Y'
+		 WHERE seq_no = #{seqNo}
+	</update>
+	
+	<!-- 프로젝트이력 -->	
+	<!-- 프로젝트이력 등록 -->
 	<insert id="insertCareerhistory" parameterType="com.nanuri.work.business.member.dto.CareerhistoryDTO">
 		INSERT INTO mem_carr_hst (
 			rgmn_nm, 
@@ -195,7 +263,7 @@
 		)
 	</insert>
 	
-	<!-- 경력이력 리스트 출력 -->
+	<!-- 프로젝트이력 리스트 출력 -->
 	<select id="selectCareerhistoryList" parameterType="string" resultType="com.nanuri.work.business.member.dto.CareerhistoryDTO">
 		SELECT T01.seq_no, 
 	      	   T01.bz_nm, 
@@ -219,7 +287,7 @@
       	   AND del_yn = 'N';
 	</select>
 	
-	<!-- 경력이력 상세 출력 -->
+	<!-- 프로젝트이력 상세 출력 -->
 	<select id="selectCareerhistoryDetail" parameterType="long" resultType="com.nanuri.work.business.member.dto.CareerhistoryDTO">
 		SELECT seq_no, 
 			   bz_nm, 
@@ -262,7 +330,7 @@
 		 WHERE seq_no = #{seqNo} 
 	</update>
 	
-	<!-- 경력이력 삭제 -->
+	<!-- 프로젝트이력 삭제 -->
 	<update id="deleteCareerhistory" parameterType="com.nanuri.work.business.member.dto.CareerhistoryDTO">
 		UPDATE mem_carr_hst
 		   SET del_yn = 'Y'

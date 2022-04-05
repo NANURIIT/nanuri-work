@@ -16,6 +16,7 @@ import com.nanuri.work.business.member.dto.CareerhistoryDTO;
 import com.nanuri.work.business.member.dto.CertificateDTO;
 import com.nanuri.work.business.member.dto.CommonCodeDTO;
 import com.nanuri.work.business.member.dto.SchoolCareerDTO;
+import com.nanuri.work.business.member.dto.WorkhistoryDTO;
 import com.nanuri.work.business.member.service.MemberService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -106,9 +107,41 @@ public class MemberApiController {
 		return memberService.deleteCertificate(params);
 	}
 	
-	/* 근무이력 */
+	/* 회사소속이력 */
 	
-	/* 경력이력 */
+	@PostMapping(value = "/workhistoryWrite")
+	public String registerWorkhistory(@RequestBody WorkhistoryDTO params) {
+		String message = "";
+
+		try {
+			boolean isRegistered = memberService.registerWorkhistory(params);
+			if (isRegistered == false) {
+				message = "등록에 실패하였습니다.";
+			}
+		} catch (Exception e) {
+			message = "시스템에 문제가 발생하였습니다.";
+			e.printStackTrace();
+		}
+		
+		return message;
+	}
+	
+	@GetMapping(value = "/workhistoryist")
+	public List<WorkhistoryDTO> getWorkhistoryList(){
+		return memberService.getWorkhistoryList();
+	}
+	
+	@GetMapping(value = "/workhistoryDetail/{seqNo}")
+	public WorkhistoryDTO getWorkhistoryDetail(@PathVariable(value = "seqNo", required = true) Long seqNo) {		
+		return memberService.getWorkhistoryDetail(seqNo);
+	}
+	
+	@DeleteMapping(value = "/workhistoryDelete")
+	public boolean deleteWorkhistory(@RequestBody WorkhistoryDTO params) {
+		return memberService.deleteWorkhistory(params);
+	}
+	
+	/* 프로젝트이력 */
 	
 	@PostMapping(value = "/careerhistoryWrite")
 	public String registerCareerhistory(@RequestBody CareerhistoryDTO params) {

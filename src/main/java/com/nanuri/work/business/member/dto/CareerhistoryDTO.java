@@ -7,6 +7,8 @@ import lombok.Setter;
 @Setter
 public class CareerhistoryDTO extends CommonCodeDTO {
 
+	/* 프로젝트이력 */
+	
 	private Long seqNo;				/* 일련번호 */
 	private String userId;			/* 사용자 ID */
 	private String bzNm;			/* 사업명 */

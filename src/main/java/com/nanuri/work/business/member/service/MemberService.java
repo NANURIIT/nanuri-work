@@ -9,6 +9,7 @@ import com.nanuri.work.business.member.dto.CareerhistoryDTO;
 import com.nanuri.work.business.member.dto.CertificateDTO;
 import com.nanuri.work.business.member.dto.CommonCodeDTO;
 import com.nanuri.work.business.member.dto.SchoolCareerDTO;
+import com.nanuri.work.business.member.dto.WorkhistoryDTO;
 import com.nanuri.work.business.member.mapper.MemberMapper;
 import com.nanuri.work.com.security.AuthenticationFacade;
 
@@ -101,9 +102,44 @@ public class MemberService {
 		return (queryResult == 1) ? true : false;
 	}
 	
-	/* 근무이력 */
+	/* 회사소속이력 */
+	public boolean registerWorkhistory(WorkhistoryDTO params) {
+		int queryResult = 0;
+
+		if (params.getSeqNo() != null) {
+			params.setMdfpNm(facade.getDetails().getUsername());
+			queryResult = memberMapper.updateWorkhistory(params);
+		} else {
+			params.setRgmnNm(facade.getDetails().getUsername());
+			params.setUserId(facade.getDetails().getUserId());
+			queryResult = memberMapper.insertWorkhistory(params);
+		}
+
+		return (queryResult > 0);
+	}
 	
-	/* 경력이력 */
+	public List<WorkhistoryDTO> getWorkhistoryList(){
+		return memberMapper.selectWorkhistoryList(facade.getDetails().getUserId());
+	}
+	
+	public WorkhistoryDTO getWorkhistoryDetail(Long seqNo) {
+		return memberMapper.selectWorkhistoryDetail(seqNo);
+	}
+	
+	public boolean deleteWorkhistory(WorkhistoryDTO params) {
+		int queryResult = 0;
+		
+		WorkhistoryDTO workhistory = memberMapper.selectWorkhistoryDetail(params.getSeqNo());
+
+		if (workhistory != null && "N".equals(workhistory.getDelYn())) {
+			params.setMdfpNm(facade.getDetails().getUsername());
+			queryResult = memberMapper.deleteWorkhistory(params);
+		}
+
+		return (queryResult == 1) ? true : false;
+	}
+	
+	/* 프로젝트이력 */
 	public boolean registerCareerHistory(CareerhistoryDTO params) {
 		int queryResult = 0;
 
