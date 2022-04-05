@@ -10,14 +10,22 @@ $(function () {
     // 자격증 리스트 호출
     getCertificateList();
 
+    // 프로젝트 이력 리스트 호출
+    getCareerhistoryList();
+
     // 학력 삭제
     $(document).on('click', '.deleteSchoolCareer', function () {
         confirmDelete($(this).attr('id'), deleteSchoolCareer);
     });
 
     //자격증 삭제
-    $(document).on('click', '.deleteCertificate', function(){
+    $(document).on('click', '.deleteCertificate', function () {
         confirmDelete($(this).attr('id'), deleteCertificate);
+    });
+
+    //프로젝트이력 삭제
+    $(document).on('click', '.deleteCareerhistory', function () {
+        confirmDelete($(this).attr('id'), deleteCareerhistory);
     });
 });
 
@@ -71,11 +79,12 @@ var getCertificateList = function () {
         url: '/employee/certificateList',
         success: function (object) {
             let CERTIFICATE_HTML = '';
-            for(let i = 0; i < object.length; i++){
+            for (let i = 0; i < object.length; i++) {
                 let tmpRow = object[i];
                 CERTIFICATE_HTML += '<div class="list_info">';
-                CERTIFICATE_HTML += '   <div class="list_info_title">'+tmpRow.qlfcNm+'</div>';
-                CERTIFICATE_HTML += '   <div class="list_info_desc">취득일자 : '+addDot(tmpRow.acqDt)+'</div>';
+                CERTIFICATE_HTML += '   <div class="list_info_title">' + tmpRow.qlfcNm + '</div>';
+                CERTIFICATE_HTML += '   <div class="list_info_desc">' + addDot(tmpRow.acqDt) + '</div>';
+                CERTIFICATE_HTML += '   <div class="list_info_desc">'+tmpRow.pbcplNm+'</div>';
                 CERTIFICATE_HTML += '   <div class="list_info_set">';
                 CERTIFICATE_HTML += '       <button onclick="location.href=\'/employee/certificateWrite?seqNo=' + tmpRow.seqNo + '\'">수정</button>';
                 CERTIFICATE_HTML += '       <button class="deleteCertificate" id="' + tmpRow.seqNo + '">삭제</button>';
@@ -92,12 +101,48 @@ var getCertificateList = function () {
  * 자격증 삭제 함수
  * @param {number} params.seqNo 일련번호
  */
-var deleteCertificate = function(params){
+var deleteCertificate = function (params) {
     ajaxCall({
-        method : 'DELETE', 
-        url : '/employee/certificateDelete', 
-        data : params, 
-        success : deleteCB(getCertificateList)
+        method: 'DELETE',
+        url: '/employee/certificateDelete',
+        data: params,
+        success: deleteCB(getCertificateList)
+    })
+}
+
+/**
+ * 프로젝트이력 리스트 호출
+ */
+var getCareerhistoryList = function(){
+    ajaxCall({
+        method : 'GET', 
+        url : '/employee/careerhistoryist', 
+        success : function(object){
+            let CAREER_HISTORY_HTML = '';
+            for(let i = 0; i < object.length; i++){
+                let tmpRow = object[i];
+                CAREER_HISTORY_HTML += '<div class="list_info">';
+                CAREER_HISTORY_HTML += '    <div class="list_info_title">'+tmpRow.blgCoNm+'</div>';
+                CAREER_HISTORY_HTML += '    <div class="list_info_desc">'+addDot(tmpRow.bzStYm)+' ~ '+addDot(tmpRow.bzEdYm)+'</div>';
+                CAREER_HISTORY_HTML += '    <div class="list_info_desc">'+tmpRow.dtlCnm+', '+tmpRow.chrgBsnNm+'</div>';
+                CAREER_HISTORY_HTML += '    <div class="list_info_set">';
+                CAREER_HISTORY_HTML += '        <button onclick="location.href=\'/employee/careerhistoryWrite?seqNo=' + tmpRow.seqNo + '\'">수정</button>';
+                CAREER_HISTORY_HTML += '        <button class="deleteCareerhistory" id="' + tmpRow.seqNo + '">삭제</button>';
+                CAREER_HISTORY_HTML += '    </div>';
+                CAREER_HISTORY_HTML += '</div>';
+            }
+
+            $('#careerhistoryList').html(CAREER_HISTORY_HTML);
+        }
+    })
+}
+
+var deleteCareerhistory = function (params) {
+    ajaxCall({
+        method: 'DELETE',
+        url: '/employee/careerhistoryDelete',
+        data: params,
+        success: deleteCB(getCareerhistoryList)
     })
 }
 
@@ -105,7 +150,7 @@ var deleteCertificate = function(params){
  * 삭제 확인팝업 함수
  * @param {number} seqNo 일련번호
  */
- var confirmDelete = function (seqNo, callback) {
+var confirmDelete = function (seqNo, callback) {
     let params = { seqNo: seqNo };
 
     openPopup({
@@ -124,7 +169,7 @@ var deleteCertificate = function(params){
  * 삭제 콜백함수
  * @param {function} callback 확인버튼 클릭 후 처리
  */
-var deleteCB = function(callback){
+var deleteCB = function (callback) {
     openPopup({
         title: '성공',
         text: '삭제완료했습니다.',
@@ -143,9 +188,9 @@ var deleteCB = function(callback){
  * @returns 
  */
 var addDot = function (date) {
-    if(date.length == 6){
+    if (date.length == 6) {
         return date.substring(0, 4) + '.' + date.substring(4, date.length);
-    } else if(date.length == 8){
+    } else if (date.length == 8) {
         return date.substring(0, 4) + '.' + date.substring(4, 6) + '.' + date.substring(6, date.length);
     }
 }

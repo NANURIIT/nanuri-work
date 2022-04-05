@@ -3,7 +3,15 @@
 
 /** onload **/
 $(function(){
+
+    let seqNo = new URL(document.location.href).searchParams.get('seqNo'); // seqNo세팅
+    let mode = seqNo != null ? 'M' : 'W';                                  // 작성인지 수정인지 모드 설정
+    
     getCommonCode();
+    
+    if (mode == 'M') {
+        getCareerhistoryDetail(seqNo);
+    }
 
     $(document).on('click', '#save', function(){
         let params = {
@@ -23,7 +31,12 @@ $(function(){
             etcCapaNm : $('#etcCapaNm').val()
         }
 
-        registerCareerhistory(params);
+        if (mode == 'W') {
+            registerCareerhistory(params);
+        } else if (mode == 'M') {
+            params.seqNo = seqNo;
+            registerCareerhistory(params);
+        }  
     });
 });
 
@@ -210,11 +223,39 @@ var registerCareerhistory = function(params){
             method : 'POST', 
             url : '/employee/careerhistoryWrite', 
             data : params, 
-            success : function(){
-                location.href = '/employee/index';
-            }
+            success: openPopup({
+                title: '성공',
+                text: '프로젝트이력 등록에 성공했습니다.',
+                type: 'success',
+                callback: function () {
+                    location.href = '/employee/index';
+                }
+            })
         });
     }
+}
+
+var getCareerhistoryDetail = function(seqNo){
+    ajaxCall({
+        method : 'GET', 
+        url : '/employee/careerhistoryDetail/'+seqNo, 
+        success : function(object){
+            $('#bzNm').val(object.bzNm);
+            $('#bzStYm').val(object.bzStYm);
+            $('#bzEdYm').val(object.bzEdYm);
+            $('#ordrNm').val(object.ordrNm);
+            $('#bzCntn').val(object.bzCntn);
+            $('#blgCoNm').val(object.blgCoNm);
+            $('#rolCd').val(object.rolCd);
+            $('#chrgBsnNm').val(object.chrgBsnNm);
+            $('#langNm').val(object.langNm);
+            $('#dbNm').val(object.dbNm);
+            $('#osNm').val(object.osNm);
+            $('#useFrmwkNm').val(object.useFrmwkNm);
+            $('#mthNm').val(object.mthNm);
+            $('#etcCapaNm').val(object.etcCapaNm);
+        }
+    });
 }
 
 /**

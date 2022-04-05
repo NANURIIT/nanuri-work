@@ -197,24 +197,26 @@
 	
 	<!-- 경력이력 리스트 출력 -->
 	<select id="selectCareerhistoryList" parameterType="string" resultType="com.nanuri.work.business.member.dto.CareerhistoryDTO">
-		SELECT seq_no, 
-			   bz_nm, 
-			   bz_st_ym, 
-			   bz_ed_ym, 
-			   ordr_nm, 
-			   bz_cntn, 
-			   blg_co_nm, 
-			   rol_cd, 
-			   chrg_bsn_nm, 
-			   lang_nm, 
-			   db_nm, 
-			   os_nm, 
-			   use_frmwk_nm, 
-			   mth_nm, 
-			   etc_capa_nm
-		  FROM mem_carr_hst
-		 WHERE user_id = #{userId}
-		   AND del_yn = 'N'
+		SELECT T01.seq_no, 
+	      	   T01.bz_nm, 
+	      	   T01.bz_st_ym, 
+	      	   T01.bz_ed_ym, 
+	      	   T01.ordr_nm, 
+	      	   T01.bz_cntn, 
+	      	   T01.blg_co_nm, 
+	      	   T02.dtl_cnm, 
+	      	   T01.chrg_bsn_nm, 
+	      	   T01.lang_nm, 
+	      	   T01.db_nm, 
+	      	   T01.os_nm, 
+	      	   T01.use_frmwk_nm, 
+	      	   T01.mth_nm, 
+	      	   T01.etc_capa_nm
+     	  FROM mem_carr_hst T01
+	 LEFT JOIN comn_cd T02
+     	    ON T01.rol_cd = T02.dtl_cd  
+    	 WHERE user_id = #{userId}
+      	   AND del_yn = 'N';
 	</select>
 	
 	<!-- 경력이력 상세 출력 -->

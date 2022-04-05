@@ -47,7 +47,7 @@ public class MemberController {
 	}
 	
 	/**
-	 * 경력이력 입력
+	 * 프로젝트이력 입력
 	 * @return
 	 */
 	@GetMapping(value = "/employee/careerhistoryWrite")
