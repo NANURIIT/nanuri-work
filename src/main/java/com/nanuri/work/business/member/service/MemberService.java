@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.nanuri.work.business.member.dto.CareerhistoryDTO;
 import com.nanuri.work.business.member.dto.CertificateDTO;
 import com.nanuri.work.business.member.dto.CommonCodeDTO;
 import com.nanuri.work.business.member.dto.SchoolCareerDTO;
@@ -100,4 +101,42 @@ public class MemberService {
 		return (queryResult == 1) ? true : false;
 	}
 	
+	/* 근무이력 */
+	
+	/* 경력이력 */
+	public boolean registerCareerHistory(CareerhistoryDTO params) {
+		int queryResult = 0;
+
+		if (params.getSeqNo() != null) {
+			params.setMdfpNm(facade.getDetails().getUsername());
+			queryResult = memberMapper.updateCareerhistory(params);
+		} else {
+			params.setRgmnNm(facade.getDetails().getUsername());
+			params.setUserId(facade.getDetails().getUserId());
+			queryResult = memberMapper.insertCareerhistory(params);
+		}
+
+		return (queryResult > 0);
+	}
+	
+	public List<CareerhistoryDTO> getCareerhistoryList(){
+		return memberMapper.selectCareerhistoryList(facade.getDetails().getUserId());
+	}
+	
+	public CareerhistoryDTO getCareerhistoryDetail(Long seqNo) {
+		return memberMapper.selectCareerhistoryDetail(seqNo);
+	}
+	
+	public boolean deleteCareerhistory(CareerhistoryDTO params) {
+		int queryResult = 0;
+
+		CareerhistoryDTO certificate = memberMapper.selectCareerhistoryDetail(params.getSeqNo());
+
+		if (certificate != null && "N".equals(certificate.getDelYn())) {
+			params.setMdfpNm(facade.getDetails().getUsername());
+			queryResult = memberMapper.deleteCareerhistory(params);
+		}
+
+		return (queryResult == 1) ? true : false;
+	}
 }
