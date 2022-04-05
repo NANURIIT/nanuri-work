@@ -46,4 +46,13 @@ public class MemberController {
 		return "business/employee/certificate_add";
 	}
 	
+	/**
+	 * 프로젝트이력 입력
+	 * @return
+	 */
+	@GetMapping(value = "/employee/careerhistoryWrite")
+	public String getCareerhistoryWritePage() {
+		return "business/employee/careerhistory_add";
+	}
+	
 }

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.nanuri.work.business.member.dto.CareerhistoryDTO;
 import com.nanuri.work.business.member.dto.CertificateDTO;
 import com.nanuri.work.business.member.dto.CommonCodeDTO;
 import com.nanuri.work.business.member.dto.SchoolCareerDTO;
@@ -103,6 +104,42 @@ public class MemberApiController {
 	@DeleteMapping(value = "/certificateDelete")
 	public boolean deleteCertificate(@RequestBody CertificateDTO params) {
 		return memberService.deleteCertificate(params);
+	}
+	
+	/* 근무이력 */
+	
+	/* 경력이력 */
+	
+	@PostMapping(value = "/careerhistoryWrite")
+	public String registerCareerhistory(@RequestBody CareerhistoryDTO params) {
+		String message = "";
+
+		try {
+			boolean isRegistered = memberService.registerCareerHistory(params);
+			if (isRegistered == false) {
+				message = "등록에 실패하였습니다.";
+			}
+		} catch (Exception e) {
+			message = "시스템에 문제가 발생하였습니다.";
+			e.printStackTrace();
+		}
+		
+		return message;
+	}
+	
+	@GetMapping(value = "/careerhistoryist")
+	public List<CareerhistoryDTO> getCareerhistoryList(){
+		return memberService.getCareerhistoryList();
+	}
+	
+	@GetMapping(value = "/careerhistoryDetail/{seqNo}")
+	public CareerhistoryDTO getCareerhistoryDetail(@PathVariable(value = "seqNo", required = true) Long seqNo) {		
+		return memberService.getCareerhistoryDetail(seqNo);
+	}
+	
+	@DeleteMapping(value = "/careerhistoryDelete")
+	public boolean deleteCareerhistory(@RequestBody CareerhistoryDTO params) {
+		return memberService.deleteCareerhistory(params);
 	}
 	
 }

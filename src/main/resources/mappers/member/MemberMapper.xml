@@ -3,10 +3,10 @@
 <mapper namespace="com.nanuri.work.business.member.mapper.MemberMapper">
 
 	<select id="selectCommonCodeList" parameterType="com.nanuri.work.business.member.dto.CommonCodeDTO" resultType="com.nanuri.work.business.member.dto.CommonCodeDTO">
-		SELECT ds_cd, 				/* 구분코드 */
-			   dtl_cd, 				/* 상세코드 */
-			   ds_cd_nm, 			/* 구분 코드명 */
-			   dtl_cnm 				/* 상세 코드명 */
+		SELECT ds_cd,
+			   dtl_cd,
+			   ds_cd_nm,
+			   dtl_cnm
 		  FROM comn_cd
     	 WHERE ds_cd = #{dsCd}
 	  ORDER BY sort_seqn
@@ -17,12 +17,12 @@
 	<insert id="insertSchoolCareer" parameterType="com.nanuri.work.business.member.dto.SchoolCareerDTO">
 		INSERT INTO mem_scca(
 			rgmn_nm,
-			user_id,			/* 사용자 ID */ 
-			scca_ds_cd, 		/* 학력구분코드 */
-			majr_nm, 			/* 전공 */
-			schl_nm, 			/* 학교명 */
-			etis_ym, 			/* 입학년월 */
-			grdu_ym 			/* 졸업년월 */
+			user_id, 
+			scca_ds_cd,
+			majr_nm,
+			schl_nm,
+			etis_ym,
+			grdu_ym
 		) VALUES (
 			#{rgmnNm}, 
 			#{userId}, 
@@ -36,12 +36,12 @@
 	
 	<!-- 학력 리스트 출력 -->
 	<select id="selectSchoolCareerList" parameterType="string" resultType="com.nanuri.work.business.member.dto.SchoolCareerDTO">
-		SELECT seq_no,				/* 일련번호 */
-			   scca_ds_cd, 			/* 학력구분코드 */
-			   majr_nm, 			/* 전공 */
-			   schl_nm, 			/* 학교명 */
-			   etis_ym, 			/* 입학년월 */
-			   grdu_ym 				/* 졸업년월 */
+		SELECT seq_no,
+			   scca_ds_cd,
+			   majr_nm,
+			   schl_nm,
+			   etis_ym,
+			   grdu_ym
 		  FROM mem_scca
 		 WHERE user_id = #{userId}
 		   AND del_yn = 'N'
@@ -49,12 +49,12 @@
 	
 	<!-- 학력 상세 출력 -->
 	<select id="selectSchoolCareerDetail" parameterType="long" resultType="com.nanuri.work.business.member.dto.SchoolCareerDTO">
-		SELECT seq_no,				/* 일련번호 */
-			   scca_ds_cd, 			/* 학력구분코드 */
-			   majr_nm, 			/* 전공 */
-			   schl_nm, 			/* 학교명 */
-			   etis_ym, 			/* 입학년월 */
-			   grdu_ym, 			/* 졸업년월 */
+		SELECT seq_no,
+			   scca_ds_cd,
+			   majr_nm,
+			   schl_nm,
+			   etis_ym,
+			   grdu_ym,
 			   del_yn
 		  FROM mem_scca
 		 WHERE seq_no = #{seqNo}
@@ -149,6 +149,122 @@
 	<!-- 자격증 삭제 -->
 	<update id="deleteCertificate" parameterType="com.nanuri.work.business.member.dto.CertificateDTO">
 		UPDATE mem_qlfc
+		   SET del_yn = 'Y'
+		 WHERE seq_no = #{seqNo}
+	</update>
+	
+	<!-- 근무이력 -->
+	
+	<!-- 경력이력 -->	
+	<!-- 경력이력 등록 -->
+	<insert id="insertCareerhistory" parameterType="com.nanuri.work.business.member.dto.CareerhistoryDTO">
+		INSERT INTO mem_carr_hst (
+			rgmn_nm, 
+			user_id, 
+			bz_nm, 
+			bz_st_ym, 
+			bz_ed_ym, 
+			ordr_nm, 
+			bz_cntn, 
+			blg_co_nm, 
+			rol_cd, 
+			chrg_bsn_nm, 
+			lang_nm, 
+			db_nm, 
+			os_nm, 
+			use_frmwk_nm, 
+			mth_nm, 
+			etc_capa_nm
+		) VALUES (
+			#{rgmnNm}, 
+			#{userId}, 
+			#{bzNm}, 
+			#{bzStYm}, 
+			#{bzEdYm}, 
+			#{ordrNm}, 
+			#{bzCntn}, 
+			#{blgCoNm}, 
+			#{rolCd}, 
+			#{chrgBsnNm}, 
+			#{langNm}, 
+			#{dbNm}, 
+			#{osNm}, 
+			#{useFrmwkNm}, 
+			#{mthNm}, 
+			#{etcCapaNm}
+		)
+	</insert>
+	
+	<!-- 경력이력 리스트 출력 -->
+	<select id="selectCareerhistoryList" parameterType="string" resultType="com.nanuri.work.business.member.dto.CareerhistoryDTO">
+		SELECT T01.seq_no, 
+	      	   T01.bz_nm, 
+	      	   T01.bz_st_ym, 
+	      	   T01.bz_ed_ym, 
+	      	   T01.ordr_nm, 
+	      	   T01.bz_cntn, 
+	      	   T01.blg_co_nm, 
+	      	   T02.dtl_cnm, 
+	      	   T01.chrg_bsn_nm, 
+	      	   T01.lang_nm, 
+	      	   T01.db_nm, 
+	      	   T01.os_nm, 
+	      	   T01.use_frmwk_nm, 
+	      	   T01.mth_nm, 
+	      	   T01.etc_capa_nm
+     	  FROM mem_carr_hst T01
+	 LEFT JOIN comn_cd T02
+     	    ON T01.rol_cd = T02.dtl_cd  
+    	 WHERE user_id = #{userId}
+      	   AND del_yn = 'N';
+	</select>
+	
+	<!-- 경력이력 상세 출력 -->
+	<select id="selectCareerhistoryDetail" parameterType="long" resultType="com.nanuri.work.business.member.dto.CareerhistoryDTO">
+		SELECT seq_no, 
+			   bz_nm, 
+			   bz_st_ym, 
+			   bz_ed_ym, 
+			   ordr_nm, 
+			   bz_cntn, 
+			   blg_co_nm, 
+			   rol_cd, 
+			   chrg_bsn_nm, 
+			   lang_nm, 
+			   db_nm, 
+			   os_nm, 
+			   use_frmwk_nm, 
+			   mth_nm, 
+			   etc_capa_nm, 
+			   del_yn
+		  FROM mem_carr_hst
+		 WHERE seq_no = #{seqNo}
+		   AND del_yn = 'N'
+	</select>
+	
+	<!-- 경력이력 수정 -->
+	<update id="updateCareerhistory" parameterType="com.nanuri.work.business.member.dto.CareerhistoryDTO">
+		UPDATE mem_carr_hst
+		   SET bz_nm = #{bzNm}, 
+		       bz_st_ym = #{bzStYm}, 
+		       bz_ed_ym = #{bzEdYm}, 
+		       ordr_nm = #{ordrNm}, 
+		       bz_cntn = #{bzCntn}, 
+		       blg_co_nm = #{blgCoNm}, 
+		       rol_cd = #{rolCd}, 
+		       chrg_bsn_nm = #{chrgBsnNm}, 
+		       lang_nm = #{langNm}, 
+		       db_nm = #{dbNm}, 
+		       os_nm = #{osNm}, 
+		       use_frmwk_nm = #{useFrmwkNm}, 
+		       mth_nm = #{mthNm}, 
+		       etc_capa_nm = #{etcCapaNm}
+		 WHERE seq_no = #{seqNo} 
+	</update>
+	
+	<!-- 경력이력 삭제 -->
+	<update id="deleteCareerhistory" parameterType="com.nanuri.work.business.member.dto.CareerhistoryDTO">
+		UPDATE mem_carr_hst
 		   SET del_yn = 'Y'
 		 WHERE seq_no = #{seqNo}
 	</update>
