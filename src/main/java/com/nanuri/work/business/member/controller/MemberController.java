@@ -37,7 +37,11 @@ public class MemberController {
 		return "business/employee/education_add";
 	}
 	
-	@GetMapping(value = "/employee/CertificateWrite")
+	/**
+	 * 자격증 입력
+	 * @return
+	 */
+	@GetMapping(value = "/employee/certificateWrite")
 	public String getCertificateWritePage() {
 		return "business/employee/certificate_add";
 	}

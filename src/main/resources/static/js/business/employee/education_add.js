@@ -9,26 +9,26 @@ $(function () {
 
     getCommonCode();
 
-    if(mode == 'M'){
+    if (mode == 'M') {
         getSchoolCareerDetail(seqNo);
     }
 
     $(document).on('click', '#save', function () {
         let params = {
-            sccaDsCd : $('#sccaDsCd').val(), 
-            majrNm : $('#majrNm').val(), 
-            schlNm : $('#schlNm').val(), 
-            etisYm : $('#etisYm').val(), 
-            grduYm : $('#grduYm').val()
+            sccaDsCd: $('#sccaDsCd').val(),
+            majrNm: $('#majrNm').val(),
+            schlNm: $('#schlNm').val(),
+            etisYm: $('#etisYm').val(),
+            grduYm: $('#grduYm').val()
         };
 
-        if(mode == 'W'){   
+        if (mode == 'W') {
             registerSchoolCareer(params);
-        } else if(mode == 'M'){
+        } else if (mode == 'M') {
             params.seqNo = seqNo;
             registerSchoolCareer(params);
         }
-        
+
     });
 });
 
@@ -43,7 +43,8 @@ var getCommonCode = function () {
         success: function (object) {
             let COMMON_CODE_HTML = '';
             for (let i = 0; i < object.length; i++) {
-                COMMON_CODE_HTML += '<option value="' + object[i].dtlCd + '">' + object[i].dtlCnm + '</option>'
+                let tmpRow = object[i];
+                COMMON_CODE_HTML += '<option value="' + tmpRow.dtlCd + '">' + tmpRow.dtlCnm + '</option>'
             }
             $('#sccaDsCd').html(COMMON_CODE_HTML);
         }
@@ -58,7 +59,7 @@ var getCommonCode = function () {
  * @param {string} params.etisYm   입학년월
  * @param {string} params.grduYm   졸업년월
  */
-var registerSchoolCareer = function(params){
+var registerSchoolCareer = function (params) {
 
     if (isEmpty(params.schlNm)) {
         openPopup({
@@ -93,7 +94,7 @@ var registerSchoolCareer = function(params){
                 });
             }
         });
-    } else if(params.sccaDsCd != 'highSchool' && isEmpty(params.majrNm)){
+    } else if (params.sccaDsCd != 'highSchool' && isEmpty(params.majrNm)) {
         openPopup({
             title: '실패',
             text: '전공을 입력해주세요.',
@@ -106,14 +107,14 @@ var registerSchoolCareer = function(params){
         });
     } else {
         ajaxCall({
-            method : 'POST', 
-            url : '/employee/schoolCareerWrite', 
-            data : params, 
-            success : openPopup({
-                title : '성공', 
-                text : '학력 등록에 성공했습니다.', 
-                type : 'success', 
-                callback : function(){
+            method: 'POST',
+            url: '/employee/schoolCareerWrite',
+            data: params,
+            success: openPopup({
+                title: '성공',
+                text: '학력 등록에 성공했습니다.',
+                type: 'success',
+                callback: function () {
                     location.href = '/employee/index';
                 }
             })
@@ -125,11 +126,11 @@ var registerSchoolCareer = function(params){
  * 학력 상세 조회
  * @param {number} seqNo 일련번호
  */
-var getSchoolCareerDetail = function(seqNo){
+var getSchoolCareerDetail = function (seqNo) {
     ajaxCall({
-        method : 'GET', 
-        url : '/employee/schoolCareerDetail/' + seqNo, 
-        success : function(object){
+        method: 'GET',
+        url: '/employee/schoolCareerDetail/' + seqNo,
+        success: function (object) {
             $('#sccaDsCd').val(object.sccaDsCd);
             $('#schlNm').val(object.schlNm);
             $('#etisYm').val(object.etisYm);
@@ -147,9 +148,9 @@ var getSchoolCareerDetail = function(seqNo){
 var dateValidation = function (date) {
     if (isEmpty(date)) {
         return false;
-    }else if(isNaN(date)){
+    } else if (isNaN(date)) {
         return false;
-    } else if(date.length > 6){
+    } else if (date.length > 6) {
         return false;
     } else if (date < 0) {
         return false;

@@ -44,6 +44,10 @@ public class MemberService {
 	public List<SchoolCareerDTO> getSchoolCareerList() {
 		return memberMapper.selectSchoolCareerList(facade.getDetails().getUserId());
 	}
+	
+	public SchoolCareerDTO getSchoolCareerDetail(Long seqNo) {
+		return memberMapper.selectSchoolCareerDetail(seqNo);
+	}
 
 	public boolean deleteSchoolCareer(SchoolCareerDTO params) {
 		int queryResult = 0;
@@ -56,10 +60,6 @@ public class MemberService {
 		}
 
 		return (queryResult == 1) ? true : false;
-	}
-
-	public SchoolCareerDTO getSchoolCareerDetail(Long seqNo) {
-		return memberMapper.selectSchoolCareerDetail(seqNo);
 	}
 
 	/* 자격증 */
@@ -78,5 +78,26 @@ public class MemberService {
 
 		return (queryResult > 0);
 	}
+	
+	public List<CertificateDTO> getCertificateList(){
+		return memberMapper.selectCertificateList(facade.getDetails().getUserId());
+	}
+	
+	public CertificateDTO getCertificateDetail(Long seqNo) {
+		return memberMapper.selectCertificateDetail(seqNo);
+	}
 
+	public boolean deleteCertificate(CertificateDTO params) {
+		int queryResult = 0;
+
+		CertificateDTO certificate = memberMapper.selectCertificateDetail(params.getSeqNo());
+
+		if (certificate != null && "N".equals(certificate.getDelYn())) {
+			params.setMdfpNm(facade.getDetails().getUsername());
+			queryResult = memberMapper.deleteCertificate(params);
+		}
+
+		return (queryResult == 1) ? true : false;
+	}
+	
 }

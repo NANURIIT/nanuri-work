@@ -88,5 +88,21 @@ public class MemberApiController {
 		}
 		
 		return message;
-	} 
+	}
+	
+	@GetMapping(value = "/certificateList")
+	public List<CertificateDTO> getCertificateList(){
+		return memberService.getCertificateList();
+	}
+	
+	@GetMapping(value = "/certificateDetail/{seqNo}")
+	public CertificateDTO getCertificateDetail(@PathVariable(value = "seqNo", required = true) Long seqNo) {		
+		return memberService.getCertificateDetail(seqNo);
+	}
+	
+	@DeleteMapping(value = "/certificateDelete")
+	public boolean deleteCertificate(@RequestBody CertificateDTO params) {
+		return memberService.deleteCertificate(params);
+	}
+	
 }
