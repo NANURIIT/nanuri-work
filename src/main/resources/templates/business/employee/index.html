@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- 공통 헤드 -->
+
+<head th:replace="layout/employee/head :: headFragment"></head>
+
+<link rel="stylesheet" th:href="@{/sample/nanuri_project/css/style.css}">
+<script th:src="@{/js/business/employee/index.js}"></script>
+
+<body>
+    <div class="main">
+        <div class="wrap">
+            <section class="list_container">
+                <div class="list_title">
+                    <div class="list_title_text">기본정보</div>
+                    <a href="/employee/basicInfoWrite" title="#" class="list_title_add">
+                        <span class="blind">추가</span>
+                    </a>
+                </div>
+                <div class="list_info">
+                    <div class="list_info_title">홍길동</div>
+                    <div class="list_info_desc">나누리IT, 사원</div>
+                </div>
+            </section>
+            <section class="list_container" id="schoolCareer">
+                <div class="list_title">
+                    <div class="list_title_text">학력</div>
+                    <a href="/employee/schoolCareerWrite" title="#" class="list_title_add">
+                        <span class="blind">추가</span>
+                    </a>
+                </div>
+                <div id="schoolCareerList">
+                    <!-- <div class="list_info">
+                    <div class="list_info_title">서울대학교</div>
+                    <div class="list_info_desc">2022.03 ~ 2022.03 졸업</div>
+                    <div class="list_info_set">
+                        <button>수정</button>
+                        <button>삭제</button>
+                    </div>
+                </div>
+                <div class="list_info">
+                    <div class="list_info_title">서울고등학교</div>
+                    <div class="list_info_desc">2022.03 ~ 2022.03 졸업</div>
+                    <div class="list_info_set">
+                        <button>수정</button>
+                        <button>삭제</button>
+                    </div>
+                </div> -->
+                </div>
+            </section>
+            <section class="list_container">
+                <div class="list_title">
+                    <div class="list_title_text">자격증</div>
+                    <a href="/employee/CertificateWrite" title="#" class="list_title_add">
+                        <span class="blind">추가</span>
+                    </a>
+                </div>
+            </section>
+            <section class="list_container">
+                <div class="list_title">
+                    <div class="list_title_text">근무이력</div>
+                    <a href="#" title="#" class="list_title_add">
+                        <span class="blind">추가</span>
+                    </a>
+                </div>
+            </section>
+            <section class="list_container">
+                <div class="list_title">
+                    <div class="list_title_text">교육이수</div>
+                    <a href="#" title="#" class="list_title_add">
+                        <span class="blind">추가</span>
+                    </a>
+                </div>
+            </section>
+            <section class="list_container">
+                <div class="list_title">
+                    <div class="list_title_text">대내외 수상경력</div>
+                    <a href="#" title="#" class="list_title_add">
+                        <span class="blind">추가</span>
+                    </a>
+                </div>
+            </section>
+            <section class="list_container">
+                <div class="list_title">
+                    <div class="list_title_text">외국어 능력</div>
+                    <a href="#" title="#" class="list_title_add">
+                        <span class="blind">추가</span>
+                    </a>
+                </div>
+            </section>
+            <section class="list_container">
+                <div class="list_title">
+                    <div class="list_title_text">사용가능 기술 분야</div>
+                    <a href="#" title="#" class="list_title_add">
+                        <span class="blind">추가</span>
+                    </a>
+                </div>
+            </section>
+            <section class="list_container">
+                <div class="list_title">
+                    <div class="list_title_text">경력이력</div>
+                    <a href="#" title="#" class="list_title_add">
+                        <span class="blind">추가</span>
+                    </a>
+                </div>
+            </section>
+        </div>
+    </div>
+</body>
+
+</html>
