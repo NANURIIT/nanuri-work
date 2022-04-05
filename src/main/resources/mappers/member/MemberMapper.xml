@@ -3,24 +3,26 @@
 <mapper namespace="com.nanuri.work.business.member.mapper.MemberMapper">
 
 	<select id="selectCommonCodeList" parameterType="com.nanuri.work.business.member.dto.CommonCodeDTO" resultType="com.nanuri.work.business.member.dto.CommonCodeDTO">
-		SELECT ds_cd, 
-			   dtl_cd, 
-			   ds_cd_nm, 
-			   dtl_cnm
+		SELECT ds_cd, 				/* 구분코드 */
+			   dtl_cd, 				/* 상세코드 */
+			   ds_cd_nm, 			/* 구분 코드명 */
+			   dtl_cnm 				/* 상세 코드명 */
 		  FROM comn_cd
     	 WHERE ds_cd = #{dsCd}
 	  ORDER BY sort_seqn
 	</select>
 	
+	<!-- 학력 -->
+	<!-- 학력 입력 -->	
 	<insert id="insertSchoolCareer" parameterType="com.nanuri.work.business.member.dto.SchoolCareerDTO">
 		INSERT INTO mem_scca(
-			rgmn_nm, 
-			user_id, 
-			scca_ds_cd, 
-			majr_nm, 
-			schl_nm, 
-			etis_ym, 
-			grdu_ym
+			rgmn_nm,
+			user_id,			/* 사용자 ID */ 
+			scca_ds_cd, 		/* 학력구분코드 */
+			majr_nm, 			/* 전공 */
+			schl_nm, 			/* 학교명 */
+			etis_ym, 			/* 입학년월 */
+			grdu_ym 			/* 졸업년월 */
 		) VALUES (
 			#{rgmnNm}, 
 			#{userId}, 
@@ -32,31 +34,34 @@
 		)
 	</insert>
 	
+	<!-- 학력 리스트 출력 -->
 	<select id="selectSchoolCareerList" parameterType="string" resultType="com.nanuri.work.business.member.dto.SchoolCareerDTO">
-		SELECT seq_no,
-			   scca_ds_cd, 
-			   majr_nm, 
-			   schl_nm, 
-			   etis_ym, 
-			   grdu_ym
+		SELECT seq_no,				/* 일련번호 */
+			   scca_ds_cd, 			/* 학력구분코드 */
+			   majr_nm, 			/* 전공 */
+			   schl_nm, 			/* 학교명 */
+			   etis_ym, 			/* 입학년월 */
+			   grdu_ym 				/* 졸업년월 */
 		  FROM mem_scca
 		 WHERE user_id = #{userId}
 		   AND del_yn = 'N'
 	</select>
 	
+	<!-- 학력 상세 출력 -->
 	<select id="selectSchoolCareerDetail" parameterType="long" resultType="com.nanuri.work.business.member.dto.SchoolCareerDTO">
-		SELECT seq_no,
-			   scca_ds_cd, 
-			   majr_nm, 
-			   schl_nm, 
-			   etis_ym, 
-			   grdu_ym, 
+		SELECT seq_no,				/* 일련번호 */
+			   scca_ds_cd, 			/* 학력구분코드 */
+			   majr_nm, 			/* 전공 */
+			   schl_nm, 			/* 학교명 */
+			   etis_ym, 			/* 입학년월 */
+			   grdu_ym, 			/* 졸업년월 */
 			   del_yn
 		  FROM mem_scca
 		 WHERE seq_no = #{seqNo}
 		   AND del_yn = 'N'
 	</select>
 	
+	<!-- 학력 수정 -->
 	<update id="updateSchoolCareer" parameterType="com.nanuri.work.business.member.dto.SchoolCareerDTO">
 		UPDATE mem_scca
 		   SET mdfp_nm = #{mdfpNm}, 
@@ -68,10 +73,35 @@
  		 WHERE seq_no = #{seqNo}
 	</update>
 	
+	<!-- 학력 삭제 -->
 	<update id="deleteSchoolCareer" parameterType="com.nanuri.work.business.member.dto.SchoolCareerDTO">
 		UPDATE mem_scca
    		   SET del_yn = 'Y'
    		 WHERE seq_no = #{seqNo}
 	</update>
+	
+	
+	<!-- 자격증 -->
+	<!-- 자격증 입력 -->
+	<insert id="insertCerticate">
+		INSERT INTO mem_qlfc (
+			rgmn_nm, 
+			user_id, 				/* 사용자 ID */
+			qlfc_ds_cd, 			/* 자격증 구분 코드 */
+			qlfc_nm, 				/* 자격증명 */
+			pbcpl_nm, 				/* 발행처 */
+			acq_dt, 				/* 취득일자 */
+			vld_Dt, 				/* 유효일자 */
+			updt_dt 				/* 갱신일자 */
+		)
+	</insert>
+	
+	<!-- 자격증 리스트 출력 -->
+	
+	<!-- 자격증 상세 출력 -->
+	
+	<!-- 자격증 수정 -->
+	
+	<!-- 자격증 삭제 -->
 	
 </mapper>

@@ -37,4 +37,9 @@ public class MemberController {
 		return "business/employee/education_add";
 	}
 	
+	@GetMapping(value = "/employee/CertificateWrite")
+	public String getCertificateWritePage() {
+		return "business/employee/certificate_add";
+	}
+	
 }
