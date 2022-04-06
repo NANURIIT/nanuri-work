@@ -4,6 +4,13 @@
 /** onload **/
 $(function(){
 
+    let seqNo = new URL(document.location.href).searchParams.get('seqNo'); // seqNo세팅
+    let mode = seqNo != null ? 'M' : 'W';                                  // 작성인지 수정인지 모드 설정
+
+    if (mode == 'M') {
+        getWorkhistoryDetail(seqNo);
+    }
+
     $(document).on('click', '#save', function(){
         let params = {
             wrkplNm : $('#wrkplNm').val(), 
@@ -13,7 +20,12 @@ $(function(){
             chrgBsnNm : $('#chrgBsnNm').val()
         }
 
-        registerWorkhistory(params);
+        if (mode == 'W') {
+            registerWorkhistory(params);
+        } else if (mode == 'M') {
+            params.seqNo = seqNo;
+            registerWorkhistory(params);
+        }
     });
 
 });
@@ -89,6 +101,24 @@ var registerWorkhistory = function(params){
             })
         });
     }
+}
+
+/**
+ * 회사소속이력 상세 조회
+ * @param {number} seqNo 일련번호
+ */
+var getWorkhistoryDetail = function(seqNo){
+    ajaxCall({
+        method : 'GET', 
+        url : '/employee/workhistoryDetail/' + seqNo, 
+        success : function(object){
+            $('#wrkplNm').val(object.wrkplNm);
+            $('#encoYm').val(object.encoYm);
+            $('#rtrmYm').val(object.rtrmYm);
+            $('#dtyNm').val(object.dtyNm);
+            $('#chrgBsnNm').val(object.chrgBsnNm);
+        }
+    })
 }
 
 /**

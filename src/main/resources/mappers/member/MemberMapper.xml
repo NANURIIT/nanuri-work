@@ -76,7 +76,8 @@
 	<!-- 학력 삭제 -->
 	<update id="deleteSchoolCareer" parameterType="com.nanuri.work.business.member.dto.SchoolCareerDTO">
 		UPDATE mem_scca
-   		   SET del_yn = 'Y'
+   		   SET del_yn = 'Y', 
+   		       mdfp_nm = #{mdfpNm}
    		 WHERE seq_no = #{seqNo}
 	</update>
 	
@@ -150,7 +151,8 @@
 	<!-- 자격증 삭제 -->
 	<update id="deleteCertificate" parameterType="com.nanuri.work.business.member.dto.CertificateDTO">
 		UPDATE mem_qlfc
-		   SET del_yn = 'Y'
+		   SET del_yn = 'Y', 
+		       mdfp_nm = #{mdfpNm}
 		 WHERE seq_no = #{seqNo}
 	</update>
 	
@@ -219,7 +221,8 @@
 	<!-- 회사소속이력 삭제 -->
 	<update id="deleteWorkhistory" parameterType="com.nanuri.work.business.member.dto.WorkhistoryDTO">
 		UPDATE mem_svce_hst
-		   SET del_yn = 'Y'
+		   SET del_yn = 'Y', 
+		       mdfp_nm = #{mdfpNm}
 		 WHERE seq_no = #{seqNo}
 	</update>
 	
@@ -333,7 +336,8 @@
 	<!-- 프로젝트이력 삭제 -->
 	<update id="deleteCareerhistory" parameterType="com.nanuri.work.business.member.dto.CareerhistoryDTO">
 		UPDATE mem_carr_hst
-		   SET del_yn = 'Y'
+		   SET del_yn = 'Y', 
+		   	   mdfp_nm = #{mdfpNm}
 		 WHERE seq_no = #{seqNo}
 	</update>
 	
