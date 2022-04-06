@@ -11,7 +11,7 @@ $(function(){
         getAwardDetail(seqNo);
     }
 
-    // 저장 클릭
+    // 저장버튼 클릭
     $(document).on('click', '#save', function(){
         let params = {
             przNm : $('#przNm').val(), 

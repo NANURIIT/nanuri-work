@@ -9,6 +9,7 @@ import com.nanuri.work.business.member.dto.CareerhistoryDTO;
 import com.nanuri.work.business.member.dto.CertificateDTO;
 import com.nanuri.work.business.member.dto.CommonCodeDTO;
 import com.nanuri.work.business.member.dto.EducationDTO;
+import com.nanuri.work.business.member.dto.LanguageDTO;
 import com.nanuri.work.business.member.dto.SchoolCareerDTO;
 import com.nanuri.work.business.member.dto.WorkhistoryDTO;
 
@@ -50,6 +51,13 @@ public interface MemberMapper {
 	public AwardDTO selectAwardDetail(Long seqNo);
 	public int updateAward(AwardDTO params);
 	public int deleteAward(AwardDTO params);
+	
+	/* 외국어 능력 */
+	public int insertLanguage(LanguageDTO params);
+	public List<LanguageDTO> selectLanguageList(String userId);
+	public LanguageDTO selectLanguageDetail(Long seqNo);
+	public int updateLanguage(LanguageDTO params);
+	public int deleteLanguage(LanguageDTO params);
 	
 	/* 프로젝트이력 */
 	public int insertCareerhistory(CareerhistoryDTO params);

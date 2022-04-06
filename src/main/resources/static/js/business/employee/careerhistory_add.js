@@ -13,6 +13,7 @@ $(function(){
         getCareerhistoryDetail(seqNo);
     }
 
+    // 저장버튼 클릭
     $(document).on('click', '#save', function(){
         let params = {
             bzNm : $('#bzNm').val(),

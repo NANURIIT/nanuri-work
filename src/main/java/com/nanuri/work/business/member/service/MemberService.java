@@ -10,6 +10,7 @@ import com.nanuri.work.business.member.dto.CareerhistoryDTO;
 import com.nanuri.work.business.member.dto.CertificateDTO;
 import com.nanuri.work.business.member.dto.CommonCodeDTO;
 import com.nanuri.work.business.member.dto.EducationDTO;
+import com.nanuri.work.business.member.dto.LanguageDTO;
 import com.nanuri.work.business.member.dto.SchoolCareerDTO;
 import com.nanuri.work.business.member.dto.WorkhistoryDTO;
 import com.nanuri.work.business.member.mapper.MemberMapper;
@@ -210,6 +211,43 @@ public class MemberService {
 		if (award != null && "N".equals(award.getDelYn())) {
 			params.setMdfpNm(facade.getDetails().getUsername());
 			queryResult = memberMapper.deleteAward(params);
+		}
+
+		return (queryResult == 1) ? true : false;
+	}
+	
+	/* 외국어 능력 */
+	public boolean registerLanguage(LanguageDTO params) {
+		int queryResult = 0;
+
+		if (params.getSeqNo() != null) {
+			params.setMdfpNm(facade.getDetails().getUsername());
+			queryResult = memberMapper.updateLanguage(params);
+		} else {
+			params.setRgmnNm(facade.getDetails().getUsername());
+			params.setUserId(facade.getDetails().getUserId());
+			queryResult = memberMapper.insertLanguage(params);
+		}
+
+		return (queryResult > 0);
+	}
+	
+	public List<LanguageDTO> getLanguageList(){
+		return memberMapper.selectLanguageList(facade.getDetails().getUserId());
+	}
+	
+	public LanguageDTO getLanguageDetail(Long seqNo) {
+		return memberMapper.selectLanguageDetail(seqNo);
+	}
+	
+	public boolean deleteLanguage(LanguageDTO params) {
+		int queryResult = 0;
+		
+		LanguageDTO language = memberMapper.selectLanguageDetail(params.getSeqNo());
+
+		if (language != null && "N".equals(language.getDelYn())) {
+			params.setMdfpNm(facade.getDetails().getUsername());
+			queryResult = memberMapper.deleteLanguage(params);
 		}
 
 		return (queryResult == 1) ? true : false;
