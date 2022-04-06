@@ -48,7 +48,11 @@ $(function () {
     // 대내외 수상경력 삭제
     $(document).on('click', '.deleteAward', function () {
         confirmDelete($(this).attr('id'), deleteAward);
-    })
+    });
+
+    $(document).on('click', '.deleteLanguage', function(){
+        confirmDelete($(this).attr('id'), deleteLanguage);
+    });
 
     // 프로젝트이력 삭제
     $(document).on('click', '.deleteCareerhistory', function () {
@@ -325,14 +329,27 @@ var getLanguageList = function () {
                 LANGUAGE_HTML += '  <div class="list_info_desc">'+tmpRow.prfcnNm+'</div>';
                 LANGUAGE_HTML += '  <div class="list_info_desc">'+tmpRow.etcNm+'</div>';
                 LANGUAGE_HTML += '  <div class="list_info_set">';
-                LANGUAGE_HTML += '      <button>수정</button>';
-                LANGUAGE_HTML += '      <button>삭제</button>';
+                LANGUAGE_HTML += '      <button onclick="location.href=\'/employee/languageWrite?seqNo=' + tmpRow.seqNo + '\'">수정</button>';
+                LANGUAGE_HTML += '      <button class="deleteLanguage" id="' + tmpRow.seqNo + '">삭제</button>';
                 LANGUAGE_HTML += '  </div>';
                 LANGUAGE_HTML += '</div>';
             }
             
             $('#languageList').html(LANGUAGE_HTML);
         }
+    });
+}
+
+/**
+ * 외국어 능력 삭제 함수
+ * @param {number} params.seqNo 일련번호
+ */
+var deleteLanguage = function(params){
+    ajaxCall({
+        method: 'DELETE',
+        url: '/employee/languageDelete',
+        data: params,
+        success: deleteCB(getLanguageList)
     });
 }
 

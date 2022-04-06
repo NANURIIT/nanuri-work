@@ -3,6 +3,13 @@
 
 /** onload **/
 $(function(){
+
+    let seqNo = new URL(document.location.href).searchParams.get('seqNo'); // seqNo세팅
+    let mode = seqNo != null ? 'M' : 'W';                                  // 작성인지 수정인지 모드 설정
+
+    if (mode == 'M') {
+        getLanguageDetail(seqNo);
+    }
     
     // 저장버튼 클릭
     $(document).on('click', '#save', function(){
@@ -12,7 +19,12 @@ $(function(){
             etcNm : $('#etcNm').val()
         };
 
-        registerLanguage(params);
+        if (mode == 'W') {
+            registerLanguage(params);
+        } else if (mode == 'M') {
+            params.seqNo = seqNo;
+            registerLanguage(params);
+        }
     });
 });
 
@@ -54,4 +66,20 @@ var registerLanguage = function(params){
             })
         });
     }
+}
+
+/**
+ * 외국어능력 상세 조회
+ * @param {number} seqNo 일련번호
+ */
+var getLanguageDetail = function(seqNo){
+    ajaxCall({
+        method : 'GET', 
+        url : '/employee/languageDetail/'+seqNo, 
+        success : function(object){
+            $('#frgnNm').val(object.frgnNm);
+            $('#prfcnNm').val(object.prfcnNm);
+            $('#etcNm').val(object.etcNm);
+        }
+    });
 }
