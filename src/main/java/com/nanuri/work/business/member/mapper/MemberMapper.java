@@ -11,6 +11,7 @@ import com.nanuri.work.business.member.dto.CommonCodeDTO;
 import com.nanuri.work.business.member.dto.EducationDTO;
 import com.nanuri.work.business.member.dto.LanguageDTO;
 import com.nanuri.work.business.member.dto.SchoolCareerDTO;
+import com.nanuri.work.business.member.dto.SkillDTO;
 import com.nanuri.work.business.member.dto.WorkhistoryDTO;
 
 @Mapper
@@ -58,6 +59,13 @@ public interface MemberMapper {
 	public LanguageDTO selectLanguageDetail(Long seqNo);
 	public int updateLanguage(LanguageDTO params);
 	public int deleteLanguage(LanguageDTO params);
+	
+	/* 사용가능기술(언어) */
+	public int insertSkill(SkillDTO params);
+	public List<SkillDTO> selectSkillList(String userId);
+	public SkillDTO selectSkillDetail(Long seqNo);
+	public int updateSkill(SkillDTO params);
+	public int deleteSkill(SkillDTO params);
 	
 	/* 프로젝트이력 */
 	public int insertCareerhistory(CareerhistoryDTO params);

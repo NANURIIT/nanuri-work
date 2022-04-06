@@ -25,6 +25,9 @@ $(function () {
     // 외국어 능력 리스트 호출
     getLanguageList();
 
+    // 사용가능기술(언어) 리스트 호출
+    getSkillList();
+
     // 학력 삭제
     $(document).on('click', '.deleteSchoolCareer', function () {
         confirmDelete($(this).attr('id'), deleteSchoolCareer);
@@ -50,8 +53,14 @@ $(function () {
         confirmDelete($(this).attr('id'), deleteAward);
     });
 
-    $(document).on('click', '.deleteLanguage', function(){
+    // 외국어 능력 삭제
+    $(document).on('click', '.deleteLanguage', function () {
         confirmDelete($(this).attr('id'), deleteLanguage);
+    });
+
+    // 사용가능기술(언어) 삭제
+    $(document).on('click', '.deleteSkill', function(){
+        confirmDelete($(this).attr('id'), deleteSkill);
     });
 
     // 프로젝트이력 삭제
@@ -325,16 +334,16 @@ var getLanguageList = function () {
                 let tmpRow = object[i];
 
                 LANGUAGE_HTML += '<div class="list_info">';
-                LANGUAGE_HTML += '  <div class="list_info_title">'+tmpRow.frgnNm+'</div>';
-                LANGUAGE_HTML += '  <div class="list_info_desc">'+tmpRow.prfcnNm+'</div>';
-                LANGUAGE_HTML += '  <div class="list_info_desc">'+tmpRow.etcNm+'</div>';
+                LANGUAGE_HTML += '  <div class="list_info_title">' + tmpRow.frgnNm + '</div>';
+                LANGUAGE_HTML += '  <div class="list_info_desc">' + tmpRow.prfcnNm + '</div>';
+                LANGUAGE_HTML += '  <div class="list_info_desc">' + tmpRow.etcNm + '</div>';
                 LANGUAGE_HTML += '  <div class="list_info_set">';
                 LANGUAGE_HTML += '      <button onclick="location.href=\'/employee/languageWrite?seqNo=' + tmpRow.seqNo + '\'">수정</button>';
                 LANGUAGE_HTML += '      <button class="deleteLanguage" id="' + tmpRow.seqNo + '">삭제</button>';
                 LANGUAGE_HTML += '  </div>';
                 LANGUAGE_HTML += '</div>';
             }
-            
+
             $('#languageList').html(LANGUAGE_HTML);
         }
     });
@@ -344,12 +353,52 @@ var getLanguageList = function () {
  * 외국어 능력 삭제 함수
  * @param {number} params.seqNo 일련번호
  */
-var deleteLanguage = function(params){
+var deleteLanguage = function (params) {
     ajaxCall({
         method: 'DELETE',
         url: '/employee/languageDelete',
         data: params,
         success: deleteCB(getLanguageList)
+    });
+}
+
+/**
+ *  사용가능기술(언어) 리스트 호출 함수
+ */
+var getSkillList = function () {
+    ajaxCall({
+        method: 'GET',
+        url: '/employee/skillList',
+        success: function (object) {
+            let SKILL_HTML = '';
+            for (let i = 0; i < object.length; i++) {
+                let tmpRow = object[i];
+
+                SKILL_HTML += '<div class="list_info">';
+                SKILL_HTML += ' <div class="list_info_title">' + tmpRow.langFeldNm + '</div>';
+                SKILL_HTML += ' <div class="list_info_desc">' + tmpRow.prfcnNm + '</div>';
+                SKILL_HTML += ' <div class="list_info_desc">' + tmpRow.etcNm + '</div>';
+                SKILL_HTML += ' <div class="list_info_set">';
+                SKILL_HTML += '     <button onclick="location.href=\'/employee/skillWrite?seqNo=' + tmpRow.seqNo + '\'">수정</button>';
+                SKILL_HTML += '     <button class="deleteSkill" id="' + tmpRow.seqNo + '">삭제</button>';
+                SKILL_HTML += ' </div>';
+                SKILL_HTML += '</div>';
+            }
+            $('#skillList').html(SKILL_HTML);
+        }
+    })
+}
+
+/**
+ * 사용가능기술(언어) 삭제 함수
+ * @param {number} params.seqNo 일련번호
+ */
+ var deleteSkill = function (params) {
+    ajaxCall({
+        method: 'DELETE',
+        url: '/employee/skillDelete',
+        data: params,
+        success: deleteCB(getSkillList)
     });
 }
 
