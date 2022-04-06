@@ -199,6 +199,8 @@ var getWorkhistoryList = function () {
         url: '/employee/workhistoryList',
         success: function (object) {
             let WORK_HISTORY_HTML = '';
+            let TOTAL_PERIOD_HTML = '';
+            let totalPeriod = {year : 0, month : 0};
 
             for (let i = 0; i < object.length; i++) {
                 let tmpRow = object[i];
@@ -217,9 +219,22 @@ var getWorkhistoryList = function () {
                 WORK_HISTORY_HTML += '      <button class="deleteWorkhistory" id="' + tmpRow.seqNo + '">삭제</button>';
                 WORK_HISTORY_HTML += '  </div>';
                 WORK_HISTORY_HTML += '</div>';
-            }
 
+                totalPeriod.year += period.year;
+                totalPeriod.month += period.month;
+            }
+            
+            totalPeriod.year += Math.floor(totalPeriod.month / 12);
+            totalPeriod.month = totalPeriod.month % 12;
+
+            if(totalPeriod.month > 0){
+                TOTAL_PERIOD_HTML += '<span class="title_total">총 경력 '+totalPeriod.year+'년 '+totalPeriod.month+'개월</span>'
+            } else {
+                TOTAL_PERIOD_HTML += '<span class="title_total">총 경력 '+totalPeriod.year+'년</span>'
+            }
+            
             $('#workhistoryList').html(WORK_HISTORY_HTML);
+            $('#totalPeriod').html(TOTAL_PERIOD_HTML);
         }
     })
 }

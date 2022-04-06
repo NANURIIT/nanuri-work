@@ -4,6 +4,13 @@
 /** onload **/
 $(function () {
 
+    let seqNo = new URL(document.location.href).searchParams.get('seqNo'); // seqNo세팅
+    let mode = seqNo != null ? 'M' : 'W';                                  // 작성인지 수정인지 모드 설정
+
+    if (mode == 'M') {
+        getSkillDetail(seqNo);
+    }
+
     // 저장버튼 클릭
     $(document).on('click', '#save', function () {
         let params = {
@@ -11,10 +18,23 @@ $(function () {
             prfcnNm : $('#prfcnNm').val(), 
             etcNm : $('#etcNm').val()
         };
-        registerSkill(params);
+
+        if (mode == 'W') {
+            registerSkill(params);
+        } else if (mode == 'M') {
+            params.seqNo = seqNo;
+            registerSkill(params);
+        }
     });
 });
 
+/**
+ * 
+ * @param {string} params.langFeldNm 사용가능기술(언어)
+ * @param {string} params.prfcnNm 숙련도
+ * @param {string} params.etcNm 기타
+ * @param {number} params.seqNo 일련번호
+ */
 var registerSkill = function (params) {
     if (isEmpty(params.langFeldNm)) {
         openPopup({
@@ -53,4 +73,20 @@ var registerSkill = function (params) {
             })
         });
     }
+}
+
+/**
+ * 사용가능기술(언어) 상세 조회
+ * @param {number} seqNo 일련번호
+ */
+var getSkillDetail = function(seqNo){
+    ajaxCall({
+        method : 'GET', 
+        url : '/employee/skillDetail/'+seqNo, 
+        success : function(object){
+            $('#langFeldNm').val(object.langFeldNm);
+            $('#prfcnNm').val(object.prfcnNm);
+            $('#etcNm').val(object.etcNm);
+        }
+    });
 }

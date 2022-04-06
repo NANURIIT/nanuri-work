@@ -442,7 +442,7 @@
 	</select>
 	
 	<!-- 사용가능기술(언어) 상세 출력 -->
-	<select id="selectSkillDetail" parameterType="string" resultType="com.nanuri.work.business.member.dto.SkillDTO">
+	<select id="selectSkillDetail" parameterType="long" resultType="com.nanuri.work.business.member.dto.SkillDTO">
 		SELECT seq_no, 
 			   lang_feld_nm, 
 			   prfcn_nm, 
