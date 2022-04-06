@@ -22,6 +22,9 @@ $(function () {
     // 대내외 수상경력 리스트 호출
     getAwardList();
 
+    // 외국어 능력 리스트 호출
+    getLanguageList();
+
     // 학력 삭제
     $(document).on('click', '.deleteSchoolCareer', function () {
         confirmDelete($(this).attr('id'), deleteSchoolCareer);
@@ -43,7 +46,7 @@ $(function () {
     });
 
     // 대내외 수상경력 삭제
-    $(document).on('click', '.deleteAward', function(){
+    $(document).on('click', '.deleteAward', function () {
         confirmDelete($(this).attr('id'), deleteAward);
     })
 
@@ -295,12 +298,41 @@ var getAwardList = function () {
  * 대내외 수상경력 삭제 함수
  * @param {number} params.seqNo 일련번호
  */
-var deleteAward = function(params){
+var deleteAward = function (params) {
     ajaxCall({
         method: 'DELETE',
         url: '/employee/awardDelete',
         data: params,
         success: deleteCB(getAwardList)
+    });
+}
+
+/**
+ *  외국어 능력 리스트 호출 함수
+ */
+var getLanguageList = function () {
+    ajaxCall({
+        method: 'GET',
+        url: '/employee/languageList',
+        success: function (object) {
+            let LANGUAGE_HTML = '';
+
+            for (let i = 0; i < object.length; i++) {
+                let tmpRow = object[i];
+
+                LANGUAGE_HTML += '<div class="list_info">';
+                LANGUAGE_HTML += '  <div class="list_info_title">'+tmpRow.frgnNm+'</div>';
+                LANGUAGE_HTML += '  <div class="list_info_desc">'+tmpRow.prfcnNm+'</div>';
+                LANGUAGE_HTML += '  <div class="list_info_desc">'+tmpRow.etcNm+'</div>';
+                LANGUAGE_HTML += '  <div class="list_info_set">';
+                LANGUAGE_HTML += '      <button>수정</button>';
+                LANGUAGE_HTML += '      <button>삭제</button>';
+                LANGUAGE_HTML += '  </div>';
+                LANGUAGE_HTML += '</div>';
+            }
+            
+            $('#languageList').html(LANGUAGE_HTML);
+        }
     });
 }
 

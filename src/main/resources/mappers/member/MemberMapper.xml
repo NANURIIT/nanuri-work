@@ -353,6 +353,66 @@
 		 WHERE seq_no = #{seqNo}
 	</update>
 	
+	<!-- 외국어 능력 -->
+	<!-- 외국어 능력 등록 -->
+	<insert id="insertLanguage" parameterType="com.nanuri.work.business.member.dto.LanguageDTO">
+		INSERT INTO mem_frgn_capa(
+			rgmn_nm, 
+			user_id, 
+			frgn_nm, 
+			prfcn_nm, 
+			etc_nm
+		) VALUES (
+			#{rgmnNm}, 
+			#{userId}, 
+			#{frgnNm}, 
+			#{prfcnNm}, 
+			#{etcNm}
+		)
+	</insert>
+	
+	<!-- 외국어 능력 리스트 출력 -->
+	<select id="selectLanguageList" parameterType="string" resultType="com.nanuri.work.business.member.dto.LanguageDTO">
+		SELECT seq_no, 
+			   frgn_nm, 
+			   prfcn_nm, 
+			   etc_nm
+		  FROM mem_frgn_capa
+		 WHERE user_id = #{userId}
+		   AND del_yn = 'N'
+	</select>
+	
+	<!-- 외국어 능력 상세 출력 -->
+	<select id="selectLanguageDetail" parameterType="long" resultType="com.nanuri.work.business.member.dto.LanguageDTO">
+		SELECT seq_no, 
+			   frgn_nm, 
+			   prfcn_nm, 
+			   etc_nm, 
+			   del_yn
+		  FROM mem_frgn_capa
+		 WHERE seq_no = #{seqNo}
+		   AND del_yn = 'N'
+	</select>
+	
+	<!-- 외국어 능력 수정 -->
+	<update id="updateLanguage" parameterType="com.nanuri.work.business.member.dto.LanguageDTO">
+		UPDATE mem_frgn_capa
+		   SET mdfp_nm = #{mdfpNm}, 
+		       frgn_nm = #{frgnNm}, 
+		       prfcn_nm = #{prfcnNm}, 
+		       etc_nm = #{etcNm}
+		 WHERE seq_no = #{seqNo}
+	</update>
+	
+	<!-- 외국어 능력 삭제 -->
+	<update id="deleteLanguage" parameterType="com.nanuri.work.business.member.dto.LanguageDTO">
+		UPDATE mem_frgn_capa
+		   SET del_yn = 'Y', 
+		       mdfp_nm = #{mdfpNm}
+		 WHERE seq_no = #{seqNo}
+	</update>
+	
+	
 	<!-- 프로젝트이력 -->	
 	<!-- 프로젝트이력 등록 -->
 	<insert id="insertCareerhistory" parameterType="com.nanuri.work.business.member.dto.CareerhistoryDTO">

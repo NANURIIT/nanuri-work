@@ -17,6 +17,7 @@ import com.nanuri.work.business.member.dto.CareerhistoryDTO;
 import com.nanuri.work.business.member.dto.CertificateDTO;
 import com.nanuri.work.business.member.dto.CommonCodeDTO;
 import com.nanuri.work.business.member.dto.EducationDTO;
+import com.nanuri.work.business.member.dto.LanguageDTO;
 import com.nanuri.work.business.member.dto.SchoolCareerDTO;
 import com.nanuri.work.business.member.dto.WorkhistoryDTO;
 import com.nanuri.work.business.member.service.MemberService;
@@ -209,6 +210,40 @@ public class MemberApiController {
 	@DeleteMapping(value = "/awardDelete")
 	public boolean deleteAward(@RequestBody AwardDTO params) {
 		return memberService.deleteAward(params);
+	}
+	
+	/* 외국어 능력 */
+	
+	@PostMapping(value = "/languageWrite")
+	public String registerLanguage(@RequestBody LanguageDTO params) {
+		String message = "";
+
+		try {
+			boolean isRegistered = memberService.registerLanguage(params);
+			if (isRegistered == false) {
+				message = "등록에 실패하였습니다.";
+			}
+		} catch (Exception e) {
+			message = "시스템에 문제가 발생하였습니다.";
+			e.printStackTrace();
+		}
+		
+		return message;
+	}
+	
+	@GetMapping(value = "/languageList")
+	public List<LanguageDTO> getLanguageList(){
+		return memberService.getLanguageList();
+	}
+	
+	@GetMapping(value = "/languageDetail/{seqNo}")
+	public LanguageDTO getLanguageDetail(@PathVariable(value = "seqNo", required = true) Long seqNo) {		
+		return memberService.getLanguageDetail(seqNo);
+	}
+	
+	@DeleteMapping(value = "/languageDelete")
+	public boolean deleteLanguage(@RequestBody LanguageDTO params) {
+		return memberService.deleteLanguage(params);
 	}
 	
 	/* 프로젝트이력 */

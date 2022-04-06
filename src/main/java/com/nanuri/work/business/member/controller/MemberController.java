@@ -74,6 +74,15 @@ public class MemberController {
 	}
 	
 	/**
+	 * 외국어 능력 입력
+	 * @return
+	 */
+	@GetMapping(value = "/employee/languageWrite")
+	public String getLanguageWritePage() {
+		return "business/employee/language_add";
+	}
+	
+	/**
 	 * 프로젝트이력 입력
 	 * @return
 	 */
