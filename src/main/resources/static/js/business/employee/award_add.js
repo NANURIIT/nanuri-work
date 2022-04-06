@@ -1,4 +1,4 @@
-/** complete_add **/
+/** award_add **/
 'use strict';
 
 /** onload **/
@@ -8,89 +8,77 @@ $(function(){
     let mode = seqNo != null ? 'M' : 'W';                                  // 작성인지 수정인지 모드 설정
 
     if (mode == 'M') {
-        getEducationDetail(seqNo);
+        getAwardDetail(seqNo);
     }
 
-    // 저장버튼 클릭
+    // 저장 클릭
     $(document).on('click', '#save', function(){
         let params = {
-            eduNm : $('#eduNm').val(), 
-            stDt : $('#stDt').val(), 
-            edDt : $('#edDt').val(),
-            orgNm : $('#orgNm').val()
+            przNm : $('#przNm').val(), 
+            przDt : $('#przDt').val(), 
+            przOrgNm : $('#przOrgNm').val(), 
+            etcNm : $('#etcNm').val()
         };
 
         if (mode == 'W') {
-            registerEducation(params);
+            registerAward(params);
         } else if (mode == 'M') {
             params.seqNo = seqNo;
-            registerEducation(params);
+            registerAward(params);
         }
     });
-
 });
 
 /**
- * 
- * @param {string} params.eduNm 교육명 
- * @param {string} params.stDt 시작일
- * @param {string} params.edDt 종료일
- * @param {string} params.orgNm 기관명
+ * 대내외 수상경력 등록 함수
+ * @param {string} params.przNm 포상명
+ * @param {string} params.przDt 포상일자
+ * @param {string} params.przOrgNm 포상기관
+ * @param {string} params.etcNm 기타
  * @param {number} params.seqNo 일련번호
  */
-var registerEducation = function(params){
-    if(isEmpty(params.eduNm)){
+var registerAward = function(params){
+    if(isEmpty(params.przNm)){
         openPopup({
             title: '실패',
-            text: '교육명을 입력해주세요.',
+            text: '포상명을 입력해주세요.',
             type: 'error',
             callback: function () {
                 $(document).on('click', '.confirm', function () {
-                    $('#eduNm').focus();
+                    $('#przNm').focus();
                 });
             }
         });
-    } else if(dateValidation(params.stDt) == false){
+    } else if(dateValidation(params.przDt) == false){
         openPopup({
             title: '실패',
-            text: '시작일을 확인해주세요.',
+            text: '포상일자를 확인해주세요.',
             type: 'error',
             callback: function () {
                 $(document).on('click', '.confirm', function () {
-                    $('#stDt').focus();
+                    $('#przDt').focus();
                 });
             }
         });
-    } else if(dateValidation(params.edDt) == false){
+    } else if(isEmpty(params.przOrgNm)){
         openPopup({
             title: '실패',
-            text: '종료일을 확인해주세요.',
+            text: '포상기관을 입력해주세요.',
             type: 'error',
             callback: function () {
                 $(document).on('click', '.confirm', function () {
-                    $('#edDt').focus();
-                });
-            }
-        });
-    } else if(isEmpty(params.orgNm)){
-        openPopup({
-            title: '실패',
-            text: '기관명을 입력해주세요.',
-            type: 'error',
-            callback: function () {
-                $(document).on('click', '.confirm', function () {
-                    $('#orgNm').focus();
+                    $('#przOrgNm').focus();
                 });
             }
         });
     } else {
         ajaxCall({
             method : 'POST', 
-            url : '/employee/educationWrite', 
+            url : '/employee/awardWrite', 
             data : params, 
             success: openPopup({
                 title: '성공',
-                text: '교육이수 등록에 성공했습니다.',
+                text: '대내외 수상경력 등록에 성공했습니다.',
                 type: 'success',
                 callback: function () {
                     location.href = '/employee/index';
@@ -100,25 +88,19 @@ var registerEducation = function(params){
     }
 }
 
-let params = {
-    eduNm : $('#eduNm').val(), 
-    stDt : $('#stDt').val(), 
-    edDt : $('#edDt').val(),
-    orgNm : $('#orgNm').val()
-};
 /**
- * 교육이수 상세 조회
+ * 대내외 수상경력 상세조회
  * @param {number} seqNo 일련번호
  */
-var getEducationDetail = function(seqNo){
+var getAwardDetail = function(seqNo){
     ajaxCall({
         method : 'GET', 
-        url : '/employee/educationDetail/' + seqNo, 
+        url : '/employee/awardDetail/' + seqNo, 
         success : function(object){
-            $('#eduNm').val(object.eduNm);
-            $('#stDt').val(object.stDt);
-            $('#edDt').val(object.edDt);
-            $('#orgNm').val(object.orgNm);
+            $('#przNm').val(object.przNm);
+            $('#przDt').val(object.przDt);
+            $('#przOrgNm').val(object.przOrgNm);
+            $('#etcNm').val(object.etcNm);
         }
     });
 }

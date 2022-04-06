@@ -55,9 +55,22 @@ public class MemberController {
 		return "business/employee/workhistory_add"; 
 	}
 	
+	/**
+	 * 교육이수 입력
+	 * @return
+	 */
 	@GetMapping(value = "/employee/educationWrite")
 	public String getEducationWritePage() {
 		return "business/employee/complete_add";
+	}
+	
+	/**
+	 * 대내외 수상경력 입력
+	 * @return
+	 */
+	@GetMapping(value = "/employee/awardWrite")
+	public String getAwardWritePage() {
+		return "business/employee/award_add";
 	}
 	
 	/**
