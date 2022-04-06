@@ -13,6 +13,9 @@ $(function () {
     // 회사소속이력 리스트 호출
     getWorkhistoryList();
 
+    // 교육이수 리스트 호출
+    getEducationList();
+
     // 프로젝트 이력 리스트 호출
     getCareerhistoryList();
 
@@ -27,9 +30,14 @@ $(function () {
     });
 
     // 회사소속이력 삭제
-    $(document).on('click', '.deleteWorkhistory', function(){
+    $(document).on('click', '.deleteWorkhistory', function () {
         confirmDelete($(this).attr('id'), deleteWorkhistory);
-    })
+    });
+
+    // 교육이수 삭제
+    $(document).on('click', '.deleteEducation', function(){
+        confirmDelete($(this).attr('id'), deleteEducation);
+    });
 
     // 프로젝트이력 삭제
     $(document).on('click', '.deleteCareerhistory', function () {
@@ -164,21 +172,21 @@ var deleteCareerhistory = function (params) {
 var getWorkhistoryList = function () {
     ajaxCall({
         method: 'GET',
-        url: '/employee/workhistoryist',
+        url: '/employee/workhistoryList',
         success: function (object) {
             let WORK_HISTORY_HTML = '';
-            
-            for(let i = 0; i < object.length; i++){
+
+            for (let i = 0; i < object.length; i++) {
                 let tmpRow = object[i];
                 let period = getPeriod(addDot(tmpRow.encoYm), addDot(tmpRow.rtrmYm));
-                
+
                 WORK_HISTORY_HTML += '<div class="list_info">';
-                WORK_HISTORY_HTML += '  <div class="list_info_title">'+tmpRow.wrkplNm+'</div>';
-                WORK_HISTORY_HTML += '  <div class="list_info_desc">'+addDot(tmpRow.encoYm)+' ~ '+addDot(tmpRow.rtrmYm)+'</div>';
-                if(period.month <= 0){
-                    WORK_HISTORY_HTML += '  <div class="list_info_desc">경력 '+period.year+'년, '+tmpRow.dtyNm+'</div>';
+                WORK_HISTORY_HTML += '  <div class="list_info_title">' + tmpRow.wrkplNm + '</div>';
+                WORK_HISTORY_HTML += '  <div class="list_info_desc">' + addDot(tmpRow.encoYm) + ' ~ ' + addDot(tmpRow.rtrmYm) + '</div>';
+                if (period.month <= 0) {
+                    WORK_HISTORY_HTML += '  <div class="list_info_desc">경력 ' + period.year + '년, ' + tmpRow.dtyNm + '</div>';
                 } else {
-                    WORK_HISTORY_HTML += '  <div class="list_info_desc">경력 '+period.year+'년'+period.month+'개월, '+tmpRow.dtyNm+'</div>';
+                    WORK_HISTORY_HTML += '  <div class="list_info_desc">경력 ' + period.year + '년' + period.month + '개월, ' + tmpRow.dtyNm + '</div>';
                 }
                 WORK_HISTORY_HTML += '  <div class="list_info_set">';
                 WORK_HISTORY_HTML += '      <button onclick="location.href=\'/employee/workhistoryWrite?seqNo=' + tmpRow.seqNo + '\'">수정</button>';
@@ -186,7 +194,7 @@ var getWorkhistoryList = function () {
                 WORK_HISTORY_HTML += '  </div>';
                 WORK_HISTORY_HTML += '</div>';
             }
-            
+
             $('#workhistoryList').html(WORK_HISTORY_HTML);
         }
     })
@@ -196,13 +204,55 @@ var getWorkhistoryList = function () {
  * 회사소속이력 삭제 함수
  * @param {number} params.seqNo 일련번호
  */
-var deleteWorkhistory = function(params){
+var deleteWorkhistory = function (params) {
+    ajaxCall({
+        method: 'DELETE',
+        url: '/employee/workhistoryDelete',
+        data: params,
+        success: deleteCB(getWorkhistoryList)
+    })
+}
+
+/**
+ * 교육이수 리스트 호출
+ */
+var getEducationList = function () {
+    ajaxCall({
+        method: 'GET',
+        url: '/employee/educationList',
+        success: function (object) {
+            let EDUCATION_HTML = '';
+
+            for (let i = 0; i < object.length; i++) {
+                let tmpRow = object[i];
+
+                EDUCATION_HTML += '<div class="list_info">';
+                EDUCATION_HTML += ' <div class="list_info_title">' + tmpRow.eduNm + '</div>';
+                EDUCATION_HTML += ' <div class="list_info_desc">' + addDot(tmpRow.stDt.substring(0, 6)) + ' ~ ' + addDot(tmpRow.edDt.substring(0, 6)) + '</div>';
+                EDUCATION_HTML += ' <div class="list_info_desc">' + tmpRow.orgNm + '</div>';
+                EDUCATION_HTML += ' <div class="list_info_set">';
+                EDUCATION_HTML += '     <button onclick="location.href=\'/employee/educationWrite?seqNo=' + tmpRow.seqNo + '\'">수정</button>';
+                EDUCATION_HTML += '     <button class="deleteEducation" id="' + tmpRow.seqNo + '">삭제</button>';
+                EDUCATION_HTML += ' </div>';
+                EDUCATION_HTML += '</div>';
+            }
+
+            $('#educationList').html(EDUCATION_HTML);
+        }
+    });
+}
+
+/**
+ * 교육이수 삭제 함수
+ * @param {number} params.seqNo 일련번호
+ */
+var deleteEducation = function(params){
     ajaxCall({
         method : 'DELETE', 
-        url : '/employee/workhistoryDelete', 
-        data : params, 
-        success : deleteCB(getWorkhistoryList)
-    })
+        url : '/employee/educationDelete', 
+        data: params,
+        success: deleteCB(getEducationList)
+    });
 }
 
 /**
@@ -254,14 +304,14 @@ var addDot = function (date) {
     }
 }
 
-var getPeriod = function(d1, d2){
+var getPeriod = function (d1, d2) {
     let date1 = d1.split('.');
     let date2 = d2.split('.');
     let year = (date2[0] - date1[0]);
     let month = (date2[1] - date1[1]);
-    if(month < 0){
+    if (month < 0) {
         month += 12;
         year--;
     }
-    return {year : year, month : month};
+    return { year: year, month: month };
 }

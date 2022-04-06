@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.nanuri.work.business.member.dto.CareerhistoryDTO;
 import com.nanuri.work.business.member.dto.CertificateDTO;
 import com.nanuri.work.business.member.dto.CommonCodeDTO;
+import com.nanuri.work.business.member.dto.EducationDTO;
 import com.nanuri.work.business.member.dto.SchoolCareerDTO;
 import com.nanuri.work.business.member.dto.WorkhistoryDTO;
 import com.nanuri.work.business.member.mapper.MemberMapper;
@@ -134,6 +135,43 @@ public class MemberService {
 		if (workhistory != null && "N".equals(workhistory.getDelYn())) {
 			params.setMdfpNm(facade.getDetails().getUsername());
 			queryResult = memberMapper.deleteWorkhistory(params);
+		}
+
+		return (queryResult == 1) ? true : false;
+	}
+	
+	/* 교육이수 */
+	public boolean registerEducation(EducationDTO params) {
+		int queryResult = 0;
+
+		if (params.getSeqNo() != null) {
+			params.setMdfpNm(facade.getDetails().getUsername());
+			queryResult = memberMapper.updateEducation(params);
+		} else {
+			params.setRgmnNm(facade.getDetails().getUsername());
+			params.setUserId(facade.getDetails().getUserId());
+			queryResult = memberMapper.insertEducation(params);
+		}
+
+		return (queryResult > 0);
+	}
+	
+	public List<EducationDTO> getEducationList(){
+		return memberMapper.selectEducationList(facade.getDetails().getUserId());
+	}
+	
+	public EducationDTO getEducationDetail(Long seqNo) {
+		return memberMapper.selectEducationDetail(seqNo);
+	}
+	
+	public boolean deleteEducation(EducationDTO params) {
+		int queryResult = 0;
+		
+		EducationDTO education = memberMapper.selectEducationDetail(params.getSeqNo());
+
+		if (education != null && "N".equals(education.getDelYn())) {
+			params.setMdfpNm(facade.getDetails().getUsername());
+			queryResult = memberMapper.deleteEducation(params);
 		}
 
 		return (queryResult == 1) ? true : false;

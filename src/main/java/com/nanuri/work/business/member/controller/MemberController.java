@@ -55,6 +55,11 @@ public class MemberController {
 		return "business/employee/workhistory_add"; 
 	}
 	
+	@GetMapping(value = "/employee/educationWrite")
+	public String getEducationWritePage() {
+		return "business/employee/complete_add";
+	}
+	
 	/**
 	 * 프로젝트이력 입력
 	 * @return

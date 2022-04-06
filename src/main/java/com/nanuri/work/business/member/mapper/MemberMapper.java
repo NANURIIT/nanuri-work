@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import com.nanuri.work.business.member.dto.CareerhistoryDTO;
 import com.nanuri.work.business.member.dto.CertificateDTO;
 import com.nanuri.work.business.member.dto.CommonCodeDTO;
+import com.nanuri.work.business.member.dto.EducationDTO;
 import com.nanuri.work.business.member.dto.SchoolCareerDTO;
 import com.nanuri.work.business.member.dto.WorkhistoryDTO;
 
@@ -34,6 +35,13 @@ public interface MemberMapper {
 	public WorkhistoryDTO selectWorkhistoryDetail(Long seqNo);
 	public int updateWorkhistory(WorkhistoryDTO params);
 	public int deleteWorkhistory(WorkhistoryDTO params);
+	
+	/* 교육이수 */
+	public int insertEducation(EducationDTO params);
+	public List<EducationDTO> selectEducationList(String userId);
+	public EducationDTO selectEducationDetail(Long seqNo);
+	public int updateEducation(EducationDTO params);
+	public int deleteEducation(EducationDTO params);
 	
 	/* 프로젝트이력 */
 	public int insertCareerhistory(CareerhistoryDTO params);
