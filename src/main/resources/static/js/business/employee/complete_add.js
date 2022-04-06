@@ -120,7 +120,7 @@ var getEducationDetail = function(seqNo){
             $('#edDt').val(object.edDt);
             $('#orgNm').val(object.orgNm);
         }
-    })
+    });
 }
 
 /**

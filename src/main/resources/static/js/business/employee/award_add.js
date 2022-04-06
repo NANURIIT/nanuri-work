@@ -4,6 +4,13 @@
 /** onload **/
 $(function(){
 
+    let seqNo = new URL(document.location.href).searchParams.get('seqNo'); // seqNo세팅
+    let mode = seqNo != null ? 'M' : 'W';                                  // 작성인지 수정인지 모드 설정
+
+    if (mode == 'M') {
+        getAwardDetail(seqNo);
+    }
+
     // 저장 클릭
     $(document).on('click', '#save', function(){
         let params = {
@@ -13,11 +20,23 @@ $(function(){
             etcNm : $('#etcNm').val()
         };
 
-        registerAward(params);
+        if (mode == 'W') {
+            registerAward(params);
+        } else if (mode == 'M') {
+            params.seqNo = seqNo;
+            registerAward(params);
+        }
     });
-
 });
 
+/**
+ * 대내외 수상경력 등록 함수
+ * @param {string} params.przNm 포상명
+ * @param {string} params.przDt 포상일자
+ * @param {string} params.przOrgNm 포상기관
+ * @param {string} params.etcNm 기타
+ * @param {number} params.seqNo 일련번호
+ */
 var registerAward = function(params){
     if(isEmpty(params.przNm)){
         openPopup({
@@ -67,6 +86,23 @@ var registerAward = function(params){
             })
         });
     }
+}
+
+/**
+ * 대내외 수상경력 상세조회
+ * @param {number} seqNo 일련번호
+ */
+var getAwardDetail = function(seqNo){
+    ajaxCall({
+        method : 'GET', 
+        url : '/employee/awardDetail/' + seqNo, 
+        success : function(object){
+            $('#przNm').val(object.przNm);
+            $('#przDt').val(object.przDt);
+            $('#przOrgNm').val(object.przOrgNm);
+            $('#etcNm').val(object.etcNm);
+        }
+    });
 }
 
 /**

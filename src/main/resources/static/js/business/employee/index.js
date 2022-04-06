@@ -42,6 +42,11 @@ $(function () {
         confirmDelete($(this).attr('id'), deleteEducation);
     });
 
+    // 대내외 수상경력 삭제
+    $(document).on('click', '.deleteAward', function(){
+        confirmDelete($(this).attr('id'), deleteAward);
+    })
+
     // 프로젝트이력 삭제
     $(document).on('click', '.deleteCareerhistory', function () {
         confirmDelete($(this).attr('id'), deleteCareerhistory);
@@ -258,13 +263,15 @@ var deleteEducation = function (params) {
     });
 }
 
+/**
+ * 대내외 수상경력 리스트 호출 함수
+ */
 var getAwardList = function () {
     ajaxCall({
         method: 'GET',
         url: '/employee/awardList',
         success: function (object) {
             let AWARD_HTML = '';
-            console.log(object);
             for (let i = 0; i < object.length; i++) {
                 let tmpRow = object[i];
 
@@ -273,14 +280,27 @@ var getAwardList = function () {
                 AWARD_HTML += ' <div class="list_info_desc">' + addDot(tmpRow.przDt.substring(0, 6)) + '</div>';
                 AWARD_HTML += ' <div class="list_info_desc">' + tmpRow.etcNm + '</div>';
                 AWARD_HTML += ' <div class="list_info_set">';
-                AWARD_HTML += '     <button>수정</button>';
-                AWARD_HTML += '     <button>삭제</button>';
+                AWARD_HTML += '     <button onclick="location.href=\'/employee/awardWrite?seqNo=' + tmpRow.seqNo + '\'">수정</button>';
+                AWARD_HTML += '     <button class="deleteAward" id="' + tmpRow.seqNo + '">삭제</button>';
                 AWARD_HTML += ' </div>';
                 AWARD_HTML += '</div>';
             }
 
             $('#awardList').html(AWARD_HTML);
         }
+    });
+}
+
+/**
+ * 대내외 수상경력 삭제 함수
+ * @param {number} params.seqNo 일련번호
+ */
+var deleteAward = function(params){
+    ajaxCall({
+        method: 'DELETE',
+        url: '/employee/awardDelete',
+        data: params,
+        success: deleteCB(getAwardList)
     });
 }
 
