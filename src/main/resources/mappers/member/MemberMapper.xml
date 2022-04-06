@@ -212,7 +212,8 @@
 			   enco_ym = #{encoYm}, 
 			   rtrm_ym = #{rtrmYm}, 
 			   dty_nm = #{dtyNm}, 
-			   chrg_bsn_nm = #{chrgBsnNm}
+			   chrg_bsn_nm = #{chrgBsnNm}, 
+			   mdfp_nm = #{mdfpNm}
 		 WHERE seq_no = #{seqNo}
 	</update>
 	
@@ -257,7 +258,7 @@
 	</select>
 	
 	<!-- 교육이수 상세 출력 -->
-	<select id="selectEducationDetail" parameterType="string" resultType="com.nanuri.work.business.member.dto.EducationDTO">
+	<select id="selectEducationDetail" parameterType="long" resultType="com.nanuri.work.business.member.dto.EducationDTO">
 		SELECT seq_no, 
 			   edu_nm, 
 			   st_dt, 
@@ -275,14 +276,16 @@
 		   SET edu_nm = #{eduNm}, 
 		       st_dt = #{stDt}, 
 		       ed_dt = #{edDt}, 
-		       org_nm = #{orgNm}
+		       org_nm = #{orgNm}, 
+		       mdfp_nm = #{mdfpNm}
 		 WHERE seq_no = #{seqNo}
 	</update>
 	
 	<!-- 교육이수 삭제 -->
 	<update id="deleteEducation" parameterType="com.nanuri.work.business.member.dto.EducationDTO">
 		UPDATE mem_edu_dpla
-		   SET del_yn = 'Y'
+		   SET del_yn = 'Y', 
+		       mdfp_nm = #{mdfpNm}
 		 WHERE seq_no = #{seqNo}
 	</update>
 	
@@ -389,7 +392,8 @@
 		       os_nm = #{osNm}, 
 		       use_frmwk_nm = #{useFrmwkNm}, 
 		       mth_nm = #{mthNm}, 
-		       etc_capa_nm = #{etcCapaNm}
+		       etc_capa_nm = #{etcCapaNm}, 
+		       mdfp_nm = #{mdfpNm}
 		 WHERE seq_no = #{seqNo} 
 	</update>
 	

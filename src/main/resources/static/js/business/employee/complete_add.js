@@ -4,6 +4,13 @@
 /** onload **/
 $(function(){
 
+    let seqNo = new URL(document.location.href).searchParams.get('seqNo'); // seqNo세팅
+    let mode = seqNo != null ? 'M' : 'W';                                  // 작성인지 수정인지 모드 설정
+
+    if (mode == 'M') {
+        getEducationDetail(seqNo);
+    }
+
     // 저장버튼 클릭
     $(document).on('click', '#save', function(){
         let params = {
@@ -13,8 +20,13 @@ $(function(){
             orgNm : $('#orgNm').val()
         };
 
-        registerEducation(params);
-    })
+        if (mode == 'W') {
+            registerEducation(params);
+        } else if (mode == 'M') {
+            params.seqNo = seqNo;
+            registerEducation(params);
+        }
+    });
 
 });
 
@@ -60,7 +72,7 @@ var registerEducation = function(params){
                 });
             }
         });
-    } else if(isEmpty(orgNm)){
+    } else if(isEmpty(params.orgNm)){
         openPopup({
             title: '실패',
             text: '기관명을 입력해주세요.',
@@ -86,6 +98,29 @@ var registerEducation = function(params){
             })
         });
     }
+}
+
+let params = {
+    eduNm : $('#eduNm').val(), 
+    stDt : $('#stDt').val(), 
+    edDt : $('#edDt').val(),
+    orgNm : $('#orgNm').val()
+};
+/**
+ * 교육이수 상세 조회
+ * @param {number} seqNo 일련번호
+ */
+var getEducationDetail = function(seqNo){
+    ajaxCall({
+        method : 'GET', 
+        url : '/employee/educationDetail/' + seqNo, 
+        success : function(object){
+            $('#eduNm').val(object.eduNm);
+            $('#stDt').val(object.stDt);
+            $('#edDt').val(object.edDt);
+            $('#orgNm').val(object.orgNm);
+        }
+    })
 }
 
 /**

@@ -34,6 +34,11 @@ $(function () {
         confirmDelete($(this).attr('id'), deleteWorkhistory);
     });
 
+    // 교육이수 삭제
+    $(document).on('click', '.deleteEducation', function(){
+        confirmDelete($(this).attr('id'), deleteEducation);
+    });
+
     // 프로젝트이력 삭제
     $(document).on('click', '.deleteCareerhistory', function () {
         confirmDelete($(this).attr('id'), deleteCareerhistory);
@@ -208,6 +213,9 @@ var deleteWorkhistory = function (params) {
     })
 }
 
+/**
+ * 교육이수 리스트 호출
+ */
 var getEducationList = function () {
     ajaxCall({
         method: 'GET',
@@ -223,13 +231,27 @@ var getEducationList = function () {
                 EDUCATION_HTML += ' <div class="list_info_desc">' + addDot(tmpRow.stDt.substring(0, 6)) + ' ~ ' + addDot(tmpRow.edDt.substring(0, 6)) + '</div>';
                 EDUCATION_HTML += ' <div class="list_info_desc">' + tmpRow.orgNm + '</div>';
                 EDUCATION_HTML += ' <div class="list_info_set">';
-                EDUCATION_HTML += '     <button>수정</button>';
-                EDUCATION_HTML += '     <button>삭제</button>';
+                EDUCATION_HTML += '     <button onclick="location.href=\'/employee/educationWrite?seqNo=' + tmpRow.seqNo + '\'">수정</button>';
+                EDUCATION_HTML += '     <button class="deleteEducation" id="' + tmpRow.seqNo + '">삭제</button>';
                 EDUCATION_HTML += ' </div>';
                 EDUCATION_HTML += '</div>';
             }
+
             $('#educationList').html(EDUCATION_HTML);
         }
+    });
+}
+
+/**
+ * 교육이수 삭제 함수
+ * @param {number} params.seqNo 일련번호
+ */
+var deleteEducation = function(params){
+    ajaxCall({
+        method : 'DELETE', 
+        url : '/employee/educationDelete', 
+        data: params,
+        success: deleteCB(getEducationList)
     });
 }
 
