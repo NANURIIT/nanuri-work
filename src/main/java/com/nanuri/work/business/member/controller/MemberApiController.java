@@ -19,6 +19,7 @@ import com.nanuri.work.business.member.dto.CommonCodeDTO;
 import com.nanuri.work.business.member.dto.EducationDTO;
 import com.nanuri.work.business.member.dto.LanguageDTO;
 import com.nanuri.work.business.member.dto.SchoolCareerDTO;
+import com.nanuri.work.business.member.dto.SkillDTO;
 import com.nanuri.work.business.member.dto.WorkhistoryDTO;
 import com.nanuri.work.business.member.service.MemberService;
 
@@ -244,6 +245,40 @@ public class MemberApiController {
 	@DeleteMapping(value = "/languageDelete")
 	public boolean deleteLanguage(@RequestBody LanguageDTO params) {
 		return memberService.deleteLanguage(params);
+	}
+	
+	/* 사용가능기술(언어) */
+	
+	@PostMapping(value = "/skillWrite")
+	public String registerSkill(@RequestBody SkillDTO params) {
+		String message = "";
+
+		try {
+			boolean isRegistered = memberService.registerSkill(params);
+			if (isRegistered == false) {
+				message = "등록에 실패하였습니다.";
+			}
+		} catch (Exception e) {
+			message = "시스템에 문제가 발생하였습니다.";
+			e.printStackTrace();
+		}
+		
+		return message;
+	}
+	
+	@GetMapping(value = "/skillList")
+	public List<SkillDTO> getSkillList(){
+		return memberService.getSkillList();
+	}
+	
+	@GetMapping(value = "/skillDetail/{seqNo}")
+	public SkillDTO getSkillDetail(@PathVariable(value = "seqNo", required = true) Long seqNo) {		
+		return memberService.getSkillDetail(seqNo);
+	}
+	
+	@DeleteMapping(value = "/skillDelete")
+	public boolean deleteSkill(@RequestBody SkillDTO params) {
+		return memberService.deleteSkill(params);
 	}
 	
 	/* 프로젝트이력 */

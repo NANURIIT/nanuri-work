@@ -82,6 +82,11 @@ public class MemberController {
 		return "business/employee/language_add";
 	}
 	
+	@GetMapping(value = "/employee/skillWrite")
+	public String getSkillWritePage() {
+		return "business/employee/skill_add";
+	}
+	
 	/**
 	 * 프로젝트이력 입력
 	 * @return

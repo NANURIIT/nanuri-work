@@ -412,6 +412,64 @@
 		 WHERE seq_no = #{seqNo}
 	</update>
 	
+	<!-- 사용가능기술(언어) -->
+	<!-- 사용가능기술(언어) 입력 -->
+	<insert id="insertSkill" parameterType="com.nanuri.work.business.member.dto.SkillDTO">
+		INSERT INTO mem_lang_feld (
+			rgmn_nm, 
+			user_id, 
+			lang_feld_nm, 
+			prfcn_nm, 
+			etc_nm
+		) VALUES (
+			#{rgmnNm}, 
+			#{userId}, 
+			#{langFeldNm}, 
+			#{prfcnNm}, 
+			#{etcNm}
+		)
+	</insert>
+	
+	<!-- 사용가능기술(언어) 리스트 출력 -->
+	<select id="selectSkillList" parameterType="string" resultType="com.nanuri.work.business.member.dto.SkillDTO">
+		SELECT seq_no, 
+			   lang_feld_nm, 
+			   prfcn_nm, 
+			   etc_nm
+		  FROM mem_lang_feld
+		 WHERE user_id = #{userId}
+		   AND del_yn = 'N'
+	</select>
+	
+	<!-- 사용가능기술(언어) 상세 출력 -->
+	<select id="selectSkillDetail" parameterType="long" resultType="com.nanuri.work.business.member.dto.SkillDTO">
+		SELECT seq_no, 
+			   lang_feld_nm, 
+			   prfcn_nm, 
+			   etc_nm, 
+			   del_yn
+		  FROM mem_lang_feld
+		 WHERE seq_no = #{seqNo}
+		   AND del_yn = 'N'
+	</select>
+	
+	<!-- 사용가능기술(언어) 수정 -->
+	<update id="updateSkill" parameterType="com.nanuri.work.business.member.dto.SkillDTO">
+		UPDATE mem_lang_feld
+		   SET mdfp_nm = #{mdfpNm}, 
+		       lang_feld_nm = #{langFeldNm}, 
+		       prfcn_nm = #{prfcnNm}, 
+		       etc_nm = #{etcNm}
+		 WHERE seq_no = #{seqNo}
+	</update>
+	
+	<!-- 사용가능기술(언어) 삭제 -->
+	<update id="deleteSkill" parameterType="com.nanuri.work.business.member.dto.SkillDTO">
+		UPDATE mem_lang_feld
+		   SET mdfp_nm = #{mdfpNm}, 
+		       del_yn = 'Y'
+		 WHERE seq_no = #{seqNo}
+	</update>
 	
 	<!-- 프로젝트이력 -->	
 	<!-- 프로젝트이력 등록 -->

@@ -12,6 +12,7 @@ import com.nanuri.work.business.member.dto.CommonCodeDTO;
 import com.nanuri.work.business.member.dto.EducationDTO;
 import com.nanuri.work.business.member.dto.LanguageDTO;
 import com.nanuri.work.business.member.dto.SchoolCareerDTO;
+import com.nanuri.work.business.member.dto.SkillDTO;
 import com.nanuri.work.business.member.dto.WorkhistoryDTO;
 import com.nanuri.work.business.member.mapper.MemberMapper;
 import com.nanuri.work.com.security.AuthenticationFacade;
@@ -248,6 +249,43 @@ public class MemberService {
 		if (language != null && "N".equals(language.getDelYn())) {
 			params.setMdfpNm(facade.getDetails().getUsername());
 			queryResult = memberMapper.deleteLanguage(params);
+		}
+
+		return (queryResult == 1) ? true : false;
+	}
+	
+	/* 사용가능기술(언어) */
+	public boolean registerSkill(SkillDTO params) {
+		int queryResult = 0;
+
+		if (params.getSeqNo() != null) {
+			params.setMdfpNm(facade.getDetails().getUsername());
+			queryResult = memberMapper.updateSkill(params);
+		} else {
+			params.setRgmnNm(facade.getDetails().getUsername());
+			params.setUserId(facade.getDetails().getUserId());
+			queryResult = memberMapper.insertSkill(params);
+		}
+
+		return (queryResult > 0);
+	}
+	
+	public List<SkillDTO> getSkillList(){
+		return memberMapper.selectSkillList(facade.getDetails().getUserId());
+	}
+	
+	public SkillDTO getSkillDetail(Long seqNo) {
+		return memberMapper.selectSkillDetail(seqNo);
+	}
+	
+	public boolean deleteSkill(SkillDTO params) {
+		int queryResult = 0;
+		
+		SkillDTO skill = memberMapper.selectSkillDetail(params.getSeqNo());
+
+		if (skill != null && "N".equals(skill.getDelYn())) {
+			params.setMdfpNm(facade.getDetails().getUsername());
+			queryResult = memberMapper.deleteSkill(params);
 		}
 
 		return (queryResult == 1) ? true : false;
