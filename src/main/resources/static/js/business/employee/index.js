@@ -10,6 +10,9 @@ $(function () {
     // 자격증 리스트 호출
     getCertificateList();
 
+    // 회사소속이력 리스트 호출
+    getWorkhistoryList();
+
     // 프로젝트 이력 리스트 호출
     getCareerhistoryList();
 
@@ -18,12 +21,17 @@ $(function () {
         confirmDelete($(this).attr('id'), deleteSchoolCareer);
     });
 
-    //자격증 삭제
+    // 자격증 삭제
     $(document).on('click', '.deleteCertificate', function () {
         confirmDelete($(this).attr('id'), deleteCertificate);
     });
 
-    //프로젝트이력 삭제
+    // 회사소속이력 삭제
+    $(document).on('click', '.deleteWorkhistory', function(){
+        confirmDelete($(this).attr('id'), deleteWorkhistory);
+    })
+
+    // 프로젝트이력 삭제
     $(document).on('click', '.deleteCareerhistory', function () {
         confirmDelete($(this).attr('id'), deleteCareerhistory);
     });
@@ -84,7 +92,7 @@ var getCertificateList = function () {
                 CERTIFICATE_HTML += '<div class="list_info">';
                 CERTIFICATE_HTML += '   <div class="list_info_title">' + tmpRow.qlfcNm + '</div>';
                 CERTIFICATE_HTML += '   <div class="list_info_desc">' + addDot(tmpRow.acqDt) + '</div>';
-                CERTIFICATE_HTML += '   <div class="list_info_desc">'+tmpRow.pbcplNm+'</div>';
+                CERTIFICATE_HTML += '   <div class="list_info_desc">' + tmpRow.pbcplNm + '</div>';
                 CERTIFICATE_HTML += '   <div class="list_info_set">';
                 CERTIFICATE_HTML += '       <button onclick="location.href=\'/employee/certificateWrite?seqNo=' + tmpRow.seqNo + '\'">수정</button>';
                 CERTIFICATE_HTML += '       <button class="deleteCertificate" id="' + tmpRow.seqNo + '">삭제</button>';
@@ -113,18 +121,18 @@ var deleteCertificate = function (params) {
 /**
  * 프로젝트이력 리스트 호출
  */
-var getCareerhistoryList = function(){
+var getCareerhistoryList = function () {
     ajaxCall({
-        method : 'GET', 
-        url : '/employee/careerhistoryist', 
-        success : function(object){
+        method: 'GET',
+        url: '/employee/careerhistoryist',
+        success: function (object) {
             let CAREER_HISTORY_HTML = '';
-            for(let i = 0; i < object.length; i++){
+            for (let i = 0; i < object.length; i++) {
                 let tmpRow = object[i];
                 CAREER_HISTORY_HTML += '<div class="list_info">';
-                CAREER_HISTORY_HTML += '    <div class="list_info_title">'+tmpRow.blgCoNm+'</div>';
-                CAREER_HISTORY_HTML += '    <div class="list_info_desc">'+addDot(tmpRow.bzStYm)+' ~ '+addDot(tmpRow.bzEdYm)+'</div>';
-                CAREER_HISTORY_HTML += '    <div class="list_info_desc">'+tmpRow.dtlCnm+', '+tmpRow.chrgBsnNm+'</div>';
+                CAREER_HISTORY_HTML += '    <div class="list_info_title">' + tmpRow.blgCoNm + '</div>';
+                CAREER_HISTORY_HTML += '    <div class="list_info_desc">' + addDot(tmpRow.bzStYm) + ' ~ ' + addDot(tmpRow.bzEdYm) + '</div>';
+                CAREER_HISTORY_HTML += '    <div class="list_info_desc">' + tmpRow.dtlCnm + ', ' + tmpRow.chrgBsnNm + '</div>';
                 CAREER_HISTORY_HTML += '    <div class="list_info_set">';
                 CAREER_HISTORY_HTML += '        <button onclick="location.href=\'/employee/careerhistoryWrite?seqNo=' + tmpRow.seqNo + '\'">수정</button>';
                 CAREER_HISTORY_HTML += '        <button class="deleteCareerhistory" id="' + tmpRow.seqNo + '">삭제</button>';
@@ -137,12 +145,63 @@ var getCareerhistoryList = function(){
     })
 }
 
+/**
+ * 프로젝트 이력 삭제 함수
+ * @param {number} params.seqNo 일련번호 
+ */
 var deleteCareerhistory = function (params) {
     ajaxCall({
         method: 'DELETE',
         url: '/employee/careerhistoryDelete',
         data: params,
         success: deleteCB(getCareerhistoryList)
+    })
+}
+
+/**
+ * 회사소속이력 리스트 호출
+ */
+var getWorkhistoryList = function () {
+    ajaxCall({
+        method: 'GET',
+        url: '/employee/workhistoryist',
+        success: function (object) {
+            let WORK_HISTORY_HTML = '';
+            
+            for(let i = 0; i < object.length; i++){
+                let tmpRow = object[i];
+                let period = getPeriod(addDot(tmpRow.encoYm), addDot(tmpRow.rtrmYm));
+                
+                WORK_HISTORY_HTML += '<div class="list_info">';
+                WORK_HISTORY_HTML += '  <div class="list_info_title">'+tmpRow.wrkplNm+'</div>';
+                WORK_HISTORY_HTML += '  <div class="list_info_desc">'+addDot(tmpRow.encoYm)+' ~ '+addDot(tmpRow.rtrmYm)+'</div>';
+                if(period.month <= 0){
+                    WORK_HISTORY_HTML += '  <div class="list_info_desc">경력 '+period.year+'년, '+tmpRow.dtyNm+'</div>';
+                } else {
+                    WORK_HISTORY_HTML += '  <div class="list_info_desc">경력 '+period.year+'년'+period.month+'개월, '+tmpRow.dtyNm+'</div>';
+                }
+                WORK_HISTORY_HTML += '  <div class="list_info_set">';
+                WORK_HISTORY_HTML += '      <button onclick="location.href=\'/employee/workhistoryWrite?seqNo=' + tmpRow.seqNo + '\'">수정</button>';
+                WORK_HISTORY_HTML += '      <button class="deleteWorkhistory" id="' + tmpRow.seqNo + '">삭제</button>';
+                WORK_HISTORY_HTML += '  </div>';
+                WORK_HISTORY_HTML += '</div>';
+            }
+            
+            $('#workhistoryList').html(WORK_HISTORY_HTML);
+        }
+    })
+}
+
+/**
+ * 회사소속이력 삭제 함수
+ * @param {number} params.seqNo 일련번호
+ */
+var deleteWorkhistory = function(params){
+    ajaxCall({
+        method : 'DELETE', 
+        url : '/employee/workhistoryDelete', 
+        data : params, 
+        success : deleteCB(getWorkhistoryList)
     })
 }
 
@@ -193,4 +252,16 @@ var addDot = function (date) {
     } else if (date.length == 8) {
         return date.substring(0, 4) + '.' + date.substring(4, 6) + '.' + date.substring(6, date.length);
     }
+}
+
+var getPeriod = function(d1, d2){
+    let date1 = d1.split('.');
+    let date2 = d2.split('.');
+    let year = (date2[0] - date1[0]);
+    let month = (date2[1] - date1[1]);
+    if(month < 0){
+        month += 12;
+        year--;
+    }
+    return {year : year, month : month};
 }
