@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.nanuri.work.business.member.dto.CareerhistoryDTO;
 import com.nanuri.work.business.member.dto.CertificateDTO;
 import com.nanuri.work.business.member.dto.CommonCodeDTO;
+import com.nanuri.work.business.member.dto.EducationDTO;
 import com.nanuri.work.business.member.dto.SchoolCareerDTO;
 import com.nanuri.work.business.member.dto.WorkhistoryDTO;
 import com.nanuri.work.business.member.service.MemberService;
@@ -126,7 +127,7 @@ public class MemberApiController {
 		return message;
 	}
 	
-	@GetMapping(value = "/workhistoryist")
+	@GetMapping(value = "/workhistoryList")
 	public List<WorkhistoryDTO> getWorkhistoryList(){
 		return memberService.getWorkhistoryList();
 	}
@@ -139,6 +140,40 @@ public class MemberApiController {
 	@DeleteMapping(value = "/workhistoryDelete")
 	public boolean deleteWorkhistory(@RequestBody WorkhistoryDTO params) {
 		return memberService.deleteWorkhistory(params);
+	}
+	
+	/* 교육이수 */
+	
+	@PostMapping(value = "/educationWrite")
+	public String registerEducation(@RequestBody EducationDTO params) {
+		String message = "";
+
+		try {
+			boolean isRegistered = memberService.registerEducation(params);
+			if (isRegistered == false) {
+				message = "등록에 실패하였습니다.";
+			}
+		} catch (Exception e) {
+			message = "시스템에 문제가 발생하였습니다.";
+			e.printStackTrace();
+		}
+		
+		return message;
+	}
+	
+	@GetMapping(value = "/educationList")
+	public List<EducationDTO> getEducationList(){
+		return memberService.getEducationList();
+	}
+	
+	@GetMapping(value = "/educationDetail/{seqNo}")
+	public EducationDTO getEducationDetail(@PathVariable(value = "seqNo", required = true) Long seqNo) {		
+		return memberService.getEducationDetail(seqNo);
+	}
+	
+	@DeleteMapping(value = "/educationDelete")
+	public boolean deleteEducation(@RequestBody EducationDTO params) {
+		return memberService.deleteEducation(params);
 	}
 	
 	/* 프로젝트이력 */

@@ -180,8 +180,7 @@
 	
 	<!-- 회사소속이력 리스트 출력 -->
 	<select id="selectWorkhistoryList" parameterType="string" resultType="com.nanuri.work.business.member.dto.WorkhistoryDTO">
-		SELECT seq_no, 
-			   user_id, 
+		SELECT seq_no,
 			   wrkpl_nm, 
 			   enco_ym, 
 			   rtrm_ym, 
@@ -194,8 +193,7 @@
 	
 	<!-- 회사소속이력 상세 출력 -->
 	<select id="selectWorkhistoryDetail" parameterType="long" resultType="com.nanuri.work.business.member.dto.WorkhistoryDTO">
-		SELECT seq_no, 
-			   user_id, 
+		SELECT seq_no,
 			   wrkpl_nm, 
 			   enco_ym, 
 			   rtrm_ym, 
@@ -223,6 +221,68 @@
 		UPDATE mem_svce_hst
 		   SET del_yn = 'Y', 
 		       mdfp_nm = #{mdfpNm}
+		 WHERE seq_no = #{seqNo}
+	</update>
+	
+	<!-- 교육이수 -->
+	<!-- 교육이수 등록 -->
+	<insert id="insertEducation" parameterType="com.nanuri.work.business.member.dto.EducationDTO">
+		INSERT INTO mem_edu_dpla (
+			rgmn_nm, 
+			user_id, 
+			edu_nm, 
+			st_dt, 
+			ed_dt, 
+			org_nm
+		) VALUES (
+			#{rgmnNm}, 
+			#{userId}, 
+			#{eduNm}, 
+			#{stDt}, 
+			#{edDt}, 
+			#{orgNm}
+		)
+	</insert>
+	
+	<!-- 교육이수 리스트 출력 -->
+	<select id="selectEducationList" parameterType="string" resultType="com.nanuri.work.business.member.dto.EducationDTO">
+		SELECT seq_no, 
+			   edu_nm, 
+			   st_dt, 
+			   ed_dt, 
+			   org_nm
+		  FROM mem_edu_dpla
+		 WHERE user_id = #{userId}
+		   AND del_yn = 'N'
+	</select>
+	
+	<!-- 교육이수 상세 출력 -->
+	<select id="selectEducationDetail" parameterType="string" resultType="com.nanuri.work.business.member.dto.EducationDTO">
+		SELECT seq_no, 
+			   edu_nm, 
+			   st_dt, 
+			   ed_dt, 
+			   org_nm, 
+			   del_yn
+		  FROM mem_edu_dpla
+		 WHERE seq_no = #{seqNo}
+		   AND del_yn = 'N'
+	</select>
+	
+	<!-- 교육이수 수정 -->
+	<update id="updateEducation" parameterType="com.nanuri.work.business.member.dto.EducationDTO">
+		UPDATE mem_edu_dpla
+		   SET edu_nm = #{eduNm}, 
+		       st_dt = #{stDt}, 
+		       ed_dt = #{edDt}, 
+		       org_nm = #{orgNm}
+		 WHERE seq_no = #{seqNo}
+	</update>
+	
+	<!-- 교육이수 삭제 -->
+	<update id="deleteEducation" parameterType="com.nanuri.work.business.member.dto.EducationDTO">
+		UPDATE mem_edu_dpla
+		   SET del_yn = 'Y'
 		 WHERE seq_no = #{seqNo}
 	</update>
 	
