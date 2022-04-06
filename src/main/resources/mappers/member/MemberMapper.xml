@@ -289,6 +289,70 @@
 		 WHERE seq_no = #{seqNo}
 	</update>
 	
+	<!-- 대내외 수상경력 -->
+	<!-- 대내외 수상경력 입력 -->
+	<insert id="insertAward" parameterType="com.nanuri.work.business.member.dto.AwardDTO">
+		INSERT INTO mem_rpz_carr (
+			rgmn_nm, 
+			user_id, 
+			prz_nm, 
+			prz_dt, 
+			prz_org_nm, 
+			etc_nm
+		) VALUES (
+			#{rgmnNm}, 
+			#{userId}, 
+			#{przNm}, 
+			#{przDt}, 
+			#{przOrgNm}, 
+			#{etcNm}
+		)
+	</insert>
+	
+	<!-- 대내외 수상경력 리스트 출력 -->
+	<select id="selectAwardList" parameterType="string" resultType="com.nanuri.work.business.member.dto.AwardDTO">
+		SELECT seq_no, 
+			   prz_nm, 
+			   prz_dt, 
+			   prz_org_nm, 
+			   etc_nm
+		  FROM mem_rpz_carr
+		 WHERE user_id = #{userId}
+		   AND del_yn = 'N'
+	</select>
+	
+	<!-- 대내외 수상경력 상세 출력 -->
+	<select id="selectAwardDetail" parameterType="long" resultType="com.nanuri.work.business.member.dto.AwardDTO">
+		SELECT seq_no, 
+			   prz_nm, 
+			   prz_dt, 
+			   prz_org_nm, 
+			   etc_nm, 
+			   del_yn
+		  FROM mem_rpz_carr
+		 WHERE seq_no = #{seqNo}
+		   AND del_yn = 'N'
+	</select>
+	
+	<!-- 대내외 수상경력 수정 -->
+	<update id="updateAward" parameterType="com.nanuri.work.business.member.dto.AwardDTO">
+		UPDATE mem_rpz_carr
+		   SET prz_nm = #{przNm}, 
+		   	   prz_dt = #{przDt}, 
+		   	   prz_org_nm = #{przOrgNm}, 
+		   	   etc_nm = #{etcNm}, 
+		   	   mdfp_nm = #{mdfpNm}
+		 WHERE seq_no = #{seqNo}
+	</update>
+	
+	<!-- 대내외 수상경력 삭제 -->
+	<update id="deleteAward" parameterType="com.nanuri.work.business.member.dto.AwardDTO">
+		UPDATE mem_rpz_carr
+		   SET del_yn = 'Y', 
+		   	   mdfp_nm = #{mdfpNm}
+		 WHERE seq_no = #{seqNo}
+	</update>
+	
 	<!-- 프로젝트이력 -->	
 	<!-- 프로젝트이력 등록 -->
 	<insert id="insertCareerhistory" parameterType="com.nanuri.work.business.member.dto.CareerhistoryDTO">
@@ -376,7 +440,7 @@
 		   AND del_yn = 'N'
 	</select>
 	
-	<!-- 경력이력 수정 -->
+	<!-- 프로젝트이력 수정 -->
 	<update id="updateCareerhistory" parameterType="com.nanuri.work.business.member.dto.CareerhistoryDTO">
 		UPDATE mem_carr_hst
 		   SET bz_nm = #{bzNm}, 

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.nanuri.work.business.member.dto.AwardDTO;
 import com.nanuri.work.business.member.dto.CareerhistoryDTO;
 import com.nanuri.work.business.member.dto.CertificateDTO;
 import com.nanuri.work.business.member.dto.CommonCodeDTO;
@@ -172,6 +173,43 @@ public class MemberService {
 		if (education != null && "N".equals(education.getDelYn())) {
 			params.setMdfpNm(facade.getDetails().getUsername());
 			queryResult = memberMapper.deleteEducation(params);
+		}
+
+		return (queryResult == 1) ? true : false;
+	}
+	
+	/* 대내외 수상경력 */
+	public boolean registerAward(AwardDTO params) {
+		int queryResult = 0;
+
+		if (params.getSeqNo() != null) {
+			params.setMdfpNm(facade.getDetails().getUsername());
+			queryResult = memberMapper.updateAward(params);
+		} else {
+			params.setRgmnNm(facade.getDetails().getUsername());
+			params.setUserId(facade.getDetails().getUserId());
+			queryResult = memberMapper.insertAward(params);
+		}
+
+		return (queryResult > 0);
+	}
+	
+	public List<AwardDTO> getAwardList(){
+		return memberMapper.selectAwardList(facade.getDetails().getUserId());
+	}
+	
+	public AwardDTO getAwardDetail(Long seqNo) {
+		return memberMapper.selectAwardDetail(seqNo);
+	}
+	
+	public boolean deleteAward(AwardDTO params) {
+		int queryResult = 0;
+		
+		AwardDTO award = memberMapper.selectAwardDetail(params.getSeqNo());
+
+		if (award != null && "N".equals(award.getDelYn())) {
+			params.setMdfpNm(facade.getDetails().getUsername());
+			queryResult = memberMapper.deleteAward(params);
 		}
 
 		return (queryResult == 1) ? true : false;

@@ -19,6 +19,9 @@ $(function () {
     // 프로젝트 이력 리스트 호출
     getCareerhistoryList();
 
+    // 대내외 수상경력 리스트 호출
+    getAwardList();
+
     // 학력 삭제
     $(document).on('click', '.deleteSchoolCareer', function () {
         confirmDelete($(this).attr('id'), deleteSchoolCareer);
@@ -35,7 +38,7 @@ $(function () {
     });
 
     // 교육이수 삭제
-    $(document).on('click', '.deleteEducation', function(){
+    $(document).on('click', '.deleteEducation', function () {
         confirmDelete($(this).attr('id'), deleteEducation);
     });
 
@@ -246,12 +249,38 @@ var getEducationList = function () {
  * 교육이수 삭제 함수
  * @param {number} params.seqNo 일련번호
  */
-var deleteEducation = function(params){
+var deleteEducation = function (params) {
     ajaxCall({
-        method : 'DELETE', 
-        url : '/employee/educationDelete', 
+        method: 'DELETE',
+        url: '/employee/educationDelete',
         data: params,
         success: deleteCB(getEducationList)
+    });
+}
+
+var getAwardList = function () {
+    ajaxCall({
+        method: 'GET',
+        url: '/employee/awardList',
+        success: function (object) {
+            let AWARD_HTML = '';
+            console.log(object);
+            for (let i = 0; i < object.length; i++) {
+                let tmpRow = object[i];
+
+                AWARD_HTML += '<div class="list_info">';
+                AWARD_HTML += ' <div class="list_info_title">' + tmpRow.przNm + '</div>';
+                AWARD_HTML += ' <div class="list_info_desc">' + addDot(tmpRow.przDt.substring(0, 6)) + '</div>';
+                AWARD_HTML += ' <div class="list_info_desc">' + tmpRow.etcNm + '</div>';
+                AWARD_HTML += ' <div class="list_info_set">';
+                AWARD_HTML += '     <button>수정</button>';
+                AWARD_HTML += '     <button>삭제</button>';
+                AWARD_HTML += ' </div>';
+                AWARD_HTML += '</div>';
+            }
+
+            $('#awardList').html(AWARD_HTML);
+        }
     });
 }
 
