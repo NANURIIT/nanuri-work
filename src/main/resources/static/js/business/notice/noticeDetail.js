@@ -82,7 +82,7 @@ var deleteBoard = function(seqNo){
 }
 
 /**
- * 게시글 삭제 콜백 함수
+ * deleteBoard 콜백 함수
  */
 var deleteBoardCB = function(){
     openPopup({

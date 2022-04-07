@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- 공통 헤드 -->
+<head th:replace="layout/employee/head :: headFragment"></head>
+
+<script th:src="@{/js/business/employee/language_add.js}"></script>
+
+<body>
+<div class="main">
+    <div class="wrap">
+        <form>
+            <div class="form_box">
+                <div class="form_title">언어</div>
+                <div>
+                    <input class="input_box" id="frgnNm" type="text" name="language_input" placeholder="언어 입력">
+                </div>
+            </div>
+            <div class="form_box">
+                <div class="form_title">숙련도</div>
+                <div>
+                    <input class="input_box" id="prfcnNm" type="text" name="language_proficiency" placeholder="숙련도 입력">
+                </div>
+            </div>
+            <div class="form_box">
+                <div class="form_title">기타</div>
+                <div>
+                    <input class="input_box" id="etcNm" type="text" name="language_etc" placeholder="기타 입력">
+                </div>
+            </div>
+        </form>
+        <div class="save_box">
+            <div class="save_button">
+                <button id="save">저장</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
