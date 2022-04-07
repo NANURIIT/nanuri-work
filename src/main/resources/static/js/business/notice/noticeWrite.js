@@ -5,6 +5,11 @@
 $(function () {
     let seqNo = new URL(document.location.href).searchParams.get('seqNo'); // seqNo세팅
     let mode = seqNo != null ? 'M' : 'W';                                  // 작성인지 수정인지 모드 설정
+
+    if(mode == 'W'){
+        $('#notice_public_check').prop('checked', true);
+    }
+
     if(mode == 'M'){
         getBoardDetail(seqNo);
     }
@@ -16,6 +21,13 @@ $(function () {
             bultTypCd: 'NOTICE',
             brcn: $('#noticeContent').val()
         }
+
+        if($('#notice_public_check').is(':checked')){
+            params.opnpEstNm = $('#notice_public_check').val();
+        } else if($('#notice_secret_check').is(':checked')){
+            params.opnpEstNm = $('#notice_secret_check').val();
+        }
+
         if(mode == 'W'){   
             registerNotice(params);
         } else if(mode == 'M'){
@@ -83,8 +95,14 @@ var getBoardDetail = function(seqNo){
         method : 'GET', 
         url : '/admin/boardDetail/' + seqNo, 
         success : function(object){
+            console.log(object);
             $('#noticeTitle').val(object.bultTitlNm);
             $('#noticeContent').val(object.brcn);
+            if(object.opnpEstNm == 'ALL'){
+                $('#notice_public_check').prop('checked', true);
+            } else if(object.opnpEstNm == 'EMPLOYEE'){
+                $('#notice_secret_check').prop('checked', true);
+            }
         }
     })
 }

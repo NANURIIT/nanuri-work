@@ -12,7 +12,8 @@
 		bult_typ_cd, 
 		bult_titl_nm, 
 		brcn, 
-		inq_cn
+		inq_cn, 
+		opnp_est_nm
 	</sql>
 	
 	<!-- 게시글 등록 -->
@@ -21,12 +22,14 @@
 			rgmn_nm,
 			bult_typ_cd,
 			bult_titl_nm,
-			brcn
+			brcn, 
+			opnp_est_nm
 		) VALUES(
 			#{rgmnNm}, 
 			#{bultTypCd}, 
 			#{bultTitlNm}, 
-			#{brcn}
+			#{brcn}, 
+			#{opnpEstNm}
 		)
 	</insert>
 	
@@ -63,7 +66,8 @@
 		   SET mdfp_nm = #{mdfpNm}, 
 		       bult_typ_cd = #{bultTypCd},
 		       bult_titl_nm = #{bultTitlNm}, 
-		       brcn = #{brcn}
+		       brcn = #{brcn}, 
+		       opnp_est_nm = #{opnpEstNm}
 		 WHERE seq_no = #{seqNo}
 	</update>
 	
