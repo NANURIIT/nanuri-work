@@ -19,13 +19,20 @@
     height: 40px;
 }
 
-.save_box .save_button > button {
+.save_box .button_box {
+    font-size: 0;
+}
+.save_box .button_box > button {
     margin-top: 50px;
-    width: 100%;
+    width: 48%;
     padding: 10px 0;
+    font-size: 15px;
+    border: 1px solid #333;
+}
+.save_box .button_box .save_button {
+    margin-right: 4%;
     background: #333;
     color: #fff;
-    font-size: 15px;
 }
 .form_select {
     width: 100%;
