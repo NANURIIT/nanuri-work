@@ -11,6 +11,7 @@ $(function(){
         getWorkhistoryDetail(seqNo);
     }
 
+    // 저장버튼 클릭
     $(document).on('click', '#save', function(){
         let params = {
             wrkplNm : $('#wrkplNm').val(), 
@@ -28,6 +29,10 @@ $(function(){
         }
     });
 
+    // 취소 버튼 클릭
+    $(document).on('click', '.cancel_button', function(){
+        location.href = '/employee/index';
+    });
 });
 
 var registerWorkhistory = function(params){

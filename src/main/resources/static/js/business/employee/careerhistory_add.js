@@ -39,6 +39,11 @@ $(function(){
             registerCareerhistory(params);
         }  
     });
+
+    // 취소 버튼 클릭
+    $(document).on('click', '.cancel_button', function(){
+        location.href = '/employee/index';
+    });
 });
 
 var getCommonCode = function(){

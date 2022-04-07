@@ -12,6 +12,23 @@
 	  ORDER BY sort_seqn
 	</select>
 	
+	<!-- 기본정보 -->
+	<!-- 기본정보 입력 -->
+	
+	
+	<!-- 기본정보 리스트 출력 -->
+	
+	
+	<!-- 기본정보 상세 출력 -->
+	
+	
+	<!-- 기본정보 수정 -->
+	
+	
+	<!-- 기본정보 삭제 -->
+	
+	
+	
 	<!-- 학력 -->
 	<!-- 학력 입력 -->	
 	<insert id="insertSchoolCareer" parameterType="com.nanuri.work.business.member.dto.SchoolCareerDTO">

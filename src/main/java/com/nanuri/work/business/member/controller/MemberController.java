@@ -14,7 +14,7 @@ public class MemberController {
 		return "business/employee_list";
 	}
 	
-	@GetMapping(value = "/employee/index")
+	@GetMapping(value = "/mobile/employeeInfo")
 	public String getEmployeeIndexPage() {
 		return "business/employee/index";
 	}
@@ -23,7 +23,7 @@ public class MemberController {
 	 * 기본정보 입력
 	 * @return
 	 */
-	@GetMapping(value = "/employee/basicInfoWrite")
+	@GetMapping(value = "/mobile/basicInfoWrite")
 	public String getBasicInfoWritePage() {
 		return "business/employee/basic_add";
 	}
@@ -32,7 +32,7 @@ public class MemberController {
 	 * 학력 입력
 	 * @return
 	 */
-	@GetMapping(value = "/employee/schoolCareerWrite")
+	@GetMapping(value = "/mobile/schoolCareerWrite")
 	public String getSchoolCareerWritePage() {
 		return "business/employee/education_add";
 	}
@@ -41,7 +41,7 @@ public class MemberController {
 	 * 자격증 입력
 	 * @return
 	 */
-	@GetMapping(value = "/employee/certificateWrite")
+	@GetMapping(value = "/mobile/certificateWrite")
 	public String getCertificateWritePage() {
 		return "business/employee/certificate_add";
 	}
@@ -50,7 +50,7 @@ public class MemberController {
 	 * 회사소속이력 입력
 	 * @return
 	 */
-	@GetMapping(value = "/employee/workhistoryWrite")
+	@GetMapping(value = "/mobile/workhistoryWrite")
 	public String getWokinghistoryWritePage() {
 		return "business/employee/workhistory_add"; 
 	}
@@ -59,7 +59,7 @@ public class MemberController {
 	 * 교육이수 입력
 	 * @return
 	 */
-	@GetMapping(value = "/employee/educationWrite")
+	@GetMapping(value = "/mobile/educationWrite")
 	public String getEducationWritePage() {
 		return "business/employee/complete_add";
 	}
@@ -68,7 +68,7 @@ public class MemberController {
 	 * 대내외 수상경력 입력
 	 * @return
 	 */
-	@GetMapping(value = "/employee/awardWrite")
+	@GetMapping(value = "/mobile/awardWrite")
 	public String getAwardWritePage() {
 		return "business/employee/award_add";
 	}
@@ -77,12 +77,12 @@ public class MemberController {
 	 * 외국어 능력 입력
 	 * @return
 	 */
-	@GetMapping(value = "/employee/languageWrite")
+	@GetMapping(value = "/mobile/languageWrite")
 	public String getLanguageWritePage() {
 		return "business/employee/language_add";
 	}
 	
-	@GetMapping(value = "/employee/skillWrite")
+	@GetMapping(value = "/mobile/skillWrite")
 	public String getSkillWritePage() {
 		return "business/employee/skill_add";
 	}
@@ -91,7 +91,7 @@ public class MemberController {
 	 * 프로젝트이력 입력
 	 * @return
 	 */
-	@GetMapping(value = "/employee/careerhistoryWrite")
+	@GetMapping(value = "/mobile/careerhistoryWrite")
 	public String getCareerhistoryWritePage() {
 		return "business/employee/careerhistory_add";
 	}
