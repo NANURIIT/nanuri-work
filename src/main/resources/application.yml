@@ -22,7 +22,11 @@ logging:
 
 spring:
   application:
-    name: NANURI IT Corp In-house System 
+    name: NANURI IT Corp In-house System
+  mobile:
+    devicedelegatingviewresolver:
+      enabled: true
+    mobile-prefix: mobile/ 
   datasource:
     url: jdbc:log4jdbc:mysql://nanuriit.com:7706/work?serverTimezone=Asia/Seoul
     username: work
