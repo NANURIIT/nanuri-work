@@ -4,6 +4,8 @@
 <!-- 공통 헤드 -->
 <head th:replace="layout/employee/head :: headFragment"></head>
 
+<script th:src="@{/js/business/employee/basic_add.js}"></script>
+
 <body>
 <div class="main">
     <div class="wrap">
@@ -12,7 +14,7 @@
                 <div class="form_title">소속구분</div>
                 <!--20220325 수정 s-->
                 <div>
-                    <select class="form_select" name="division_name">
+                    <select class="form_select" id="blgDsCd" name="division_name">
                         <option value="나누리직원" selected>나누리직원</option>
                         <option value="프리랜서">프리랜서</option>
                         <option value="협력업체">협력업체</option>
