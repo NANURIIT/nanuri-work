@@ -13,12 +13,16 @@ import com.nanuri.work.business.member.dto.LanguageDTO;
 import com.nanuri.work.business.member.dto.SchoolCareerDTO;
 import com.nanuri.work.business.member.dto.SkillDTO;
 import com.nanuri.work.business.member.dto.WorkhistoryDTO;
+import com.nanuri.work.business.member.vo.EmployeeVO;
 
 @Mapper
 public interface MemberMapper {
 	
+	public List<EmployeeVO> selectEmployeeList();		/* 직원 목록 출력 */
+	
 	/* 기본정보 */
 	public int insertBasicInfo(BasicInfoDTO params);
+	public List<BasicInfoDTO> selectBasicInfoList();
 	public BasicInfoDTO selectBasicInfoDetail(String userId);
 	public int updateBasicInfo(BasicInfoDTO params);
 	

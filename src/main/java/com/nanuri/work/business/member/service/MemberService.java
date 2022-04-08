@@ -16,6 +16,7 @@ import com.nanuri.work.business.member.dto.SchoolCareerDTO;
 import com.nanuri.work.business.member.dto.SkillDTO;
 import com.nanuri.work.business.member.dto.WorkhistoryDTO;
 import com.nanuri.work.business.member.mapper.MemberMapper;
+import com.nanuri.work.business.member.vo.EmployeeVO;
 import com.nanuri.work.com.security.AuthenticationFacade;
 
 @Service
@@ -31,7 +32,19 @@ public class MemberService {
 		return memberMapper.selectCommonCodeList(params);
 	}
 
+	/**
+	 * 직원 목록 출력
+	 * @return 직원목록 리스트
+	 */
+	public List<EmployeeVO> getEmployeeList(){
+		return memberMapper.selectEmployeeList();
+	}
+	
 	/* 기본정보 */
+	
+	public List<BasicInfoDTO> getBasicInfoList(){
+		return memberMapper.selectBasicInfoList();
+	}
 	
 	public BasicInfoDTO getBasicInfoDetail() {
 		return memberMapper.selectBasicInfoDetail(facade.getDetails().getUserId());

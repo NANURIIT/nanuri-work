@@ -23,6 +23,7 @@ import com.nanuri.work.business.member.dto.SchoolCareerDTO;
 import com.nanuri.work.business.member.dto.SkillDTO;
 import com.nanuri.work.business.member.dto.WorkhistoryDTO;
 import com.nanuri.work.business.member.service.MemberService;
+import com.nanuri.work.business.member.vo.EmployeeVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -44,7 +45,17 @@ public class MemberApiController {
 		return memberService.getCommonCodeList(params);
 	}
 	
+	@GetMapping("/employeeList")
+	public List<EmployeeVO> getEmployeeList(){
+		return memberService.getEmployeeList();
+	}
+	
 	/* 기본정보 */
+	
+	@GetMapping(value = "/basicInfoList")
+	public List<BasicInfoDTO> getbasicInfoList(){
+		return memberService.getBasicInfoList();
+	}
 	
 	@GetMapping(value = "/basicInfoDetail")
 	public BasicInfoDTO getBasicInfoDetail() {

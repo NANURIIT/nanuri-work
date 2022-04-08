@@ -26,5 +26,4 @@ public class BasicInfoDTO extends CommonDTO {
 	private String rtrmYm;			/* 퇴사년월 */
 	private String userAutrNm;		/* 사용자권한 */
 	
-	
 }

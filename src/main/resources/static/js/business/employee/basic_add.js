@@ -6,9 +6,6 @@ $(function () {
 
     getCommonCode();
 
-    // 기본정보 호출
-    // getBasicInfoDetail();
-
     // 저장 버튼 클릭
     $(document).on('click', '#save', function () {
         let params = {

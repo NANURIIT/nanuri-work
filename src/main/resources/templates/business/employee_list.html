@@ -4,7 +4,9 @@
 <head th:replace="layout/notice/head :: headFragment"></head>
 
 <script th:src="@{https://code.jquery.com/ui/1.13.1/jquery-ui.js}"></script>
+<script th:src="@{/js/business/employee/employee_list.js}"></script>
 <link rel="stylesheet" th:href="@{/sample/admin/css/notice.css}">
+
 <body>
     <div class="wrapper">
         <header th:replace="/layout/notice/header :: headerFragment"></header>
@@ -91,8 +93,11 @@
                                     <th>프로필 파일</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="employeeList">
                                 <tr>
+                                    <td colspan="9">직원 정보가 없습니다.</td>
+                                </tr>
+                                <!-- <tr>
                                     <td>
                                         <input type="checkbox">
                                     </td>
@@ -142,7 +147,7 @@
                                             <img th:src="@{/sample/admin/images/ico_download.png}" alt="">
                                         </a>
                                     </td>
-                                </tr>
+                                </tr> -->
                             </tbody>
                         </table>
                     </div>
