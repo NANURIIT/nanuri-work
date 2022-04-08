@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.nanuri.work.business.member.dto.AwardDTO;
+import com.nanuri.work.business.member.dto.BasicInfoDTO;
 import com.nanuri.work.business.member.dto.CareerhistoryDTO;
 import com.nanuri.work.business.member.dto.CertificateDTO;
 import com.nanuri.work.business.member.dto.CommonCodeDTO;
@@ -30,6 +31,12 @@ public class MemberService {
 		return memberMapper.selectCommonCodeList(params);
 	}
 
+	/* 기본정보 */
+	
+	public BasicInfoDTO getBasicInfoDetail() {
+		return memberMapper.selectBasicInfoDetail(facade.getDetails().getUserId());
+	}
+	
 	/* 학력 */
 
 	public boolean registerSchoolCareer(SchoolCareerDTO params) {

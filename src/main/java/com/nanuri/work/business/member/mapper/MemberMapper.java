@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.nanuri.work.business.member.dto.AwardDTO;
+import com.nanuri.work.business.member.dto.BasicInfoDTO;
 import com.nanuri.work.business.member.dto.CareerhistoryDTO;
 import com.nanuri.work.business.member.dto.CertificateDTO;
 import com.nanuri.work.business.member.dto.CommonCodeDTO;
@@ -16,6 +17,9 @@ import com.nanuri.work.business.member.dto.WorkhistoryDTO;
 
 @Mapper
 public interface MemberMapper {
+	
+	/* 기본정보 */
+	public BasicInfoDTO selectBasicInfoDetail(String userId);
 	
 	/* 학력 */
 	public int insertSchoolCareer(SchoolCareerDTO params);

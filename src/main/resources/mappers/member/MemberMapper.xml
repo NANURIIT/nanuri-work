@@ -20,7 +20,22 @@
 	
 	
 	<!-- 기본정보 상세 출력 -->
-	
+	<select id="selectBasicInfoDetail" parameterType="string" resultType="com.nanuri.work.business.member.dto.BasicInfoDTO">
+		SELECT user_nm, 
+			   rrno, 
+			   blg_ds_cd, 
+			   blg_nm, 
+			   dty_nm, 
+			   dut_nm, 
+			   zip, 
+			   addr, 
+			   tel_no, 
+			   email_addr, 
+			   enco_ym, 
+			   rtrm_ym
+		  FROM mem_bsc_info
+		 WHERE user_id = #{userId}
+	</select>
 	
 	<!-- 기본정보 수정 -->
 	

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nanuri.work.business.member.dto.AwardDTO;
+import com.nanuri.work.business.member.dto.BasicInfoDTO;
 import com.nanuri.work.business.member.dto.CareerhistoryDTO;
 import com.nanuri.work.business.member.dto.CertificateDTO;
 import com.nanuri.work.business.member.dto.CommonCodeDTO;
@@ -41,6 +42,13 @@ public class MemberApiController {
 	@GetMapping(value = "/getCommonCode")
 	public List<CommonCodeDTO> getCommonCodeList(@ModelAttribute("params") CommonCodeDTO params) {
 		return memberService.getCommonCodeList(params);
+	}
+	
+	/* 기본정보 */
+	
+	@GetMapping(value = "/basicInfoDetail")
+	public BasicInfoDTO getBasicInfoDetail() {
+		return memberService.getBasicInfoDetail();
 	}
 	
 	/* 학력 */
