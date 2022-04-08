@@ -1,10 +1,12 @@
 package com.nanuri.work.business.member.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.nanuri.work.business.common.paging.PaginationInfo;
 import com.nanuri.work.business.member.dto.AwardDTO;
 import com.nanuri.work.business.member.dto.BasicInfoDTO;
 import com.nanuri.work.business.member.dto.CareerhistoryDTO;
@@ -36,8 +38,20 @@ public class MemberService {
 	 * 직원 목록 출력
 	 * @return 직원목록 리스트
 	 */
-	public List<EmployeeVO> getEmployeeList(){
-		return memberMapper.selectEmployeeList();
+	public HashMap<String, Object> getEmployeeList(EmployeeVO params){
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		int employeeTotalCount = memberMapper.selectTotalCountEmployee();
+		
+		PaginationInfo paginationInfo = new PaginationInfo(params);
+		paginationInfo.setTotalRecordCount(employeeTotalCount);
+		
+		params.setPaginationInfo(paginationInfo);
+		
+		if(employeeTotalCount > 0) {
+			resultMap.put("employeeTotalCount", employeeTotalCount);
+			resultMap.put("employeeList", memberMapper.selectEmployeeList(params));
+		}
+		return resultMap;
 	}
 	
 	/* 기본정보 */

@@ -18,7 +18,8 @@ import com.nanuri.work.business.member.vo.EmployeeVO;
 @Mapper
 public interface MemberMapper {
 	
-	public List<EmployeeVO> selectEmployeeList();		/* 직원 목록 출력 */
+	public List<EmployeeVO> selectEmployeeList(EmployeeVO params);		/* 직원 목록 출력 */
+	public int selectTotalCountEmployee();
 	
 	/* 기본정보 */
 	public int insertBasicInfo(BasicInfoDTO params);

@@ -1,5 +1,6 @@
 package com.nanuri.work.business.member.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,8 +47,8 @@ public class MemberApiController {
 	}
 	
 	@GetMapping("/employeeList")
-	public List<EmployeeVO> getEmployeeList(){
-		return memberService.getEmployeeList();
+	public HashMap<String, Object> getEmployeeList(@ModelAttribute("params") EmployeeVO params){
+		return memberService.getEmployeeList(params);
 	}
 	
 	/* 기본정보 */

@@ -5,19 +5,32 @@
 $(function () {
 
     // 직원 리스트 호출
-    getEmployeeList();
+    getEmployeeList(1);
 });
 
-var getEmployeeList = function () {
+let param = {
+    thisPageNo: 1,
+    functionNm: 'getEmployeeList',
+    htmlNm: 'list_pagination',
+    pageDivNo: 10,
+    pageViewNo: 10
+};
+
+var getEmployeeList = function (pageNo) {
+    param.thisPageNo = pageNo;
     ajaxCall({
         method: 'GET',
         url: '/employee/employeeList',
+        data : param, 
         success: function (object) {
             let EMPLOYEE_LIST_HTML = '';
 
-            if (object.length > 0) {
-                for (let i = 0; i < object.length; i++) {
-                    let tmpRow = object[i];
+            if (Object.keys(object).length != 0) {
+                let employeeList = object.employeeList;
+                param.totalDataNum = object.employeeTotalCount;
+
+                for (let i = 0; i < employeeList.length; i++) {
+                    let tmpRow = employeeList[i];
                     EMPLOYEE_LIST_HTML += '<tr>';
                     EMPLOYEE_LIST_HTML += ' <td>';
                     EMPLOYEE_LIST_HTML += '     <input type="checkbox">';
@@ -39,11 +52,13 @@ var getEmployeeList = function () {
                     EMPLOYEE_LIST_HTML += '     </a>';
                     EMPLOYEE_LIST_HTML += ' </td>';
                     EMPLOYEE_LIST_HTML += '</tr>';
+                    setPage(param);
                 }
             } else {
                 EMPLOYEE_LIST_HTML += '<tr>';
                 EMPLOYEE_LIST_HTML += ' <td colspan="9">직원 정보가 없습니다.</td>';
                 EMPLOYEE_LIST_HTML += '</tr>';
+                setPage(param);
             }
 
             $('#employeeList').html(EMPLOYEE_LIST_HTML);

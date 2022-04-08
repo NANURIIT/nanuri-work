@@ -13,7 +13,7 @@
 	</select>
 	
 	<!-- 직원 정보 리스트 출력 -->
-	<select id="selectEmployeeList" resultType="com.nanuri.work.business.member.vo.EmployeeVO">
+	<select id="selectEmployeeList" parameterType="com.nanuri.work.business.member.vo.EmployeeVO" resultType="com.nanuri.work.business.member.vo.EmployeeVO">
 		SELECT T01.user_id, 
 			   T01.user_nm, 
 			   T01.dty_nm, 
@@ -28,6 +28,14 @@
 	 		ON T02.scca_ds_cd = T03.dtl_cd
 	 	 WHERE T01.user_autr_nm != 'ADMIN'
 	  GROUP BY T03.ds_cd 
+	  	<include refid="CommonMapper.paging" />
+	</select>
+	
+	<!-- 총 직원 수 출력 -->
+	<select id="selectTotalCountEmployee" resultType="int">
+		SELECT COUNT(*)
+		  FROM mem_bsc_info
+		 WHERE user_autr_nm != 'ADMIN'
 	</select>
 	
 	<!-- 기본정보 -->
