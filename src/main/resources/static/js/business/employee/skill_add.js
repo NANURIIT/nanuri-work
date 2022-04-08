@@ -73,7 +73,7 @@ var registerSkill = function (params) {
                 text: '사용가능기술(언어) 등록에 성공했습니다.',
                 type: 'success',
                 callback: function () {
-                    location.href = '/employee/index';
+                    location.href = '/mobile/employeeInfo';
                 }
             })
         });

@@ -87,7 +87,7 @@ var registerAward = function(params){
                 text: '대내외 수상경력 등록에 성공했습니다.',
                 type: 'success',
                 callback: function () {
-                    location.href = '/employee/index';
+                    location.href = '/mobile/employeeInfo';
                 }
             })
         });

@@ -72,6 +72,9 @@ $(function () {
     });
 });
 
+/**
+ * 기본정보 호출
+ */
 var getBasicInfoDetail = function () {
     ajaxCall({
         method: 'GET',
@@ -105,7 +108,7 @@ var getSchoolCareerList = function () {
                     SCHOOL_CAREER_HTML += ' <div class="list_info_title">' + tmpRow.schlNm + '</div>';
                     SCHOOL_CAREER_HTML += ' <div class="list_info_desc">' + addDot(tmpRow.etisYm) + ' ~ ' + addDot(tmpRow.grduYm) + ' 졸업</div>';
                     SCHOOL_CAREER_HTML += ' <div class="list_info_set">';
-                    SCHOOL_CAREER_HTML += '     <button onclick="location.href=\'/employee/schoolCareerWrite?seqNo=' + tmpRow.seqNo + '\'">수정</button>';
+                    SCHOOL_CAREER_HTML += '     <button onclick="location.href=\'/mobile/schoolCareerWrite?seqNo=' + tmpRow.seqNo + '\'">수정</button>';
                     SCHOOL_CAREER_HTML += '     <button class="deleteSchoolCareer" id="' + tmpRow.seqNo + '">삭제</button>';
                     SCHOOL_CAREER_HTML += ' </div>';
                     SCHOOL_CAREER_HTML += '</div>';
@@ -247,14 +250,16 @@ var getWorkhistoryList = function () {
             totalPeriod.year += Math.floor(totalPeriod.month / 12);
             totalPeriod.month = totalPeriod.month % 12;
 
-            if (totalPeriod.month > 0) {
-                TOTAL_PERIOD_HTML += '<span class="title_total">총 경력 ' + totalPeriod.year + '년 ' + totalPeriod.month + '개월</span>'
-            } else {
-                TOTAL_PERIOD_HTML += '<span class="title_total">총 경력 ' + totalPeriod.year + '년</span>'
+            if(totalPeriod.month + totalPeriod.year > 0){
+                if (totalPeriod.month > 0) {
+                    TOTAL_PERIOD_HTML += '<span class="title_total">총 경력 ' + totalPeriod.year + '년 ' + totalPeriod.month + '개월</span>'
+                } else {
+                    TOTAL_PERIOD_HTML += '<span class="title_total">총 경력 ' + totalPeriod.year + '년</span>'
+                }
+                $('#totalPeriod').html(TOTAL_PERIOD_HTML);
             }
 
             $('#workhistoryList').html(WORK_HISTORY_HTML);
-            $('#totalPeriod').html(TOTAL_PERIOD_HTML);
         }
     })
 }

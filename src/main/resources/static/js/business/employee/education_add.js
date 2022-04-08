@@ -15,7 +15,7 @@ $(function () {
 
     // 저장버튼 클릭
     $(document).on('click', '#save', function () {
-        let params = {
+        params = {
             sccaDsCd: $('#sccaDsCd').val(),
             majrNm: $('#majrNm').val(),
             schlNm: $('#schlNm').val(),
@@ -120,7 +120,7 @@ var registerSchoolCareer = function (params) {
                 text: '학력 등록에 성공했습니다.',
                 type: 'success',
                 callback: function () {
-                    location.href = '/employee/index';
+                    location.href = '/mobile/employeeInfo';
                 }
             })
         });
@@ -136,7 +136,7 @@ var getSchoolCareerDetail = function (seqNo) {
         method: 'GET',
         url: '/employee/schoolCareerDetail/' + seqNo,
         success: function (object) {
-            $('#sccaDsCd').val(object.sccaDsCd);
+            $('#sccaDsCd').val(object.sccaDsCd).prop('selected', true);
             $('#schlNm').val(object.schlNm);
             $('#etisYm').val(object.etisYm);
             $('#grduYm').val(object.grduYm);

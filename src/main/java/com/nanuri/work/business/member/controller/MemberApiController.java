@@ -51,6 +51,23 @@ public class MemberApiController {
 		return memberService.getBasicInfoDetail();
 	}
 	
+	@PostMapping(value = "/basicInfoUpdate")
+	public String updateBasicInfo(@RequestBody BasicInfoDTO params) {
+		String message = "";
+
+		try {
+			boolean isRegistered = memberService.updateBasicInfo(params);
+			if (isRegistered == false) {
+				message = "등록에 실패하였습니다.";
+			}
+		} catch (Exception e) {
+			message = "시스템에 문제가 발생하였습니다.";
+			e.printStackTrace();
+		}
+		
+		return message;
+	}
+	
 	/* 학력 */
 	
 	@PostMapping(value = "/schoolCareerWrite")

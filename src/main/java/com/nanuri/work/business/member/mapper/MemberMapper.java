@@ -3,7 +3,6 @@ package com.nanuri.work.business.member.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
-
 import com.nanuri.work.business.member.dto.AwardDTO;
 import com.nanuri.work.business.member.dto.BasicInfoDTO;
 import com.nanuri.work.business.member.dto.CareerhistoryDTO;
@@ -19,7 +18,9 @@ import com.nanuri.work.business.member.dto.WorkhistoryDTO;
 public interface MemberMapper {
 	
 	/* 기본정보 */
+	public int insertBasicInfo(BasicInfoDTO params);
 	public BasicInfoDTO selectBasicInfoDetail(String userId);
+	public int updateBasicInfo(BasicInfoDTO params);
 	
 	/* 학력 */
 	public int insertSchoolCareer(SchoolCareerDTO params);

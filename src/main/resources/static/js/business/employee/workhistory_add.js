@@ -101,7 +101,7 @@ var registerWorkhistory = function(params){
                 text : '회사소속이력 등록에 성공했습니다.', 
                 type : 'success', 
                 callback: function () {
-                    location.href = '/employee/index';
+                    location.href = '/mobile/employeeInfo';
                 }
             })
         });

@@ -37,6 +37,11 @@ public class MemberService {
 		return memberMapper.selectBasicInfoDetail(facade.getDetails().getUserId());
 	}
 	
+	public boolean updateBasicInfo(BasicInfoDTO params) {
+		params.setUserId(facade.getDetails().getUserId());
+		return memberMapper.updateBasicInfo(params) > 0;
+	}
+	
 	/* 학력 */
 
 	public boolean registerSchoolCareer(SchoolCareerDTO params) {

@@ -38,10 +38,22 @@
 	</select>
 	
 	<!-- 기본정보 수정 -->
-	
+	<update id="updateBasicInfo" parameterType="com.nanuri.work.business.member.dto.BasicInfoDTO">
+		UPDATE mem_bsc_info
+		   SET blg_ds_cd = #{blgDsCd}, 
+		   	   blg_nm = #{blgNm}, 
+		   	   zip = #{zip}, 
+		   	   addr = #{addr}, 
+		   	   user_nm = #{userNm}, 
+		   	   dty_nm = #{dtyNm}, 
+		   	   tel_no = #{telNo}, 
+		   	   rrno = #{rrno}, 
+		   	   dut_nm = #{dutNm}, 
+		   	   email_addr = #{emailAddr}
+		 WHERE user_id = #{userId}
+	</update>
 	
 	<!-- 기본정보 삭제 -->
-	
 	
 	
 	<!-- 학력 -->

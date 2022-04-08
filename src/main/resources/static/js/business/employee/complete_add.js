@@ -97,7 +97,7 @@ var registerEducation = function(params){
                 text: '교육이수 등록에 성공했습니다.',
                 type: 'success',
                 callback: function () {
-                    location.href = '/employee/index';
+                    location.href = '/mobile/employeeInfo';
                 }
             })
         });
