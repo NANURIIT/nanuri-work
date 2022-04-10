@@ -1,61 +1,116 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 
-<!-- 공통 헤드 -->
-<head th:replace="layout/employee/head :: headFragment"></head>
+<!-- 공통헤드 -->
+<head th:replace="layout/notice/head :: headFragment"></head>
 
-<script th:src="@{/js/business/employee/certificate_add.js}"></script>
+<link rel="stylesheet" th:href="@{/sample/admin/css/info.css}">
 
 <body>
-<div class="main">
-    <div class="wrap">
-        <form>
-            <div class="form_box">
-                <div class="form_title">자격증구분</div>
-                <div>
-                    <select class="form_select" id="qlfcDsCd" name="certificate_classification">
-                        <!-- <option value="기술사" selected>기술사</option>
-                        <option value="기사">기사</option>
-                        <option value="산업기사">산업기사</option>
-                        <option value="기능사">기능사</option>
-                        <option value="기타">기타</option> -->
-                    </select>
+    <div class="wrapper">
+        <header th:replace="/layout/notice/header :: headerFragment"></header>
+
+        <div class="submain_wrap">
+            <div class="sub_wrap">
+                <div class="sub_container">
+                    <div class="submain_title">
+                        자격증
+                    </div>
+                    <div class="join_detail_wrap">
+                        <form>
+                            <table class="join_table1">
+                                <colgroup>
+                                    <col style="width:200px;">
+                                    <col style="width:auto;">
+                                </colgroup>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">
+                                            자격증구분
+                                        </th>
+                                        <td>
+                                            <div class="join_input">
+                                                <select class="form_select" name="certificate_classification">
+                                                    <option value="기술사" selected>기술사</option>
+                                                    <option value="기사">기사</option>
+                                                    <option value="산업기사">산업기사</option>
+                                                    <option value="기능사">기능사</option>
+                                                    <option value="기타">기타</option>
+                                                </select>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">
+                                            자격증명
+                                        </th>
+                                        <td>
+                                            <div class="join_input">
+                                                <input class="input_box" type="text" name="certificate_name" placeholder="자격증명 입력">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">
+                                            발행처
+                                        </th>
+                                        <td>
+                                            <div class="join_input">
+                                                <input class="input_box" type="text" name="publish_name" placeholder="발행처 입력">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">
+                                            취득일자
+                                        </th>
+                                        <td>
+                                            <div class="join_input">
+                                                <input class="input_box" type="text" name="acquisition_date" placeholder="취득일자 입력">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">
+                                            유효일자
+                                        </th>
+                                        <td>
+                                            <div class="join_input">
+                                                <input class="input_box" type="text" name="effective_date" placeholder="유효일자 입력">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">
+                                            갱신일자
+                                        </th>
+                                        <td>
+                                            <div class="join_input">
+                                                <input class="input_box" type="text" name="renewal_date" placeholder="갱신일자 입력">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>
+                    <div class="join_agree_wrap">
+                        <div class="join_agree_button">
+                            <button>등록</button>
+                            <button class="cancel_button">취소</button>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="form_box">
-                <div class="form_title">자격증명</div>
-                <div>
-                    <input class="input_box" id="qlfcNm" type="text" name="certificate_name" placeholder="자격증명 입력">
-                </div>
-            </div>
-            <div class="form_box">
-                <div class="form_title">발행처</div>
-                <div>
-                    <input class="input_box" id="pbcplNm" type="text" name="publish_name" placeholder="발행처 입력">
-                </div>
-            </div>
-            <div class="form_box">
-                <div class="form_title">취득일자</div>
-                <div>
-                    <input class="input_box" id="acqDt" type="text" name="acquisition_date" placeholder="취득일자 입력">
-                </div>
-            </div>
-            <div class="form_box">
-                <div class="form_title">유효일자</div>
-                <div>
-                    <input class="input_box" id="vldDt" type="text" name="effective_date" placeholder="유효일자 입력">
-                </div>
-            </div>
-            <div class="form_box">
-                <div class="form_title">갱신일자</div>
-                <div>
-                    <input class="input_box" id="updtDt" type="text" name="renewal_date" placeholder="갱신일자 입력">
-                </div>
-            </div>
+<<<<<<< Updated upstream
         </form>
-        
-        <div th:replace="layout/employee/footer :: saveBoxFragment"></div>
+        <div class="save_box">
+            <div class="save_button">
+                <button id="save">저장</button>
+            </div>
+=======
+>>>>>>> Stashed changes
+        </div>
     </div>
-</div>
 </body>
 </html>
