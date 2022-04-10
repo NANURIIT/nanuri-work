@@ -14,7 +14,7 @@
             <div class="sub_wrap">
                 <div class="sub_container">
                     <div class="submain_title">
-                        경력이력
+                        직원 등록
                     </div>
                     <div class="join_detail_wrap">
                         <form>
@@ -26,89 +26,18 @@
                                 <tbody>
                                     <tr>
                                         <th scope="row">
-                                            사업명
+                                            소속구분
                                         </th>
                                         <td>
                                             <div class="join_input">
-                                                <input class="input_box" type="text" name="project_name" placeholder="사업명 입력">
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">
-                                            사업시작년월
-                                        </th>
-                                        <td>
-                                            <div class="join_input">
-                                                <input class="input_box" type="text" name="project_start" placeholder="사업시작년월 입력">
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">
-                                            사업종료년월
-                                        </th>
-                                        <td>
-                                            <div class="join_input">
-                                                <input class="input_box" type="text" name="project_end" placeholder="사업종료년월 입력">
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">
-                                            발주사
-                                        </th>
-                                        <td>
-                                            <div class="join_input">
-                                                <input class="input_box" type="text" name="order_company" placeholder="발주사 입력">
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">
-                                            사업내용
-                                        </th>
-                                        <td>
-                                            <div class="join_input">
-                                                <input class="input_box" type="text" name="project_contents" placeholder="사업내용 입력">
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">
-                                            소속회사
-                                        </th>
-                                        <td>
-                                            <div class="join_input">
-                                                <input class="input_box" type="text" name="affiliated_company" placeholder="소속회사 입력">
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">
-                                            역할
-                                        </th>
-                                        <td>
-                                            <div class="join_input">
-                                                <select class="form_select" name="part_name">
-                                                    <option value="컨설팅" selected>컨설팅</option>
-                                                    <option value="개발">개발</option>
-                                                    <option value="모듈매니저">모듈매니저</option>
-                                                    <option value="분석및설계">분석및설계</option>
-                                                    <option value="설계및개발">설계및개발</option>
-                                                    <option value="PM">PM</option>
-                                                    <option value="업무PM">업무PM</option>
-                                                    <option value="공통및기술지원">공통및기술지원</option>
-                                                    <option value="PL">PL</option>
-                                                    <option value="DBA">DBA</option>
-                                                    <option value="QA">QA</option>
-                                                    <option value="모델러">모델러</option>
-                                                    <option value="테스트">테스트</option>
-                                                    <option value="안정화">안정화</option>
-                                                    <option value="유지보수">유지보수</option>
-                                                    <option value="운영">운영</option>
-                                                    <option value="현업">현업</option>
-                                                    <option value="디자인">디자인</option>
+                                                <select class="form_select" name="division_name">
+                                                    <option value="나누리직원" selected>나누리직원</option>
+                                                    <option value="프리랜서">프리랜서</option>
+                                                    <option value="협력업체">협력업체</option>
+                                                    <!--20220407 수정 s-->
+                                                    <option value="운영자">운영자</option>
+                                                    <option value="경영지원">경영지원</option>
+                                                    <!--20220407 수정 f-->
                                                     <option value="기타">기타</option>
                                                 </select>
                                             </div>
@@ -116,71 +45,121 @@
                                     </tr>
                                     <tr>
                                         <th scope="row">
-                                            담당업무
+                                            소속
                                         </th>
                                         <td>
                                             <div class="join_input">
-                                                <input class="input_box" type="text" name="task_input" placeholder="담당업무 입력">
+                                                <input class="input_box" type="text" name="department_name" placeholder="소속 입력">
                                             </div>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th scope="row">
-                                            사용언어
+                                            우편번호
                                         </th>
                                         <td>
                                             <div class="join_input">
-                                                <input class="input_box" type="text" name="use_language" placeholder="사용언어 입력">
+                                                <input class="input_box" type="text" name="zip_code" placeholder="우편번호 입력">
                                             </div>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th scope="row">
-                                            사용DB
+                                            주소
                                         </th>
                                         <td>
                                             <div class="join_input">
-                                                <input class="input_box" type="text" name="use_db" placeholder="사용DB 입력">
+                                                <input class="input_box" type="text" name="address_name" placeholder="주소 입력">
                                             </div>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th scope="row">
-                                            사용OS
+                                            이름
                                         </th>
                                         <td>
                                             <div class="join_input">
-                                                <input class="input_box" type="text" name="use_os" placeholder="사용OS 입력">
+                                                <input class="input_box" type="text" name="user_name" placeholder="이름 입력">
                                             </div>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th scope="row">
-                                            사용프레임워크
+                                            입사일자
                                         </th>
                                         <td>
                                             <div class="join_input">
-                                                <input class="input_box" type="text" name="use_framework" placeholder="사용프레임워크 입력">
+                                                <input class="input_box" type="text" name="user_name" placeholder="입사일자 입력">
                                             </div>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th scope="row">
-                                            사용방법론
+                                            퇴자일자
                                         </th>
                                         <td>
                                             <div class="join_input">
-                                                <input class="input_box" type="text" name="use_how" placeholder="사용방법론 입력">
+                                                <input class="input_box" type="text" name="user_name" placeholder="퇴자일자 입력">
                                             </div>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th scope="row">
-                                            사용기타
+                                            소속구분 변경일자
                                         </th>
                                         <td>
                                             <div class="join_input">
-                                                <input class="input_box" type="text" name="use_etc" placeholder="사용기타 입력">
+                                                <input class="input_box" type="text" name="user_name" placeholder="소속구분 변경일자 입력">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">
+                                            직급
+                                        </th>
+                                        <td>
+                                            <div class="join_input">
+                                                <input class="input_box" type="text" name="rank_name" placeholder="직급 입력">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">
+                                            전화번호
+                                        </th>
+                                        <td>
+                                            <div class="join_input">
+                                                <input class="input_box" type="tel" name="phone_num" placeholder="전화번호 입력">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">
+                                            주민등록번호
+                                        </th>
+                                        <td>
+                                            <div class="join_input">
+                                                <input class="input_box" type="text" name="registration_number" placeholder="주민등록번호 입력">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">
+                                            직무
+                                        </th>
+                                        <td>
+                                            <div class="join_input">
+                                                <input class="input_box" type="text" name="job_name" placeholder="직무 입력">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">
+                                            E-mail
+                                        </th>
+                                        <td>
+                                            <div class="join_input">
+                                                <input class="input_box" type="email" name="email_address" placeholder="이메일 입력">
                                             </div>
                                         </td>
                                     </tr>
@@ -196,14 +175,6 @@
                     </div>
                 </div>
             </div>
-<<<<<<< Updated upstream
-        </form>
-        <div class="save_box">
-            <div class="save_button">
-                <button id="save">저장</button>
-            </div>
-=======
->>>>>>> Stashed changes
         </div>
     </div>
 </body>

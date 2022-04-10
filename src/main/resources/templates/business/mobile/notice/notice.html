@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<!-- 공통헤드 -->
+<head th:replace="layout/mobile/notice/head :: headFragment"></head>
+
+<link rel="stylesheet" th:href="@{/sample/nanuri_project/css/notice.css}">
+
+<body>
+<div class="mo_wrapper">
+    <div class="submain">
+        <div class="submain_contents">
+            <div class="notice_contents_wrap">
+                <div class="notice_contents_box">
+                    <ul>
+                        <li class="notice_list">
+                            <a class="notice_link" href="#">
+                                <div class="notice_title">
+                                    공지사항 입니다.공지사항 입니다.공지사항 입니다.공지사항 입니다.
+                                </div>
+                                <div class="notice_desc">
+                                    <span>나누리</span><span>2022-01-01 15:00</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="notice_list">
+                            <a class="notice_link" href="#">
+                                <div class="notice_title">
+                                    공지사항 입니다.공지사항 입니다.공지사항 입니다.공지사항 입니다.
+                                </div>
+                                <div class="notice_desc">
+                                    <span>나누리</span><span>2022-01-01 15:00</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="notice_list">
+                            <a class="notice_link" href="#">
+                                <div class="notice_title">
+                                    공지사항 입니다.공지사항 입니다.공지사항 입니다.공지사항 입니다.
+                                </div>
+                                <div class="notice_desc">
+                                    <span>나누리</span><span>2022-01-01 15:00</span>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="com_pagination">
+                    <div class="pagination_wrap">
+                        <ul>
+                            <li class="pagination_prev">
+                                <a href="#">
+                                    <
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">1</a>
+                            </li>
+                            <li class="select">
+                                <a href="#">2</a>
+                            </li>
+                            <li>
+                                <a href="#">3</a>
+                            </li>
+                            <li>
+                                <a href="#">4</a>
+                            </li>
+                            <li>
+                                <a href="#">5</a>
+                            </li>
+                            <li>
+                                ...
+                            </li>
+                            <li>
+                                <a href="#">51</a>
+                            </li>
+                            <li class="pagination_next">
+                                <a href="#">
+                                    >
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="notice_search">
+                    <form action="#">
+                        <div class="notice_search_box">
+                            <select name="date">
+                                <option value="1we">일주일</option>
+                                <option value="1m">한달</option>
+                                <option value="3m">세달</option>
+                                <option value="all">전체</option>
+                            </select>
+                            <select name="date">
+                                <option value="1we">제목</option>
+                                <option value="1m">내용</option>
+                                <option value="3m">글쓴이</option>
+                                <option value="all">아이디</option>
+                            </select>
+                            <input name="notice_search" type="text">
+                            <a href="#">검색</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

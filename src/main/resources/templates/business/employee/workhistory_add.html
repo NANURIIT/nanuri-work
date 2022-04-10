@@ -1,52 +1,100 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 
-<!-- 공통 헤드 -->
-<head th:replace="layout/employee/head :: headFragment"></head>
+<!-- 공통헤드 -->
+<head th:replace="layout/notice/head :: headFragment"></head>
 
-<script th:src="@{/js/business/employee/workhistory_add.js}"></script>
+<link rel="stylesheet" th:href="@{/sample/admin/css/info.css}">
 
 <body>
-<div class="main">
-    <div class="wrap">
-        <form>
-            <div class="form_box">
-                <div class="form_title">근무처</div>
-                <div>
-                    <input class="input_box" id="wrkplNm" type="text" name="company_name" placeholder="근무처 입력">
+    <div class="wrapper">
+        <header th:replace="/layout/notice/header :: headerFragment"></header>
+
+        <div class="submain_wrap">
+            <div class="sub_wrap">
+                <div class="sub_container">
+                    <div class="submain_title">
+                        근무이력
+                    </div>
+                    <div class="join_detail_wrap">
+                        <form>
+                            <table class="join_table1">
+                                <colgroup>
+                                    <col style="width:200px;">
+                                    <col style="width:auto;">
+                                </colgroup>
+                                <tbody>
+                                <tr>
+                                    <th scope="row">
+                                        근무처
+                                    </th>
+                                    <td>
+                                        <div class="join_input">
+                                            <input class="input_box" type="text" name="company_name" placeholder="근무처 입력">
+                                        </div>
+                                    </td>
+                                </tr>
+                                    <tr>
+                                        <th scope="row">
+                                            입사년월
+                                        </th>
+                                        <td>
+                                            <div class="join_input">
+                                                <input class="input_box" type="text" name="join_date" placeholder="입사년월 입력">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">
+                                            퇴사년월
+                                        </th>
+                                        <td>
+                                            <div class="join_input">
+                                                <input class="input_box" type="text" name="effective_date" placeholder="퇴사년월 입력">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                <tr>
+                                    <th scope="row">
+                                        직책
+                                    </th>
+                                    <td>
+                                        <div class="join_input">
+                                            <input class="input_box" type="text" name="position_date" placeholder="직책 입력">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">
+                                        담당업무
+                                    </th>
+                                    <td>
+                                        <div class="join_input">
+                                            <input class="input_box" type="text" name="responsibilities_name" placeholder="담당업무 입력">
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>
+                    <div class="join_agree_wrap">
+                        <div class="join_agree_button">
+                            <button>등록</button>
+                            <button class="cancel_button">취소</button>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="form_box">
-                <div class="form_title">입사년월</div>
-                <div>
-                    <input class="input_box" id="encoYm" type="text" name="join_date" placeholder="입사년월 입력">
-                </div>
-            </div>
-            <div class="form_box">
-                <div class="form_title">퇴사년월</div>
-                <div>
-                    <input class="input_box" id="rtrmYm" type="text" name="effective_date" placeholder="퇴사년월 입력">
-                </div>
-            </div>
-            <div class="form_box">
-                <div class="form_title">직책</div>
-                <div>
-                    <input class="input_box" id="dtyNm" type="text" name="position_date" placeholder="직책 입력">
-                </div>
-            </div>
-            <div class="form_box">
-                <div class="form_title">담당업무</div>
-                <div>
-                    <input class="input_box" id="chrgBsnNm" type="text" name="responsibilities_name" placeholder="담당업무 입력">
-                </div>
-            </div>
+<<<<<<< Updated upstream
         </form>
         <div class="save_box">
             <div class="save_button">
                 <button id="save">저장</button>
             </div>
+=======
+>>>>>>> Stashed changes
         </div>
     </div>
-</div>
 </body>
 </html>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<!-- 공통헤드 -->
+<head th:replace="layout/notice/head :: headFragment"></head>
+
+<link rel="stylesheet" th:href="@{/sample/admin/css/style.css}">
+
+<body>
+    <div class="wrapper">
+        <header th:replace="/layout/notice/header :: headerFragment"></header>
+
+        <div class="submain_wrap">
+            <div class="wrap">
+                <div class="submain_title">
+                    마이페이지
+                </div>
+                <section class="list_container">
+                    <div class="list_title">
+                        <div class="list_title_text">기본정보</div>
+                        <a href="/admin/basicInfoWrite" title="#" class="list_title_add list_title_edit">
+                            <span class="blind">추가</span>
+                        </a>
+                    </div>
+                    <div class="list_info">
+                        <div class="list_info_title">홍길동</div>
+                        <div class="list_info_desc">소속구분, 직급</div>
+                    </div>
+                </section>
+                <section class="list_container">
+                    <div class="list_title">
+                        <div class="list_title_text">학력</div>
+                        <a href="/admin/schoolCareerWrite" title="#" class="list_title_add">
+                            <span class="blind">추가</span>
+                        </a>
+                    </div>
+                    <div class="list_info">
+                        <div class="list_info_title">학교명</div>
+                        <div class="list_info_desc">2022.03 ~ 2022.03</div>
+                        <div class="list_info_set">
+                            <button>수정</button>
+                            <button>삭제</button>
+                        </div>
+                    </div>
+                </section>
+                <section class="list_container">
+                    <div class="list_title">
+                        <div class="list_title_text">자격증</div>
+                        <a href="/admin/certificateWrite" title="#" class="list_title_add">
+                            <span class="blind">추가</span>
+                        </a>
+                    </div>
+                    <div class="list_info">
+                        <div class="list_info_title">자격증명</div>
+                        <div class="list_info_desc">2022.04</div>
+                        <div class="list_info_desc">발행처</div>
+                        <div class="list_info_set">
+                            <button>수정</button>
+                            <button>삭제</button>
+                        </div>
+                    </div>
+                    <div class="list_info">
+                        <div class="list_info_title">자격증명</div>
+                        <div class="list_info_desc">2022.04</div>
+                        <div class="list_info_desc">발행처</div>
+                        <div class="list_info_set">
+                            <button>수정</button>
+                            <button>삭제</button>
+                        </div>
+                    </div>
+                </section>
+                <section class="list_container">
+                    <div class="list_title">
+                        <div class="list_title_text">회사소속이력<span class="title_total">총 경력 1년 1개월</span></div>
+                        <a href="/admin/workhistoryWrite" title="#" class="list_title_add">
+                            <span class="blind">추가</span>
+                        </a>
+                    </div>
+                    <div class="list_info">
+                        <div class="list_info_title">근무처</div>
+                        <div class="list_info_desc">2022.01 ~ 2022.04</div>
+                        <div class="list_info_desc">경력 1년1개월, 직책</div>
+                        <div class="list_info_set">
+                            <button>수정</button>
+                            <button>삭제</button>
+                        </div>
+                    </div>
+                    <div class="list_info">
+                        <div class="list_info_title">근무처</div>
+                        <div class="list_info_desc">2022.01 ~ 2022.04</div>
+                        <div class="list_info_desc">경력 1년1개월, 직책</div>
+                        <div class="list_info_set">
+                            <button>수정</button>
+                            <button>삭제</button>
+                        </div>
+                    </div>
+                </section>
+                <section class="list_container">
+                    <div class="list_title">
+                        <div class="list_title_text">교육이수</div>
+                        <a href="/admin/educationWrite" title="#" class="list_title_add">
+                            <span class="blind">추가</span>
+                        </a>
+                    </div>
+                    <div class="list_info">
+                        <div class="list_info_title">교육명</div>
+                        <div class="list_info_desc">2022.01 ~ 2022.04</div>
+                        <div class="list_info_desc">기관</div>
+                        <div class="list_info_set">
+                            <button>수정</button>
+                            <button>삭제</button>
+                        </div>
+                    </div>
+                </section>
+                <section class="list_container">
+                    <div class="list_title">
+                        <div class="list_title_text">대내외 수상경력</div>
+                        <a href="/admin/awardWrite" title="#" class="list_title_add">
+                            <span class="blind">추가</span>
+                        </a>
+                    </div>
+                    <div class="list_info">
+                        <div class="list_info_title">포상명</div>
+                        <div class="list_info_desc">2022.01 ~ 2022.04</div>
+                        <div class="list_info_desc">기타내용</div>
+                        <div class="list_info_set">
+                            <button>수정</button>
+                            <button>삭제</button>
+                        </div>
+                    </div>
+                </section>
+                <section class="list_container">
+                    <div class="list_title">
+                        <div class="list_title_text">외국어 능력</div>
+                        <a href="/admin/languageWrite" title="#" class="list_title_add">
+                            <span class="blind">추가</span>
+                        </a>
+                    </div>
+                    <div class="list_info">
+                        <div class="list_info_title">언어</div>
+                        <div class="list_info_desc">숙련도</div>
+                        <div class="list_info_desc">기타내용</div>
+                        <div class="list_info_set">
+                            <button>수정</button>
+                            <button>삭제</button>
+                        </div>
+                    </div>
+                </section>
+                <section class="list_container">
+                    <div class="list_title">
+                        <div class="list_title_text">사용가능기술(언어)</div>
+                        <a href="/admin/skillWrite" title="#" class="list_title_add">
+                            <span class="blind">추가</span>
+                        </a>
+                    </div>
+                    <div class="list_info">
+                        <div class="list_info_title">사용가능기술(언어)</div>
+                        <div class="list_info_desc">숙련도</div>
+                        <div class="list_info_desc">기타내용</div>
+                        <div class="list_info_set">
+                            <button>수정</button>
+                            <button>삭제</button>
+                        </div>
+                    </div>
+                </section>
+                <section class="list_container">
+                    <div class="list_title">
+                        <div class="list_title_text">프로젝트이력</div>
+                        <a href="/admin/careerhistoryWrite" title="#" class="list_title_add">
+                            <span class="blind">추가</span>
+                        </a>
+                    </div>
+                    <div class="list_info">
+                        <div class="list_info_title">소속회사</div>
+                        <div class="list_info_desc">2022.01 ~ 2022.04</div>
+                        <div class="list_info_desc">역할, 담당업무</div>
+                        <div class="list_info_set">
+                            <button>수정</button>
+                            <button>삭제</button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
