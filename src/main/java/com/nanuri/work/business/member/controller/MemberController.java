@@ -141,6 +141,15 @@ public class MemberController {
 	}
 	
 	/**
+	 * 직원 등록
+	 * @return
+	 */
+	@GetMapping(value = "/mobile/employeeAdd")
+	public String getMobileEmployeeAddPage() {
+		return "business/mobile/employee/employee_add";
+	}
+	
+	/**
 	 * 기본정보 입력
 	 * @return
 	 */
