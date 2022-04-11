@@ -6,6 +6,8 @@
 
 <link rel="stylesheet" th:href="@{/sample/admin/css/info.css}">
 
+<script th:src="@{/js/business/employee/award_add.js}"></script>
+
 <body>
     <div class="wrapper">
         <header th:replace="/layout/notice/header :: headerFragment"></header>
@@ -30,7 +32,7 @@
                                         </th>
                                         <td>
                                             <div class="join_input">
-                                                <input class="input_box" type="text" name="award_name" placeholder="포상명 입력">
+                                                <input class="input_box" id="przNm" type="text" name="award_name" placeholder="포상명 입력">
                                             </div>
                                         </td>
                                     </tr>
@@ -40,7 +42,7 @@
                                         </th>
                                         <td>
                                             <div class="join_input">
-                                                <input class="input_box" type="text" name="award_date" placeholder="포상일자 입력">
+                                                <input class="input_box" id="przDt" type="text" name="award_date" placeholder="포상일자 입력">
                                             </div>
                                         </td>
                                     </tr>
@@ -50,7 +52,7 @@
                                         </th>
                                         <td>
                                             <div class="join_input">
-                                                <input class="input_box" type="text" name="award_institution" placeholder="포상기관 입력">
+                                                <input class="input_box" id="przOrgNm" type="text" name="award_institution" placeholder="포상기관 입력">
                                             </div>
                                         </td>
                                     </tr>
@@ -60,7 +62,7 @@
                                         </th>
                                         <td>
                                             <div class="join_input">
-                                                <input class="input_box" type="text" name="award_etc" placeholder="기타 입력">
+                                                <input class="input_box" id="etcNm" type="text" name="award_etc" placeholder="기타 입력">
                                             </div>
                                         </td>
                                     </tr>
@@ -68,22 +70,9 @@
                             </table>
                         </form>
                     </div>
-                    <div class="join_agree_wrap">
-                        <div class="join_agree_button">
-                            <button>등록</button>
-                            <button class="cancel_button">취소</button>
-                        </div>
-                    </div>
+                    <div th:replace="layout/employee/footer :: saveBoxFragment"></div>
                 </div>
             </div>
-<<<<<<< Updated upstream
-        </form>
-        <div class="save_box">
-            <div class="save_button">
-                <button id="save">저장</button>
-            </div>
-=======
->>>>>>> Stashed changes
         </div>
     </div>
 </body>

@@ -6,6 +6,8 @@
 
 <link rel="stylesheet" th:href="@{/sample/admin/css/info.css}">
 
+<script th:src="@{/js/business/employee/education_add.js}"></script>
+
 <body>
     <div class="wrapper">
         <header th:replace="/layout/notice/header :: headerFragment"></header>
@@ -30,11 +32,11 @@
                                         </th>
                                         <td>
                                             <div class="join_input">
-                                                <select class="form_select" name="education">
-                                                    <option value="고등학교">고등학교</option>
+                                                <select class="form_select" id="sccaDsCd" name="education">
+                                                    <!-- <option value="고등학교">고등학교</option>
                                                     <option value="전문대학교">전문대학교</option>
                                                     <option value="대학교">대학교</option>
-                                                    <option value="대학원">대학원</option>
+                                                    <option value="대학원">대학원</option> -->
                                                 </select>
                                             </div>
                                         </td>
@@ -45,7 +47,7 @@
                                         </th>
                                         <td>
                                             <div class="join_input">
-                                                <input class="input_box" type="text" name="school_name" placeholder="학교명 입력">
+                                                <input class="input_box" id="schlNm" type="text" name="school_name" placeholder="학교명 입력">
                                             </div>
                                         </td>
                                     </tr>
@@ -55,7 +57,7 @@
                                         </th>
                                         <td>
                                             <div class="join_input">
-                                                <input class="input_box" type="text" name="school_period" placeholder="YYYYMM">
+                                                <input class="input_box" id="etisYm" type="text" name="school_period" placeholder="YYYYMM">
                                             </div>
                                         </td>
                                     </tr>
@@ -65,7 +67,7 @@
                                         </th>
                                         <td>
                                             <div class="join_input">
-                                                <input class="input_box" type="text" name="school_period" placeholder="YYYYMM">
+                                                <input class="input_box" id="grduYm" type="text" name="school_period" placeholder="YYYYMM">
                                             </div>
                                         </td>
                                     </tr>
@@ -75,7 +77,7 @@
                                         </th>
                                         <td>
                                             <div class="join_input">
-                                                <input class="input_box" type="text" name="major" placeholder="전공학과 입력">
+                                                <input class="input_box" id="majrNm" type="text" name="major" placeholder="전공학과 입력">
                                             </div>
                                         </td>
                                     </tr>
@@ -83,22 +85,9 @@
                             </table>
                         </form>
                     </div>
-                    <div class="join_agree_wrap">
-                        <div class="join_agree_button">
-                            <button>등록</button>
-                            <button class="cancel_button">취소</button>
-                        </div>
-                    </div>
+                    <div th:replace="layout/employee/footer :: saveBoxFragment"></div>
                 </div>
             </div>
-<<<<<<< Updated upstream
-        </form>
-        <div class="save_box">
-            <div class="save_button">
-                <button id="save">저장</button>
-            </div>
-=======
->>>>>>> Stashed changes
         </div>
     </div>
 </body>
