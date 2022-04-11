@@ -8,11 +8,11 @@ import lombok.Getter;
 public enum MemberLevelCode {
 	
 	/** 윤영자 */
-	ADMIN(1, "운영자"), 
-	/** 직원 */
-	EMPLOYEE(2, "직원"), 
+	ADMIN(1, "운영자"),
 	/** 경영관리 */
-	ASSISTANT(3, "경영관리"), 
+	ASSISTANT(2, "경영관리"), 
+	/** 직원 */
+	EMPLOYEE(3, "직원"), 
 	/** 프리랜서 */
 	FREELANCER(4, "프리랜서"), 
 	/** 협력사 */
