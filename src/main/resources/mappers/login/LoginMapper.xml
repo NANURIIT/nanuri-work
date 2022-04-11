@@ -3,7 +3,7 @@
 <mapper namespace="com.nanuri.work.com.login.mapper.LoginMapper">
 
 	<!-- 로그인 회원정보 -->
-	<select id="getLoginUserDetailsVO" parameterType="String" resultType="com.nanuri.work.com.login.vo.UserDetailsVO">
+	<select id="getLoginUserDetailsVO" parameterType="String" resultType="com.nanuri.work.business.member.dto.MemberDTO">
 		SELECT user_id				/* ID */
 		     , user_nm				/* 이름 */
 		     , tel_no				/* 휴대전화번호 */
