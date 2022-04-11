@@ -29,11 +29,6 @@ public class MemberController {
 		return "business/employee_list";
 	}
 	
-<<<<<<< Updated upstream
-	@GetMapping(value = "/employee/index")
-	public String getEmployeeIndexPage() {
-		return "business/employee/index";
-=======
 	/**
 	 * 회원정보 출력
 	 * @return
@@ -41,20 +36,14 @@ public class MemberController {
 	@GetMapping(value = "/admin/index")
 	public String getAdminIndexPage() {
 		return "business/index copy";
->>>>>>> Stashed changes
 	}
 	
 	/**
 	 * 기본정보 입력
 	 * @return
 	 */
-<<<<<<< Updated upstream
-	@GetMapping(value = "/employee/basicInfoWrite")
-	public String getBasicInfoWritePage() {
-=======
 	@GetMapping(value = "/admin/basicInfoWrite" )
 	public String getBasicInfoWrite() {
->>>>>>> Stashed changes
 		return "business/employee/basic_add";
 	}
 	
@@ -62,11 +51,7 @@ public class MemberController {
 	 * 학력 입력
 	 * @return
 	 */
-<<<<<<< Updated upstream
-	@GetMapping(value = "/employee/schoolCareerWrite")
-=======
 	@GetMapping(value = "/admin/schoolCareerWrite")
->>>>>>> Stashed changes
 	public String getSchoolCareerWritePage() {
 		return "business/employee/education_add";
 	}
@@ -75,11 +60,7 @@ public class MemberController {
 	 * 자격증 입력
 	 * @return
 	 */
-<<<<<<< Updated upstream
-	@GetMapping(value = "/employee/certificateWrite")
-=======
 	@GetMapping(value = "/admin/certificateWrite")
->>>>>>> Stashed changes
 	public String getCertificateWritePage() {
 		return "business/employee/certificate_add";
 	}
@@ -88,26 +69,16 @@ public class MemberController {
 	 * 회사소속이력 입력
 	 * @return
 	 */
-<<<<<<< Updated upstream
-	@GetMapping(value = "/employee/workhistoryWrite")
-	public String getWokinghistoryWritePage() {
-		return "business/employee/workhistory_add"; 
-=======
 	@GetMapping(value = "/admin/workhistoryWrite")
 	public String getWorkhistoryWritePage() {
 		return "business/employee/workhistory_add";
->>>>>>> Stashed changes
 	}
 	
 	/**
 	 * 교육이수 입력
 	 * @return
 	 */
-<<<<<<< Updated upstream
-	@GetMapping(value = "/employee/educationWrite")
-=======
 	@GetMapping(value = "/admin/educationWrite")
->>>>>>> Stashed changes
 	public String getEducationWritePage() {
 		return "business/employee/complete_add";
 	}
@@ -116,11 +87,7 @@ public class MemberController {
 	 * 대내외 수상경력 입력
 	 * @return
 	 */
-<<<<<<< Updated upstream
-	@GetMapping(value = "/employee/awardWrite")
-=======
 	@GetMapping(value = "/admin/awardWrite")
->>>>>>> Stashed changes
 	public String getAwardWritePage() {
 		return "business/employee/award_add";
 	}
@@ -129,24 +96,16 @@ public class MemberController {
 	 * 외국어 능력 입력
 	 * @return
 	 */
-<<<<<<< Updated upstream
-	@GetMapping(value = "/employee/languageWrite")
-=======
 	@GetMapping(value = "/admin/languageWrite")
->>>>>>> Stashed changes
 	public String getLanguageWritePage() {
 		return "business/employee/language_add";
 	}
 	
-<<<<<<< Updated upstream
-	@GetMapping(value = "/employee/skillWrite")
-=======
 	/**
 	 * 사용가능기술(언어) 입력
 	 * @return
 	 */
 	@GetMapping(value = "/admin/skillWrite")
->>>>>>> Stashed changes
 	public String getSkillWritePage() {
 		return "business/employee/skill_add";
 	}
@@ -155,11 +114,7 @@ public class MemberController {
 	 * 프로젝트이력 입력
 	 * @return
 	 */
-<<<<<<< Updated upstream
-	@GetMapping(value = "/employee/careerhistoryWrite")
-=======
 	@GetMapping(value = "/admin/careerhistoryWrite")
->>>>>>> Stashed changes
 	public String getCareerhistoryWritePage() {
 		return "business/employee/careerhistory_add";
 	}
@@ -174,6 +129,15 @@ public class MemberController {
 	@GetMapping(value = "/mobile/employeeInfo")
 	public String getMobileEmployeeIndexPage() {
 		return "business/mobile/employee/index";
+	}
+	
+	/**
+	 * 회원정보 리스트 출력
+	 * @return
+	 */
+	@GetMapping(value = "/mobile/employeeList")
+	public String getMobileEmployeeListPage() {
+		return "business/mobile/employee_list";
 	}
 	
 	/**

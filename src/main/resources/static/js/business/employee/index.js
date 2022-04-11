@@ -4,6 +4,9 @@
 /** onload **/
 $(function () {
 
+    // 기본정보 호출
+    getBasicInfoDetail();
+
     // 학력 리스트 호출
     getSchoolCareerList();
 
@@ -59,7 +62,7 @@ $(function () {
     });
 
     // 사용가능기술(언어) 삭제
-    $(document).on('click', '.deleteSkill', function(){
+    $(document).on('click', '.deleteSkill', function () {
         confirmDelete($(this).attr('id'), deleteSkill);
     });
 
@@ -68,6 +71,26 @@ $(function () {
         confirmDelete($(this).attr('id'), deleteCareerhistory);
     });
 });
+
+/**
+ * 기본정보 호출
+ */
+var getBasicInfoDetail = function () {
+    ajaxCall({
+        method: 'GET',
+        url: '/employee/basicInfoDetail',
+        success: function (object) {
+            let BASIC_INFO_HTML = '';
+
+            BASIC_INFO_HTML += '<div class="list_info">';
+            BASIC_INFO_HTML += '    <div class="list_info_title">'+object.userNm+'</div>';
+            BASIC_INFO_HTML += '    <div class="list_info_desc">'+object.blgNm+', '+object.dtyNm+'</div>';
+            BASIC_INFO_HTML += '</div>';
+
+            $('#basicInfo').html(BASIC_INFO_HTML);
+        }
+    });
+}
 
 /**
  * 학력 리스트 호출
@@ -85,7 +108,7 @@ var getSchoolCareerList = function () {
                     SCHOOL_CAREER_HTML += ' <div class="list_info_title">' + tmpRow.schlNm + '</div>';
                     SCHOOL_CAREER_HTML += ' <div class="list_info_desc">' + addDot(tmpRow.etisYm) + ' ~ ' + addDot(tmpRow.grduYm) + ' 졸업</div>';
                     SCHOOL_CAREER_HTML += ' <div class="list_info_set">';
-                    SCHOOL_CAREER_HTML += '     <button onclick="location.href=\'/employee/schoolCareerWrite?seqNo=' + tmpRow.seqNo + '\'">수정</button>';
+                    SCHOOL_CAREER_HTML += '     <button onclick="location.href=\'/mobile/schoolCareerWrite?seqNo=' + tmpRow.seqNo + '\'">수정</button>';
                     SCHOOL_CAREER_HTML += '     <button class="deleteSchoolCareer" id="' + tmpRow.seqNo + '">삭제</button>';
                     SCHOOL_CAREER_HTML += ' </div>';
                     SCHOOL_CAREER_HTML += '</div>';
@@ -200,7 +223,7 @@ var getWorkhistoryList = function () {
         success: function (object) {
             let WORK_HISTORY_HTML = '';
             let TOTAL_PERIOD_HTML = '';
-            let totalPeriod = {year : 0, month : 0};
+            let totalPeriod = { year: 0, month: 0 };
 
             for (let i = 0; i < object.length; i++) {
                 let tmpRow = object[i];
@@ -223,18 +246,20 @@ var getWorkhistoryList = function () {
                 totalPeriod.year += period.year;
                 totalPeriod.month += period.month;
             }
-            
+
             totalPeriod.year += Math.floor(totalPeriod.month / 12);
             totalPeriod.month = totalPeriod.month % 12;
 
-            if(totalPeriod.month > 0){
-                TOTAL_PERIOD_HTML += '<span class="title_total">총 경력 '+totalPeriod.year+'년 '+totalPeriod.month+'개월</span>'
-            } else {
-                TOTAL_PERIOD_HTML += '<span class="title_total">총 경력 '+totalPeriod.year+'년</span>'
+            if(totalPeriod.month + totalPeriod.year > 0){
+                if (totalPeriod.month > 0) {
+                    TOTAL_PERIOD_HTML += '<span class="title_total">총 경력 ' + totalPeriod.year + '년 ' + totalPeriod.month + '개월</span>'
+                } else {
+                    TOTAL_PERIOD_HTML += '<span class="title_total">총 경력 ' + totalPeriod.year + '년</span>'
+                }
+                $('#totalPeriod').html(TOTAL_PERIOD_HTML);
             }
-            
+
             $('#workhistoryList').html(WORK_HISTORY_HTML);
-            $('#totalPeriod').html(TOTAL_PERIOD_HTML);
         }
     })
 }
@@ -408,7 +433,7 @@ var getSkillList = function () {
  * 사용가능기술(언어) 삭제 함수
  * @param {number} params.seqNo 일련번호
  */
- var deleteSkill = function (params) {
+var deleteSkill = function (params) {
     ajaxCall({
         method: 'DELETE',
         url: '/employee/skillDelete',

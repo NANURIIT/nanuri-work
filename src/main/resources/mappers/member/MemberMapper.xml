@@ -12,6 +12,81 @@
 	  ORDER BY sort_seqn
 	</select>
 	
+	<!-- 직원 정보 리스트 출력 -->
+	<select id="selectEmployeeList" parameterType="com.nanuri.work.business.member.vo.EmployeeVO" resultType="com.nanuri.work.business.member.vo.EmployeeVO">
+		SELECT T01.user_id, 
+			   T01.user_nm, 
+			   T01.dty_nm, 
+			   T01.tel_no, 
+			   T01.email_addr, 
+			   T03.dtl_cnm, 
+			   T01.addr
+		  FROM mem_bsc_info T01
+	 LEFT JOIN mem_scca T02
+	        ON T01.user_id = T02.user_id
+	 LEFT JOIN comn_cd T03
+	 		ON T02.scca_ds_cd = T03.dtl_cd
+	 	 WHERE T01.user_autr_nm != 'ADMIN'
+	  GROUP BY T03.ds_cd 
+	  	<include refid="CommonMapper.paging" />
+	</select>
+	
+	<!-- 총 직원 수 출력 -->
+	<select id="selectTotalCountEmployee" resultType="int">
+		SELECT COUNT(*)
+		  FROM mem_bsc_info
+		 WHERE user_autr_nm != 'ADMIN'
+	</select>
+	
+	<!-- 기본정보 -->
+	<!-- 기본정보 입력 -->
+	
+	
+	<!-- 기본정보 리스트 출력 -->
+	<select id="selectBasicInfoList" resultType="com.nanuri.work.business.member.dto.BasicInfoDTO">
+		SELECT *
+		  FROM mem_bsc_info
+		 WHERE user_autr_nm != 'ADMIN'
+	</select>
+	
+	<!-- 기본정보 상세 출력 -->
+	<select id="selectBasicInfoDetail" parameterType="string" resultType="com.nanuri.work.business.member.dto.BasicInfoDTO">
+		SELECT user_nm, 
+			   rrno, 
+			   blg_ds_cd, 
+			   blg_nm, 
+			   dty_nm, 
+			   dut_nm, 
+			   zip, 
+			   addr, 
+			   tel_no, 
+			   email_addr, 
+			   enco_ym, 
+			   rtrm_ym, 
+			   user_autr_nm
+		  FROM mem_bsc_info
+		 WHERE user_id = #{userId}
+	</select>
+	
+	<!-- 기본정보 수정 -->
+	<update id="updateBasicInfo" parameterType="com.nanuri.work.business.member.dto.BasicInfoDTO">
+		UPDATE mem_bsc_info
+		   SET blg_ds_cd = #{blgDsCd}, 
+		   	   blg_nm = #{blgNm}, 
+		   	   zip = #{zip}, 
+		   	   addr = #{addr}, 
+		   	   user_nm = #{userNm}, 
+		   	   dty_nm = #{dtyNm}, 
+		   	   tel_no = #{telNo}, 
+		   	   rrno = #{rrno}, 
+		   	   dut_nm = #{dutNm}, 
+		   	   email_addr = #{emailAddr}
+		 WHERE user_id = #{userId}
+	</update>
+	
+	<!-- 기본정보 삭제 -->
+	
+	
 	<!-- 학력 -->
 	<!-- 학력 입력 -->	
 	<insert id="insertSchoolCareer" parameterType="com.nanuri.work.business.member.dto.SchoolCareerDTO">

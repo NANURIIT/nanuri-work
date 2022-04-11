@@ -39,6 +39,11 @@ $(function(){
             registerCareerhistory(params);
         }  
     });
+
+    // 취소 버튼 클릭
+    $(document).on('click', '.cancel_button', function(){
+        location.href = '/mobile/employeeInfo';
+    });
 });
 
 var getCommonCode = function(){
@@ -229,7 +234,7 @@ var registerCareerhistory = function(params){
                 text: '프로젝트이력 등록에 성공했습니다.',
                 type: 'success',
                 callback: function () {
-                    location.href = '/employee/index';
+                    location.href = '/mobile/employeeInfo';
                 }
             })
         });

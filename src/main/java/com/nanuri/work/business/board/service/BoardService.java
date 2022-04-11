@@ -24,7 +24,6 @@ public class BoardService {
 	
 	public boolean registerBoard(BoardDTO params) {
 		int queryResult = 0;
-		
 		if(params.getSeqNo() != null) {
 			params.setMdfpNm(facade.getDetails().getUsername());
 			queryResult = boardMapper.updateBoard(params);

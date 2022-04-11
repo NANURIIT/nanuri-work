@@ -11,6 +11,7 @@ $(function(){
         getWorkhistoryDetail(seqNo);
     }
 
+    // 저장버튼 클릭
     $(document).on('click', '#save', function(){
         let params = {
             wrkplNm : $('#wrkplNm').val(), 
@@ -28,6 +29,10 @@ $(function(){
         }
     });
 
+    // 취소 버튼 클릭
+    $(document).on('click', '.cancel_button', function(){
+        location.href = '/mobile/employeeInfo';
+    });
 });
 
 var registerWorkhistory = function(params){
@@ -96,7 +101,7 @@ var registerWorkhistory = function(params){
                 text : '회사소속이력 등록에 성공했습니다.', 
                 type : 'success', 
                 callback: function () {
-                    location.href = '/employee/index';
+                    location.href = '/mobile/employeeInfo';
                 }
             })
         });

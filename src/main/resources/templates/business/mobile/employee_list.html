@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<!-- 공통헤드 -->
+<head th:replace="layout/mobile/notice/head :: headFragment"></head>
+
+<link rel="stylesheet" th:href="@{/sample/nanuri_project/css/notice.css}">
+
+<body>
+<div class="mo_wrapper">
+    <div class="submain">
+        <div class="submain_contents">
+            <div class="notice_contents_wrap">
+                <div class="employee_contents_box">
+                    <table>
+                        <colgroup>
+                            <col style="width: 22%">
+                            <col style="width: 30%">
+                        </colgroup>
+                        <tr>
+                            <th>이름</th>
+                            <th>전화번호</th>
+                            <th>이메일</th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="#" title="#">나누리</a>
+                            </td>
+                            <td>010-0000-0000</td>
+                            <td>nanuri@naver.com</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="#" title="#">나누리</a>
+                            </td>
+                            <td>010-0000-0000</td>
+                            <td>nanuri@naver.com</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="com_pagination">
+                    <div class="pagination_wrap">
+                        <ul>
+                            <li class="pagination_prev">
+                                <a href="#">
+                                    <
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">1</a>
+                            </li>
+                            <li class="select">
+                                <a href="#">2</a>
+                            </li>
+                            <li>
+                                <a href="#">3</a>
+                            </li>
+                            <li>
+                                <a href="#">4</a>
+                            </li>
+                            <li>
+                                <a href="#">5</a>
+                            </li>
+                            <li>
+                                ...
+                            </li>
+                            <li>
+                                <a href="#">51</a>
+                            </li>
+                            <li class="pagination_next">
+                                <a href="#">
+                                    >
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="notice_search employee_search">
+                    <form action="#">
+                        <div class="notice_search_box">
+                            <select name="date">
+                                <option value="이름">이름</option>
+                                <option value="전화번호">전화번호</option>
+                                <option value="이메일">이메일</option>
+                            </select>
+                            <input name="notice_search" type="text">
+                            <a href="#">검색</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
