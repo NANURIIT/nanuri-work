@@ -4,6 +4,9 @@
 /** onload **/
 $(function () {
 
+    let uri = new URL(document.location.href).pathname;
+    let pathname = uri.split('/')[1];
+
     getCommonCode();
 
     // 저장 버튼 클릭
@@ -21,12 +24,16 @@ $(function () {
             emailAddr: $('#emailAddr').val()
         }
 
-        registerBasicInfo(params);
+        registerBasicInfo(params, pathname);
     });
 
     // 취소 버튼 클릭
-    $(document).on('click', '.cancel_button', function () {
-        location.href = '/mobile/employeeInfo';
+    $(document).on('click', '.cancel_button', function(){
+        if(uri.includes('admin') > -1){
+            location.href = '/admin/index';
+        } else if(uri.includes('mobile') > -1){
+            location.href = '/mobile/index';
+        }
     });
 });
 
@@ -58,7 +65,6 @@ var getBasicInfoDetail = function () {
         method: 'GET',
         url: '/employee/basicInfoDetail',
         success: function (object) {
-            console.log(object);
             $('#blgDsCd').val(object.blgDsCd).prop('selected', true);
             $('#blgNm').val(object.blgNm);
             $('#zip').val(object.zip);
@@ -86,7 +92,7 @@ var getBasicInfoDetail = function () {
  * @param {string} params.dutNm 직무
  * @param {string} params.emailAddr 이메일주소
  */
-var registerBasicInfo = function (params) {
+var registerBasicInfo = function (params, pathname) {
     if(isEmpty(params.blgDsCd)){
         openPopup({
             title: '실패',
@@ -207,7 +213,7 @@ var registerBasicInfo = function (params) {
                 text: '기본정보 등록에 성공했습니다.',
                 type: 'success',
                 callback: function () {
-                    location.href = '/mobile/employeeInfo';
+                    location.href = '/'+pathname+'/index';
                 }
             })
         });

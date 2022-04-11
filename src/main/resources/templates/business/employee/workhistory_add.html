@@ -6,6 +6,8 @@
 
 <link rel="stylesheet" th:href="@{/sample/admin/css/info.css}">
 
+<script th:src="@{/js/business/employee/workhistory_add.js}"></script>
+
 <body>
     <div class="wrapper">
         <header th:replace="/layout/notice/header :: headerFragment"></header>
@@ -30,7 +32,7 @@
                                     </th>
                                     <td>
                                         <div class="join_input">
-                                            <input class="input_box" type="text" name="company_name" placeholder="근무처 입력">
+                                            <input class="input_box" id="wrkplNm" type="text" name="company_name" placeholder="근무처 입력">
                                         </div>
                                     </td>
                                 </tr>
@@ -40,7 +42,7 @@
                                         </th>
                                         <td>
                                             <div class="join_input">
-                                                <input class="input_box" type="text" name="join_date" placeholder="입사년월 입력">
+                                                <input class="input_box" id="encoYm" type="text" name="join_date" placeholder="입사년월 입력">
                                             </div>
                                         </td>
                                     </tr>
@@ -50,7 +52,7 @@
                                         </th>
                                         <td>
                                             <div class="join_input">
-                                                <input class="input_box" type="text" name="effective_date" placeholder="퇴사년월 입력">
+                                                <input class="input_box" id="rtrmYm" type="text" name="effective_date" placeholder="퇴사년월 입력">
                                             </div>
                                         </td>
                                     </tr>
@@ -60,7 +62,7 @@
                                     </th>
                                     <td>
                                         <div class="join_input">
-                                            <input class="input_box" type="text" name="position_date" placeholder="직책 입력">
+                                            <input class="input_box" id="dtyNm" type="text" name="position_date" placeholder="직책 입력">
                                         </div>
                                     </td>
                                 </tr>
@@ -70,7 +72,7 @@
                                     </th>
                                     <td>
                                         <div class="join_input">
-                                            <input class="input_box" type="text" name="responsibilities_name" placeholder="담당업무 입력">
+                                            <input class="input_box" id="chrgBsnNm" type="text" name="responsibilities_name" placeholder="담당업무 입력">
                                         </div>
                                     </td>
                                 </tr>
@@ -78,12 +80,7 @@
                             </table>
                         </form>
                     </div>
-                    <div class="join_agree_wrap">
-                        <div class="join_agree_button">
-                            <button>등록</button>
-                            <button class="cancel_button">취소</button>
-                        </div>
-                    </div>
+                    <div th:replace="layout/employee/footer :: saveBoxFragment"></div>
                 </div>
             </div>
         </div>

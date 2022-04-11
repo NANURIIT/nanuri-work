@@ -6,6 +6,8 @@
 
 <link rel="stylesheet" th:href="@{/sample/admin/css/info.css}">
 
+<script th:src="@{/js/business/employee/certificate_add.js}"></script>
+
 <body>
     <div class="wrapper">
         <header th:replace="/layout/notice/header :: headerFragment"></header>
@@ -30,12 +32,12 @@
                                         </th>
                                         <td>
                                             <div class="join_input">
-                                                <select class="form_select" name="certificate_classification">
-                                                    <option value="기술사" selected>기술사</option>
+                                                <select class="form_select" id="qlfcDsCd" name="certificate_classification">
+                                                    <!-- <option value="기술사" selected>기술사</option>
                                                     <option value="기사">기사</option>
                                                     <option value="산업기사">산업기사</option>
                                                     <option value="기능사">기능사</option>
-                                                    <option value="기타">기타</option>
+                                                    <option value="기타">기타</option> -->
                                                 </select>
                                             </div>
                                         </td>
@@ -46,7 +48,7 @@
                                         </th>
                                         <td>
                                             <div class="join_input">
-                                                <input class="input_box" type="text" name="certificate_name" placeholder="자격증명 입력">
+                                                <input class="input_box" id="qlfcNm" type="text" name="certificate_name" placeholder="자격증명 입력">
                                             </div>
                                         </td>
                                     </tr>
@@ -56,7 +58,7 @@
                                         </th>
                                         <td>
                                             <div class="join_input">
-                                                <input class="input_box" type="text" name="publish_name" placeholder="발행처 입력">
+                                                <input class="input_box" id="pbcplNm" type="text" name="publish_name" placeholder="발행처 입력">
                                             </div>
                                         </td>
                                     </tr>
@@ -66,7 +68,7 @@
                                         </th>
                                         <td>
                                             <div class="join_input">
-                                                <input class="input_box" type="text" name="acquisition_date" placeholder="취득일자 입력">
+                                                <input class="input_box" id="acqDt" type="text" name="acquisition_date" placeholder="취득일자 입력">
                                             </div>
                                         </td>
                                     </tr>
@@ -76,7 +78,7 @@
                                         </th>
                                         <td>
                                             <div class="join_input">
-                                                <input class="input_box" type="text" name="effective_date" placeholder="유효일자 입력">
+                                                <input class="input_box" id="vldDt" type="text" name="effective_date" placeholder="유효일자 입력">
                                             </div>
                                         </td>
                                     </tr>
@@ -86,7 +88,7 @@
                                         </th>
                                         <td>
                                             <div class="join_input">
-                                                <input class="input_box" type="text" name="renewal_date" placeholder="갱신일자 입력">
+                                                <input class="input_box" id="updtDt" type="text" name="renewal_date" placeholder="갱신일자 입력">
                                             </div>
                                         </td>
                                     </tr>
@@ -94,12 +96,7 @@
                             </table>
                         </form>
                     </div>
-                    <div class="join_agree_wrap">
-                        <div class="join_agree_button">
-                            <button>등록</button>
-                            <button class="cancel_button">취소</button>
-                        </div>
-                    </div>
+                    <div th:replace="layout/employee/footer :: saveBoxFragment"></div>
                 </div>
             </div>
         </div>

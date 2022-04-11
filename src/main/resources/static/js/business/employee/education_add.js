@@ -5,6 +5,8 @@
 $(function () {
 
     let seqNo = new URL(document.location.href).searchParams.get('seqNo'); // seqNo세팅
+    let uri = new URL(document.location.href).pathname;
+    let pathname = uri.split('/')[1];
     let mode = seqNo != null ? 'M' : 'W';                                  // 작성인지 수정인지 모드 설정
 
     getCommonCode();
@@ -24,16 +26,20 @@ $(function () {
         };
 
         if (mode == 'W') {
-            registerSchoolCareer(params);
+            registerSchoolCareer(params, pathname);
         } else if (mode == 'M') {
             params.seqNo = seqNo;
-            registerSchoolCareer(params);
+            registerSchoolCareer(params, pathname);
         }
     });
 
     // 취소 버튼 클릭
     $(document).on('click', '.cancel_button', function(){
-        location.href = '/mobile/employeeInfo';
+        if(uri.includes('admin') > -1){
+            location.href = '/admin/index';
+        } else if(uri.includes('mobile') > -1){
+            location.href = '/mobile/index';
+        }
     });
 });
 
@@ -64,7 +70,7 @@ var getCommonCode = function () {
  * @param {string} params.etisYm   입학년월
  * @param {string} params.grduYm   졸업년월
  */
-var registerSchoolCareer = function (params) {
+var registerSchoolCareer = function (params, pathname) {
 
     if (isEmpty(params.schlNm)) {
         openPopup({
@@ -120,7 +126,7 @@ var registerSchoolCareer = function (params) {
                 text: '학력 등록에 성공했습니다.',
                 type: 'success',
                 callback: function () {
-                    location.href = '/mobile/employeeInfo';
+                    location.href = '/'+pathname+'/index';
                 }
             })
         });

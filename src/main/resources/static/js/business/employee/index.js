@@ -3,6 +3,7 @@
 
 /** onload **/
 $(function () {
+    let uri = new URL(document.location.href).pathname;
 
     // 기본정보 호출
     getBasicInfoDetail();
@@ -30,6 +31,79 @@ $(function () {
 
     // 사용가능기술(언어) 리스트 호출
     getSkillList();
+
+    // 학력 수정
+    $(document).on('click', '.updateSchoolCareer', function () {
+        if (uri.indexOf('admin') > -1) {
+            location.href = '/admin/schoolCareerWrite?seqNo=' + $(this).attr('id');
+        } else if (uri.indexOf('mobile') > -1) {
+            location.href = '/mobile/schoolCareerWrite?seqNo=' + $(this).attr('id');
+        }
+    });
+
+    // 자격증 수정
+    $(document).on('click', '.updateCertificate', function(){
+        if (uri.indexOf('admin') > -1) {
+            location.href = '/admin/certificateWrite?seqNo=' + $(this).attr('id');
+        } else if (uri.indexOf('mobile') > -1) {
+            location.href = '/mobile/certificateWrite?seqNo=' + $(this).attr('id');
+        }
+    });
+
+    // 회사소속이력 수정
+    $(document).on('click', '.updateWorkhistory', function(){
+        if (uri.indexOf('admin') > -1) {
+            location.href = '/admin/workhistoryWrite?seqNo=' + $(this).attr('id');
+        } else if (uri.indexOf('mobile') > -1) {
+            location.href = '/mobile/workhistoryWrite?seqNo=' + $(this).attr('id');
+        }
+    });
+
+    // 교육이수 수정
+    $(document).on('click', '.updateEducation', function(){
+        if (uri.indexOf('admin') > -1) {
+            location.href = '/admin/educationWrite?seqNo=' + $(this).attr('id');
+        } else if (uri.indexOf('mobile') > -1) {
+            location.href = '/mobile/educationWrite?seqNo=' + $(this).attr('id');
+        }
+    });
+
+    // 대내외 수상경력 수정
+    $(document).on('click', '.updateAward', function(){
+        if (uri.indexOf('admin') > -1) {
+            location.href = '/admin/awardWrite?seqNo=' + $(this).attr('id');
+        } else if (uri.indexOf('mobile') > -1) {
+            location.href = '/mobile/awardWrite?seqNo=' + $(this).attr('id');
+        }
+    });
+
+    // 외국어 능력 수정
+    $(document).on('click', '.updateLanguage', function(){
+        if (uri.indexOf('admin') > -1) {
+            location.href = '/admin/languageWrite?seqNo=' + $(this).attr('id');
+        } else if (uri.indexOf('mobile') > -1) {
+            location.href = '/mobile/languageWrite?seqNo=' + $(this).attr('id');
+        }
+    });
+
+    // 사용가능기술(언어) 수정
+    $(document).on('click', '.updateSkill', function(){
+        if (uri.indexOf('admin') > -1) {
+            location.href = '/admin/skillWrite?seqNo=' + $(this).attr('id');
+        } else if (uri.indexOf('mobile') > -1) {
+            location.href = '/mobile/skillWrite?seqNo=' + $(this).attr('id');
+        }
+    });
+
+    // 프로젝트이력 수정
+    $(document).on('click', '.updateCareerhistory', function(){
+        if (uri.indexOf('admin') > -1) {
+            location.href = '/admin/careerhistoryWrite?seqNo=' + $(this).attr('id');
+        } else if (uri.indexOf('mobile') > -1) {
+            location.href = '/mobile/careerhistoryWrite?seqNo=' + $(this).attr('id');
+        }
+    });
+
 
     // 학력 삭제
     $(document).on('click', '.deleteSchoolCareer', function () {
@@ -83,8 +157,8 @@ var getBasicInfoDetail = function () {
             let BASIC_INFO_HTML = '';
 
             BASIC_INFO_HTML += '<div class="list_info">';
-            BASIC_INFO_HTML += '    <div class="list_info_title">'+object.userNm+'</div>';
-            BASIC_INFO_HTML += '    <div class="list_info_desc">'+object.blgNm+', '+object.dtyNm+'</div>';
+            BASIC_INFO_HTML += '    <div class="list_info_title">' + object.userNm + '</div>';
+            BASIC_INFO_HTML += '    <div class="list_info_desc">' + object.blgNm + ', ' + object.dtyNm + '</div>';
             BASIC_INFO_HTML += '</div>';
 
             $('#basicInfo').html(BASIC_INFO_HTML);
@@ -108,7 +182,7 @@ var getSchoolCareerList = function () {
                     SCHOOL_CAREER_HTML += ' <div class="list_info_title">' + tmpRow.schlNm + '</div>';
                     SCHOOL_CAREER_HTML += ' <div class="list_info_desc">' + addDot(tmpRow.etisYm) + ' ~ ' + addDot(tmpRow.grduYm) + ' 졸업</div>';
                     SCHOOL_CAREER_HTML += ' <div class="list_info_set">';
-                    SCHOOL_CAREER_HTML += '     <button onclick="location.href=\'/mobile/schoolCareerWrite?seqNo=' + tmpRow.seqNo + '\'">수정</button>';
+                    SCHOOL_CAREER_HTML += '     <button class="updateSchoolCareer" id="' + tmpRow.seqNo + '">수정</button>';
                     SCHOOL_CAREER_HTML += '     <button class="deleteSchoolCareer" id="' + tmpRow.seqNo + '">삭제</button>';
                     SCHOOL_CAREER_HTML += ' </div>';
                     SCHOOL_CAREER_HTML += '</div>';
@@ -149,7 +223,7 @@ var getCertificateList = function () {
                 CERTIFICATE_HTML += '   <div class="list_info_desc">' + addDot(tmpRow.acqDt) + '</div>';
                 CERTIFICATE_HTML += '   <div class="list_info_desc">' + tmpRow.pbcplNm + '</div>';
                 CERTIFICATE_HTML += '   <div class="list_info_set">';
-                CERTIFICATE_HTML += '       <button onclick="location.href=\'/employee/certificateWrite?seqNo=' + tmpRow.seqNo + '\'">수정</button>';
+                CERTIFICATE_HTML += '       <button class="updateCertificate" id="'+tmpRow.seqNo+'">수정</button>';
                 CERTIFICATE_HTML += '       <button class="deleteCertificate" id="' + tmpRow.seqNo + '">삭제</button>';
                 CERTIFICATE_HTML += '   </div>';
                 CERTIFICATE_HTML += '</div>';
@@ -170,46 +244,6 @@ var deleteCertificate = function (params) {
         url: '/employee/certificateDelete',
         data: params,
         success: deleteCB(getCertificateList)
-    })
-}
-
-/**
- * 프로젝트이력 리스트 호출
- */
-var getCareerhistoryList = function () {
-    ajaxCall({
-        method: 'GET',
-        url: '/employee/careerhistoryist',
-        success: function (object) {
-            let CAREER_HISTORY_HTML = '';
-            for (let i = 0; i < object.length; i++) {
-                let tmpRow = object[i];
-                CAREER_HISTORY_HTML += '<div class="list_info">';
-                CAREER_HISTORY_HTML += '    <div class="list_info_title">' + tmpRow.blgCoNm + '</div>';
-                CAREER_HISTORY_HTML += '    <div class="list_info_desc">' + addDot(tmpRow.bzStYm) + ' ~ ' + addDot(tmpRow.bzEdYm) + '</div>';
-                CAREER_HISTORY_HTML += '    <div class="list_info_desc">' + tmpRow.dtlCnm + ', ' + tmpRow.chrgBsnNm + '</div>';
-                CAREER_HISTORY_HTML += '    <div class="list_info_set">';
-                CAREER_HISTORY_HTML += '        <button onclick="location.href=\'/employee/careerhistoryWrite?seqNo=' + tmpRow.seqNo + '\'">수정</button>';
-                CAREER_HISTORY_HTML += '        <button class="deleteCareerhistory" id="' + tmpRow.seqNo + '">삭제</button>';
-                CAREER_HISTORY_HTML += '    </div>';
-                CAREER_HISTORY_HTML += '</div>';
-            }
-
-            $('#careerhistoryList').html(CAREER_HISTORY_HTML);
-        }
-    })
-}
-
-/**
- * 프로젝트 이력 삭제 함수
- * @param {number} params.seqNo 일련번호 
- */
-var deleteCareerhistory = function (params) {
-    ajaxCall({
-        method: 'DELETE',
-        url: '/employee/careerhistoryDelete',
-        data: params,
-        success: deleteCB(getCareerhistoryList)
     })
 }
 
@@ -238,7 +272,7 @@ var getWorkhistoryList = function () {
                     WORK_HISTORY_HTML += '  <div class="list_info_desc">경력 ' + period.year + '년' + period.month + '개월, ' + tmpRow.dtyNm + '</div>';
                 }
                 WORK_HISTORY_HTML += '  <div class="list_info_set">';
-                WORK_HISTORY_HTML += '      <button onclick="location.href=\'/employee/workhistoryWrite?seqNo=' + tmpRow.seqNo + '\'">수정</button>';
+                WORK_HISTORY_HTML += '      <button class="updateWorkhistory" id="'+tmpRow.seqNo+'">수정</button>';
                 WORK_HISTORY_HTML += '      <button class="deleteWorkhistory" id="' + tmpRow.seqNo + '">삭제</button>';
                 WORK_HISTORY_HTML += '  </div>';
                 WORK_HISTORY_HTML += '</div>';
@@ -250,7 +284,7 @@ var getWorkhistoryList = function () {
             totalPeriod.year += Math.floor(totalPeriod.month / 12);
             totalPeriod.month = totalPeriod.month % 12;
 
-            if(totalPeriod.month + totalPeriod.year > 0){
+            if (totalPeriod.month + totalPeriod.year > 0) {
                 if (totalPeriod.month > 0) {
                     TOTAL_PERIOD_HTML += '<span class="title_total">총 경력 ' + totalPeriod.year + '년 ' + totalPeriod.month + '개월</span>'
                 } else {
@@ -295,7 +329,7 @@ var getEducationList = function () {
                 EDUCATION_HTML += ' <div class="list_info_desc">' + addDot(tmpRow.stDt.substring(0, 6)) + ' ~ ' + addDot(tmpRow.edDt.substring(0, 6)) + '</div>';
                 EDUCATION_HTML += ' <div class="list_info_desc">' + tmpRow.orgNm + '</div>';
                 EDUCATION_HTML += ' <div class="list_info_set">';
-                EDUCATION_HTML += '     <button onclick="location.href=\'/employee/educationWrite?seqNo=' + tmpRow.seqNo + '\'">수정</button>';
+                EDUCATION_HTML += '     <button class="updateEducation" id="'+tmpRow.seqNo+'">수정</button>';
                 EDUCATION_HTML += '     <button class="deleteEducation" id="' + tmpRow.seqNo + '">삭제</button>';
                 EDUCATION_HTML += ' </div>';
                 EDUCATION_HTML += '</div>';
@@ -336,7 +370,7 @@ var getAwardList = function () {
                 AWARD_HTML += ' <div class="list_info_desc">' + addDot(tmpRow.przDt.substring(0, 6)) + '</div>';
                 AWARD_HTML += ' <div class="list_info_desc">' + tmpRow.etcNm + '</div>';
                 AWARD_HTML += ' <div class="list_info_set">';
-                AWARD_HTML += '     <button onclick="location.href=\'/employee/awardWrite?seqNo=' + tmpRow.seqNo + '\'">수정</button>';
+                AWARD_HTML += '     <button class="updateAward" id="'+tmpRow.seqNo+'">수정</button>';
                 AWARD_HTML += '     <button class="deleteAward" id="' + tmpRow.seqNo + '">삭제</button>';
                 AWARD_HTML += ' </div>';
                 AWARD_HTML += '</div>';
@@ -378,7 +412,7 @@ var getLanguageList = function () {
                 LANGUAGE_HTML += '  <div class="list_info_desc">' + tmpRow.prfcnNm + '</div>';
                 LANGUAGE_HTML += '  <div class="list_info_desc">' + tmpRow.etcNm + '</div>';
                 LANGUAGE_HTML += '  <div class="list_info_set">';
-                LANGUAGE_HTML += '      <button onclick="location.href=\'/employee/languageWrite?seqNo=' + tmpRow.seqNo + '\'">수정</button>';
+                LANGUAGE_HTML += '      <button class="updateLanguage" id="'+tmpRow.seqNo+'">수정</button>';
                 LANGUAGE_HTML += '      <button class="deleteLanguage" id="' + tmpRow.seqNo + '">삭제</button>';
                 LANGUAGE_HTML += '  </div>';
                 LANGUAGE_HTML += '</div>';
@@ -419,7 +453,7 @@ var getSkillList = function () {
                 SKILL_HTML += ' <div class="list_info_desc">' + tmpRow.prfcnNm + '</div>';
                 SKILL_HTML += ' <div class="list_info_desc">' + tmpRow.etcNm + '</div>';
                 SKILL_HTML += ' <div class="list_info_set">';
-                SKILL_HTML += '     <button onclick="location.href=\'/employee/skillWrite?seqNo=' + tmpRow.seqNo + '\'">수정</button>';
+                SKILL_HTML += '     <button class="updateSkill" id="'+tmpRow.seqNo+'">수정</button>';
                 SKILL_HTML += '     <button class="deleteSkill" id="' + tmpRow.seqNo + '">삭제</button>';
                 SKILL_HTML += ' </div>';
                 SKILL_HTML += '</div>';
@@ -440,6 +474,46 @@ var deleteSkill = function (params) {
         data: params,
         success: deleteCB(getSkillList)
     });
+}
+
+/**
+ * 프로젝트이력 리스트 호출
+ */
+var getCareerhistoryList = function () {
+    ajaxCall({
+        method: 'GET',
+        url: '/employee/careerhistoryist',
+        success: function (object) {
+            let CAREER_HISTORY_HTML = '';
+            for (let i = 0; i < object.length; i++) {
+                let tmpRow = object[i];
+                CAREER_HISTORY_HTML += '<div class="list_info">';
+                CAREER_HISTORY_HTML += '    <div class="list_info_title">' + tmpRow.blgCoNm + '</div>';
+                CAREER_HISTORY_HTML += '    <div class="list_info_desc">' + addDot(tmpRow.bzStYm) + ' ~ ' + addDot(tmpRow.bzEdYm) + '</div>';
+                CAREER_HISTORY_HTML += '    <div class="list_info_desc">' + tmpRow.dtlCnm + ', ' + tmpRow.chrgBsnNm + '</div>';
+                CAREER_HISTORY_HTML += '    <div class="list_info_set">';
+                CAREER_HISTORY_HTML += '        <button class="updateCareerhistory" id="'+tmpRow.seqNo+'">수정</button>';
+                CAREER_HISTORY_HTML += '        <button class="deleteCareerhistory" id="' + tmpRow.seqNo + '">삭제</button>';
+                CAREER_HISTORY_HTML += '    </div>';
+                CAREER_HISTORY_HTML += '</div>';
+            }
+
+            $('#careerhistoryList').html(CAREER_HISTORY_HTML);
+        }
+    })
+}
+
+/**
+ * 프로젝트 이력 삭제 함수
+ * @param {number} params.seqNo 일련번호 
+ */
+var deleteCareerhistory = function (params) {
+    ajaxCall({
+        method: 'DELETE',
+        url: '/employee/careerhistoryDelete',
+        data: params,
+        success: deleteCB(getCareerhistoryList)
+    })
 }
 
 /**

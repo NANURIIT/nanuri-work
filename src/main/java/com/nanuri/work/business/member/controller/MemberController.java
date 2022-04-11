@@ -35,7 +35,7 @@ public class MemberController {
 	 */
 	@GetMapping(value = "/admin/index")
 	public String getAdminIndexPage() {
-		return "business/index copy";
+		return "business/employee/index";
 	}
 	
 	/**
@@ -126,7 +126,7 @@ public class MemberController {
 	 * 회원정보 출력
 	 * @return
 	 */
-	@GetMapping(value = "/mobile/employeeInfo")
+	@GetMapping(value = "/mobile/index")
 	public String getMobileEmployeeIndexPage() {
 		return "business/mobile/employee/index";
 	}

@@ -6,6 +6,8 @@
 
 <link rel="stylesheet" th:href="@{/sample/admin/css/info.css}">
 
+<script th:src="@{/js/business/employee/careerhistory_add.js}"></script>
+
 <body>
     <div class="wrapper">
         <header th:replace="/layout/notice/header :: headerFragment"></header>
@@ -30,7 +32,7 @@
                                         </th>
                                         <td>
                                             <div class="join_input">
-                                                <input class="input_box" type="text" name="project_name" placeholder="사업명 입력">
+                                                <input class="input_box" id="bzNm" type="text" name="project_name" placeholder="사업명 입력">
                                             </div>
                                         </td>
                                     </tr>
@@ -40,7 +42,7 @@
                                         </th>
                                         <td>
                                             <div class="join_input">
-                                                <input class="input_box" type="text" name="project_start" placeholder="사업시작년월 입력">
+                                                <input class="input_box" id="bzStYm" type="text" name="project_start" placeholder="사업시작년월 입력">
                                             </div>
                                         </td>
                                     </tr>
@@ -50,7 +52,7 @@
                                         </th>
                                         <td>
                                             <div class="join_input">
-                                                <input class="input_box" type="text" name="project_end" placeholder="사업종료년월 입력">
+                                                <input class="input_box" id="bzEdYm" type="text" name="project_end" placeholder="사업종료년월 입력">
                                             </div>
                                         </td>
                                     </tr>
@@ -60,7 +62,7 @@
                                         </th>
                                         <td>
                                             <div class="join_input">
-                                                <input class="input_box" type="text" name="order_company" placeholder="발주사 입력">
+                                                <input class="input_box" id="ordrNm" type="text" name="order_company" placeholder="발주사 입력">
                                             </div>
                                         </td>
                                     </tr>
@@ -70,7 +72,7 @@
                                         </th>
                                         <td>
                                             <div class="join_input">
-                                                <input class="input_box" type="text" name="project_contents" placeholder="사업내용 입력">
+                                                <input class="input_box" id="bzCntn" type="text" name="project_contents" placeholder="사업내용 입력">
                                             </div>
                                         </td>
                                     </tr>
@@ -80,7 +82,7 @@
                                         </th>
                                         <td>
                                             <div class="join_input">
-                                                <input class="input_box" type="text" name="affiliated_company" placeholder="소속회사 입력">
+                                                <input class="input_box" id="blgCoNm" type="text" name="affiliated_company" placeholder="소속회사 입력">
                                             </div>
                                         </td>
                                     </tr>
@@ -90,8 +92,8 @@
                                         </th>
                                         <td>
                                             <div class="join_input">
-                                                <select class="form_select" name="part_name">
-                                                    <option value="컨설팅" selected>컨설팅</option>
+                                                <select class="form_select" id="rolCd" name="part_name">
+                                                    <!-- <option value="컨설팅" selected>컨설팅</option>
                                                     <option value="개발">개발</option>
                                                     <option value="모듈매니저">모듈매니저</option>
                                                     <option value="분석및설계">분석및설계</option>
@@ -109,7 +111,7 @@
                                                     <option value="운영">운영</option>
                                                     <option value="현업">현업</option>
                                                     <option value="디자인">디자인</option>
-                                                    <option value="기타">기타</option>
+                                                    <option value="기타">기타</option> -->
                                                 </select>
                                             </div>
                                         </td>
@@ -120,7 +122,7 @@
                                         </th>
                                         <td>
                                             <div class="join_input">
-                                                <input class="input_box" type="text" name="task_input" placeholder="담당업무 입력">
+                                                <input class="input_box" id="chrgBsnNm" type="text" name="task_input" placeholder="담당업무 입력">
                                             </div>
                                         </td>
                                     </tr>
@@ -130,7 +132,7 @@
                                         </th>
                                         <td>
                                             <div class="join_input">
-                                                <input class="input_box" type="text" name="use_language" placeholder="사용언어 입력">
+                                                <input class="input_box" id="langNm" type="text" name="use_language" placeholder="사용언어 입력">
                                             </div>
                                         </td>
                                     </tr>
@@ -140,7 +142,7 @@
                                         </th>
                                         <td>
                                             <div class="join_input">
-                                                <input class="input_box" type="text" name="use_db" placeholder="사용DB 입력">
+                                                <input class="input_box" id="dbNm" type="text" name="use_db" placeholder="사용DB 입력">
                                             </div>
                                         </td>
                                     </tr>
@@ -150,7 +152,7 @@
                                         </th>
                                         <td>
                                             <div class="join_input">
-                                                <input class="input_box" type="text" name="use_os" placeholder="사용OS 입력">
+                                                <input class="input_box" id="osNm" type="text" name="use_os" placeholder="사용OS 입력">
                                             </div>
                                         </td>
                                     </tr>
@@ -160,7 +162,7 @@
                                         </th>
                                         <td>
                                             <div class="join_input">
-                                                <input class="input_box" type="text" name="use_framework" placeholder="사용프레임워크 입력">
+                                                <input class="input_box" id="useFrmwkNm" type="text" name="use_framework" placeholder="사용프레임워크 입력">
                                             </div>
                                         </td>
                                     </tr>
@@ -170,7 +172,7 @@
                                         </th>
                                         <td>
                                             <div class="join_input">
-                                                <input class="input_box" type="text" name="use_how" placeholder="사용방법론 입력">
+                                                <input class="input_box" id="mthNm" type="text" name="use_how" placeholder="사용방법론 입력">
                                             </div>
                                         </td>
                                     </tr>
@@ -180,7 +182,7 @@
                                         </th>
                                         <td>
                                             <div class="join_input">
-                                                <input class="input_box" type="text" name="use_etc" placeholder="사용기타 입력">
+                                                <input class="input_box" id="etcCapaNm" type="text" name="use_etc" placeholder="사용기타 입력">
                                             </div>
                                         </td>
                                     </tr>
@@ -188,12 +190,7 @@
                             </table>
                         </form>
                     </div>
-                    <div class="join_agree_wrap">
-                        <div class="join_agree_button">
-                            <button>등록</button>
-                            <button class="cancel_button">취소</button>
-                        </div>
-                    </div>
+                    <div th:replace="layout/employee/footer :: saveBoxFragment"></div>
                 </div>
             </div>
         </div>
