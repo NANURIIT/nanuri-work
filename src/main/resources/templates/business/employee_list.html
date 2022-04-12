@@ -48,14 +48,14 @@
                         <div class="notice_search notice_search_option">
                             <form action="#">
                                 <div class="notice_search_box">
-                                    <select name="date">
-                                        <option value="이름">이름</option>
-                                        <option value="전화번호">전화번호</option>
-                                        <option value="이메일">이메일</option>
+                                    <select id="employee_search_type" name="date">
+                                        <option value="name">이름</option>
+                                        <option value="telNo">전화번호</option>
+                                        <option value="emailAddr">이메일</option>
                                         <option value="최종등록일">최종등록일</option>
                                     </select>
-                                    <input name="notice_search" type="text">
-                                    <a href="#">검색</a>
+                                    <input id="employee_search_keyword" name="notice_search" type="text">
+                                    <a id="employeeSearch">검색</a>
                                 </div>
                             </form>
                         </div>

@@ -27,6 +27,7 @@
 	 LEFT JOIN comn_cd T03
 	 		ON T02.scca_ds_cd = T03.dtl_cd
 	 	 WHERE T01.user_autr_nm != 'ADMIN'
+	 	 <include refid="CommonMapper.search" />
 	  GROUP BY T03.ds_cd 
 	  	<include refid="CommonMapper.paging" />
 	</select>

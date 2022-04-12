@@ -53,6 +53,7 @@ var searchBoardList = function (pageNo) {
                 BOARD_LIST_HTML += '    <td colspan="4">조회된 결과가 없습니다.</td>'
                 BOARD_LIST_HTML += '</tr>';
                 $('.notice_list > table > tbody').html(BOARD_LIST_HTML);
+                $('#list_pagination').empty();
             }
         }
     });

@@ -7,6 +7,13 @@ $(function () {
     // 직원 리스트 호출
     getEmployeeList(1);
 
+    // 검색 버튼 클릭
+    $(document).on('click', '#employeeSearch', function () {
+        param.searchType = $('#employee_search_type').val();
+        param.searchKeyword = $('#employee_search_keyword').val();
+        getEmployeeList(1);
+    });
+
 });
 
 let param = {
@@ -25,8 +32,7 @@ var getEmployeeList = function (pageNo) {
         data : param, 
         success: function (object) {
             let EMPLOYEE_LIST_HTML = '';
-
-            if (Object.keys(object).length > 0) {
+            if (object.employeeList.length > 0) {
                 let employeeList = object.employeeList;
                 param.totalDataNum = object.employeeTotalCount;
 
@@ -53,16 +59,16 @@ var getEmployeeList = function (pageNo) {
                     EMPLOYEE_LIST_HTML += '     </a>';
                     EMPLOYEE_LIST_HTML += ' </td>';
                     EMPLOYEE_LIST_HTML += '</tr>';
+                    $('#employeeList').html(EMPLOYEE_LIST_HTML);
                     setPage(param);
                 }
             } else {
                 EMPLOYEE_LIST_HTML += '<tr>';
-                EMPLOYEE_LIST_HTML += ' <td colspan="9">직원 정보가 없습니다.</td>';
+                EMPLOYEE_LIST_HTML += ' <td colspan="9">조회된 결과가 없습니다.</td>';
                 EMPLOYEE_LIST_HTML += '</tr>';
-                setPage(param);
+                $('#employeeList').html(EMPLOYEE_LIST_HTML);
+                $('#list_pagination').empty();
             }
-
-            $('#employeeList').html(EMPLOYEE_LIST_HTML);
         }
     })
 }
