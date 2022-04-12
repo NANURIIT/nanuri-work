@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.nanuri.work.business.board.dto.BoardDTO;
 import com.nanuri.work.business.board.mapper.BoardMapper;
 import com.nanuri.work.business.common.paging.PaginationInfo;
+import com.nanuri.work.com.code.MemberLevelCode;
 import com.nanuri.work.com.security.AuthenticationFacade;
 
 import lombok.extern.slf4j.Slf4j;
@@ -37,7 +38,16 @@ public class BoardService {
 	
 	public HashMap<String, Object> getBoardList(BoardDTO params) {
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
-		int boardTotalCount = boardMapper.selectTotalCountBoard(params);
+		int boardTotalCount = 0;
+		
+		if(facade.getDetails().getUserAutrNm() == MemberLevelCode.ADMIN 
+				|| facade.getDetails().getUserAutrNm() == MemberLevelCode.ASSISTANT 
+				|| facade.getDetails().getUserAutrNm() == MemberLevelCode.EMPLOYEE) {
+			boardTotalCount = boardMapper.selectTotalCountPrivateBoard(params);
+		} else {
+			boardTotalCount = boardMapper.selectTotalCountPublicBoard(params);
+		}
+		
 		
 		PaginationInfo paginationInfo = new PaginationInfo(params);
 		paginationInfo.setTotalRecordCount(boardTotalCount);
@@ -45,8 +55,15 @@ public class BoardService {
 		params.setPaginationInfo(paginationInfo);
 		
 		if(boardTotalCount > 0 ) {
-			resultMap.put("boardTotalCount", boardTotalCount);
-			resultMap.put("boardList", boardMapper.selectBoardList(params));
+			if(facade.getDetails().getUserAutrNm() == MemberLevelCode.ADMIN 
+					|| facade.getDetails().getUserAutrNm() == MemberLevelCode.ASSISTANT 
+					|| facade.getDetails().getUserAutrNm() == MemberLevelCode.EMPLOYEE) {
+				resultMap.put("boardTotalCount", boardTotalCount);
+				resultMap.put("boardList", boardMapper.selectPrivateBoardList(params));
+			} else {
+				resultMap.put("boardTotalCount", boardTotalCount);
+				resultMap.put("boardList", boardMapper.selectPublicBoardList(params));
+			}
 		}
 		return resultMap;
 	}
