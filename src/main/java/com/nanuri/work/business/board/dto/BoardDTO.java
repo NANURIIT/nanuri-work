@@ -14,5 +14,6 @@ public class BoardDTO extends CommonDTO {
 	private String bultTitlNm;		/* 게시글 제목 */
 	private String brcn;			/* 게시글 내용 */
 	private int inqCn;				/* 조회수 */
+	private String opnpEstNm;		/* 공개설정 */
 	
 }

@@ -12,7 +12,8 @@
 		bult_typ_cd, 
 		bult_titl_nm, 
 		brcn, 
-		inq_cn
+		inq_cn, 
+		opnp_est_nm
 	</sql>
 	
 	<!-- 게시글 등록 -->
@@ -21,22 +22,36 @@
 			rgmn_nm,
 			bult_typ_cd,
 			bult_titl_nm,
-			brcn
+			brcn, 
+			opnp_est_nm
 		) VALUES(
 			#{rgmnNm}, 
 			#{bultTypCd}, 
 			#{bultTitlNm}, 
-			#{brcn}
+			#{brcn}, 
+			#{opnpEstNm}
 		)
 	</insert>
 	
-	<!-- 게시글 리스트 호출 -->
-	<select id="selectBoardList" parameterType="com.nanuri.work.business.board.dto.BoardDTO" resultType="com.nanuri.work.business.board.dto.BoardDTO">
+	<!-- 전체공개 게시글 리스트 호출 -->
+	<select id="selectPublicBoardList" parameterType="com.nanuri.work.business.board.dto.BoardDTO" resultType="com.nanuri.work.business.board.dto.BoardDTO">
 		SELECT
 			  <include refid="boardColumns" />
 		  FROM blbd 
 		 WHERE bult_typ_cd = #{bultTypCd}
 		   AND del_yn = 'N' 
+		   AND opnp_est_nm = 'ALL'
+		   <include refid="CommonMapper.search" />
+	  ORDER BY seq_no DESC
+	       <include refid="CommonMapper.paging" />
+	</select>
+	
+	<select id="selectPrivateBoardList" parameterType="com.nanuri.work.business.board.dto.BoardDTO" resultType="com.nanuri.work.business.board.dto.BoardDTO">
+		SELECT
+			  <include refid="boardColumns" />
+		  FROM blbd 
+		 WHERE bult_typ_cd = #{bultTypCd}
+		   AND del_yn = 'N'
 		   <include refid="CommonMapper.search" />
 	  ORDER BY seq_no DESC
 	       <include refid="CommonMapper.paging" />
@@ -63,7 +78,8 @@
 		   SET mdfp_nm = #{mdfpNm}, 
 		       bult_typ_cd = #{bultTypCd},
 		       bult_titl_nm = #{bultTitlNm}, 
-		       brcn = #{brcn}
+		       brcn = #{brcn}, 
+		       opnp_est_nm = #{opnpEstNm}
 		 WHERE seq_no = #{seqNo}
 	</update>
 	
@@ -75,13 +91,23 @@
 		 WHERE seq_no = #{seqNo}
 	</update>
 	
-	<!-- 게시글 갯수 -->
-	<select id="selectTotalCountBoard" parameterType="com.nanuri.work.business.board.dto.BoardDTO" resultType="int">
+	<!-- 전체공개 게시글 갯수 -->
+	<select id="selectTotalCountPublicBoard" parameterType="com.nanuri.work.business.board.dto.BoardDTO" resultType="int">
 		SELECT COUNT(*) 						AS totalCount
 		  FROM blbd
 		 WHERE bult_typ_cd = #{bultTypCd}
 		   AND del_yn = 'N'
+		   AND opnp_est_nm = 'ALL'
 		 <include refid="CommonMapper.search" />
+	</select>
+	
+	<!-- 직원공개 게시글 갯수 -->
+	<select id="selectTotalCountPrivateBoard"  parameterType="com.nanuri.work.business.board.dto.BoardDTO" resultType="int">
+		SELECT COUNT(*) 						AS totalCount
+		  FROM blbd
+		 WHERE bult_typ_cd = #{bultTypCd}
+		   AND del_yn = 'N'
+		 <include refid="CommonMapper.search" />	  
 	</select>
 	
 </mapper>

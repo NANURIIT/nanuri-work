@@ -34,7 +34,7 @@ var searchBoardList = function (pageNo) {
         data: param,
         success: function (object) {
             let BOARD_LIST_HTML = '';
-            if (Object.keys(object).length != 0) {
+            if (Object.keys(object).length > 0) {
                 let boardList = object.boardList
                 param.totalDataNum = object.boardTotalCount;
                 for (let i = 0; i < boardList.length; i++) {
