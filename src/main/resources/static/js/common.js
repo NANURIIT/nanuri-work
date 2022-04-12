@@ -255,6 +255,79 @@ var setPage = function (option) {
 };
 
 /**
+ * 모바일화면 페이지 함수
+ * @param {number} option.thisPageNo 현재 페이지 번호
+ * @param {number} option.totalDataNum 전체 데이터 개수
+ * @param {string} option.functionNm 페이지 callback function명
+ * @param {string} option.htmlNm 타겟html ID명
+ * @param {number} option.pageDivNo 페이지 나누는 개수 (default 50)
+ * @param {number} option.pageViewNo 페이지 표시 개수 (default 5)
+ */
+ var setMobilePage = function (option) {
+
+	if (!optionObjChk(option)) {
+		return;
+	}
+
+	// 미입력시 default값 세팅
+	if(isEmpty(option.pageDivNo)){
+		option.pageDivNo = 50;
+	}
+	if (isEmpty(option.thisPageNo)) {
+		option.thisPageNo = 1;
+	}
+	if (isEmpty(option.pageViewNo)) {
+		option.pageViewNo = 5;
+	}
+	if (isEmpty(option.functionNm)) {
+		option.functionNm = "void";
+	}
+	if (isEmpty(option.totalDataNum)) {
+		option.totalDataNum = 0;
+	}
+
+	let pageHtml = "";
+	let forStartNo = 0;
+	let forEndNo = 0;
+	let pagePrev = 0;
+	let pageNext = 0;
+	let totalPageNo = 0;
+
+	pagePrev = Math.floor((option.thisPageNo-1)/option.pageDivNo)*option.pageDivNo; // 이전페이지
+	pageNext = ((Math.floor((option.thisPageNo-1)/option.pageDivNo)+1)*option.pageDivNo)+1; // 이후페이지
+	totalPageNo = Math.ceil(option.totalDataNum/option.pageDivNo); // 총페이지
+	forStartNo = Math.floor((option.thisPageNo-1)/option.pageViewNo)*option.pageViewNo; // 페이지시작 (ex] 1~5 / 6~10 - 0 5)
+	forEndNo = Math.floor((option.thisPageNo-1)/option.pageViewNo)*option.pageViewNo + option.pageViewNo; // 페이지 종료 (- 5 10)
+
+	if(forEndNo > totalPageNo){
+		forEndNo = totalPageNo;
+	}
+	if(pagePrev <= 0){
+		pagePrev = 1;
+	}
+	if(pageNext > totalPageNo){
+		pageNext = totalPageNo;
+	}
+
+	pageHtml += '<ul>'
+	pageHtml += '<li class="pagination_prev"><a onclick="'+option.functionNm+'('+pagePrev+');"><</a></li>';
+	
+	for(var i=forStartNo; i<forEndNo; i++){
+		if((i+1) == option.thisPageNo){
+			pageHtml += '<li class="select"><a onclick="'+option.functionNm+'('+(i+1)+');">'+(i+1)+'</a></li>';
+		}else{
+			pageHtml += '<li><a onclick="'+option.functionNm+'('+(i+1)+');">'+(i+1)+'</a></li>';
+		}
+	}
+
+	pageHtml += '<li class="pagination_next"><a onclick="'+option.functionNm+'('+pageNext+');">></a></li>';
+	pageHtml += '</ul>'
+
+	$('.'+option.htmlNm).html(pageHtml);
+	$('.'+option.htmlNm).show();
+};
+
+/**
  * 비밀번호변경 팝업
  */
 var popupChgPw = function () {

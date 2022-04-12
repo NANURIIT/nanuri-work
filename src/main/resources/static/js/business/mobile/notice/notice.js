@@ -10,7 +10,7 @@ let param = {
     bultTypCd: "NOTICE",
     thisPageNo: 1,
     functionNm: 'searchBoardList',
-    htmlNm: 'com_pagination',
+    htmlNm: 'pagination_wrap',
     pageDivNo: 10,
     pageViewNo: 10
 }
@@ -45,8 +45,8 @@ var searchBoardList = function (pageNo) {
                 BOARD_LIST_HTML += '</ul>';
 
                 $('.notice_contents_box').html(BOARD_LIST_HTML);
+                setMobilePage(param);
             }
-            console.log(object);
         }
     });
 }
