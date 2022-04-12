@@ -33,7 +33,7 @@ public class MemberController {
 	 * 회원정보 출력
 	 * @return
 	 */
-	@GetMapping(value = "/admin/index")
+	@GetMapping(value = {"/admin/index", "/"})
 	public String getAdminIndexPage() {
 		return "business/employee/index";
 	}
