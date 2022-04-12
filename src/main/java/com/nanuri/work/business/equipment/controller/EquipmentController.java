@@ -7,10 +7,23 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Slf4j
 @Controller
 public class EquipmentController {
-    /*
-     * 장비정보 입력
-     * @return
-     */
+	
+	/**
+	 * 장비정보 리스트
+	 * @return
+	 */
+	@GetMapping(value = "/admin/equipmentList")
+	public String getEquipmentListPage() {
+		return "business/equipment/equipment_add";		
+	}
+	
+	/**
+	 * 직원정보 입력
+	 * @return
+	 */
     @GetMapping(value = "/admin/equipmentWrite")
-    public String getequipmentWrite() { return "business/employee/equipment_add"; }
+    public String getEquipmentWrite() { 
+    	return "business/equipment/equipment_add"; 
+    }
+    
 }

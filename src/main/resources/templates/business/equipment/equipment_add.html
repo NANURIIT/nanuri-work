@@ -1,51 +1,15 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <title>나누리</title>
-    <link rel="stylesheet" href="../../css/reset.css">
-    <link rel="stylesheet" href="../../css/common.css">
-    <link rel="stylesheet" href="../../css/header.css">
-    <link rel="stylesheet" href="../../css/info.css">
+<!-- 공통헤드 -->
+<head th:replace="layout/notice/head :: headFragment"></head>
 
-    <script src="../../js/jquery-3.6.0.min.js"></script>
-</head>
+<link rel="stylesheet" th:href="@{/sample/admin/css/info.css}">
+
+<script th:src="@{/js/business/employee/equipment_add.js}"></script>
+
 <body>
     <div class="wrapper">
-        <header class="header">
-            <div class="top_area main_top_area">
-                <!--<div class="logo_wrap">
-                    <div class="main_logo">
-                        <a href="#">
-                            로고영역
-                            &lt;!&ndash;<img src="" alt="logo">&ndash;&gt;
-                        </a>
-                    </div>
-                </div>-->
-                <div class="gnb_wrap">
-                    <div class="main_gnb">
-                        <ul>
-                            <li class="gnb_menu">
-                                <a href="employee_add.html">직원 등록</a>
-                            </li>
-                            <li class="gnb_menu">
-                                <a href="../index.html">마이페이지</a>
-                            </li>
-                            <li class="gnb_menu">
-                                <a href="../notice/employee_list.html">직원 목록</a>
-                            </li>
-                            <li class="gnb_menu">
-                                <a href="../notice/notice.html">공지사항</a>
-                            </li>
-                            <li class="gnb_menu">
-                                <a href="../notice/notice_write.html">공지사항 등록</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </header>
-
+        <header th:replace="/layout/notice/header :: headerFragment"></header>
         <div class="submain_wrap">
             <div class="sub_wrap">
                 <div class="sub_container">
@@ -80,7 +44,7 @@
                                         </th>
                                         <td>
                                             <div class="join_input">
-                                                <input class="input_box" type="text" name="model_name" placeholder="모델명 입력">
+                                                <input class="input_box" type="modlNm" name="model_name" placeholder="모델명 입력">
                                             </div>
                                         </td>
                                     </tr>
@@ -90,7 +54,7 @@
                                         </th>
                                         <td>
                                             <div class="join_input">
-                                                <input class="input_box" type="text" name="model_num" placeholder="시리얼번호 입력">
+                                                <input class="input_box" type="srlNo" name="model_num" placeholder="시리얼번호 입력">
                                             </div>
                                         </td>
                                     </tr>
@@ -100,7 +64,7 @@
                                         </th>
                                         <td>
                                             <div class="join_input">
-                                                <input class="input_box" type="text" name="supply_date" placeholder="지급일자 입력">
+                                                <input class="input_box" type="pyDt" name="supply_date" placeholder="지급일자 입력">
                                             </div>
                                         </td>
                                     </tr>
@@ -108,12 +72,7 @@
                             </table>
                         </form>
                     </div>
-                    <div class="join_agree_wrap">
-                        <div class="join_agree_button">
-                            <button>등록</button>
-                            <button class="cancel_button">취소</button>
-                        </div>
-                    </div>
+                    <div th:replace="layout/employee/footer :: saveBoxFragment"></div>
                 </div>
             </div>
         </div>

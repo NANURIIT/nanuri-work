@@ -17,6 +17,7 @@ $(function () {
 
     // 저장버튼 클릭
     $(document).on('click', '#save', function () {
+        console.log('#save');
         let params = {
             sccaDsCd: $('#sccaDsCd').val(),
             majrNm: $('#majrNm').val(),
