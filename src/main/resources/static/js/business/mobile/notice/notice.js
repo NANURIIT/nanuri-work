@@ -4,6 +4,13 @@
 /** onload **/
 $(function () {
     searchBoardList(1);
+
+    $(document).on('click', '#noticeSearch', function () {
+        param.searchType = $('#notice_search_type').val();
+        param.searchKeyword = $('#notice_search_keyword').val();
+        param.searchDateType = $('#notice_search_date_type').val();
+        searchBoardList(1);
+    });
 });
 
 let param = {
