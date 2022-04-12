@@ -33,9 +33,8 @@ var searchBoardList = function (pageNo) {
         url: '/admin/boardList',
         data: param,
         success: function (object) {
-            console.log(object);
             let BOARD_LIST_HTML = '';
-            if (Object.keys(object).length != 0) {
+            if (Object.keys(object).length > 0) {
                 let boardList = object.boardList
                 param.totalDataNum = object.boardTotalCount;
                 for (let i = 0; i < boardList.length; i++) {
