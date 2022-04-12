@@ -2,9 +2,11 @@
 'use strict';
 
 /** onload **/
-$(function () {
+$(function(){
     let seqNo = new URL(document.location.href).searchParams.get('seqNo'); // seqNo세팅
     let mode = seqNo != null ? 'M' : 'W';                                  // 작성인지 수정인지 모드 설정
+
+    console.log('mode', mode);
 
     if(mode == 'W'){
         $('#notice_public_check').prop('checked', true);
@@ -15,7 +17,7 @@ $(function () {
     }
 
     // 등록버튼 클릭
-    $(document).on('click', '#noticeRegister', function () {
+    $(document).on('click', '#noticeRegister', function(){
         let params = {
             bultTitlNm: $('#noticeTitle').val(),
             bultTypCd: 'NOTICE',
@@ -34,7 +36,6 @@ $(function () {
             params.seqNo = seqNo;
             registerNotice(params);
         }
-        
     });
 
     // 취소버튼 클릭
@@ -50,7 +51,7 @@ $(function () {
  * @param {String} params.brcn       게시글 내용
  * @param {Number} params.seqNo      일련번호
  */
-var registerNotice = function(params) {
+var registerNotice = function(params){
     if (isEmpty(params.bultTitlNm)) {
         openPopup({
             title: '실패',
@@ -79,7 +80,7 @@ var registerNotice = function(params) {
                 text: '공지사항 등록에 성공했습니다.',
                 type: 'success',
                 callback: function () {
-                    location.href = '/admin/notice';
+                    location.href = '/mobile/notice';
                 }
             })
 

@@ -40,11 +40,11 @@ public class BoardService {
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
 		int boardTotalCount = 0;
 		
-		if(facade.getDetails().getUserAutrNm() == MemberLevelCode.ADMIN 
+		if(facade.getDetails().getUserAutrNm() == MemberLevelCode.ADMIN 	// ADMIN, ASSISTANT, EMPLOYEE 권한은 모든 게시물 열람 가능 
 				|| facade.getDetails().getUserAutrNm() == MemberLevelCode.ASSISTANT 
 				|| facade.getDetails().getUserAutrNm() == MemberLevelCode.EMPLOYEE) {
 			boardTotalCount = boardMapper.selectTotalCountPrivateBoard(params);
-		} else {
+		} else {	// 그 외 권한은 공개설정 ALL 게시글만 열람 가능
 			boardTotalCount = boardMapper.selectTotalCountPublicBoard(params);
 		}
 		
@@ -55,12 +55,12 @@ public class BoardService {
 		params.setPaginationInfo(paginationInfo);
 		
 		if(boardTotalCount > 0 ) {
-			if(facade.getDetails().getUserAutrNm() == MemberLevelCode.ADMIN 
+			if(facade.getDetails().getUserAutrNm() == MemberLevelCode.ADMIN 	// ADMIN, ASSISTANT, EMPLOYEE 권한은 모든 게시물 열람 가능 
 					|| facade.getDetails().getUserAutrNm() == MemberLevelCode.ASSISTANT 
 					|| facade.getDetails().getUserAutrNm() == MemberLevelCode.EMPLOYEE) {
 				resultMap.put("boardTotalCount", boardTotalCount);
 				resultMap.put("boardList", boardMapper.selectPrivateBoardList(params));
-			} else {
+			} else {	// 그 외 권한은 공개설정 ALL 게시글만 열람 가능
 				resultMap.put("boardTotalCount", boardTotalCount);
 				resultMap.put("boardList", boardMapper.selectPublicBoardList(params));
 			}

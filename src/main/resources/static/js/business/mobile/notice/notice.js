@@ -17,14 +17,14 @@ let param = {
     bultTypCd: "NOTICE",
     thisPageNo: 1,
     functionNm: 'searchBoardList',
-    htmlNm: 'list_pagination',
+    htmlNm: 'pagination_wrap',
     pageDivNo: 10,
     pageViewNo: 10
-};
+}
 
 /**
- * 게시글 리스트 호출 함수
- * @param {Number} pageNo 
+ * 게시글 리스트 출력
+ * @param {Number} pageNo 현재 페이지 번호
  */
 var searchBoardList = function (pageNo) {
     param.thisPageNo = pageNo;
@@ -35,24 +35,24 @@ var searchBoardList = function (pageNo) {
         success: function (object) {
             let BOARD_LIST_HTML = '';
             if (Object.keys(object).length > 0) {
-                let boardList = object.boardList
+                let boardList = object.boardList;
                 param.totalDataNum = object.boardTotalCount;
+                BOARD_LIST_HTML += '<ul>';
                 for (let i = 0; i < boardList.length; i++) {
                     let tmpRow = boardList[i];
-                    BOARD_LIST_HTML += '<tr>';
-                    BOARD_LIST_HTML += '    <td>' + tmpRow.seqNo + '</td>';
-                    BOARD_LIST_HTML += '    <td><a href="/admin/noticeDetail?seqNo=' + tmpRow.seqNo + '">' + tmpRow.bultTitlNm + '</a></td>';
-                    BOARD_LIST_HTML += '    <td>' + tmpRow.rgmnNm + '</td>';
-                    BOARD_LIST_HTML += '    <td>' + tmpRow.rgDtm.substring(0, 11) + '</td>';
-                    BOARD_LIST_HTML += '</tr>';
+                    BOARD_LIST_HTML += '    <li class="notice_list">';
+                    BOARD_LIST_HTML += '        <a class="notice_link" href="/mobile/noticeDetail?seqNo='+tmpRow.seqNo+'">';
+                    BOARD_LIST_HTML += '            <div class="notice_title">'+tmpRow.bultTitlNm+'</div>';
+                    BOARD_LIST_HTML += '            <div class="notice_desc">';
+                    BOARD_LIST_HTML += '                <span>'+tmpRow.rgmnNm+'</span><span>'+tmpRow.rgDtm+'</span>';
+                    BOARD_LIST_HTML += '            </div>';
+                    BOARD_LIST_HTML += '        </a>';
+                    BOARD_LIST_HTML += '    </li>';
                 }
-                $('.notice_list > table > tbody').html(BOARD_LIST_HTML);
-                setPage(param);
-            } else {
-                BOARD_LIST_HTML += '<tr>';
-                BOARD_LIST_HTML += '    <td colspan="4">조회된 결과가 없습니다.</td>'
-                BOARD_LIST_HTML += '</tr>';
-                $('.notice_list > table > tbody').html(BOARD_LIST_HTML);
+                BOARD_LIST_HTML += '</ul>';
+
+                $('.notice_contents_box').html(BOARD_LIST_HTML);
+                setMobilePage(param);
             }
         }
     });
