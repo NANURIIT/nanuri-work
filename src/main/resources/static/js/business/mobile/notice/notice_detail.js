@@ -1,4 +1,4 @@
-/** notice **/
+/** mobile notice **/
 'use strict';
 
 /** onload **/

@@ -1,4 +1,4 @@
-/** noticeWrite **/
+/** mobile noticeWrite **/
 'use strict';
 
 /** onload **/

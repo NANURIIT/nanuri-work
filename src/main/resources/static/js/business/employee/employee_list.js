@@ -6,6 +6,7 @@ $(function () {
 
     // 직원 리스트 호출
     getEmployeeList(1);
+
 });
 
 let param = {
@@ -25,7 +26,7 @@ var getEmployeeList = function (pageNo) {
         success: function (object) {
             let EMPLOYEE_LIST_HTML = '';
 
-            if (Object.keys(object).length != 0) {
+            if (Object.keys(object).length > 0) {
                 let employeeList = object.employeeList;
                 param.totalDataNum = object.employeeTotalCount;
 
