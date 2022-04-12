@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.nanuri.work.business.common.paging.PaginationInfo;
@@ -21,6 +22,9 @@ import com.nanuri.work.business.member.mapper.MemberMapper;
 import com.nanuri.work.business.member.vo.EmployeeVO;
 import com.nanuri.work.com.security.AuthenticationFacade;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class MemberService {
 
@@ -29,6 +33,9 @@ public class MemberService {
 
 	@Autowired
 	private AuthenticationFacade facade;
+	
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
 
 	public List<CommonCodeDTO> getCommonCodeList(CommonCodeDTO params) {
 		return memberMapper.selectCommonCodeList(params);

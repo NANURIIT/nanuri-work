@@ -10,6 +10,7 @@ import com.nanuri.work.business.member.dto.CertificateDTO;
 import com.nanuri.work.business.member.dto.CommonCodeDTO;
 import com.nanuri.work.business.member.dto.EducationDTO;
 import com.nanuri.work.business.member.dto.LanguageDTO;
+import com.nanuri.work.business.member.dto.MemberDTO;
 import com.nanuri.work.business.member.dto.SchoolCareerDTO;
 import com.nanuri.work.business.member.dto.SkillDTO;
 import com.nanuri.work.business.member.dto.WorkhistoryDTO;
@@ -20,6 +21,8 @@ public interface MemberMapper {
 	
 	public List<EmployeeVO> selectEmployeeList(EmployeeVO params);		/* 직원 목록 출력 */
 	public int selectTotalCountEmployee();
+	
+	public int insertEmployee(MemberDTO params);			/* 직원 등록 */
 	
 	/* 기본정보 */
 	public int insertBasicInfo(BasicInfoDTO params);
