@@ -5,6 +5,8 @@
 $(function () {
 
     let seqNo = new URL(document.location.href).searchParams.get('seqNo'); // seqNo세팅
+    let uri = new URL(document.location.href).pathname;
+    let pathname = uri.split('/')[1];
     let mode = seqNo != null ? 'M' : 'W';                                  // 작성인지 수정인지 모드 설정
 
     getCommonCode();
@@ -25,10 +27,19 @@ $(function () {
         }
 
         if (mode == 'W') {
-            registerCertificate(params);
+            registerCertificate(params, pathname);
         } else if (mode == 'M') {
             params.seqNo = seqNo;
-            registerCertificate(params);
+            registerCertificate(params, pathname);
+        }
+    });
+
+    // 취소 버튼 클릭
+    $(document).on('click', '.cancel_button', function(){
+        if(uri.includes('admin') > -1){
+            location.href = '/admin/index';
+        } else if(uri.includes('mobile') > -1){
+            location.href = '/mobile/index';
         }
     });
 });
@@ -62,7 +73,7 @@ var getCommonCode = function () {
  * @param {string} params.vldDt     유효일자
  * @param {string} params.updtDt    갱신일자
  */
-var registerCertificate = function (params) {
+var registerCertificate = function (params, pathname) {
     if (isEmpty(params.qlfcNm)) {
         openPopup({
             title: '실패',
@@ -128,7 +139,7 @@ var registerCertificate = function (params) {
                 text: '자격증 등록에 성공했습니다.',
                 type: 'success',
                 callback: function () {
-                    location.href = '/employee/index';
+                    location.href = '/'+pathname+'/index';
                 }
             })
         });

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<!-- 공통헤드 -->
+<head th:replace="layout/mobile/notice/head :: headFragment"></head>
+
+<link rel="stylesheet" th:href="@{/sample/nanuri_project/css/notice_write.css}">
+
+<body>
+    <div class="mo_wrapper">
+        <div class="submain">
+            <div class="submain_contents">
+                <div class="qna_contents_wrap">
+                    <div class="product_qna_contents">
+                        <div class="product_qna_box">
+                            <form>
+                                <table>
+                                    <tr>
+                                        <th>제목</th>
+                                        <td>
+                                            <div class="qna_title">
+                                                <input type="text" class="qna_input_title">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <textarea maxlength="200" placeholder="내용을 입력하세요"></textarea>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>
+                                            비밀번호
+                                        </th>
+                                        <td>
+                                            <input type="password" class="qna_input_pw">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>
+                                            첨부파일
+                                        </th>
+                                        <td class="qna_fileup">
+                                            <input type="file" class="file_up" name="file_up">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>공개설정</th>
+                                        <td class="qna_secret_radio">
+                                            <input type="radio" id="qna_public_check" name="qna_secret" checked><label for="qna_public_check">전체공개</label>
+                                            <input type="radio" id="qna_secret_check" name="qna_secret"><label for="qna_secret_check">직원공개</label>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="qna_button_box">
+                    <div class="qna_register_link">
+                        <a href="#" title="#" class="qna_register">등록</a>
+                        <a href="#" title="#" class="qna_cancel">취소</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

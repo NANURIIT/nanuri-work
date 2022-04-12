@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- 공통 헤드 -->
+<head th:replace="layout/mobile/employee/head :: headFragment"></head>
+
+<link rel="stylesheet" th:href="@{/sample/nanuri_project/css/education.css}">
+<script th:src="@{/js/business/employee/education_add.js}"></script>
+
+<body>
+<div class="main">
+    <div class="wrap">
+        <form>
+            <div class="form_box form_box_first">
+                <div class="form_title">학력구분</div>
+                <!--20220325 수정 s-->
+                <select class="form_select" id="sccaDsCd" name="education">
+                    <!-- <option value="고등학교">고등학교</option>
+                    <option value="전문대학교">전문대학교</option>
+                    <option value="대학교">대학교</option>
+                    <option value="대학원">대학원</option> -->
+                </select>
+                <!--20220325 수정 f-->
+            </div>
+
+            <div class="form_box">
+                <div class="form_title">학교명</div>
+                <div>
+                    <input class="input_box" id="schlNm" type="text" name="school_name" placeholder="학교명 입력">
+                </div>
+            </div>
+            <!--20220325 수정 s-->
+            <div class="form_box">
+                <div class="form_title">입학년월</div>
+                <div>
+                    <input class="input_box" id="etisYm" type="text" name="school_period" placeholder="YYYYMM">
+                </div>
+            </div>
+            <div class="form_box">
+                <div class="form_title">졸업년월</div>
+                <div>
+                    <input class="input_box" id="grduYm" type="text" name="school_period" placeholder="YYYYMM">
+                </div>
+            </div>
+            <!--20220325 수정 f-->
+            <div class="form_box">
+                <div class="form_title">전공</div>
+                <div>
+                    <input class="input_box" id="majrNm" type="text" name="major" placeholder="전공학과 입력">
+                </div>
+            </div>
+        </form>
+        
+        <div th:replace="layout/mobile/employee/footer :: saveBoxFragment"></div>
+    </div>
+</div>
+</body>
+</html>

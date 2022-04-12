@@ -1,126 +1,199 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 
-<!-- 공통 헤드 -->
-<head th:replace="layout/employee/head :: headFragment"></head>
+<!-- 공통헤드 -->
+<head th:replace="layout/notice/head :: headFragment"></head>
+
+<link rel="stylesheet" th:href="@{/sample/admin/css/info.css}">
 
 <script th:src="@{/js/business/employee/careerhistory_add.js}"></script>
 
 <body>
-<div class="main">
-    <div class="wrap">
-        <form>
-            <div class="form_box">
-                <div class="form_title">사업명</div>
-                <div>
-                    <input class="input_box" id="bzNm" type="text" name="project_name" placeholder="사업명 입력">
+    <div class="wrapper">
+        <header th:replace="/layout/notice/header :: headerFragment"></header>
+
+        <div class="submain_wrap">
+            <div class="sub_wrap">
+                <div class="sub_container">
+                    <div class="submain_title">
+                        경력이력
+                    </div>
+                    <div class="join_detail_wrap">
+                        <form>
+                            <table class="join_table1">
+                                <colgroup>
+                                    <col style="width:200px;">
+                                    <col style="width:auto;">
+                                </colgroup>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">
+                                            사업명
+                                        </th>
+                                        <td>
+                                            <div class="join_input">
+                                                <input class="input_box" id="bzNm" type="text" name="project_name" placeholder="사업명 입력">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">
+                                            사업시작년월
+                                        </th>
+                                        <td>
+                                            <div class="join_input">
+                                                <input class="input_box" id="bzStYm" type="text" name="project_start" placeholder="사업시작년월 입력">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">
+                                            사업종료년월
+                                        </th>
+                                        <td>
+                                            <div class="join_input">
+                                                <input class="input_box" id="bzEdYm" type="text" name="project_end" placeholder="사업종료년월 입력">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">
+                                            발주사
+                                        </th>
+                                        <td>
+                                            <div class="join_input">
+                                                <input class="input_box" id="ordrNm" type="text" name="order_company" placeholder="발주사 입력">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">
+                                            사업내용
+                                        </th>
+                                        <td>
+                                            <div class="join_input">
+                                                <input class="input_box" id="bzCntn" type="text" name="project_contents" placeholder="사업내용 입력">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">
+                                            소속회사
+                                        </th>
+                                        <td>
+                                            <div class="join_input">
+                                                <input class="input_box" id="blgCoNm" type="text" name="affiliated_company" placeholder="소속회사 입력">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">
+                                            역할
+                                        </th>
+                                        <td>
+                                            <div class="join_input">
+                                                <select class="form_select" id="rolCd" name="part_name">
+                                                    <!-- <option value="컨설팅" selected>컨설팅</option>
+                                                    <option value="개발">개발</option>
+                                                    <option value="모듈매니저">모듈매니저</option>
+                                                    <option value="분석및설계">분석및설계</option>
+                                                    <option value="설계및개발">설계및개발</option>
+                                                    <option value="PM">PM</option>
+                                                    <option value="업무PM">업무PM</option>
+                                                    <option value="공통및기술지원">공통및기술지원</option>
+                                                    <option value="PL">PL</option>
+                                                    <option value="DBA">DBA</option>
+                                                    <option value="QA">QA</option>
+                                                    <option value="모델러">모델러</option>
+                                                    <option value="테스트">테스트</option>
+                                                    <option value="안정화">안정화</option>
+                                                    <option value="유지보수">유지보수</option>
+                                                    <option value="운영">운영</option>
+                                                    <option value="현업">현업</option>
+                                                    <option value="디자인">디자인</option>
+                                                    <option value="기타">기타</option> -->
+                                                </select>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">
+                                            담당업무
+                                        </th>
+                                        <td>
+                                            <div class="join_input">
+                                                <input class="input_box" id="chrgBsnNm" type="text" name="task_input" placeholder="담당업무 입력">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">
+                                            사용언어
+                                        </th>
+                                        <td>
+                                            <div class="join_input">
+                                                <input class="input_box" id="langNm" type="text" name="use_language" placeholder="사용언어 입력">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">
+                                            사용DB
+                                        </th>
+                                        <td>
+                                            <div class="join_input">
+                                                <input class="input_box" id="dbNm" type="text" name="use_db" placeholder="사용DB 입력">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">
+                                            사용OS
+                                        </th>
+                                        <td>
+                                            <div class="join_input">
+                                                <input class="input_box" id="osNm" type="text" name="use_os" placeholder="사용OS 입력">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">
+                                            사용프레임워크
+                                        </th>
+                                        <td>
+                                            <div class="join_input">
+                                                <input class="input_box" id="useFrmwkNm" type="text" name="use_framework" placeholder="사용프레임워크 입력">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">
+                                            사용방법론
+                                        </th>
+                                        <td>
+                                            <div class="join_input">
+                                                <input class="input_box" id="mthNm" type="text" name="use_how" placeholder="사용방법론 입력">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">
+                                            사용기타
+                                        </th>
+                                        <td>
+                                            <div class="join_input">
+                                                <input class="input_box" id="etcCapaNm" type="text" name="use_etc" placeholder="사용기타 입력">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>
+                    <div th:replace="layout/employee/footer :: saveBoxFragment"></div>
                 </div>
-            </div>
-            <div class="form_box">
-                <div class="form_title">사업시작년월</div>
-                <div>
-                    <input class="input_box" id="bzStYm" type="text" name="project_start" placeholder="사업시작년월 입력">
-                </div>
-            </div>
-            <div class="form_box">
-                <div class="form_title">사업종료년월</div>
-                <div>
-                    <input class="input_box" id="bzEdYm" type="text" name="project_end" placeholder="사업종료년월 입력">
-                </div>
-            </div>
-            <div class="form_box">
-                <div class="form_title">발주사</div>
-                <div>
-                    <input class="input_box" id="ordrNm" type="text" name="order_company" placeholder="발주사 입력">
-                </div>
-            </div>
-            <div class="form_box">
-                <div class="form_title">사업내용</div>
-                <div>
-                    <input class="input_box" id="bzCntn" type="text" name="project_contents" placeholder="사업내용 입력">
-                </div>
-            </div>
-            <div class="form_box">
-                <div class="form_title">소속회사</div>
-                <div>
-                    <input class="input_box" id="blgCoNm" type="text" name="affiliated_company" placeholder="소속회사 입력">
-                </div>
-            </div>
-            <div class="form_box">
-                <div class="form_title">역할</div>
-                <div>
-                    <select class="form_select" id="rolCd" name="part_name">
-                        <!-- <option value="컨설팅" selected>컨설팅</option>
-                        <option value="개발">개발</option>
-                        <option value="모듈매니저">모듈매니저</option>
-                        <option value="분석및설계">분석및설계</option>
-                        <option value="설계및개발">설계및개발</option>
-                        <option value="PM">PM</option>
-                        <option value="업무PM">업무PM</option>
-                        <option value="공통및기술지원">공통및기술지원</option>
-                        <option value="PL">PL</option>
-                        <option value="DBA">DBA</option>
-                        <option value="QA">QA</option>
-                        <option value="모델러">모델러</option>
-                        <option value="테스트">테스트</option>
-                        <option value="안정화">안정화</option>
-                        <option value="유지보수">유지보수</option>
-                        <option value="운영">운영</option>
-                        <option value="현업">현업</option>
-                        <option value="디자인">디자인</option>
-                        <option value="기타">기타</option> -->
-                    </select>
-                </div>
-            </div>
-            <div class="form_box">
-                <div class="form_title">담당업무</div>
-                <div>
-                    <input class="input_box" id="chrgBsnNm" type="text" name="task_input" placeholder="담당업무 입력">
-                </div>
-            </div>
-            <div class="form_box">
-                <div class="form_title">사용언어</div>
-                <div>
-                    <input class="input_box" id="langNm" type="text" name="use_language" placeholder="사용언어 입력">
-                </div>
-            </div>
-            <div class="form_box">
-                <div class="form_title">사용DB</div>
-                <div>
-                    <input class="input_box" id="dbNm" type="text" name="use_db" placeholder="사용DB 입력">
-                </div>
-            </div>
-            <div class="form_box">
-                <div class="form_title">사용OS</div>
-                <div>
-                    <input class="input_box" id="osNm" type="text" name="use_os" placeholder="사용OS 입력">
-                </div>
-            </div>
-            <div class="form_box">
-                <div class="form_title">사용프레임워크</div>
-                <div>
-                    <input class="input_box" id="useFrmwkNm" type="text" name="use_framework" placeholder="사용프레임워크 입력">
-                </div>
-            </div>
-            <div class="form_box">
-                <div class="form_title">사용방법론</div>
-                <div>
-                    <input class="input_box" id="mthNm" type="text" name="use_how" placeholder="사용방법론 입력">
-                </div>
-            </div>
-            <div class="form_box">
-                <div class="form_title">사용기타</div>
-                <div>
-                    <input class="input_box" id="etcCapaNm" type="text" name="use_etc" placeholder="사용기타 입력">
-                </div>
-            </div>
-        </form>
-        <div class="save_box">
-            <div class="save_button">
-                <button id="save">저장</button>
             </div>
         </div>
     </div>
-</div>
 </body>
 </html>

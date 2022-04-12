@@ -1,5 +1,6 @@
 package com.nanuri.work.business.member.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nanuri.work.business.member.dto.AwardDTO;
+import com.nanuri.work.business.member.dto.BasicInfoDTO;
 import com.nanuri.work.business.member.dto.CareerhistoryDTO;
 import com.nanuri.work.business.member.dto.CertificateDTO;
 import com.nanuri.work.business.member.dto.CommonCodeDTO;
@@ -22,6 +24,7 @@ import com.nanuri.work.business.member.dto.SchoolCareerDTO;
 import com.nanuri.work.business.member.dto.SkillDTO;
 import com.nanuri.work.business.member.dto.WorkhistoryDTO;
 import com.nanuri.work.business.member.service.MemberService;
+import com.nanuri.work.business.member.vo.EmployeeVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -41,6 +44,40 @@ public class MemberApiController {
 	@GetMapping(value = "/getCommonCode")
 	public List<CommonCodeDTO> getCommonCodeList(@ModelAttribute("params") CommonCodeDTO params) {
 		return memberService.getCommonCodeList(params);
+	}
+	
+	@GetMapping("/employeeList")
+	public HashMap<String, Object> getEmployeeList(@ModelAttribute("params") EmployeeVO params){
+		return memberService.getEmployeeList(params);
+	}
+	
+	/* 기본정보 */
+	
+	@GetMapping(value = "/basicInfoList")
+	public List<BasicInfoDTO> getbasicInfoList(){
+		return memberService.getBasicInfoList();
+	}
+	
+	@GetMapping(value = "/basicInfoDetail")
+	public BasicInfoDTO getBasicInfoDetail() {
+		return memberService.getBasicInfoDetail();
+	}
+	
+	@PostMapping(value = "/basicInfoUpdate")
+	public String updateBasicInfo(@RequestBody BasicInfoDTO params) {
+		String message = "";
+
+		try {
+			boolean isRegistered = memberService.updateBasicInfo(params);
+			if (isRegistered == false) {
+				message = "등록에 실패하였습니다.";
+			}
+		} catch (Exception e) {
+			message = "시스템에 문제가 발생하였습니다.";
+			e.printStackTrace();
+		}
+		
+		return message;
 	}
 	
 	/* 학력 */

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"/>
+    <title>나누리</title>
+
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <script src="../js/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<div class="main">
+    <div class="wrap">
+        <form>
+            <div class="form_box">
+                <div class="form_title">장비종류</div>
+                <div>
+                    <select class="form_select" name="equipment_type">
+                        <option value="나누리직원" selected>모니터</option>
+                        <option value="프리랜서">노트북</option>
+                        <option value="협력업체">PC</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form_box">
+                <div class="form_title">모델명</div>
+                <div>
+                    <input class="input_box" type="text" name="model_name" placeholder="모델명 입력">
+                </div>
+            </div>
+            <div class="form_box">
+                <div class="form_title">시리얼번호</div>
+                <div>
+                    <input class="input_box" type="text" name="model_num" placeholder="시리얼번호 입력">
+                </div>
+            </div>
+            <div class="form_box">
+                <div class="form_title">지급일자</div>
+                <div>
+                    <input class="input_box" type="text" name="supply_date" placeholder="지급일자 입력">
+                </div>
+            </div>
+        </form>
+        <div class="save_box">
+            <div class="button_box">
+                <button class="save_button">저장</button>
+                <button class="cancel_button" onclick="history.back()">취소</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -62,6 +62,9 @@
     margin: 0 10px;
 }
 /*------------gnb 영역------------*/
+.wrapper .header .top_area .gnb_wrap {
+    position: relative;
+}
 .wrapper .header .top_area .gnb_wrap .main_gnb {
     float: left;
 }
@@ -205,4 +208,13 @@
 .wrapper .header .top_area .gnb_wrap.fixinner .search_wrap {
     top: 0;
     right: 0;
+}
+
+.wrapper .header .top_area .logout_button {
+    position: absolute;
+    top: 30px;
+    right: 15px;
+}
+.wrapper .header .top_area .logout_button button {
+    font-size: 15px;
 }
