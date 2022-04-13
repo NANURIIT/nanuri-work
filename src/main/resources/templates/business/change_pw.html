@@ -1,15 +1,21 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
 <head>
     <meta charset="UTF-8">
     <title>나누리</title>
-    <link rel="stylesheet" th:href="@{/sample/admin/css/swiper.css}">
+    <!-- <link rel="stylesheet" th:href="@{/sample/admin/css/swiper.css}"> -->
+    <link rel="stylesheet" th:href="@{/css/plugins/sweetalert/sweetalert.css}">
     <link rel="stylesheet" th:href="@{/sample/admin/css/reset.css}">
     <link rel="stylesheet" th:href="@{/sample/admin/css/common.css}">
     <link rel="stylesheet" th:href="@{/sample/admin/css/login.css}">
 
+    <script th:src="@{/js/plugins/sweetalert/sweetalert.min.js}"></script>
     <script th:src="@{/js/plugins/jquery/jquery-3.6.0.min.js}"></script>
+    <script th:src="@{/js/business/change_pw.js}"></script>
+    <script th:src="@{/js/common.js}"></script>
 </head>
+
 <body>
     <div class="wrapper">
         <div class="submain_wrap">
@@ -19,23 +25,22 @@
                         비밀번호 변경
                     </div>
                     <div class="normal_wrap">
-                        <form action="#">
-                            <div class="changepw_input_wrap">
-                                <div class="changepw_input">
-                                    <input type="text" placeholder="현재 비밀번호">
-                                    <input type="password" placeholder="새로운 비밀번호">
-                                    <input type="password" placeholder="새로운 비밀번호 확인">
-                                </div>
-                                <div class="changepw_button">
-                                    <button>변경</button>
-                                    <button class="changepw_cancel">취소</button>
-                                </div>
+                        <div class="changepw_input_wrap">
+                            <div class="changepw_input">
+                                <input type="password" id="currPwd" placeholder="현재 비밀번호">
+                                <input type="password" id="newPwd" placeholder="새로운 비밀번호">
+                                <input type="password" id="confirmNewPwd" placeholder="새로운 비밀번호 확인">
                             </div>
-                        </form>
+                            <div class="changepw_button">
+                                <button id="change">변경</button>
+                                <button class="changepw_cancel">취소</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </body>
+
 </html>
