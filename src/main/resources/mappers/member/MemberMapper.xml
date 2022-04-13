@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.nanuri.work.business.member.mapper.MemberMapper">
 
+	<!-- 공통코드 호출 -->
 	<select id="selectCommonCodeList" parameterType="com.nanuri.work.business.member.dto.CommonCodeDTO" resultType="com.nanuri.work.business.member.dto.CommonCodeDTO">
 		SELECT ds_cd,
 			   dtl_cd,
@@ -11,6 +12,45 @@
     	 WHERE ds_cd = #{dsCd}
 	  ORDER BY sort_seqn
 	</select>
+	
+	<!-- 신규직원등록 -->
+	<insert id="insertEmployee" parameterType="com.nanuri.work.business.member.dto.MemberDTO">
+		INSERT INTO mem_bsc_info (
+			user_id, 
+			user_password, 
+			user_nm, 
+			rrno, 
+			blg_ds_cd,
+			blg_nm, 
+			dty_nm, 
+			dut_nm, 
+			zip, 
+			addr, 
+			tel_no, 
+			email_addr, 
+			enco_dt, 
+			rtrm_dt, 
+			blg_ds_chg_dt, 
+			user_autr_nm
+		) VALUES (
+			#{userId}, 
+			#{userPassword}, 
+			#{userNm}, 
+			#{rrno}, 
+			#{blgDsCd}, 
+			#{blgNm}, 
+			#{dtyNm}, 
+			#{dutNm}, 
+			#{zip}, 
+			#{addr}, 
+			#{telNo}, 
+			#{emailAddr}, 
+			#{encoDt}, 
+			#{rtrmDt}, 
+			#{blgDsChgDt}, 
+			#{userAutrNm}
+		)
+	</insert>
 	
 	<!-- 직원 정보 리스트 출력 -->
 	<select id="selectEmployeeList" parameterType="com.nanuri.work.business.member.vo.EmployeeVO" resultType="com.nanuri.work.business.member.vo.EmployeeVO">

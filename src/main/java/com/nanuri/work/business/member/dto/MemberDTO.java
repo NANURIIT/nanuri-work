@@ -19,7 +19,7 @@ public class MemberDTO extends CommonDTO {
 	private String userNm;						/* 이름 */
 	private String encoDt;						/* 입사일자 */
 	private String rtrmDt;						/* 퇴사일자 */
-	/* private String */						/* 소속구분 변경일자 */
+	private String blgDsChgDt;					/* 소속구분 변경일자 */
 	private String dtyNm;						/* 직급 */
 	private String telNo;						/* 전화번호 */
 	private String rrno;						/* 주민등록번호 */
