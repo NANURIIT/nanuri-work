@@ -51,6 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
     public void configure(WebSecurity web) {
 		//web.ignoring().mvcMatchers("/therapist/signup");
+		web.ignoring().mvcMatchers("/sample/**");
 		web.ignoring().requestMatchers(PathRequest.toStaticResources().atCommonLocations());
 	}
 

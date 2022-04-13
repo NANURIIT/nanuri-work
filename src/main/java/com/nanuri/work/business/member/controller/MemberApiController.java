@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,6 +21,7 @@ import com.nanuri.work.business.member.dto.CertificateDTO;
 import com.nanuri.work.business.member.dto.CommonCodeDTO;
 import com.nanuri.work.business.member.dto.EducationDTO;
 import com.nanuri.work.business.member.dto.LanguageDTO;
+import com.nanuri.work.business.member.dto.MemberDTO;
 import com.nanuri.work.business.member.dto.SchoolCareerDTO;
 import com.nanuri.work.business.member.dto.SkillDTO;
 import com.nanuri.work.business.member.dto.WorkhistoryDTO;
@@ -46,6 +48,39 @@ public class MemberApiController {
 		return memberService.getCommonCodeList(params);
 	}
 	
+	/**
+	 * 신규 직원 등록
+	 * @param params 신규직원
+	 * @return 결과 메세지
+	 */
+	@PostMapping(value = "/registerEmployee")
+	public String registerEmployee(@RequestBody MemberDTO params) {
+		String message = "";
+
+		log.debug("registerEmployee");
+		try {
+			boolean isRegistered = memberService.registerEmployee(params);
+			if (isRegistered == false) {
+				message = "등록에 실패하였습니다.";
+			}
+		} catch (Exception e) {
+			message = "시스템에 문제가 발생하였습니다.";
+			e.printStackTrace();
+		}
+		
+		return message;
+	}
+	
+	@PatchMapping(value = "/changePassword")
+	public boolean changePassword(@RequestBody HashMap<String, String> params) {
+		return memberService.changePassword(params);
+	}
+	
+	/**
+	 * 직원목록 호출
+	 * @param params
+	 * @return 직원목록
+	 */
 	@GetMapping("/employeeList")
 	public HashMap<String, Object> getEmployeeList(@ModelAttribute("params") EmployeeVO params){
 		return memberService.getEmployeeList(params);
