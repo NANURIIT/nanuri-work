@@ -20,6 +20,7 @@ import com.nanuri.work.business.member.dto.CertificateDTO;
 import com.nanuri.work.business.member.dto.CommonCodeDTO;
 import com.nanuri.work.business.member.dto.EducationDTO;
 import com.nanuri.work.business.member.dto.LanguageDTO;
+import com.nanuri.work.business.member.dto.MemberDTO;
 import com.nanuri.work.business.member.dto.SchoolCareerDTO;
 import com.nanuri.work.business.member.dto.SkillDTO;
 import com.nanuri.work.business.member.dto.WorkhistoryDTO;
@@ -46,6 +47,29 @@ public class MemberApiController {
 		return memberService.getCommonCodeList(params);
 	}
 	
+	@PostMapping(value = "/registerEmployee")
+	public String registerEmployee(@RequestBody MemberDTO params) {
+		String message = "";
+
+		log.debug("registerEmployee");
+		try {
+			boolean isRegistered = memberService.registerEmployee(params);
+			if (isRegistered == false) {
+				message = "등록에 실패하였습니다.";
+			}
+		} catch (Exception e) {
+			message = "시스템에 문제가 발생하였습니다.";
+			e.printStackTrace();
+		}
+		
+		return message;
+	}
+	
+	/**
+	 * 직원목록 호출
+	 * @param params
+	 * @return 직원목록
+	 */
 	@GetMapping("/employeeList")
 	public HashMap<String, Object> getEmployeeList(@ModelAttribute("params") EmployeeVO params){
 		return memberService.getEmployeeList(params);

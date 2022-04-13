@@ -21,8 +21,7 @@ public interface MemberMapper {
 	
 	public List<EmployeeVO> selectEmployeeList(EmployeeVO params);		/* 직원 목록 출력 */
 	public int selectTotalCountEmployee();
-	
-	public int insertEmployee(MemberDTO params);			/* 직원 등록 */
+	public int insertEmployee(MemberDTO params);						/* 직원 등록 */
 	
 	/* 기본정보 */
 	public int insertBasicInfo(BasicInfoDTO params);

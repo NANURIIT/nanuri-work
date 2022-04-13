@@ -15,11 +15,13 @@ import com.nanuri.work.business.member.dto.CertificateDTO;
 import com.nanuri.work.business.member.dto.CommonCodeDTO;
 import com.nanuri.work.business.member.dto.EducationDTO;
 import com.nanuri.work.business.member.dto.LanguageDTO;
+import com.nanuri.work.business.member.dto.MemberDTO;
 import com.nanuri.work.business.member.dto.SchoolCareerDTO;
 import com.nanuri.work.business.member.dto.SkillDTO;
 import com.nanuri.work.business.member.dto.WorkhistoryDTO;
 import com.nanuri.work.business.member.mapper.MemberMapper;
 import com.nanuri.work.business.member.vo.EmployeeVO;
+import com.nanuri.work.com.code.MemberLevelCode;
 import com.nanuri.work.com.security.AuthenticationFacade;
 
 import lombok.extern.slf4j.Slf4j;
@@ -37,8 +39,29 @@ public class MemberService {
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 
+	/**
+	 * 공통코드 호출
+	 * @return 공통코드 리스트
+	 */
 	public List<CommonCodeDTO> getCommonCodeList(CommonCodeDTO params) {
 		return memberMapper.selectCommonCodeList(params);
+	}
+	
+	public boolean registerEmployee(MemberDTO params) {
+		
+		int queryResult = 0;
+		
+		// 아이디는 휴대전화 번호랑 같음.
+		params.setUserId(params.getTelNo());
+		
+		// 기본 비밀번호는 휴대전화번호랑 같음.
+		params.setUserPassword(passwordEncoder.encode(params.getTelNo()));
+		
+		params.setUserAutrNm(MemberLevelCode.valueOf(params.getBlgDsCd()));
+		
+		queryResult = memberMapper.insertEmployee(params);
+		
+		return (queryResult > 0);
 	}
 
 	/**
