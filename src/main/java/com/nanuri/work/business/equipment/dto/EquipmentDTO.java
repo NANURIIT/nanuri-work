@@ -8,11 +8,11 @@ import lombok.Setter;
 @Getter
 @Setter
 public class EquipmentDTO extends CommonDTO {
-    public int seqNo;           /* 일련번호 */
+    public Long seqNo;          /* 일련번호 */
     public String userId;       /* 사용자ID */
     public String modlNm;       /* 모델명 */
+    public String eqpmKdCd;   	/* 장비종류코드 */
     public String srlNo;        /* 시리얼번호 */
     public String pyDt;         /* 지급일자 */
-    public String wdnwDt;       /* 회수일자 */
-    public String stsCd;        /* 상태코드 */
+    public String wdrwDt;       /* 회수일자 */
 }

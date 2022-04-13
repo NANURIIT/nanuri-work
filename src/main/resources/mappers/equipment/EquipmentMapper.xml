@@ -1,32 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.nanuri.work.business.equipment.mapper.EquipmentMapper">
-
+	
+	<select id="selectCommonCodeList" parameterType="com.nanuri.work.business.member.dto.CommonCodeDTO" resultType="com.nanuri.work.business.member.dto.CommonCodeDTO">
+		SELECT ds_cd,
+			   dtl_cd,
+			   ds_cd_nm,
+			   dtl_cnm
+		  FROM comn_cd
+    	 WHERE ds_cd = #{dsCd}
+	  ORDER BY ds_cd
+	</select>
+	
     <!-- 장비 정보 -->
 
     <!-- 장비 정보 등록 -->
     <insert id="insertEquipment" parameterType="com.nanuri.work.business.equipment.dto.EquipmentDTO">
    		INSERT INTO eqpm_info(
-			seq_no,					/* 일련번호 */
-			user_id,				/* 사용자ID */
+   			user_id,				/* 사용자ID */
 			modl_nm,				/* 모델명 */	
+			eqpm_kd_cd, 			/* 장비종류코드 */
 			srl_no,					/* 시리얼번호 */
-			py_dt,					/* 지급일자 */
-			wdrw_dt,				/* 회수일자 */
-			sts_cd 				    /* 상태코드 */
-		)VALUES(
-			#{seqNo},		
+			py_dt					/* 지급일자 */
+		) VALUES (
 			#{userId},
 			#{modlNm},
+			#{eqpmKdCd},
 			#{srlNo},
-			#{pyDt},
-			#{wdrwDt},
-			#{stsCd}
+			#{pyDt}
 		)  
     </insert>
     <!-- 장비 리스트 출력 -->
     <select id="selectEducationList" parameterType="com.nanuri.work.business.equipment.dto.EquipmentDTO">
-	
+		SELECT T01.modl_nm,			/* 모델명 */
+	   		   T01.srl_no,			/* 시리얼번호 */
+	   		   T01.py_dt			/* 지급일자 */
+  		  FROM eqpm_info			AS T01;
     </select>
 
     <!-- 장비 정보 수정 -->

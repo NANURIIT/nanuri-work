@@ -8,22 +8,24 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class EquipmentController {
 	
-	/**
-	 * 장비정보 리스트
-	 * @return
-	 */
-	@GetMapping(value = "/admin/equipmentList")
-	public String getEquipmentListPage() {
-		return "business/equipment/equipment_add";		
-	}
+	/* pc */
 	
 	/**
-	 * 직원정보 입력
+	 * 장비정보 입력
 	 * @return
 	 */
     @GetMapping(value = "/admin/equipmentWrite")
     public String getEquipmentWrite() { 
     	return "business/equipment/equipment_add"; 
     }
+    
+	/**
+	 * 장비정보 리스트
+	 * @return
+	 */
+	@GetMapping(value = "/admin/equipmentList")
+	public String getEquipmentList() {
+		return "business/equipment/equipment_add";		
+	}
     
 }
