@@ -96,6 +96,7 @@ public class MemberService {
 	
 	public boolean updateBasicInfo(BasicInfoDTO params) {
 		params.setUserId(facade.getDetails().getUserId());
+		params.setUserAutrNm(MemberLevelCode.valueOf(params.getBlgDsCd()));
 		return memberMapper.updateBasicInfo(params) > 0;
 	}
 	
