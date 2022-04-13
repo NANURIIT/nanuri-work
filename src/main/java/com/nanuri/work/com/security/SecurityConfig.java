@@ -51,6 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
     public void configure(WebSecurity web) {
 		//web.ignoring().mvcMatchers("/therapist/signup");
+		web.ignoring().mvcMatchers("/sample/**");
 		web.ignoring().requestMatchers(PathRequest.toStaticResources().atCommonLocations());
 	}
 
@@ -69,7 +70,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     			.antMatchers("/mobile/employeeAdd").hasAnyRole("ADMIN", "ASSISTANT")
     			.antMatchers("/mobile/employeeList").hasAnyRole("ADMIN", "EMPLOYEE", "ASSISTANT")
     			.antMatchers("/mobile/noticeWrite").hasAnyRole("ADMIN", "EMPLOYEE", "ASSISTANT")
-    			.antMatchers("/sample/**").permitAll()
     			.antMatchers("**").authenticated()
     			.and()
     		.formLogin()

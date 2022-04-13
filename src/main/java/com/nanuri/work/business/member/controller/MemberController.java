@@ -8,8 +8,17 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Controller
 public class MemberController {
-
+	
 	/* pc */
+	
+	/**
+	 * 비밀번호 변경 페이지
+	 * @return
+	 */
+	@GetMapping(value = "/admin/changePassword")
+	public String getChangePasswordPage() {
+		return "business/change_pw";
+	}
 	
 	/**
 	 * 직원 등록
@@ -33,7 +42,7 @@ public class MemberController {
 	 * 회원정보 출력
 	 * @return
 	 */
-	@GetMapping(value = "/admin/index")
+	@GetMapping(value = {"/admin/index", "/"})
 	public String getAdminIndexPage() {
 		return "business/employee/index";
 	}
