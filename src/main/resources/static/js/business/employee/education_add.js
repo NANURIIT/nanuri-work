@@ -50,7 +50,7 @@ var getCommonCode = function () {
     ajaxCall({
         method: 'GET',
         url: '/employee/getCommonCode',
-        data: { dsCd: 'schoolCareer' },
+        data: { dsCd: 'SCHOOLCAREER' },
         success: function (object) {
             let COMMON_CODE_HTML = '';
             for (let i = 0; i < object.length; i++) {
@@ -105,7 +105,7 @@ var registerSchoolCareer = function (params, pathname) {
                 });
             }
         });
-    } else if (params.sccaDsCd != 'highSchool' && isEmpty(params.majrNm)) {
+    } else if (params.sccaDsCd != 'HIGHSCHOOL' && isEmpty(params.majrNm)) {
         openPopup({
             title: '실패',
             text: '전공을 입력해주세요.',
