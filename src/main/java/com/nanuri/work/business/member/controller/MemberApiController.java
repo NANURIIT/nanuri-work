@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -47,6 +48,11 @@ public class MemberApiController {
 		return memberService.getCommonCodeList(params);
 	}
 	
+	/**
+	 * 신규 직원 등록
+	 * @param params 신규직원
+	 * @return 결과 메세지
+	 */
 	@PostMapping(value = "/registerEmployee")
 	public String registerEmployee(@RequestBody MemberDTO params) {
 		String message = "";
@@ -63,6 +69,11 @@ public class MemberApiController {
 		}
 		
 		return message;
+	}
+	
+	@PatchMapping(value = "/changePassword")
+	public boolean changePassword(@RequestBody HashMap<String, String> params) {
+		return memberService.changePassword(params);
 	}
 	
 	/**

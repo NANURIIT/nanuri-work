@@ -52,6 +52,13 @@
 		)
 	</insert>
 	
+	<!-- 비밀번호 변경 -->
+	<update id="changePassword" parameterType="java.util.HashMap">
+		UPDATE mem_bsc_info
+		   SET user_password = #{newPwd}
+		 WHERE user_id = #{userId}
+	</update>
+	
 	<!-- 직원 정보 리스트 출력 -->
 	<select id="selectEmployeeList" parameterType="com.nanuri.work.business.member.vo.EmployeeVO" resultType="com.nanuri.work.business.member.vo.EmployeeVO">
 		SELECT T01.user_id, 
