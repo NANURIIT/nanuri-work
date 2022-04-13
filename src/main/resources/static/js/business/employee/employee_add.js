@@ -2,31 +2,38 @@
 'use strict';
 
 /** onload **/
-$(function(){
-    
+$(function () {
+
+    let uri = new URL(document.location.href).pathname;
+    let pathname = uri.split('/')[1];       // admin -> pc화면, mobile -> mobile화면
+
     getCommonCode();
 
-    $(document).on('click', '#save', function(){
+    console.log(1);
+
+    // 저장버튼 클릭
+    $(document).on('click', '#save', function () {
         let param = {
-            blgDsCd : $('#blgDsCd').val(), 
-            blgNm : $('#blgNm').val(), 
-            zip : $('#zip').val(), 
-            addr : $('#addr').val(), 
-            userNm : $('#userNm').val(), 
-            encoDt : $('#encoDt').val(), 
-            rtrmDt : $('#rtrmDt').val(), 
-            blgDsChgDt : $('#blgDsChgDt').val(), 
-            dtyNm : $('#dtyNm').val(), 
-            telNo : $('#telNo').val(), 
-            rrno : $('#rrno').val(), 
-            dutNm : $('#dutNm').val(), 
-            emailAddr : $('#emailAddr').val()
+            blgDsCd: $('#blgDsCd').val(),
+            blgNm: $('#blgNm').val(),
+            zip: $('#zip').val(),
+            addr: $('#addr').val(),
+            userNm: $('#userNm').val(),
+            encoDt: $('#encoDt').val(),
+            rtrmDt: $('#rtrmDt').val(),
+            blgDsChgDt: $('#blgDsChgDt').val(),
+            dtyNm: $('#dtyNm').val(),
+            telNo: $('#telNo').val(),
+            rrno: $('#rrno').val(),
+            dutNm: $('#dutNm').val(),
+            emailAddr: $('#emailAddr').val()
         }
-        
-        registerEmployee(param);
+
+        registerEmployee(param, pathname);
     });
 
-    $(document).on('click', '.cancel_button', function(){
+    // 취소버튼 클릭
+    $(document).on('click', '.cancel_button', function () {
         history.go(-1);
     });
 });
@@ -34,7 +41,7 @@ $(function(){
 /**
  * 공통코드 호출
  */
- var getCommonCode = function () {
+var getCommonCode = function () {
     ajaxCall({
         method: 'GET',
         url: '/employee/getCommonCode',
@@ -66,12 +73,12 @@ $(function(){
  * @param {string} param.dutNm 직무
  * @param {string} param.emailAddr 이메일
  */
-var registerEmployee = function(param){
+var registerEmployee = function (param, pathname) {
 
     let regBirth = /([0-9]{2}(0[1-9]|1[0-2])(0[1-9]|[1,2][0-9]|3[0,1]))/;
     let regEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
 
-    if(isEmpty(param.blgDsCd)){
+    if (isEmpty(param.blgDsCd)) {
         openPopup({
             title: '실패',
             text: '소속구분을 입력해주세요.',
@@ -82,7 +89,7 @@ var registerEmployee = function(param){
                 });
             }
         });
-    } else if(isEmpty(param.blgNm)){
+    } else if (isEmpty(param.blgNm)) {
         openPopup({
             title: '실패',
             text: '소속을 입력해주세요.',
@@ -93,7 +100,7 @@ var registerEmployee = function(param){
                 });
             }
         });
-    } else if(isEmpty(param.zip)){
+    } else if (isEmpty(param.zip)) {
         openPopup({
             title: '실패',
             text: '우편번호를 입력해주세요.',
@@ -104,7 +111,7 @@ var registerEmployee = function(param){
                 });
             }
         });
-    } else if(isEmpty(param.addr)){
+    } else if (isEmpty(param.addr)) {
         openPopup({
             title: '실패',
             text: '주소를 입력해주세요.',
@@ -115,7 +122,7 @@ var registerEmployee = function(param){
                 });
             }
         });
-    } else if(isEmpty(param.userNm)){
+    } else if (isEmpty(param.userNm)) {
         openPopup({
             title: '실패',
             text: '이름을 입력해주세요.',
@@ -126,7 +133,7 @@ var registerEmployee = function(param){
                 });
             }
         });
-    } else if(isEmpty(param.encoDt)){
+    } else if (isEmpty(param.encoDt)) {
         openPopup({
             title: '실패',
             text: '입사일자를 입력해주세요.',
@@ -137,7 +144,7 @@ var registerEmployee = function(param){
                 });
             }
         });
-    } else if(isEmpty(param.dtyNm)){
+    } else if (isEmpty(param.dtyNm)) {
         openPopup({
             title: '실패',
             text: '직급을 입력해주세요.',
@@ -148,7 +155,7 @@ var registerEmployee = function(param){
                 });
             }
         });
-    } else if(isEmpty(param.telNo)){
+    } else if (isEmpty(param.telNo)) {
         openPopup({
             title: '실패',
             text: '전화번호를 입력해주세요.',
@@ -159,7 +166,7 @@ var registerEmployee = function(param){
                 });
             }
         });
-    } else if(param.rrno.length != 7){
+    } else if (param.rrno.length != 7) {
         openPopup({
             title: '실패',
             text: '주민등록번호는 7자리를 입력해주세요.',
@@ -170,7 +177,7 @@ var registerEmployee = function(param){
                 });
             }
         });
-    } else if(regBirth.test(param.rrno.substring(0, 6)) == false){
+    } else if (regBirth.test(param.rrno.substring(0, 6)) == false) {
         openPopup({
             title: '실패',
             text: '주민등록번호 앞7자리를 확인해주세요.',
@@ -181,7 +188,7 @@ var registerEmployee = function(param){
                 });
             }
         });
-    } else if(isEmpty(param.dutNm)){
+    } else if (isEmpty(param.dutNm)) {
         openPopup({
             title: '실패',
             text: '직무를 입력해주세요',
@@ -192,7 +199,7 @@ var registerEmployee = function(param){
                 });
             }
         });
-    } else if(regEmail.test(param.emailAddr) == false){
+    } else if (regEmail.test(param.emailAddr) == false) {
         openPopup({
             title: '실패',
             text: '이메일을 확인해주세요',
@@ -205,15 +212,15 @@ var registerEmployee = function(param){
         });
     } else {
         ajaxCall({
-            method : 'POST', 
-            url : '/employee/registerEmployee', 
-            data : param, 
-            success : openPopup({
-                title : '성공', 
-                text : '신규 직원 등록에 성공했습니다.', 
-                type : 'success', 
-                callback : function(){
-                    history.go(-1);
+            method: 'POST',
+            url: '/employee/registerEmployee',
+            data: param,
+            success: openPopup({
+                title: '성공',
+                text: '신규 직원 등록에 성공했습니다.',
+                type: 'success',
+                callback: function () {
+                    location.href = '/' + pathname + '/employeeList'
                 }
             })
         });
