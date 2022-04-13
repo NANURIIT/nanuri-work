@@ -2,6 +2,7 @@ package com.nanuri.work.business.equipment.service;
 
 import com.nanuri.work.business.equipment.dto.EquipmentDTO;
 import com.nanuri.work.business.equipment.mapper.EquipmentMapper;
+import com.nanuri.work.business.member.mapper.MemberMapper;
 import com.nanuri.work.com.security.AuthenticationFacade;
 
 import java.util.List;
@@ -14,7 +15,10 @@ public class EquipmentService {
 
     @Autowired
     private EquipmentMapper equipmentMapper;
-
+    
+    @Autowired
+    private MemberMapper memberMapper;
+    
     @Autowired
     private AuthenticationFacade facade;
     
