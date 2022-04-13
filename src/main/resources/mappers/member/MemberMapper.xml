@@ -132,7 +132,8 @@
 		   	   tel_no = #{telNo}, 
 		   	   rrno = #{rrno}, 
 		   	   dut_nm = #{dutNm}, 
-		   	   email_addr = #{emailAddr}
+		   	   email_addr = #{emailAddr}, 
+		   	   user_autr_nm = #{userAutrNm}
 		 WHERE user_id = #{userId}
 	</update>
 	
