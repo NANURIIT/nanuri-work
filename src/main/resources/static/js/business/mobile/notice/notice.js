@@ -5,6 +5,7 @@
 $(function () {
     searchBoardList(1);
 
+    // 검색 버튼 클릭
     $(document).on('click', '#noticeSearch', function () {
         param.searchType = $('#notice_search_type').val();
         param.searchKeyword = $('#notice_search_keyword').val();

@@ -27,6 +27,15 @@
 						<!-- <when test="'id'.equals(searchType)">
 							writer LIKE CONCAT('%', #{searchKeyword}, '%')
 						</when> -->
+						<!-- <when test="'name'.equals(searchType)">
+							AND T01.user_nm LIKE CONCAT('%' #{searchKeyword}, '%')
+						</when>
+						<when test="'telNo'.equals(searchType)">
+							AND T01.tel_no LIKE CONCAT('%' #{searchKeyword}, '%')
+						</when>
+						<when test="'emailAddr'.equals(searchType)">
+							AND T01.email_addr LIKE CONCAT('%' #{searchKeyword}, '%')
+						</when> -->
 					</choose>
 				</when>
 				<!-- 검색 유형이 없을 때 -->
