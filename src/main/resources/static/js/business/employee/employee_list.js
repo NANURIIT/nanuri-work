@@ -6,11 +6,35 @@ $(function () {
 
     // 직원 리스트 호출
     getEmployeeList(1);
+    let regDate = /^\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$/;
+
+    $(document).on('change', '#employee_search_type', function(){
+        if($('#employee_search_type').val() != 'lastModifyDate'){
+            $('#employee_search_keyword').attr('placeholder', '');
+        } else if($('#employee_search_type').val() == 'lastModifyDate') {
+            $('#employee_search_keyword').attr('placeholder', '2022-01-01');
+        }
+    });
 
     // 검색 버튼 클릭
     $(document).on('click', '#employeeSearch', function () {
+
         param.searchType = $('#employee_search_type').val();
         param.searchKeyword = $('#employee_search_keyword').val();
+
+        // 검색 조건이 최종등록일 일 때 날짜 형식이 안맞은 경우 해당 팝업창 띄움.
+        if($('#employee_search_type').val() == 'lastModifyDate' && !isEmpty(param.searchKeyword) && !regDate.test(param.searchKeyword)){
+            openPopup({
+                title : '실패', 
+                text : '날짜 형식을 확인해주세요', 
+                type : 'error', 
+                callback : function(){
+                    $(document).on('click', '.confirm', function(){
+                        $('#employee_search_keyword').focus();
+                    });
+                }
+            });
+        }
         getEmployeeList(1);
     });
 
@@ -52,7 +76,11 @@ var getEmployeeList = function (pageNo) {
                         EMPLOYEE_LIST_HTML += ' <td>' + tmpRow.dtlCnm + '</td>';
                     }
                     EMPLOYEE_LIST_HTML += ' <td>' + tmpRow.addr + '</td>';
-                    EMPLOYEE_LIST_HTML += ' <td>2022-03-23</td>';
+                    if(isEmpty(tmpRow.lastModifyDate)){
+                        EMPLOYEE_LIST_HTML += ' <td> - </td>';
+                    } else {
+                        EMPLOYEE_LIST_HTML += ' <td>'+tmpRow.lastModifyDate+'</td>';
+                    }
                     EMPLOYEE_LIST_HTML += ' <td>';
                     EMPLOYEE_LIST_HTML += '     <a class="download_link" href="#" download="">';
                     EMPLOYEE_LIST_HTML += '         <img src="/sample/admin/images/ico_download.png" alt="">';

@@ -32,7 +32,6 @@ var getEmployeeList = function (pageNo) {
         data: param,
         success: function (object) {
             let EMPLOYEE_LIST_HTML = '';
-            console.log('object', object.employeeList.length);
             if (object.employeeList.length > 0) {
                 let employeeList = object.employeeList;
                 param.totalDataNum = object.employeeTotalCount;
