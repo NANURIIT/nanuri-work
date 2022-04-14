@@ -11,7 +11,7 @@ $(function() {
     getCommonCode();
 
     if (mode == 'M') {
-        getAwardDetail(seqNo);
+        getEquipmentDetail(seqNo);
     }
  
     // 등록 버튼 클릭
@@ -61,11 +61,6 @@ $(function() {
         }
     });
 }
-
-/**
- * 장비 정보 호출 
- */
- 
 
 /**
  * 장비 정보 등록
@@ -126,7 +121,20 @@ var registerEquipment = function(params, pathname) {
 }
 
 /**
- * 장비 정보 상세조회
+ * 장비 정보 상세 조회
  * @param {number} seqNo 일련번호
- */    
+ */ 
+var getEquipmentDetail = function(seqNo) {
+    ajaxCall({
+        method: 'GET',
+        url: '/equipment/equipmentDetail' + seqNo,
+        success: function() {
+            $('#dtlCnm').val();
+            $('#modlNm').val();
+            $('#srlNo').val();
+            $('#pyDt').val();
+        }
+    });
+}
+   
 

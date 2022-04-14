@@ -1,15 +1,16 @@
 package com.nanuri.work.business.equipment.service;
 
-import com.nanuri.work.business.equipment.dto.EquipmentDTO;
-import com.nanuri.work.business.equipment.mapper.EquipmentMapper;
-import com.nanuri.work.business.member.dto.CommonCodeDTO;
-import com.nanuri.work.business.member.mapper.MemberMapper;
-import com.nanuri.work.com.security.AuthenticationFacade;
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.nanuri.work.business.equipment.dto.EquipmentDTO;
+import com.nanuri.work.business.equipment.mapper.EquipmentMapper;
+import com.nanuri.work.business.equipment.vo.EquipmentVO;
+import com.nanuri.work.business.member.dto.CommonCodeDTO;
+import com.nanuri.work.business.member.mapper.MemberMapper;
+import com.nanuri.work.com.security.AuthenticationFacade;
 
 @Service
 public class EquipmentService {
@@ -31,11 +32,6 @@ public class EquipmentService {
 	public List<CommonCodeDTO> getCommonCodeList(CommonCodeDTO params) {
 		return memberMapper.selectCommonCodeList(params);
 	}
-	
-    /* 장비 정보 리스트*/
-    public List<EquipmentDTO> getEquipmentList(){
-    	return equipmentMapper.selectEducationList(facade.getDetails().getUserId());
-    }
     
     /* 장비 정보 등록*/
     public boolean registeEquipment(EquipmentDTO params) {
@@ -52,5 +48,30 @@ public class EquipmentService {
 
 		return (queryResult > 0);
     }
+    
+    /* 장비 정보 리스트*/
+    public List<EquipmentVO> getEquipmentList(){
+    	return equipmentMapper.selectEquipmentList(facade.getDetails().getUserId());
+    }
+    
+    /* 장비 정보 리스트 수정 */
+    public EquipmentDTO getEquipmentDetail(Long seqNo) {
+		return equipmentMapper.selectEquipmentDetail(seqNo);
+    }
+    
+    /* 장비 정보 삭제 */
+    public boolean deleteEquipment(EquipmentDTO params){
+		int queryResult = 0;
+		
+		EquipmentDTO equipment = equipmentMapper.selectEquipmentDetail(params.getSeqNo());
+		
+		if (equipment != null && "N".equals(equipment.getDelYn())) {
+			params.setMdfpNm(facade.getDetails().getUsername());
+			queryResult = equipmentMapper.deleteEquipment(params);
+		}
+
+		return (queryResult == 1) ? true : false;
+    }
+
 
 }

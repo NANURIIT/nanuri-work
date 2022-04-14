@@ -32,6 +32,9 @@ $(function () {
     // 사용가능기술(언어) 리스트 호출
     getSkillList();
 
+    // 장비 정보 호출
+    getEquipmentList();
+
     // 학력 수정
     $(document).on('click', '.updateSchoolCareer', function () {
         if (uri.indexOf('admin') > -1) {
@@ -97,6 +100,7 @@ $(function () {
 
     // 프로젝트이력 수정
     $(document).on('click', '.updateCareerhistory', function(){
+        console.log('asdf');
         if (uri.indexOf('admin') > -1) {
             location.href = '/admin/careerhistoryWrite?seqNo=' + $(this).attr('id');
         } else if (uri.indexOf('mobile') > -1) {
@@ -104,6 +108,14 @@ $(function () {
         }
     });
 
+    // 장비 정보 수정
+    $(document).on('click', '.updateEquipment', function(){
+        if (uri.indexOf('admin') > -1) {
+            location.href = '/admin/equipmentWrite?seqNo=' + $(this).attr('id');
+        } else if (uri.indexOf('mobile') > -1) {
+            location.href = '/mobile/equipmentWrite?seqNo=' + $(this).attr('id');
+        }
+    });
 
     // 학력 삭제
     $(document).on('click', '.deleteSchoolCareer', function () {
@@ -144,6 +156,12 @@ $(function () {
     $(document).on('click', '.deleteCareerhistory', function () {
         confirmDelete($(this).attr('id'), deleteCareerhistory);
     });
+
+    // 장비 정보 삭제
+    $(document).on('click', '.deleteEquipment', function () {
+        confirmDelete($(this).attr('id'), deleteEquipment);
+    });
+
 });
 
 /**
@@ -514,6 +532,46 @@ var deleteCareerhistory = function (params) {
         data: params,
         success: deleteCB(getCareerhistoryList)
     })
+}
+
+/**
+ * 장비 정보 리스트 함수
+ */
+ var getEquipmentList = function() {
+    ajaxCall({
+        method: 'GET',
+        url: '/equipment/equipmentList',
+        success: function (object) {
+            console.log(object);
+            let EQUIPMENT_HTML = '';
+            for (let i = 0; i < object.length; i++) {
+                let tmpRow = object[i];
+
+                EQUIPMENT_HTML += '<div class="list_info">';
+                EQUIPMENT_HTML += '     <div class="list_info_title">' + tmpRow.dtlCnm + '</div>';
+                EQUIPMENT_HTML += '     <div class="list_info_desc">' + tmpRow.srlNo + ', ' + tmpRow.pyDt + '</div>';
+                EQUIPMENT_HTML += '     <div class="list_info_set">';
+                EQUIPMENT_HTML += '         <button class="updateEquipment" id="'+tmpRow.seqNo+'">수정</button>';
+                EQUIPMENT_HTML += '         <button class="deleteEquipment" id="' + tmpRow.seqNo + '">삭제</button>';
+                EQUIPMENT_HTML += '     </div>';
+                EQUIPMENT_HTML += '</div>';
+            }
+            $('#equipmentList').html(EQUIPMENT_HTML);
+        }
+    })
+ }
+
+ /**
+ * 장비 정보 삭제 함수
+ * @param {number} params.seqNo 일련번호
+ */
+  var deleteEquipment = function (params) {
+    ajaxCall({
+        method: 'DELETE',
+        url: '/equipment/equipmentDelete',
+        data: params,
+        success: deleteCB(getEquipmentList)
+    });
 }
 
 /**

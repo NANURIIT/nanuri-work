@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.nanuri.work.business.equipment.mapper.EquipmentMapper">
 	
+	<!-- 공통코드 호출-->
 	<select id="selectCommonCodeList" parameterType="com.nanuri.work.business.member.dto.CommonCodeDTO" resultType="com.nanuri.work.business.member.dto.CommonCodeDTO">
 		SELECT ds_cd,
 			   dtl_cd,
@@ -30,21 +31,43 @@
 			#{pyDt}
 		)  
     </insert>
-    <!-- 장비 리스트 출력 -->
-    <select id="selectEducationList" parameterType="com.nanuri.work.business.equipment.dto.EquipmentDTO">
-		SELECT T01.modl_nm,			/* 모델명 */
+    <!-- 장비 정보 리스트 출력 -->
+    <select id="selectEquipmentList" parameterType="com.nanuri.work.business.equipment.dto.EquipmentDTO" resultType="com.nanuri.work.business.equipment.vo.EquipmentVO">
+		SELECT T02.dtl_cnm, 		/* 상세코드명 */
+			   T01.modl_nm,			/* 모델명 */
 	   		   T01.srl_no,			/* 시리얼번호 */
-	   		   T01.py_dt			/* 지급일자 */
-  		  FROM eqpm_info			AS T01;
+	   	   	   T01.py_dt			/* 지급일자 */
+  	 	  FROM eqpm_info			AS T01
+	 LEFT JOIN comn_cd 				AS T02
+			ON T01.eqpm_kd_cd 		= T02.dtl_cd
+		 WHERE T01.user_id 			= #{userId} 
     </select>
-
+    
+    <!-- 장비 정보 상세 출력 -->
+    <select id="selectEquipmentDetail" parameterType="long" resultType="com.nanuri.work.business.equipment.dto.EquipmentDTO">
+    SELECT T02.dtl_cnm, 		/* 상세코드명 */
+		   T01.modl_nm,			/* 모델명 */
+	   	   T01.srl_no,			/* 시리얼번호 */
+	   	   T01.py_dt			/* 지급일자 */
+  	  FROM eqpm_info			AS T01
+ LEFT JOIN comn_cd 				AS T02
+		ON T01.eqpm_kd_cd 		= T02.dtl_cd
+	 WHERE T01.seq_no 			= #{seqNo} 
+    
+    </select>
+    
     <!-- 장비 정보 수정 -->
-    <update id="updateEquipment" parameterType="com.nanuri.work.business.equipment.dto.EquipmentDTO">
-
+    <update id="updateEquipment" parameterType="com.nanuri.work.business.equipment.dto.EquipmentDTO" >
+		UPDATE eqpm_info 
+   		   SET modl_nm = #{modlNm},				/* 모델명 */	
+	   		   eqpm_kd_cd = #{eqpmKdCd}, 		/* 장비종류코드 */
+	   		   srl_no = #{srlNo},				/* 시리얼번호 */
+	   		   py_dt = #{pyDt}					/* 지급일자 */
+ 		 WHERE seq_no = #{seqNo}  
     </update>
 
     <!-- 장비 정보 삭제 -->
     <delete id="deleteEquipment" parameterType="com.nanuri.work.business.equipment.dto.EquipmentDTO">
-
+	
     </delete>
 </mapper>
