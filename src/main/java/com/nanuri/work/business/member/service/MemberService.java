@@ -71,6 +71,12 @@ public class MemberService {
 		return (queryResult > 0);
 	}
 
+	/**
+	 * 비밀번호 변경
+	 * @param params HashMap<"currPwd", 현재 비밀번호>
+	 * @param params HashMap<"newPwd", 새 비밀번호>
+	 * @return boolean 변경여부
+	 */
 	public boolean changePassword(HashMap<String, String> params) {
 		
 		int queryResult = 0;
