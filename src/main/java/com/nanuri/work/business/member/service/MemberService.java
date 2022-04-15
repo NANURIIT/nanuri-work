@@ -22,6 +22,7 @@ import com.nanuri.work.business.member.dto.WorkhistoryDTO;
 import com.nanuri.work.business.member.mapper.MemberMapper;
 import com.nanuri.work.business.member.vo.EmployeeVO;
 import com.nanuri.work.com.code.MemberLevelCode;
+import com.nanuri.work.com.login.mapper.LoginMapper;
 import com.nanuri.work.com.security.AuthenticationFacade;
 
 import lombok.extern.slf4j.Slf4j;
@@ -32,6 +33,9 @@ public class MemberService {
 
 	@Autowired
 	private MemberMapper memberMapper;
+	
+	@Autowired
+	private LoginMapper loginMapper;
 
 	@Autowired
 	private AuthenticationFacade facade;
@@ -81,7 +85,9 @@ public class MemberService {
 		
 		int queryResult = 0;
 		
-		if(!passwordEncoder.matches(params.get("currPwd"), facade.getDetails().getPassword())) {
+		MemberDTO member = loginMapper.getLoginUserDetailsVO(facade.getDetails().getUserId());
+		
+		if(!passwordEncoder.matches(params.get("currPwd"), member.getUserPassword())) {
 			return false;
 		}
 		

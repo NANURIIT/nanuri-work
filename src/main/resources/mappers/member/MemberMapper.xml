@@ -100,23 +100,6 @@
 				</when>
 		 	</choose>
 		 </if>
-		<!-- SELECT T01.user_id, 
-			   T01.user_nm, 
-			   T01.dty_nm, 
-			   T01.tel_no, 
-			   T01.email_addr, 
-			   T03.dtl_cnm, 
-			   T01.addr
-		  FROM mem_bsc_info T01
-	 LEFT JOIN mem_scca T02
-	        ON T01.user_id = T02.user_id
-	 LEFT JOIN comn_cd T03
-	 		ON T02.scca_ds_cd = T03.dtl_cd
-	 	 WHERE T01.user_autr_nm != 'ADMIN'
-	 	 	<include refid="CommonMapper.search" />
-	  GROUP BY T01.user_nm, 
-	  		   T03.ds_cd 
-	  	<include refid="CommonMapper.paging" /> -->
 	</select>
 	
 	<!-- 총 직원 수 출력 -->
