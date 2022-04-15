@@ -4,6 +4,21 @@
 /** onload **/
 $(function(){
 
+    let pathname = new URL(document.location.href).pathname[1];
+
+    if(isEmpty(pathname)){
+        openPopup({
+            title : '아이디와 비밀번호가 같습니다.', 
+            text : '비밀번호를 변경해주세요', 
+            type : 'error', 
+            callback : function(){
+                $(document).on('click', '.confirm', function(){
+                    $('#currPwd').focus();
+                });
+            }
+        });
+    }
+
     let regPassword = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*()/.,?])[A-Za-z\d!@#$%^&*()/.,?]{8,}$/;
 
     // 변경 버튼 클릭
