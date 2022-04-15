@@ -70,10 +70,10 @@ var getEmployeeList = function (pageNo) {
                     EMPLOYEE_LIST_HTML += ' <td>' + tmpRow.dtyNm + '</td>';
                     EMPLOYEE_LIST_HTML += ' <td>' + formatPhoneNo(tmpRow.telNo) + '</td>';
                     EMPLOYEE_LIST_HTML += ' <td>' + tmpRow.emailAddr + '</td>';
-                    if (isEmpty(tmpRow.dtlCnm)) {
+                    if (isEmpty(tmpRow.schoolCareer)) {
                         EMPLOYEE_LIST_HTML += ' <td> - </td>'
                     } else {
-                        EMPLOYEE_LIST_HTML += ' <td>' + tmpRow.dtlCnm + '</td>';
+                        EMPLOYEE_LIST_HTML += ' <td>' + tmpRow.schoolCareer + '</td>';
                     }
                     EMPLOYEE_LIST_HTML += ' <td>' + tmpRow.addr + '</td>';
                     if(isEmpty(tmpRow.lastModifyDate)){

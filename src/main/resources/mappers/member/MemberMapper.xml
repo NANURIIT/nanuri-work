@@ -68,7 +68,7 @@
 		  		   T01.dty_nm, 
 		  		   T01.tel_no, 
 		  		   T01.email_addr, 
-		  		   T03.dtl_cnm, 
+		  		   T03.dtl_cnm 												AS school_career, 
 		  		   T01.addr, 
 		  		   DATE_FORMAT(IFNULL(T04.mod_dtm, T04.rg_dtm), '%Y-%m-%d') AS last_modify_date
 		  	  FROM mem_bsc_info T01

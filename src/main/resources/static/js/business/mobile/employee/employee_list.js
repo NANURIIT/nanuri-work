@@ -14,6 +14,10 @@ $(function () {
         getEmployeeList(1);
     });
 
+    $(document).on('click', '#userNm', function(){
+        console.log($(this).attr('id'));
+    });
+
 });
 
 let param = {
@@ -40,7 +44,7 @@ var getEmployeeList = function (pageNo) {
                     let tmpRow = employeeList[i];
                     EMPLOYEE_LIST_HTML += '<tr>';
                     EMPLOYEE_LIST_HTML += ' <td>';
-                    EMPLOYEE_LIST_HTML += '     <a>' + tmpRow.userNm + '</a>';
+                    EMPLOYEE_LIST_HTML += '     <a id="userNm">' + tmpRow.userNm + '</a>';
                     EMPLOYEE_LIST_HTML += ' </td>';
                     EMPLOYEE_LIST_HTML += ' <td>' + formatPhoneNo(tmpRow.telNo) + '</td>';
                     EMPLOYEE_LIST_HTML += ' <td>' + tmpRow.emailAddr + '</td>';
