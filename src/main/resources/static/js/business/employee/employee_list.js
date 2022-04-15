@@ -8,6 +8,7 @@ $(function () {
     getEmployeeList(1);
     let regDate = /^\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$/;
 
+    // 검색 타입 변경
     $(document).on('change', '#employee_search_type', function(){
         if($('#employee_search_type').val() != 'lastModifyDate'){
             $('#employee_search_keyword').attr('placeholder', '');
@@ -48,6 +49,10 @@ let param = {
     pageViewNo: 10
 };
 
+/**
+ * 직원목록 리스트 출력
+ * @param {number} pageNo 페이지 번호
+ */
 var getEmployeeList = function (pageNo) {
     param.thisPageNo = pageNo;
     ajaxCall({

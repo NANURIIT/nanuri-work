@@ -39,6 +39,14 @@ $(function(){
     });
 });
 
+/**
+ * 외국어능력 등록
+ * @param {string} params.frgnNm 외국어
+ * @param {string} params.prfcnNm 숙련도
+ * @param {string} params.etcNm 기타
+ * @param {string} params.seqNo 일련번호
+ * @param {string} pathname pc, mobile구분자 -> admin or mobile
+ */
 var registerLanguage = function(params, pathname){
     if(isEmpty(params.frgnNm)){
         openPopup({

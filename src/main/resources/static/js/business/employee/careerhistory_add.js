@@ -51,6 +51,9 @@ $(function(){
     });
 });
 
+/**
+ * 공통코드 호출
+ */
 var getCommonCode = function(){
     ajaxCall({
         method : 'GET', 
@@ -246,6 +249,10 @@ var registerCareerhistory = function(params, pathname){
     }
 }
 
+/**
+ * 프로젝트 이력 상세조회
+ * @param {number seqNo 일련번호
+ */
 var getCareerhistoryDetail = function(seqNo){
     ajaxCall({
         method : 'GET', 
