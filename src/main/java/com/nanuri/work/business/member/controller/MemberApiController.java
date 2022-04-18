@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nanuri.work.business.member.dto.AwardDTO;
@@ -57,8 +56,7 @@ public class MemberApiController {
 	@PostMapping(value = "/registerEmployee")
 	public String registerEmployee(@RequestBody MemberDTO params) {
 		String message = "";
-
-		log.debug("registerEmployee");
+		
 		try {
 			boolean isRegistered = memberService.registerEmployee(params);
 			if (isRegistered == false) {
@@ -82,6 +80,16 @@ public class MemberApiController {
 		log.debug("params : " +params.getUserNm());
 		log.debug("params : " + params.getTelNo());
 		return memberService.selectEmployeeDetail(params);
+	}
+	
+	/**
+	 * 직원정보 수정
+	 * @param params
+	 * @return
+	 */
+	@PatchMapping(value = "/updateEmployee")
+	public boolean updateEmployee(@RequestBody MemberDTO params) {
+		return memberService.updateEmployee(params);
 	}
 	
 	/**

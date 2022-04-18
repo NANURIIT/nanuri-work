@@ -17,6 +17,18 @@ $(function () {
         }
     });
 
+    $(document).on('click', '#userNm', function(){
+        let userNm = $(this).text();
+        let telNo = $(this).parent().parent().children('#telNo').text().replaceAll('-', '');
+
+        let params = {
+            userNm : userNm, 
+            telNo : telNo
+        };
+
+        localStorage.setItem('userInfo', JSON.stringify(params));
+    });
+
     // 검색 버튼 클릭
     $(document).on('click', '#employeeSearch', function () {
 
@@ -71,9 +83,9 @@ var getEmployeeList = function (pageNo) {
                     EMPLOYEE_LIST_HTML += ' <td>';
                     EMPLOYEE_LIST_HTML += '     <input type="checkbox">';
                     EMPLOYEE_LIST_HTML += ' </td>';
-                    EMPLOYEE_LIST_HTML += ' <td>' + tmpRow.userNm + '</td>';
+                    EMPLOYEE_LIST_HTML += ' <td><a href="/admin/employeeAdd" id="userNm">' + tmpRow.userNm + '</a></td>';
                     EMPLOYEE_LIST_HTML += ' <td>' + tmpRow.dtyNm + '</td>';
-                    EMPLOYEE_LIST_HTML += ' <td>' + formatPhoneNo(tmpRow.telNo) + '</td>';
+                    EMPLOYEE_LIST_HTML += ' <td id="telNo">' + formatPhoneNo(tmpRow.telNo) + '</td>';
                     EMPLOYEE_LIST_HTML += ' <td>' + tmpRow.emailAddr + '</td>';
                     if (isEmpty(tmpRow.schoolCareer)) {
                         EMPLOYEE_LIST_HTML += ' <td> - </td>'
