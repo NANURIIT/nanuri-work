@@ -6,10 +6,18 @@ $(function () {
 
     let uri = new URL(document.location.href).pathname;
     let pathname = uri.split('/')[1];       // admin -> pc화면, mobile -> mobile화면
-
+    let mode = isEmpty(localStorage) ? 'W' : 'M';
+    
     getCommonCode();
 
-    console.log(1);
+    if(mode == 'M'){
+        let params = {
+            userNm : JSON.parse(localStorage.getItem('userInfo')).userNm, 
+            telNo : JSON.parse(localStorage.getItem('userInfo')).telNo
+        };
+
+        getEmployeeDetail(params);
+    }
 
     // 저장버튼 클릭
     $(document).on('click', '#save', function () {
@@ -28,12 +36,17 @@ $(function () {
             dutNm: $('#dutNm').val(),
             emailAddr: $('#emailAddr').val()
         }
-
+        if(mode == 'M'){
+            localStorage.clear();
+        }
         registerEmployee(param, pathname);
     });
 
     // 취소버튼 클릭
     $(document).on('click', '.cancel_button', function () {
+        if(mode == 'M'){
+            localStorage.clear();
+        }
         history.go(-1);
     });
 });
@@ -225,4 +238,33 @@ var registerEmployee = function (param, pathname) {
             })
         });
     }
+}
+
+/**
+ * 직원정보 호출
+ * @param {string} params.userNm 이름
+ * @param {string} params.telNo 전화번호
+ */
+var getEmployeeDetail = function(params){
+    ajaxCall({
+        method : 'GET', 
+        url : '/employee/getEmployeeDetail', 
+        data : params, 
+        success : function(object){
+            console.log(object);
+            $('#blgDsCd').val(object.blgDsCd);
+            $('#blgNm').val(object.blgNm);
+            $('#zip').val(object.zip);
+            $('#addr').val(object.addr);
+            $('#userNm').val(object.userNm);
+            $('#encoDt').val(object.encoDt);
+            $('#rtrmDt').val(object.rtrmDt);
+            $('#blgDsChgDt').val(object.blgDsChgDt);
+            $('#dtyNm').val(object.dtyNm);
+            $('#telNo').val(object.telNo);
+            $('#rrno').val(object.rrno);
+            $('#dutNm').val(object.dutNm);
+            $('#emailAddr').val(object.emailAddr);
+        }
+    })
 }

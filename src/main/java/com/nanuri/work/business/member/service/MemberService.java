@@ -74,6 +74,15 @@ public class MemberService {
 
 		return (queryResult > 0);
 	}
+	
+	/**
+	 * 직원정보 상세조회
+	 * @param params 이름, 전화번호
+	 * @return 직원정보
+	 */
+	public MemberDTO selectEmployeeDetail(MemberDTO params) {
+		return memberMapper.selectEmployeeDetail(params);
+	}
 
 	/**
 	 * 비밀번호 변경

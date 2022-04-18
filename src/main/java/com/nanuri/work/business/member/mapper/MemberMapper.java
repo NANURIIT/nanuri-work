@@ -23,6 +23,7 @@ public interface MemberMapper {
 	public List<EmployeeVO> selectEmployeeList(EmployeeVO params);		/* 직원 목록 출력 */
 	public int selectTotalCountEmployee();
 	public int insertEmployee(MemberDTO params);						/* 직원 등록 */
+	public MemberDTO selectEmployeeDetail(MemberDTO params);					/* 직원 상세조회 */
 	public int changePassword(HashMap<String, String> params);			/* 비밀번호 변경 */
 	
 	/* 기본정보 */

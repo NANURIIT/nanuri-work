@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nanuri.work.business.member.dto.AwardDTO;
@@ -71,6 +72,23 @@ public class MemberApiController {
 		return message;
 	}
 	
+	/**
+	 * 직원 정보 상세 조회
+	 * @param params
+	 * @return
+	 */
+	@GetMapping(value = "/getEmployeeDetail")
+	public MemberDTO getEmployeeDetail(MemberDTO params) {
+		log.debug("params : " +params.getUserNm());
+		log.debug("params : " + params.getTelNo());
+		return memberService.selectEmployeeDetail(params);
+	}
+	
+	/**
+	 * 비밀번호 변경
+	 * @param params
+	 * @return
+	 */
 	@PatchMapping(value = "/changePassword")
 	public boolean changePassword(@RequestBody HashMap<String, String> params) {
 		return memberService.changePassword(params);
