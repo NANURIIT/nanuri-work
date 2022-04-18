@@ -56,8 +56,7 @@ public class MemberApiController {
 	@PostMapping(value = "/registerEmployee")
 	public String registerEmployee(@RequestBody MemberDTO params) {
 		String message = "";
-
-		log.debug("registerEmployee");
+		
 		try {
 			boolean isRegistered = memberService.registerEmployee(params);
 			if (isRegistered == false) {
@@ -71,6 +70,33 @@ public class MemberApiController {
 		return message;
 	}
 	
+	/**
+	 * 직원 정보 상세 조회
+	 * @param params
+	 * @return
+	 */
+	@GetMapping(value = "/getEmployeeDetail")
+	public MemberDTO getEmployeeDetail(MemberDTO params) {
+		log.debug("params : " +params.getUserNm());
+		log.debug("params : " + params.getTelNo());
+		return memberService.selectEmployeeDetail(params);
+	}
+	
+	/**
+	 * 직원정보 수정
+	 * @param params
+	 * @return
+	 */
+	@PatchMapping(value = "/updateEmployee")
+	public boolean updateEmployee(@RequestBody MemberDTO params) {
+		return memberService.updateEmployee(params);
+	}
+	
+	/**
+	 * 비밀번호 변경
+	 * @param params
+	 * @return
+	 */
 	@PatchMapping(value = "/changePassword")
 	public boolean changePassword(@RequestBody HashMap<String, String> params) {
 		return memberService.changePassword(params);
