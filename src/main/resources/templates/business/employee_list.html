@@ -48,14 +48,14 @@
                         <div class="notice_search notice_search_option">
                             <form action="#">
                                 <div class="notice_search_box">
-                                    <select name="date">
-                                        <option value="이름">이름</option>
-                                        <option value="전화번호">전화번호</option>
-                                        <option value="이메일">이메일</option>
-                                        <option value="최종등록일">최종등록일</option>
+                                    <select id="employee_search_type" name="date">
+                                        <option value="name">이름</option>
+                                        <option value="telNo">전화번호</option>
+                                        <option value="emailAddr">이메일</option>
+                                        <option value="lastModifyDate">최종등록일</option>
                                     </select>
-                                    <input name="notice_search" type="text">
-                                    <a href="#">검색</a>
+                                    <input id="employee_search_keyword" name="notice_search" type="text">
+                                    <a id="employeeSearch">검색</a>
                                 </div>
                             </form>
                         </div>
@@ -94,60 +94,7 @@
                                 </tr>
                             </thead>
                             <tbody id="employeeList">
-                                <tr>
-                                    <td colspan="9">직원 정보가 없습니다.</td>
-                                </tr>
-                                <!-- <tr>
-                                    <td>
-                                        <input type="checkbox">
-                                    </td>
-                                    <td>홍길동</td>
-                                    <td>사원</td>
-                                    <td>010-1234-5678</td>
-                                    <td>nanuri@nanuri.com</td>
-                                    <td>대학교</td>
-                                    <td>서울시 영등포구 선유로 49길 4 SK1타워 805호</td>
-                                    <td>2022-03-23</td>
-                                    <td>
-                                        <a class="download_link" href="#" download="">
-                                            <img th:src="@{/sample/admin/images/ico_download.png}" alt="">
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <input type="checkbox">
-                                    </td>
-                                    <td>홍길동</td>
-                                    <td>사원</td>
-                                    <td>010-1234-5678</td>
-                                    <td>nanuri@nanuri.com</td>
-                                    <td>대학교</td>
-                                    <td>서울시 영등포구 선유로 49길 4 SK1타워 805호</td>
-                                    <td>2022-03-23</td>
-                                    <td>
-                                        <a class="download_link" href="#" download="">
-                                            <img th:src="@{/sample/admin/images/ico_download.png}" alt="">
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <input type="checkbox">
-                                    </td>
-                                    <td>홍길동</td>
-                                    <td>사원</td>
-                                    <td>010-1234-5678</td>
-                                    <td>nanuri@nanuri.com</td>
-                                    <td>대학교</td>
-                                    <td>서울시 영등포구 선유로 49길 4 SK1타워 805호</td>
-                                    <td>2022-03-23</td>
-                                    <td>
-                                        <a class="download_link" href="#" download="">
-                                            <img th:src="@{/sample/admin/images/ico_download.png}" alt="">
-                                        </a>
-                                    </td>
-                                </tr> -->
+                                <!-- employeeList -->
                             </tbody>
                         </table>
                     </div>

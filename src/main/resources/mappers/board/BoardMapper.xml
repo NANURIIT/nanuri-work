@@ -46,6 +46,7 @@
 	       <include refid="CommonMapper.paging" />
 	</select>
 	
+	<!-- 직원공개 + 전체공개 게시글 리스트 호출 -->
 	<select id="selectPrivateBoardList" parameterType="com.nanuri.work.business.board.dto.BoardDTO" resultType="com.nanuri.work.business.board.dto.BoardDTO">
 		SELECT
 			  <include refid="boardColumns" />

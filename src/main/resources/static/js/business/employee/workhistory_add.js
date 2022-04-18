@@ -41,6 +41,16 @@ $(function () {
     });
 });
 
+/**
+ * 회사소속이력 등록
+ * @param {*} params.wrkplNm 근무처
+ * @param {*} params.encoYm 입사년월
+ * @param {*} params.rtrmYm 퇴사년월
+ * @param {*} params.dtyNm 직책
+ * @param {*} params.chrgBsnNm 담당업무
+ * @param {*} params.seqNo 일련번호
+ * @param {*} pathname admin or mobile
+ */
 var registerWorkhistory = function (params, pathname) {
     if (isEmpty(params.wrkplNm)) {
         openPopup({

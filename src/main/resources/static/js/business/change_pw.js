@@ -4,6 +4,23 @@
 /** onload **/
 $(function(){
 
+    let pathname = new URL(document.location.href).pathname[1];
+
+    if(isEmpty(pathname)){
+        openPopup({
+            title : '아이디와 비밀번호가 같습니다.', 
+            text : '비밀번호를 변경해주세요', 
+            type : 'error', 
+            callback : function(){
+                $(document).on('click', '.confirm', function(){
+                    $('#currPwd').focus();
+                });
+            }
+        });
+    }
+
+    let regPassword = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*()/.,?])[A-Za-z\d!@#$%^&*()/.,?]{8,}$/;
+
     // 변경 버튼 클릭
     $(document).on('click', '#change', function(){
         let params = {
@@ -12,7 +29,18 @@ $(function(){
             confirmNewPwd : $('#confirmNewPwd').val()
         }
         
-        if(params.currPwd == params.newPwd){
+        if(!regPassword.test(params.newPwd)){
+            openPopup({
+                title : '실패', 
+                text : '비밀번호는 영어, 숫자, 특수문자 포함 8자리 이상 입력해주세요.', 
+                type : 'error', 
+                callback : function(){
+                    $(document).on('click', '.confirm', function () {
+                        $('#newPwd').focus();
+                    });
+                }
+            });
+        } else if(params.currPwd == params.newPwd){
             openPopup({
                 title : '실패', 
                 text : '이미 사용하고 있는 비밀번호 입니다. 다른 비밀번호를 입력해주세요.', 

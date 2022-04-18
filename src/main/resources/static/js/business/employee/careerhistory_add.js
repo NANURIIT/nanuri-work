@@ -51,11 +51,14 @@ $(function(){
     });
 });
 
+/**
+ * 공통코드 호출
+ */
 var getCommonCode = function(){
     ajaxCall({
         method : 'GET', 
         url : '/employee/getCommonCode', 
-        data : {dsCd : 'role'}, 
+        data : {dsCd : 'ROLE'}, 
         success : function(object){
             let COMMON_CODE_HTML = '';
             for(let i = 0; i < object.length; i++){
@@ -246,6 +249,10 @@ var registerCareerhistory = function(params, pathname){
     }
 }
 
+/**
+ * 프로젝트 이력 상세조회
+ * @param {number seqNo 일련번호
+ */
 var getCareerhistoryDetail = function(seqNo){
     ajaxCall({
         method : 'GET', 

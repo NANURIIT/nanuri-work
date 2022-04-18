@@ -623,6 +623,12 @@ var addDot = function (date) {
     }
 }
 
+/**
+ * 기간 출력 함수
+ * @param {string} d1 날짜1
+ * @param {string} d2 날짜2
+ * @returns 기간
+ */
 var getPeriod = function (d1, d2) {
     let date1 = d1.split('.');
     let date2 = d2.split('.');
