@@ -22,8 +22,6 @@ $(function() {
             srlNo : $('#srlNo').val(),
             pyDt : $('#pyDt').val()
         };
-        console.log(params.modlNm);
-        console.log(params.eqpmKdCd);
         if (mode == 'W') {
             registerEquipment(params, pathname);
         } else if (mode == 'M') {
@@ -69,7 +67,6 @@ $(function() {
  * @param {string} params.pyDt 지급일자
  */
 var registerEquipment = function(params, pathname) {
-    console.log(params);
     if(isEmpty(params.modlNm)){
         openPopup({
             title : '실패',
@@ -127,12 +124,12 @@ var registerEquipment = function(params, pathname) {
 var getEquipmentDetail = function(seqNo) {
     ajaxCall({
         method: 'GET',
-        url: '/equipment/equipmentDetail' + seqNo,
-        success: function() {
-            $('#dtlCnm').val();
-            $('#modlNm').val();
-            $('#srlNo').val();
-            $('#pyDt').val();
+        url: '/equipment/equipmentDetail/' + seqNo,
+        success: function (object) {
+            $('#eqType').val(object.eqType);
+            $('#modlNm').val(object.modlNm);
+            $('#srlNo').val(object.srlNo);
+            $('#pyDt').val(object.pyDt);
         }
     });
 }

@@ -32,11 +32,12 @@
 		)  
     </insert>
     <!-- 장비 정보 리스트 출력 -->
-    <select id="selectEquipmentList" parameterType="com.nanuri.work.business.equipment.dto.EquipmentDTO" resultType="com.nanuri.work.business.equipment.vo.EquipmentVO">
-		SELECT T02.dtl_cnm, 		/* 상세코드명 */
-			   T01.modl_nm,			/* 모델명 */
-	   		   T01.srl_no,			/* 시리얼번호 */
-	   	   	   T01.py_dt			/* 지급일자 */
+    <select id="selectEquipmentList" parameterType="string" resultType="com.nanuri.work.business.equipment.vo.EquipmentVO">
+		SELECT T01.seq_no,							/* 일련번호 */
+			   T02.dtl_cnm 			AS eq_type, 	/* 상세코드명 */
+			   T01.modl_nm,							/* 모델명 */
+	   		   T01.srl_no,							/* 시리얼번호 */
+	   	   	   T01.py_dt							/* 지급일자 */
   	 	  FROM eqpm_info			AS T01
 	 LEFT JOIN comn_cd 				AS T02
 			ON T01.eqpm_kd_cd 		= T02.dtl_cd
@@ -45,10 +46,11 @@
     
     <!-- 장비 정보 상세 출력 -->
     <select id="selectEquipmentDetail" parameterType="long" resultType="com.nanuri.work.business.equipment.dto.EquipmentDTO">
-    SELECT T02.dtl_cnm, 		/* 상세코드명 */
-		   T01.modl_nm,			/* 모델명 */
-	   	   T01.srl_no,			/* 시리얼번호 */
-	   	   T01.py_dt			/* 지급일자 */
+    SELECT T01.seq_no,							/* 일련번호 */
+    	   T02.dtl_cnm 			AS eq_type, 	/* 상세코드명 */
+		   T01.modl_nm,							/* 모델명 */
+	   	   T01.srl_no,							/* 시리얼번호 */
+	   	   T01.py_dt							/* 지급일자 */
   	  FROM eqpm_info			AS T01
  LEFT JOIN comn_cd 				AS T02
 		ON T01.eqpm_kd_cd 		= T02.dtl_cd

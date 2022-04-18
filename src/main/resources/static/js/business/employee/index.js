@@ -548,7 +548,7 @@ var deleteCareerhistory = function (params) {
                 let tmpRow = object[i];
 
                 EQUIPMENT_HTML += '<div class="list_info">';
-                EQUIPMENT_HTML += '     <div class="list_info_title">' + tmpRow.dtlCnm + '</div>';
+                EQUIPMENT_HTML += '     <div class="list_info_title">' + tmpRow.eqType + '</div>';
                 EQUIPMENT_HTML += '     <div class="list_info_desc">' + tmpRow.srlNo + ', ' + tmpRow.pyDt + '</div>';
                 EQUIPMENT_HTML += '     <div class="list_info_set">';
                 EQUIPMENT_HTML += '         <button class="updateEquipment" id="'+tmpRow.seqNo+'">수정</button>';

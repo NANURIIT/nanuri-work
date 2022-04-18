@@ -15,4 +15,6 @@ public class EquipmentDTO extends CommonDTO {
     private String srlNo;        /* 시리얼번호 */
     private String pyDt;         /* 지급일자 */
     private String wdrwDt;       /* 회수일자 */
+	private String eqType;		 /* 상세코드명 */
+
 }

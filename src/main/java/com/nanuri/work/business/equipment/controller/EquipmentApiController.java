@@ -53,8 +53,9 @@ public class EquipmentApiController {
 		return equipmentService.getEquipmentList();
 	}
 	
+    /* 장비 정보 리스트 수정 */
 	@GetMapping(value = "/equipmentDetail/{seqNo}")
-	public EquipmentDTO equipmentDetail(@PathVariable(value = "seqNo", required = true) Long seqNo) {		
+	public EquipmentDTO getEquipmentDetail(@PathVariable(value = "seqNo", required = true) Long seqNo) {		
 		return equipmentService.getEquipmentDetail(seqNo);
 	}
 	
