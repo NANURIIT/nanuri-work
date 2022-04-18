@@ -4,10 +4,11 @@
 /** onload **/
 $(function () {
 
-    let seqNo = new URL(document.location.href).searchParams.get('seqNo'); // seqNo세팅
-    let uri = new URL(document.location.href).pathname;
-    let pathname = uri.split('/')[1];
-    let mode = seqNo != null ? 'M' : 'W';                                  // 작성인지 수정인지 모드 설정
+    let pageInfo = getPageInfo();
+
+    let seqNo = pageInfo.seqNo;
+    let pathname = pageInfo.pathname;
+    let mode = pageInfo.mode;
 
     if (mode == 'M') {
         getWorkhistoryDetail(seqNo);
@@ -33,23 +34,19 @@ $(function () {
 
     // 취소 버튼 클릭
     $(document).on('click', '.cancel_button', function () {
-        if (uri.includes('admin') > -1) {
-            location.href = '/admin/index';
-        } else if (uri.includes('mobile') > -1) {
-            location.href = '/mobile/index';
-        }
+        goToIndex(pathname);
     });
 });
 
 /**
  * 회사소속이력 등록
- * @param {*} params.wrkplNm 근무처
- * @param {*} params.encoYm 입사년월
- * @param {*} params.rtrmYm 퇴사년월
- * @param {*} params.dtyNm 직책
- * @param {*} params.chrgBsnNm 담당업무
- * @param {*} params.seqNo 일련번호
- * @param {*} pathname admin or mobile
+ * @param {string} params.wrkplNm 근무처
+ * @param {string} params.encoYm 입사년월
+ * @param {string} params.rtrmYm 퇴사년월
+ * @param {string} params.dtyNm 직책
+ * @param {string} params.chrgBsnNm 담당업무
+ * @param {string} params.seqNo 일련번호
+ * @param {string} pathname admin or mobile
  */
 var registerWorkhistory = function (params, pathname) {
     if (isEmpty(params.wrkplNm)) {
@@ -140,23 +137,4 @@ var getWorkhistoryDetail = function (seqNo) {
             $('#chrgBsnNm').val(object.chrgBsnNm);
         }
     })
-}
-
-/**
- * 날짜 유효성 검사
- * @param {string} date 날짜
- * @returns {boolean} 유효성 검사 결과
- */
-var dateValidation = function (date) {
-    if (isEmpty(date)) {
-        return false;
-    } else if (isNaN(date)) {
-        return false;
-    } else if (date.length > 6) {
-        return false;
-    } else if (date < 0) {
-        return false;
-    } else if (date.substring(4, date.length) < 0 || date.substring(4, date.length) > 12) {
-        return false;
-    }
 }

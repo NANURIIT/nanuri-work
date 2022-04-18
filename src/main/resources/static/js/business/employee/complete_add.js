@@ -4,10 +4,11 @@
 /** onload **/
 $(function(){
 
-    let seqNo = new URL(document.location.href).searchParams.get('seqNo'); // seqNo세팅
-    let uri = new URL(document.location.href).pathname;
-    let pathname = uri.split('/')[1];
-    let mode = seqNo != null ? 'M' : 'W';                                  // 작성인지 수정인지 모드 설정
+    let pageInfo = getPageInfo();
+
+    let seqNo = pageInfo.seqNo;
+    let pathname = pageInfo.pathname;
+    let mode = pageInfo.mode;
 
     if (mode == 'M') {
         getEducationDetail(seqNo);
@@ -32,11 +33,7 @@ $(function(){
 
     // 취소 버튼 클릭
     $(document).on('click', '.cancel_button', function () {
-        if (uri.includes('admin') > -1) {
-            location.href = '/admin/index';
-        } else if (uri.includes('mobile') > -1) {
-            location.href = '/mobile/index';
-        }
+        goToIndex(pathname);
     });
 });
 
@@ -131,25 +128,4 @@ var getEducationDetail = function(seqNo){
             $('#orgNm').val(object.orgNm);
         }
     });
-}
-
-/**
- * 날짜 유효성 검사
- * @param {string} date 날짜
- * @return {boolean} 유효성 검사 결과
- */
- var dateValidation = function (date) {
-    if (isEmpty(date)) {
-        return false;
-    } else if (isNaN(date)) {
-        return false;
-    } else if (date.length > 8) {
-        return false;
-    } else if (date < 0) {
-        return false;
-    } else if (date.substring(4, 6) < 0 || date.substring(4, 6) > 12) {
-        return false;
-    } else if (date.substring(6, 8) < 0 || date.substring(6, 8) > 31) {
-        return false;
-    }
 }

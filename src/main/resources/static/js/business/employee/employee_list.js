@@ -6,6 +6,7 @@ $(function () {
 
     // 직원 리스트 호출
     getEmployeeList(1);
+
     let regDate = /^\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$/;
 
     // 검색 타입 변경
@@ -17,6 +18,7 @@ $(function () {
         }
     });
 
+    // 직원 이름 클릭
     $(document).on('click', '#userNm', function(){
         let userNm = $(this).text();
         let telNo = $(this).parent().parent().children('#telNo').text().replaceAll('-', '');

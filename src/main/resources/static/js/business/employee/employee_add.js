@@ -4,9 +4,10 @@
 /** onload **/
 $(function () {
 
-    let uri = new URL(document.location.href).pathname;
-    let pathname = uri.split('/')[1];       // admin -> pc화면, mobile -> mobile화면
-    let mode = isEmpty(localStorage) ? 'W' : 'M';
+    let pageInfo = getPageInfo();
+    
+    let pathname = pageInfo.pathname;
+    let mode = pageInfo.mode;
 
     getCommonCode();
 
