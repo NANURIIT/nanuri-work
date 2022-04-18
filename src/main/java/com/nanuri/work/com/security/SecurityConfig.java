@@ -74,7 +74,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     			.and()
     		.formLogin()
     			.loginPage("/login")
-    			.defaultSuccessUrl("/dashboard/view", true)
+    			.defaultSuccessUrl("/admin/index", true)
     			.usernameParameter("loginId").passwordParameter("pwd")
     			.successHandler(customSuccessHandler)
     			.failureHandler(customFailureHandler)

@@ -22,6 +22,15 @@ public class MemberController {
 	/* pc */
 	
 	/**
+	 * root url로 접속시도시 /admin/index 페이지로 redirection시킴
+	 * @return
+	 */
+	@GetMapping(value = "/")
+	public String getIndexPage() {
+		return "redirect:/admin/index";
+	}
+	
+	/**
 	 * 비밀번호 변경 페이지
 	 * @return
 	 */
@@ -52,9 +61,8 @@ public class MemberController {
 	 * 회원정보 출력
 	 * @return
 	 */
-	@GetMapping(value = {"/admin/index", "/"})
-	public String getAdminIndexPage() {
-		
+	@GetMapping(value = "/admin/index")
+	public String getAdminIndexPage() {	
 		// 로그인 시 아이디와 비밀번호가 같은경우(비밀번호가 전화번호일경우) 비밀번호 페이지로 이동시켜 비밀번호 변경을 유도.
 		if(passwordEncoder.matches(facade.getDetails().getUserPassword(), facade.getDetails().getUserId())) {
 			return "business/change_pw";
