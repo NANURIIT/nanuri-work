@@ -19,10 +19,16 @@
     }
 }
 
+/**
+ * 페이지 정보 출력
+ * @returns seqNo : 일련번호
+ * @returns pathname : admin or mobile -> pc화면인지 모바일화면인지 구분
+ * @returns mode : 작성인지 수정인지 모드 설정
+ */
 var getPageInfo = function(){
-    let seqNo = new URL(document.location.href).searchParams.get('seqNo'); // seqNo세팅
-    let pathname = new URL(document.location.href).pathname.split('/')[1]; // admin or mobile -> pc화면인지 모바일화면인지 구분
-    let mode = seqNo != null ? 'M' : 'W';                                  // 작성인지 수정인지 모드 설정
+    let seqNo = new URL(document.location.href).searchParams.get('seqNo'); 
+    let pathname = new URL(document.location.href).pathname.split('/')[1]; 
+    let mode = seqNo != null ? 'M' : 'W';                                  
 
     let param = {
         seqNo : seqNo, 
