@@ -67,7 +67,7 @@ public class MemberService {
 
 		// 기본 비밀번호는 휴대전화번호랑 같음.
 		params.setUserPassword(passwordEncoder.encode(params.getTelNo()));
-
+		
 		params.setUserAutrNm(MemberLevelCode.valueOf(params.getBlgDsCd()));
 
 		queryResult = memberMapper.insertEmployee(params);

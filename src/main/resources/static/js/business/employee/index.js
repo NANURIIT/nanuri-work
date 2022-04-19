@@ -3,6 +3,13 @@
 
 /** onload **/
 $(function () {
+    
+    let pageInfo = getPageInfo();
+
+    let pathname = pageInfo.pathname;
+
+    console.log(pageInfo);
+    console.log(pathname);
     let uri = new URL(document.location.href).pathname;
 
     // 기본정보 호출
@@ -32,78 +39,53 @@ $(function () {
     // 사용가능기술(언어) 리스트 호출
     getSkillList();
 
+    // 장비 정보 호출
+    getEquipmentList();
+
     // 학력 수정
     $(document).on('click', '.updateSchoolCareer', function () {
-        if (uri.indexOf('admin') > -1) {
-            location.href = '/admin/schoolCareerWrite?seqNo=' + $(this).attr('id');
-        } else if (uri.indexOf('mobile') > -1) {
-            location.href = '/mobile/schoolCareerWrite?seqNo=' + $(this).attr('id');
-        }
+        location.href = '/'+pathname+'/schoolCareerWrite?seqNo=' + $(this).attr('id');
     });
 
     // 자격증 수정
     $(document).on('click', '.updateCertificate', function(){
-        if (uri.indexOf('admin') > -1) {
-            location.href = '/admin/certificateWrite?seqNo=' + $(this).attr('id');
-        } else if (uri.indexOf('mobile') > -1) {
-            location.href = '/mobile/certificateWrite?seqNo=' + $(this).attr('id');
-        }
+        location.href = '/'+pathname+'/certificateWrite?seqNo=' + $(this).attr('id');
     });
 
     // 회사소속이력 수정
     $(document).on('click', '.updateWorkhistory', function(){
-        if (uri.indexOf('admin') > -1) {
-            location.href = '/admin/workhistoryWrite?seqNo=' + $(this).attr('id');
-        } else if (uri.indexOf('mobile') > -1) {
-            location.href = '/mobile/workhistoryWrite?seqNo=' + $(this).attr('id');
-        }
+        location.href = '/'+pathname+'/workhistoryWrite?seqNo=' + $(this).attr('id');
     });
 
     // 교육이수 수정
     $(document).on('click', '.updateEducation', function(){
-        if (uri.indexOf('admin') > -1) {
-            location.href = '/admin/educationWrite?seqNo=' + $(this).attr('id');
-        } else if (uri.indexOf('mobile') > -1) {
-            location.href = '/mobile/educationWrite?seqNo=' + $(this).attr('id');
-        }
+        location.href = '/'+pathname+'/educationWrite?seqNo=' + $(this).attr('id');
     });
 
     // 대내외 수상경력 수정
     $(document).on('click', '.updateAward', function(){
-        if (uri.indexOf('admin') > -1) {
-            location.href = '/admin/awardWrite?seqNo=' + $(this).attr('id');
-        } else if (uri.indexOf('mobile') > -1) {
-            location.href = '/mobile/awardWrite?seqNo=' + $(this).attr('id');
-        }
+        location.href = '/'+pathname+'/awardWrite?seqNo=' + $(this).attr('id');
     });
 
     // 외국어 능력 수정
     $(document).on('click', '.updateLanguage', function(){
-        if (uri.indexOf('admin') > -1) {
-            location.href = '/admin/languageWrite?seqNo=' + $(this).attr('id');
-        } else if (uri.indexOf('mobile') > -1) {
-            location.href = '/mobile/languageWrite?seqNo=' + $(this).attr('id');
-        }
+        location.href = '/'+pathname+'/languageWrite?seqNo=' + $(this).attr('id');
     });
 
     // 사용가능기술(언어) 수정
     $(document).on('click', '.updateSkill', function(){
-        if (uri.indexOf('admin') > -1) {
-            location.href = '/admin/skillWrite?seqNo=' + $(this).attr('id');
-        } else if (uri.indexOf('mobile') > -1) {
-            location.href = '/mobile/skillWrite?seqNo=' + $(this).attr('id');
-        }
+        location.href = '/'+pathname+'/skillWrite?seqNo=' + $(this).attr('id');
     });
 
     // 프로젝트이력 수정
     $(document).on('click', '.updateCareerhistory', function(){
-        if (uri.indexOf('admin') > -1) {
-            location.href = '/admin/careerhistoryWrite?seqNo=' + $(this).attr('id');
-        } else if (uri.indexOf('mobile') > -1) {
-            location.href = '/mobile/careerhistoryWrite?seqNo=' + $(this).attr('id');
-        }
+        location.href = '/'+pathname+'/careerhistoryWrite?seqNo=' + $(this).attr('id');
     });
 
+    // 장비 정보 수정
+    $(document).on('click', '.updateEquipment', function(){
+        location.href = '/'+pathname+'/equipmentWrite?seqNo=' + $(this).attr('id');
+    });
 
     // 학력 삭제
     $(document).on('click', '.deleteSchoolCareer', function () {
@@ -144,6 +126,12 @@ $(function () {
     $(document).on('click', '.deleteCareerhistory', function () {
         confirmDelete($(this).attr('id'), deleteCareerhistory);
     });
+
+    // 장비 정보 삭제
+    $(document).on('click', '.deleteEquipment', function () {
+        confirmDelete($(this).attr('id'), deleteEquipment);
+    });
+
 });
 
 /**
@@ -514,6 +502,45 @@ var deleteCareerhistory = function (params) {
         data: params,
         success: deleteCB(getCareerhistoryList)
     })
+}
+
+/**
+ * 장비 정보 리스트 함수
+ */
+ var getEquipmentList = function() {
+    ajaxCall({
+        method: 'GET',
+        url: '/equipment/equipmentList',
+        success: function (object) {
+            let EQUIPMENT_HTML = '';
+            for (let i = 0; i < object.length; i++) {
+                let tmpRow = object[i];
+
+                EQUIPMENT_HTML += '<div class="list_info">';
+                EQUIPMENT_HTML += '     <div class="list_info_title">' + tmpRow.eqType + '</div>';
+                EQUIPMENT_HTML += '     <div class="list_info_desc">' + tmpRow.srlNo + ', ' + tmpRow.pyDt + '</div>';
+                EQUIPMENT_HTML += '     <div class="list_info_set">';
+                EQUIPMENT_HTML += '         <button class="updateEquipment" id="'+tmpRow.seqNo+'">수정</button>';
+                EQUIPMENT_HTML += '         <button class="deleteEquipment" id="' + tmpRow.seqNo + '">삭제</button>';
+                EQUIPMENT_HTML += '     </div>';
+                EQUIPMENT_HTML += '</div>';
+            }
+            $('#equipmentList').html(EQUIPMENT_HTML);
+        }
+    })
+ }
+
+ /**
+ * 장비 정보 삭제 함수
+ * @param {number} params.seqNo 일련번호
+ */
+  var deleteEquipment = function (params) {
+    ajaxCall({
+        method: 'DELETE',
+        url: '/equipment/equipmentDelete',
+        data: params,
+        success: deleteCB(getEquipmentList)
+    });
 }
 
 /**
