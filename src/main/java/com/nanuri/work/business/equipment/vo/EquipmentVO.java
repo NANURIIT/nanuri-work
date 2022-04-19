@@ -9,6 +9,7 @@ import lombok.Setter;
 @Setter
 public class EquipmentVO extends CommonDTO{
 	private Long seqNo;			 /* 일련번호 */
+    private String mdfpNm;       /* 수정자 */
 	private String eqType;		 /* 상세코드명 */
     private String modlNm;       /* 모델명 */
     private String srlNo;        /* 시리얼번호 */
