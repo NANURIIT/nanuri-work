@@ -28,12 +28,8 @@ $(function () {
     });
 
     // 취소 버튼 클릭
-    $(document).on('click', '.cancel_button', function(){
-        if(uri.includes('admin') > -1){
-            location.href = '/admin/index';
-        } else if(uri.includes('mobile') > -1){
-            location.href = '/mobile/index';
-        }
+    $(document).on('click', '.cancel_button', function () {
+        goToIndex(pathname);
     });
 });
 

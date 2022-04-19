@@ -576,6 +576,7 @@ var deleteCareerhistory = function (params) {
 /**
  * 삭제 확인팝업 함수
  * @param {number} seqNo 일련번호
+ * @param {function} callback 삭제함수
  */
 var confirmDelete = function (seqNo, callback) {
     let params = { seqNo: seqNo };
