@@ -13,19 +13,19 @@
             <div class="gnb_wrap">
                 <div class="main_gnb">
                     <ul>
-                        <li class="gnb_menu">
+                        <li class="gnb_menu" sec:authorize="hasAnyRole('ADMIN', 'ASSISTANT', 'EMPLOYEE')">
                             <a href="/admin/employeeAdd">직원 등록</a>
                         </li>
                         <li class="gnb_menu">
                             <a href="/admin/index">마이페이지</a>
                         </li>
-                        <li class="gnb_menu">
+                        <li class="gnb_menu" sec:authorize="hasAnyRole('ADMIN', 'ASSISTANT', 'EMPLOYEE')">
                             <a href="/admin/employeeList">직원 목록</a>
                         </li>
                         <li class="gnb_menu">
                             <a href="/admin/notice">공지사항</a>
                         </li>
-                        <li class="gnb_menu">
+                        <li class="gnb_menu" sec:authorize="hasAnyRole('ADMIN', 'ASSISTANT', 'EMPLOYEE')">
                             <a href="/admin/noticeWrite">공지사항 등록</a>
                         </li>
                     </ul>
