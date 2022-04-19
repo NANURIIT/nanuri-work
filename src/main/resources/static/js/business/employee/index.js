@@ -542,7 +542,6 @@ var deleteCareerhistory = function (params) {
         method: 'GET',
         url: '/equipment/equipmentList',
         success: function (object) {
-            console.log(object);
             let EQUIPMENT_HTML = '';
             for (let i = 0; i < object.length; i++) {
                 let tmpRow = object[i];

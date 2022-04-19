@@ -23,8 +23,6 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping(value = "/equipment")
 
 public class EquipmentApiController {
-	@Autowired
-	private MemberService memberService;
 	
 	@Autowired
 	private EquipmentService equipmentService;

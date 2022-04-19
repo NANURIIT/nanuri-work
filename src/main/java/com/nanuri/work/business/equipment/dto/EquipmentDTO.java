@@ -16,5 +16,5 @@ public class EquipmentDTO extends CommonDTO {
     private String pyDt;         /* 지급일자 */
     private String wdrwDt;       /* 회수일자 */
 	private String eqType;		 /* 상세코드명 */
-
+	private String wdrwYn;		 /* 회수여부 */	
 }

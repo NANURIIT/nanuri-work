@@ -65,7 +65,7 @@ public class EquipmentService {
 		
 		EquipmentDTO equipment = equipmentMapper.selectEquipmentDetail(params.getSeqNo());
 		
-		if (equipment != null && "N".equals(equipment.getDelYn())) {
+		if (equipment != null && "N".equals(equipment.getWdrwYn())) {
 			params.setMdfpNm(facade.getDetails().getUsername());
 			queryResult = equipmentMapper.deleteEquipment(params);
 		}
