@@ -47,7 +47,7 @@ a:hover, a:active {
 }
 a:focus { outline:none; }
 button{
-    background: inherit ;
+    background: inherit;
     border:none;
     box-shadow:none;
     border-radius:0;
@@ -55,4 +55,9 @@ button{
     overflow:visible;
     cursor:pointer;
     font-family: 'Noto Sans KR', sans-serif;
+}
+input {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }

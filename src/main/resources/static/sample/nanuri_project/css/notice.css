@@ -123,3 +123,7 @@
 .employee_contents_box table tr:last-child td {
     border: none;
 }
+
+.attendance_search select {
+    width: 30%;
+}
