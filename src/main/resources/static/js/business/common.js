@@ -4,19 +4,25 @@
  * @return {boolean} 유효성 검사 결과
  */
  var dateValidation = function (date) {
-    if (isEmpty(date)) {
+
+    if(isEmpty(date)){
         return false;
-    } else if (isNaN(date)) {
+    } else if(isNaN(date)){
         return false;
-    } else if (date.length > 8) {
-        return false;
-    } else if (date < 0) {
-        return false;
-    } else if (date.substring(4, 6) < 0 || date.substring(4, 6) > 12) {
-        return false;
-    } else if (date.substring(6, 8) < 0 || date.substring(6, 8) > 31) {
+    } else if(date.length == 8){
+        if(date.substring(4, 6) < 0 || date.substring(4, 6) > 12){
+            return false;
+        } else if(date.substring(6, 8) < 0 || date.substring(6, 8) > 31){
+            return false;
+        }
+    } else if(date.length == 6){
+        if(date.substring(4, date.length) < 0 || date.substring(4, date.length) > 12){
+            return false;
+        }
+    } else {
         return false;
     }
+     return true;
 }
 
 /**
