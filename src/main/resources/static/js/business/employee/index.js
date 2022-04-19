@@ -519,6 +519,7 @@ var deleteCareerhistory = function (params) {
 /**
  * 삭제 확인팝업 함수
  * @param {number} seqNo 일련번호
+ * @param {function} callback 삭제함수
  */
 var confirmDelete = function (seqNo, callback) {
     let params = { seqNo: seqNo };
@@ -565,6 +566,12 @@ var addDot = function (date) {
     }
 }
 
+/**
+ * 기간 출력 함수
+ * @param {string} d1 날짜1
+ * @param {string} d2 날짜2
+ * @returns 기간
+ */
 var getPeriod = function (d1, d2) {
     let date1 = d1.split('.');
     let date2 = d2.split('.');

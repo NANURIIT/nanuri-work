@@ -74,6 +74,32 @@ public class MemberService {
 
 		return (queryResult > 0);
 	}
+	
+	/**
+	 * 직원정보 상세조회
+	 * @param params 이름, 전화번호
+	 * @return 직원정보
+	 */
+	public MemberDTO selectEmployeeDetail(MemberDTO params) {
+		return memberMapper.selectEmployeeDetail(params);
+	}
+	
+	/**
+	 * 직원정보 수정
+	 * @param params
+	 * @return
+	 */
+	public boolean updateEmployee(MemberDTO params) {
+		int queryResult = 0;
+		
+		if(facade.getDetails().getUserAutrNm() == MemberLevelCode.ADMIN || 
+				facade.getDetails().getUserAutrNm() == MemberLevelCode.ASSISTANT || 
+				facade.getDetails().getUserAutrNm() == MemberLevelCode.EMPLOYEE) {
+			queryResult = memberMapper.updateEmployee(params);
+		}
+		
+		return (queryResult > 0);
+	}
 
 	/**
 	 * 비밀번호 변경

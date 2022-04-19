@@ -16,7 +16,7 @@ public class EmployeeVO extends CommonDTO {
 	private String dtyNm;				/* 직급 */
 	private String telNo;				/* 전화번호 */
 	private String emailAddr;			/* 이메일 주소 */
-	private String dtlCnm;				/* 공통코드 - 학력 */
+	private String schoolCareer;		/* 학력 */
 	private String addr;				/* 주소 */
 	private String lastModifyDate;		/* 프로젝트 이력 기준 최종 수정일 */
 	

@@ -52,6 +52,44 @@
 		)
 	</insert>
 	
+	<!-- 직원정보 상세 조회 -->
+	<select id="selectEmployeeDetail" parameterType="com.nanuri.work.business.member.dto.MemberDTO" resultType="com.nanuri.work.business.member.dto.MemberDTO">
+		SELECT blg_ds_cd,
+			   blg_nm, 
+			   zip, 
+			   addr, 
+			   user_nm, 
+			   enco_dt, 
+			   rtrm_dt, 
+			   blg_ds_chg_dt, 
+			   dty_nm, 
+			   tel_no, 
+			   rrno, 
+			   dut_nm, 
+			   email_addr
+		  FROM mem_bsc_info
+		 WHERE user_nm = #{userNm}
+		   AND tel_no = #{telNo}
+	</select>
+	
+	<!-- 직원 정보 수정 -->
+	<update id="updateEmployee" parameterType="com.nanuri.work.business.member.dto.MemberDTO">
+		UPDATE mem_bsc_info
+		   SET blg_ds_cd = #{blgDsCd}, 
+		       blg_nm = #{blgNm}, 
+		       zip = #{zip}, 
+		       addr = #{addr}, 
+		       enco_dt = #{encoDt}, 
+		       rtrm_dt = #{rtrmDt}, 
+		       blg_ds_chg_dt = #{blgDsChgDt}, 
+		       dty_nm = #{dtyNm}, 
+		       tel_no = #{telNo}, 
+		       rrno = #{rrno}, 
+		       dut_nm = #{dutNm}, 
+		       email_addr = #{emailAddr}
+		 WHERE user_nm = #{userNm}
+	</update>
+	
 	<!-- 비밀번호 변경 -->
 	<update id="changePassword" parameterType="java.util.HashMap">
 		UPDATE mem_bsc_info
@@ -68,7 +106,7 @@
 		  		   T01.dty_nm, 
 		  		   T01.tel_no, 
 		  		   T01.email_addr, 
-		  		   T03.dtl_cnm, 
+		  		   T03.dtl_cnm 												AS school_career, 
 		  		   T01.addr, 
 		  		   DATE_FORMAT(IFNULL(T04.mod_dtm, T04.rg_dtm), '%Y-%m-%d') AS last_modify_date
 		  	  FROM mem_bsc_info T01

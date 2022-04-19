@@ -6,14 +6,29 @@ $(function () {
 
     // 직원 리스트 호출
     getEmployeeList(1);
+
     let regDate = /^\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$/;
 
+    // 검색 타입 변경
     $(document).on('change', '#employee_search_type', function(){
         if($('#employee_search_type').val() != 'lastModifyDate'){
             $('#employee_search_keyword').attr('placeholder', '');
         } else if($('#employee_search_type').val() == 'lastModifyDate') {
             $('#employee_search_keyword').attr('placeholder', '2022-01-01');
         }
+    });
+
+    // 직원 이름 클릭
+    $(document).on('click', '#userNm', function(){
+        let userNm = $(this).text();
+        let telNo = $(this).parent().parent().children('#telNo').text().replaceAll('-', '');
+
+        let params = {
+            userNm : userNm, 
+            telNo : telNo
+        };
+
+        localStorage.setItem('userInfo', JSON.stringify(params));
     });
 
     // 검색 버튼 클릭
@@ -48,6 +63,10 @@ let param = {
     pageViewNo: 10
 };
 
+/**
+ * 직원목록 리스트 출력
+ * @param {number} pageNo 페이지 번호
+ */
 var getEmployeeList = function (pageNo) {
     param.thisPageNo = pageNo;
     ajaxCall({
@@ -66,14 +85,14 @@ var getEmployeeList = function (pageNo) {
                     EMPLOYEE_LIST_HTML += ' <td>';
                     EMPLOYEE_LIST_HTML += '     <input type="checkbox">';
                     EMPLOYEE_LIST_HTML += ' </td>';
-                    EMPLOYEE_LIST_HTML += ' <td>' + tmpRow.userNm + '</td>';
+                    EMPLOYEE_LIST_HTML += ' <td><a href="/admin/employeeAdd" id="userNm">' + tmpRow.userNm + '</a></td>';
                     EMPLOYEE_LIST_HTML += ' <td>' + tmpRow.dtyNm + '</td>';
-                    EMPLOYEE_LIST_HTML += ' <td>' + formatPhoneNo(tmpRow.telNo) + '</td>';
+                    EMPLOYEE_LIST_HTML += ' <td id="telNo">' + formatPhoneNo(tmpRow.telNo) + '</td>';
                     EMPLOYEE_LIST_HTML += ' <td>' + tmpRow.emailAddr + '</td>';
-                    if (isEmpty(tmpRow.dtlCnm)) {
+                    if (isEmpty(tmpRow.schoolCareer)) {
                         EMPLOYEE_LIST_HTML += ' <td> - </td>'
                     } else {
-                        EMPLOYEE_LIST_HTML += ' <td>' + tmpRow.dtlCnm + '</td>';
+                        EMPLOYEE_LIST_HTML += ' <td>' + tmpRow.schoolCareer + '</td>';
                     }
                     EMPLOYEE_LIST_HTML += ' <td>' + tmpRow.addr + '</td>';
                     if(isEmpty(tmpRow.lastModifyDate)){

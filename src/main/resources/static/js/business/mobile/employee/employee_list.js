@@ -14,6 +14,18 @@ $(function () {
         getEmployeeList(1);
     });
 
+    $(document).on('click', '#userNm', function(){
+        let userNm = $(this).text();
+        let telNo = $(this).parent().parent().children('.telNo').text().replaceAll('-', '');
+        console.log(userNm);
+        console.log(telNo);
+        let param = {
+            userNm : userNm, 
+            telNo : telNo
+        };
+        localStorage.setItem('userInfo', JSON.stringify(param));
+    });
+
 });
 
 let param = {
@@ -40,9 +52,9 @@ var getEmployeeList = function (pageNo) {
                     let tmpRow = employeeList[i];
                     EMPLOYEE_LIST_HTML += '<tr>';
                     EMPLOYEE_LIST_HTML += ' <td>';
-                    EMPLOYEE_LIST_HTML += '     <a>' + tmpRow.userNm + '</a>';
+                    EMPLOYEE_LIST_HTML += '     <a href="/mobile/employeeAdd" id="userNm">' + tmpRow.userNm + '</a>';
                     EMPLOYEE_LIST_HTML += ' </td>';
-                    EMPLOYEE_LIST_HTML += ' <td>' + formatPhoneNo(tmpRow.telNo) + '</td>';
+                    EMPLOYEE_LIST_HTML += ' <td class="telNo">' + formatPhoneNo(tmpRow.telNo) + '</td>';
                     EMPLOYEE_LIST_HTML += ' <td>' + tmpRow.emailAddr + '</td>';
                     EMPLOYEE_LIST_HTML += '</tr>';
                 }
