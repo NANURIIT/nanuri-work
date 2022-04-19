@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.nanuri.work.business.equipment.dto.EquipmentDTO;
 import com.nanuri.work.business.equipment.service.EquipmentService;
 import com.nanuri.work.business.equipment.vo.EquipmentVO;
-import com.nanuri.work.business.member.service.MemberService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -51,7 +50,7 @@ public class EquipmentApiController {
 		return equipmentService.getEquipmentList();
 	}
 	
-    /* 장비 정보 리스트 수정 */
+    /* 장비 정보 상세 조회 */
 	@GetMapping(value = "/equipmentDetail/{seqNo}")
 	public EquipmentDTO getEquipmentDetail(@PathVariable(value = "seqNo", required = true) Long seqNo) {		
 		return equipmentService.getEquipmentDetail(seqNo);

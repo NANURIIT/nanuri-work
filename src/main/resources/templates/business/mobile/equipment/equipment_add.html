@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- 공통 헤드 -->
+<head th:replace="layout/mobile/employee/head :: headFragment"></head>
+
+<script th:src="@{/js/business/equipment/equipment_add.js}"></script>
+
+<body>
+<div class="main">
+    <div class="wrap">
+        <form>
+            <div class="form_box">
+                <div class="form_title">장비종류</div>
+                <div>
+                    <select id="eqpmKdCd" class="form_select" name="equipment_type">
+                        <!-- eqpmKdCd list -->
+                    </select>
+                </div>
+            </div>
+            <div class="form_box">
+                <div class="form_title">모델명</div>
+                <div>
+                    <input id="modlNm" class="input_box" type="text" name="model_name" placeholder="모델명 입력">
+                </div>
+            </div>
+            <div class="form_box">
+                <div class="form_title">시리얼번호</div>
+                <div>
+                    <input id="srlNo" class="input_box" type="text" name="model_num" placeholder="시리얼번호 입력">
+                </div>
+            </div>
+            <div class="form_box">
+                <div class="form_title">지급일자</div>
+                <div>
+                    <input id="pyDt" class="input_box" type="text" name="supply_date" placeholder="지급일자 입력">
+                </div>
+            </div>
+        </form>
+
+        <div th:replace="layout/mobile/employee/footer :: saveBoxFragment"></div>
+        <!-- <div class="save_box">
+            <div class="button_box">
+                <button class="save_button">저장</button>
+                <button class="cancel_button" onclick="history.back()">취소</button>
+            </div>
+        </div> -->
+    </div>
+</div>
+</body>
+</html>

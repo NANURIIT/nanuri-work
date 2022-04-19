@@ -27,5 +27,11 @@ public class EquipmentController {
 	public String getEquipmentList() {
 		return "business/equipment/equipment_add";		
 	}
+	
+	/* mobile */
+	@GetMapping(value = "/mobile/equipmentWrite")
+	public String getMobileEquipmentWritePage() {
+		return "business/mobile/equipment/equipment_add";
+	}
     
 }

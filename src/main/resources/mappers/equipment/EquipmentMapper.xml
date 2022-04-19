@@ -2,17 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.nanuri.work.business.equipment.mapper.EquipmentMapper">
 	
-	<!-- 공통코드 호출-->
-	<select id="selectCommonCodeList" parameterType="com.nanuri.work.business.member.dto.CommonCodeDTO" resultType="com.nanuri.work.business.member.dto.CommonCodeDTO">
-		SELECT ds_cd,
-			   dtl_cd,
-			   ds_cd_nm,
-			   dtl_cnm
-		  FROM comn_cd
-    	 WHERE ds_cd = #{dsCd}
-	  ORDER BY ds_cd
-	</select>
-	
     <!-- 장비 정보 -->
 
     <!-- 장비 정보 등록 -->
@@ -56,6 +45,7 @@
     SELECT T01.seq_no,							/* 일련번호 */
     	   T01.mdfp_nm,							/* 수정자 */
     	   T02.dtl_cnm 			AS eq_type, 	/* 상세코드명 */
+    	   T01.eqpm_kd_cd, 
 		   T01.modl_nm,							/* 모델명 */
 	   	   T01.srl_no,							/* 시리얼번호 */
 	   	   T01.py_dt,							/* 지급일자 */

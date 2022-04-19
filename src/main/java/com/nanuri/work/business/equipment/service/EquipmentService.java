@@ -8,10 +8,11 @@ import org.springframework.stereotype.Service;
 import com.nanuri.work.business.equipment.dto.EquipmentDTO;
 import com.nanuri.work.business.equipment.mapper.EquipmentMapper;
 import com.nanuri.work.business.equipment.vo.EquipmentVO;
-import com.nanuri.work.business.member.dto.CommonCodeDTO;
-import com.nanuri.work.business.member.mapper.MemberMapper;
 import com.nanuri.work.com.security.AuthenticationFacade;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class EquipmentService {
 
@@ -19,19 +20,7 @@ public class EquipmentService {
     private EquipmentMapper equipmentMapper;
     
     @Autowired
-    private MemberMapper memberMapper;
-    
-    @Autowired
     private AuthenticationFacade facade;
-    
-	/**
-	 * 공통코드 호출
-	 * 
-	 * @return 공통코드 리스트
-	 */
-	public List<CommonCodeDTO> getCommonCodeList(CommonCodeDTO params) {
-		return memberMapper.selectCommonCodeList(params);
-	}
     
     /* 장비 정보 등록*/
     public boolean registeEquipment(EquipmentDTO params) {
