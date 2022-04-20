@@ -16,14 +16,14 @@ $(function(){
             BUTTON_HTML += '<button id="leaveWork">퇴근</button>';
             BUTTON_HTML += '<button class="cancel_button">취소</button>';
 
-            $('.join_detail_wrap > form > :nth-child(3)').remove();
+            $('#reason').remove();
             $('.join_agree_button').html(BUTTON_HTML);
 
         } else if($(this).find('option:selected').attr('class') == 'OFF_DUTY'){
             let REASON_HTML = '';
             let BUTTON_HTML = '';
 
-            REASON_HTML += '<div class="attendance_list">';
+            REASON_HTML += '<div id="reason" class="attendance_list">';
             REASON_HTML += '    <div class="attendance_title">사유</div>';
             REASON_HTML += '    <div class="attendance_box attendance_reason">';
             REASON_HTML += '        <input id="rsnTxt" type="text" placeholder="사유 입력">';
@@ -64,7 +64,7 @@ $(function(){
             aawBtnClkDtm : today + ' ' + time
         };
 
-        registerDuty(params);
+        registerOnDuty(params);
     });
 
     // 퇴근버튼 클릭
@@ -83,6 +83,7 @@ $(function(){
         updateDuty(params);
     });
 
+    // 상신 버튼 클릭
     $(document).on('click', '#confirm', function(){
         let params = {
             svceFormCd : $('#dutyTypeList').val(),
@@ -125,7 +126,7 @@ var getCommonCode = function(){
  * @param {string} params.stTm 시작시각
  * @param {string} params.aawBtnClkDtm 출근버튼클릭시간
  */
-var registerDuty = function(params){
+var registerOnDuty = function(params){
     if(isEmpty(params.svcePrjtTxt)){
         openPopup({
             title : '실패', 
@@ -162,7 +163,7 @@ var registerDuty = function(params){
     } else {
         ajaxCall({
             method : 'POST', 
-            url : '/duty/registerDuty', 
+            url : '/duty/registerOnDuty', 
             data : params, 
             success : function(object){
                 if(object){

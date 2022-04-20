@@ -10,7 +10,7 @@ import com.nanuri.work.business.duty.vo.DutyHistoryVO;
 @Mapper
 public interface DutyMapper {
 
-	public int insertDuty(DutyHistoryDTO params);
+	public int insertOnDuty(DutyHistoryDTO params);
 	public List<DutyHistoryVO> selectDutyHistoryList(String userId);
 	public DutyHistoryDTO selectLastDutyHistoryDetail(String userId);
 	public int updateDuty(DutyHistoryDTO params);

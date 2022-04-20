@@ -30,7 +30,7 @@ public class DutyService {
 	 * @param params
 	 * @return
 	 */
-	public boolean registerDuty(DutyHistoryDTO params) {
+	public boolean registerOnDuty(DutyHistoryDTO params) {
 		int queryResult = 0;
 		
 		DutyHistoryDTO dutyHistory = dutyMapper.selectLastDutyHistoryDetail(facade.getDetails().getUserId());
@@ -41,7 +41,7 @@ public class DutyService {
 		
 		params.setUserId(facade.getDetails().getUserId());
 		
-		queryResult = dutyMapper.insertDuty(params);
+		queryResult = dutyMapper.insertOnDuty(params);
 		
 		return (queryResult > 0);
 	}

@@ -31,9 +31,9 @@ public class DutyApiController {
 	 * @param params
 	 * @return
 	 */
-	@PostMapping(value = "/registerDuty")
+	@PostMapping(value = "/registerOnDuty")
 	public boolean registerDuty(@RequestBody DutyHistoryDTO params) {
-		return dutyService.registerDuty(params);
+		return dutyService.registerOnDuty(params);
 	}
 	
 	/**
