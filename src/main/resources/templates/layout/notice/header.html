@@ -28,6 +28,15 @@
                         <li class="gnb_menu" sec:authorize="hasAnyRole('ADMIN', 'ASSISTANT', 'EMPLOYEE')">
                             <a href="/admin/noticeWrite">공지사항 등록</a>
                         </li>
+                        <li class="gnb_menu">
+                            <a href="/admin/dutyList">근태 조회</a>
+                        </li>
+                        <li class="gnb_menu">
+                            <a href="/admin/dutyWrite">근태 등록</a>
+                        </li>
+                        <li class="gnb_menu" sec:authorize="hasAnyRole('ADMIN', 'ASSISTANT')">
+                            <a href="/admin/dutyConfirm">근태 결재</a>
+                        </li>
                     </ul>
                 </div>
                 <div class="logout_button">

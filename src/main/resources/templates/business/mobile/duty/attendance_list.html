@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"/>
+    <title>나누리</title>
+    <link rel="stylesheet" href="../../css/reset.css">
+    <link rel="stylesheet" href="../../css/common.css">
+    <link rel="stylesheet" href="../../css/notice.css">
+
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<div class="mo_wrapper">
+    <div class="submain">
+        <div class="submain_contents">
+            <div class="notice_contents_wrap">
+                <div class="employee_contents_box">
+                    <table>
+                        <colgroup>
+                            <col style="width: 25%">
+                            <col style="width: 50%">
+                        </colgroup>
+                        <tr>
+                            <th>이름</th>
+                            <th>전체기간</th>
+                            <th>결재상태</th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="attendance_list_detail.html" title="#">홍길동</a>
+                            </td>
+                            <td>2022-04-14(목) ~<br/>2022-04-18(월) 18:00, 3일</td>
+                            <td>상신</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="attendance_list_detail.html" title="#">홍길동</a>
+                            </td>
+                            <td>2022-04-14(목) ~<br/>2022-04-18(월) 18:00, 3일</td>
+                            <td>상신</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="com_pagination">
+                    <div class="pagination_wrap">
+                        <ul>
+                            <li class="pagination_prev">
+                                <a href="#">
+                                    <
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">1</a>
+                            </li>
+                            <li class="select">
+                                <a href="#">2</a>
+                            </li>
+                            <li>
+                                <a href="#">3</a>
+                            </li>
+                            <li>
+                                <a href="#">4</a>
+                            </li>
+                            <li>
+                                <a href="#">5</a>
+                            </li>
+                            <li>
+                                ...
+                            </li>
+                            <li>
+                                <a href="#">51</a>
+                            </li>
+                            <li class="pagination_next">
+                                <a href="#">
+                                    >
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="notice_search attendance_search">
+                    <form action="#">
+                        <div class="notice_search_box">
+                            <select name="date">
+                                <option value="전체">전체</option>
+                                <option value="근무">근무</option>
+                                <option value="휴가">휴가</option>
+                                <option value="교육">교육</option>
+                                <option value="오후반차">오후반차</option>
+                                <option value="오전반차">오전반차</option>
+                                <option value="병가">병가</option>
+                                <option value="경조휴가">경조휴가</option>
+                            </select>
+                            <a href="#">검색</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

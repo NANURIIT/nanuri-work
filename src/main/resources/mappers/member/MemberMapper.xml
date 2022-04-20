@@ -10,6 +10,9 @@
 			   dtl_cnm
 		  FROM comn_cd
     	 WHERE ds_cd = #{dsCd}
+    	 <if test="dtlDsCd != null and dtlDsCd != ''">
+    	 	AND dtl_ds_cd = #{dtlDsCD}
+    	 </if>
 	  ORDER BY sort_seqn
 	</select>
 	

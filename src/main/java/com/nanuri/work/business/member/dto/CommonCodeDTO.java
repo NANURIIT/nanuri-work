@@ -10,8 +10,10 @@ import lombok.Setter;
 public class CommonCodeDTO extends CommonDTO {
 
 	private String dsCd;		/* 구분코드 */
+	private String dtlDsCd;		/* 상세구분코드 */
 	private String dtlCd;		/* 상세코드 */
 	private String dsCdNm;		/* 구분코드명 */
+	private String dtlDsCdNm;	/* 상세구분코드명 */
 	private String dtlCnm;		/* 상세코드명 */
 	
 }

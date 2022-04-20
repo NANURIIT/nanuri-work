@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<!-- 공통헤드 -->
+<head th:replace="layout/notice/head :: headFragment"></head>
+
+<link rel="stylesheet" th:href="@{/sample/admin/css/notice.css}">
+<link rel="stylesheet" th:href="@{/sample/admin/css/attendance.css}">
+
+<script th:src="@{https://code.jquery.com/ui/1.13.1/jquery-ui.js}"></script>
+<script th:src="@{/js/business/duty/attendance_list.js}"></script>
+
+<body>
+    <div class="wrapper">
+        <header th:replace="/layout/notice/header :: headerFragment"></header>
+
+        <div class="submain_wrap">
+            <div class="sub_wrap notice_wrap">
+                <div class="sub_container notice_container">
+                    <div class="condition_wrap">
+                        <div class="notice_search notice_search_option">
+                            <form action="#">
+                                <div class="notice_search_box">
+                                    <label for="attendance_date">기준년도</label>
+                                    <input id="attendance_date" name="attendance_date" type="text">
+                                    <label for="employee_name">직원명</label>
+                                    <input id="employee_name" name="employee_name" type="text">
+                                    <select id="dutyTypeList" name="date">
+                                        <!-- dutyTypeList -->
+                                    </select>
+                                    <a href="#">검색</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="submain_title notice_title">
+                        근태조회
+                    </div>
+                    <div class="notice_list file_down_list">
+                        <table>
+                            <colgroup>
+                                <col style="width: 7%;">
+                                <col style="width: 7%;">
+                                <col style="width: 7%;">
+                                <col style="width: 7%;">
+                                <col style="width: 10%;">
+                                <col style="width: 5%;">
+                                <col style="width: 7%;">
+                                <col style="width: 17%;">
+                                <col style="width: 11%;">
+                                <col style="width: 5%;">
+                                <col style="width: 10%;">
+                                <col style="width: 7%;">
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th scope="col">사번번호</th>
+                                    <th scope="col">이름</th>
+                                    <th scope="col">직급</th>
+                                    <th>소속</th>
+                                    <th>기준일자</th>
+                                    <th>근태구분</th>
+                                    <th>차감후<br/>휴가일수</th>
+                                    <th>전체 기간</th>
+                                    <th>상신일시</th>
+                                    <th>결재상태</th>
+                                    <th>결재일시</th>
+                                    <th>결재자<br/>이름</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>123</td>
+                                    <td>홍길동</td>
+                                    <td>차장</td>
+                                    <td>나누리아이티</td>
+                                    <td>2022-04-14</td>
+                                    <td>휴가</td>
+                                    <td>1</td>
+                                    <td>2022-04-14(목) 09:00 ~<br/>2022-04-18(월) 18:00, 3일</td>
+                                    <td>2022-04-15(금)<br/>19:59</td>
+                                    <td>상신</td>
+                                    <td>2022-04-16<br/>08:00</td>
+                                    <td>홍길동</td>
+                                </tr>
+                                <tr>
+                                    <td>123</td>
+                                    <td>홍길동</td>
+                                    <td>차장</td>
+                                    <td>나누리아이티</td>
+                                    <td>2022-04-15</td>
+                                    <td>휴가</td>
+                                    <td>0</td>
+                                    <td>2022-04-14(목) 09:00 ~<br/>2022-04-18(월) 18:00, 3일</td>
+                                    <td>2022-04-15(금)<br/>19:59</td>
+                                    <td>승인</td>
+                                    <td>2022-04-16<br/>08:00</td>
+                                    <td>홍길동</td>
+                                </tr>
+                                <tr>
+                                    <td>123</td>
+                                    <td>홍길동</td>
+                                    <td>차장</td>
+                                    <td>나누리아이티</td>
+                                    <td>2022-04-15</td>
+                                    <td>근무</td>
+                                    <td>-</td>
+                                    <td>2022-04-14(목) 09:00 ~<br/>2022-04-18(월) 18:00, 3일</td>
+                                    <td>2022-04-15(금)<br/>19:59</td>
+                                    <td>결재취소</td>
+                                    <td>2022-04-16<br/>08:00</td>
+                                    <td>홍길동</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="list_pagination">
+                        <a class="list_prev" href="#">
+                            <
+                        </a>
+                        <ul>
+                            <li>
+                                <a href="#">1</a>
+                            </li>
+                            <li>
+                                <a href="#">2</a>
+                            </li>
+                            <li>
+                                <a href="#">3</a>
+                            </li>
+                            <li>
+                                <a href="#">4</a>
+                            </li>
+                            <li>
+                                <a href="#">5</a>
+                            </li>
+                            <li>
+                                <a href="#">...</a>
+                            </li>
+                            <li>
+                                <a href="#">51</a>
+                            </li>
+                        </ul>
+                        <a class="product_list_next" href="#">
+                            >
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

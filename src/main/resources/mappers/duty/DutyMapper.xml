@@ -2,4 +2,28 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.nanuri.work.business.duty.mapper.DutyMapper">
 
+	<insert id="insertDuty" parameterType="com.nanuri.work.business.duty.dto.DutyHistoryDTO">
+		INSERT INTO dut_hst (
+			user_id, 
+			bas_dt, 
+			svce_form_cd, 
+			st_dt, 
+			st_tm, 
+			aaw_btn_clk_dtm, 
+			ed_dt, 
+			ed_tm, 
+			svce_prjt_txt
+		) VALUES (
+			#{userId}, 
+			#{basDt}, 
+			#{svceFormCd}, 
+			#{stDt}, 
+			#{stTm}, 
+			#{aawBtnClkDtm}, 
+			#{edDt}, 
+			#{edTm}, 
+			#{svcePrjtTxt}
+		)
+	</insert>
+
 </mapper>
