@@ -29,7 +29,8 @@
 	
 	<!-- 근태 조회 -->
 	<select id="selectDutyHistoryList" parameterType="string" resultType="com.nanuri.work.business.duty.vo.DutyHistoryVO">
-		SELECT T02.user_nm, 
+		SELECT T01.seq_no, 
+			   T02.user_nm, 
 			   T02.dty_nm, 
 			   T02.blg_nm, 
 			   T01.bas_dt, 
@@ -63,6 +64,7 @@
 	 		<if test="userId != null and userId != ''">
 	 			WHERE T01.user_id = #{userId}
 	 		</if> 
+	  ORDER BY T01.seq_no DESC
 	</select>
 
 	<!-- 마지막 근태기록 조회 -->

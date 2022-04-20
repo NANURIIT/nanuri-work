@@ -9,6 +9,7 @@ import lombok.Setter;
 @Setter
 public class DutyHistoryVO extends CommonDTO {
 
+	private Long seqNo;				/* 일련번호 */
 	private String userNm;			/* 이름 */
 	private String dtyNm;			/* 직급 */
 	private String blgNm;			/* 소속 */

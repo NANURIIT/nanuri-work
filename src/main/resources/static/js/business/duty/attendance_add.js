@@ -33,7 +33,9 @@ $(function(){
             BUTTON_HTML += '<button id="confirm">상신</button>';
             BUTTON_HTML += '<button class="cancel_button">취소</button>';
 
-            $('.join_detail_wrap > form > :nth-child(2)').after(REASON_HTML);
+            if(isEmpty($('#reason'))){
+                $('.join_detail_wrap > form > :nth-child(2)').after(REASON_HTML);
+            }
             $('.join_agree_button').html(BUTTON_HTML);
         }
     });
@@ -64,7 +66,8 @@ $(function(){
             aawBtnClkDtm : today + ' ' + time
         };
 
-        registerOnDuty(params);
+        console.log($('#dutyTypeList').find('option:selected').val());
+        //registerOnDuty(params);
     });
 
     // 퇴근버튼 클릭
@@ -95,7 +98,7 @@ $(function(){
             edTm : $('#edTm').val()
         }
 
-        console.log(params);
+        console.log($('#dutyTypeList').find('option:selected').val());
     });
 });
 

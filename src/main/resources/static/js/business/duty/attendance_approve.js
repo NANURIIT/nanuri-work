@@ -46,7 +46,6 @@ var getDutyHistoryList = function () {
         url: '/duty/getDutyHistoryList',
         data: param,
         success: function (object) {
-            console.log(object);
             let DUTY_HISTORY_LIST_HTML = '';
             if (object.dutyHistoryList.length > 0) {
                 let dutyHistoryList = object.dutyHistoryList;
@@ -55,7 +54,7 @@ var getDutyHistoryList = function () {
                 for (let i = 0; i < dutyHistoryList.length; i++) {
                     let tmpRow = dutyHistoryList[i];
 
-                    DUTY_HISTORY_LIST_HTML += '<tr>';
+                    DUTY_HISTORY_LIST_HTML += '<tr id="'+tmpRow.seqNo+'">';
                     DUTY_HISTORY_LIST_HTML += ' <td>';
                     DUTY_HISTORY_LIST_HTML += '     <input type="checkbox">';
                     DUTY_HISTORY_LIST_HTML += ' </td>';
@@ -71,6 +70,7 @@ var getDutyHistoryList = function () {
                     DUTY_HISTORY_LIST_HTML += ' <td>' + tmpRow.dczStsCdnm + '</td>';
                     DUTY_HISTORY_LIST_HTML += ' <td>결재 일시</td>';
                     DUTY_HISTORY_LIST_HTML += ' <td>결재자이름</td>';
+
                     if (tmpRow.dczStsCd == 'REPORT' || tmpRow.dczStsCd == 'CLEAR') {
                         DUTY_HISTORY_LIST_HTML += ' <td>';
                         DUTY_HISTORY_LIST_HTML += '     <button class="attendance_button approval_button">결재</button>';
@@ -80,8 +80,8 @@ var getDutyHistoryList = function () {
                         DUTY_HISTORY_LIST_HTML += ' <td>';
                         DUTY_HISTORY_LIST_HTML += '     <button class="attendance_button reject_button">결재취소</button>';
                         DUTY_HISTORY_LIST_HTML += ' </td>';
-
                     }
+                    
                     DUTY_HISTORY_LIST_HTML += '</tr>';
                 }
                 $('#dutyHistoryList').html(DUTY_HISTORY_LIST_HTML);
