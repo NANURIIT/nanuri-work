@@ -10,6 +10,7 @@ import com.nanuri.work.business.common.paging.PaginationInfo;
 import com.nanuri.work.business.duty.dto.DutyHistoryDTO;
 import com.nanuri.work.business.duty.mapper.DutyMapper;
 import com.nanuri.work.business.duty.vo.DutyHistoryVO;
+import com.nanuri.work.com.code.MemberLevelCode;
 import com.nanuri.work.com.security.AuthenticationFacade;
 
 import lombok.extern.slf4j.Slf4j;
@@ -44,13 +45,21 @@ public class DutyService {
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
 		int dutyHistoryTotalCount = dutyMapper.selectTotalCountDutyHistory();
 		
+		String userId = null;
+		
 		PaginationInfo paginationInfo = new PaginationInfo(params);
 		paginationInfo.setTotalRecordCount(dutyHistoryTotalCount);
 		
 		params.setPaginationInfo(paginationInfo);
+		
+		if(facade.getDetails().getUserAutrNm() != MemberLevelCode.ADMIN &&
+				facade.getDetails().getUserAutrNm() != MemberLevelCode.ASSISTANT) {
+			userId = facade.getDetails().getUserId();
+		}
+		
 		if(dutyHistoryTotalCount > 0) {
 			resultMap.put("dutyHistoryTotalCount", dutyHistoryTotalCount);
-			resultMap.put("dutyHistoryList", dutyMapper.selectDutyHistoryList());
+			resultMap.put("dutyHistoryList", dutyMapper.selectDutyHistoryList(userId));
 		}
 		return resultMap;
 	}

@@ -11,7 +11,7 @@ import com.nanuri.work.business.duty.vo.DutyHistoryVO;
 public interface DutyMapper {
 
 	public int insertDuty(DutyHistoryDTO params);
-	public List<DutyHistoryVO> selectDutyHistoryList();
+	public List<DutyHistoryVO> selectDutyHistoryList(String userId);
 	public DutyHistoryDTO selectLastDutyHistoryDetail(String userId);
 	public int updateDuty(DutyHistoryDTO params);
 	public int selectTotalCountDutyHistory();

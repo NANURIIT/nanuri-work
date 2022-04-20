@@ -28,13 +28,14 @@
 	</insert>
 	
 	<!-- 근태 조회 -->
-	<select id="selectDutyHistoryList" resultType="com.nanuri.work.business.duty.vo.DutyHistoryVO">
+	<select id="selectDutyHistoryList" parameterType="string" resultType="com.nanuri.work.business.duty.vo.DutyHistoryVO">
 		SELECT T02.user_nm, 
 			   T02.dty_nm, 
 			   T02.blg_nm, 
 			   T01.bas_dt, 
 			   T03.dtl_cnm AS svce_form_cd_nm, 
-			   T01.rg_dtm, 
+			   T01.rg_dtm,
+			   T01.dcz_sts_cd,  
 			   T04.dtl_cnm AS dcz_sts_cd_nm, 
 			   T01.dcz_dtm, 
 			   T01.dczmn_id
@@ -58,7 +59,10 @@
 	 		  FROM comn_cd
 	 		 WHERE ds_cd = 'CONFIRM'
 	 		) T04
-	 		ON T01.dcz_sts_cd = T04.dtl_cd 
+	 		ON T01.dcz_sts_cd = T04.dtl_cd
+	 		<if test="userId != null and userId != ''">
+	 			WHERE T01.user_id = #{userId}
+	 		</if> 
 	</select>
 
 	<!-- 마지막 근태기록 조회 -->

@@ -15,6 +15,7 @@ public class DutyHistoryVO extends CommonDTO {
 	private String basDt;
 	private String svceFormCdNm;
 	private String rgDtm;
+	private String dczStsCd;
 	private String dczStsCdnm;
 	private String dczDtm;
 	private String dczmnId;
