@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.nanuri.work.business.duty.mapper.DutyMapper">
 
+	<!-- 근태등록 -->
 	<insert id="insertDuty" parameterType="com.nanuri.work.business.duty.dto.DutyHistoryDTO">
 		INSERT INTO dut_hst (
 			user_id, 
@@ -25,5 +26,74 @@
 			#{svcePrjtTxt}
 		)
 	</insert>
+	
+	<!-- 근태 조회 -->
+	<select id="selectDutyHistoryList" resultType="com.nanuri.work.business.duty.vo.DutyHistoryVO">
+		SELECT T02.user_nm, 
+			   T02.dty_nm, 
+			   T02.blg_nm, 
+			   T01.bas_dt, 
+			   T03.dtl_cnm AS svce_form_cd_nm, 
+			   T01.rg_dtm, 
+			   T04.dtl_cnm AS dcz_sts_cd_nm, 
+			   T01.dcz_dtm, 
+			   T01.dczmn_id
+		  FROM dut_hst T01
+	 LEFT JOIN mem_bsc_info T02
+	 		ON T01.user_id = T02.user_id
+	 LEFT JOIN (
+	 		SELECT ds_cd, 
+	 			   dtl_ds_cd, 
+	 			   dtl_cd, 
+	 			   dtl_ds_cd_nm, 
+	 			   dtl_cnm
+	 		  FROM comn_cd
+	 		 WHERE ds_cd = 'DUTY'
+	 		) T03
+	 		ON T01.svce_form_cd = T03.dtl_cd
+	 LEFT JOIN (
+	 		SELECT ds_cd, 
+	 			   dtl_cd, 
+	 			   dtl_cnm
+	 		  FROM comn_cd
+	 		 WHERE ds_cd = 'CONFIRM'
+	 		) T04
+	 		ON T01.dcz_sts_cd = T04.dtl_cd 
+	</select>
+
+	<!-- 마지막 근태기록 조회 -->
+	<select id="selectLastDutyHistoryDetail" parameterType="string" resultType="com.nanuri.work.business.duty.dto.DutyHistoryDTO">
+		SELECT seq_no,
+			   bas_dt, 
+			   svce_form_cd, 
+			   st_dt, 
+			   st_tm, 
+			   ed_dt, 
+			   ed_tm, 
+			   svce_prjt_txt
+		  FROM dut_hst T01
+	 LEFT JOIN comn_cd T02
+	 		ON T01.svce_form_cd = T02.dtl_cd
+		 WHERE user_id = #{userId}
+		   AND T02.dtl_ds_cd = 'ON_DUTY'
+	  ORDER BY T01.rg_dtm DESC
+	     LIMIT 1
+	</select>
+	
+	<!-- 퇴근등록 -->
+	<update id="updateDuty" parameterType="com.nanuri.work.business.duty.dto.DutyHistoryDTO">
+		UPDATE dut_hst
+		   SET svce_form_cd = #{svceFormCd},
+		   	   ed_dt = #{edDt}, 
+		   	   ed_tm = #{edTm}, 
+		   	   ckof_btn_clk_dtm = #{ckofBtnClkDtm}
+		 WHERE user_id = #{userId}
+		   AND seq_no = #{seqNo}
+	</update>
+	
+	<select id="selectTotalCountDutyHistory" resultType="int">
+		SELECT COUNT(*) 
+		  FROM dut_hst
+	</select>
 
 </mapper>

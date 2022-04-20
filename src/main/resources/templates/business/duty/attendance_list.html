@@ -23,8 +23,8 @@
                                 <div class="notice_search_box">
                                     <label for="attendance_date">기준년도</label>
                                     <input id="attendance_date" name="attendance_date" type="text">
-                                    <label for="employee_name">직원명</label>
-                                    <input id="employee_name" name="employee_name" type="text">
+                                    <label sec:authorize="hasAnyRole('ADMIN', 'ASSISTANT')" for="employee_name">직원명</label>
+                                    <input sec:authorize="hasAnyRole('ADMIN', 'ASSISTANT')" id="employee_name" name="employee_name" type="text">
                                     <select id="dutyTypeList" name="date">
                                         <!-- dutyTypeList -->
                                     </select>
@@ -68,82 +68,13 @@
                                     <th>결재자<br/>이름</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td>123</td>
-                                    <td>홍길동</td>
-                                    <td>차장</td>
-                                    <td>나누리아이티</td>
-                                    <td>2022-04-14</td>
-                                    <td>휴가</td>
-                                    <td>1</td>
-                                    <td>2022-04-14(목) 09:00 ~<br/>2022-04-18(월) 18:00, 3일</td>
-                                    <td>2022-04-15(금)<br/>19:59</td>
-                                    <td>상신</td>
-                                    <td>2022-04-16<br/>08:00</td>
-                                    <td>홍길동</td>
-                                </tr>
-                                <tr>
-                                    <td>123</td>
-                                    <td>홍길동</td>
-                                    <td>차장</td>
-                                    <td>나누리아이티</td>
-                                    <td>2022-04-15</td>
-                                    <td>휴가</td>
-                                    <td>0</td>
-                                    <td>2022-04-14(목) 09:00 ~<br/>2022-04-18(월) 18:00, 3일</td>
-                                    <td>2022-04-15(금)<br/>19:59</td>
-                                    <td>승인</td>
-                                    <td>2022-04-16<br/>08:00</td>
-                                    <td>홍길동</td>
-                                </tr>
-                                <tr>
-                                    <td>123</td>
-                                    <td>홍길동</td>
-                                    <td>차장</td>
-                                    <td>나누리아이티</td>
-                                    <td>2022-04-15</td>
-                                    <td>근무</td>
-                                    <td>-</td>
-                                    <td>2022-04-14(목) 09:00 ~<br/>2022-04-18(월) 18:00, 3일</td>
-                                    <td>2022-04-15(금)<br/>19:59</td>
-                                    <td>결재취소</td>
-                                    <td>2022-04-16<br/>08:00</td>
-                                    <td>홍길동</td>
-                                </tr>
+                            <tbody id="dutyHistoryList">
+                                <!-- dutyHistoryList -->
                             </tbody>
                         </table>
                     </div>
-                    <div class="list_pagination">
-                        <a class="list_prev" href="#">
-                            <
-                        </a>
-                        <ul>
-                            <li>
-                                <a href="#">1</a>
-                            </li>
-                            <li>
-                                <a href="#">2</a>
-                            </li>
-                            <li>
-                                <a href="#">3</a>
-                            </li>
-                            <li>
-                                <a href="#">4</a>
-                            </li>
-                            <li>
-                                <a href="#">5</a>
-                            </li>
-                            <li>
-                                <a href="#">...</a>
-                            </li>
-                            <li>
-                                <a href="#">51</a>
-                            </li>
-                        </ul>
-                        <a class="product_list_next" href="#">
-                            >
-                        </a>
+                    <div id="list_pagination" class="list_pagination">
+                        <!-- pagination list -->
                     </div>
                 </div>
             </div>

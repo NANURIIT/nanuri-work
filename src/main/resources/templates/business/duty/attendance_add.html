@@ -2,6 +2,7 @@
 <html lang="ko">
 
 <!-- 공통헤드 -->
+
 <head th:replace="layout/notice/head :: headFragment"></head>
 
 <link rel="stylesheet" th:href="@{/sample/admin/css/attendance.css}">
@@ -33,12 +34,7 @@
                                     <input id="svcePrjtTxt" type="text" placeholder="근무프로젝트 입력">
                                 </div>
                             </div>
-                            <div class="attendance_list">
-                                <div class="attendance_title">사유</div>
-                                <div class="attendance_box attendance_reason">
-                                    <input id="rsnTxt" type="text" placeholder="사유 입력">
-                                </div>
-                            </div>
+                            <!-- 사유 input box -->
                             <div class="attendance_list">
                                 <div class="attendance_title">시작일시</div>
                                 <div class="attendance_box">
@@ -71,4 +67,5 @@
         </div>
     </div>
 </body>
+
 </html>

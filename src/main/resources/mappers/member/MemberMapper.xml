@@ -6,6 +6,7 @@
 	<select id="selectCommonCodeList" parameterType="com.nanuri.work.business.member.dto.CommonCodeDTO" resultType="com.nanuri.work.business.member.dto.CommonCodeDTO">
 		SELECT ds_cd,
 			   dtl_cd,
+			   dtl_ds_cd, 
 			   ds_cd_nm,
 			   dtl_cnm
 		  FROM comn_cd
