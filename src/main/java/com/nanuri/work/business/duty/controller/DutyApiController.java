@@ -26,21 +26,40 @@ public class DutyApiController {
 	@Autowired
 	private DutyService dutyService;
 	
+	/**
+	 * 근태 등록(출근 버튼 눌렀을 때)
+	 * @param params
+	 * @return
+	 */
 	@PostMapping(value = "/registerDuty")
 	public boolean registerDuty(@RequestBody DutyHistoryDTO params) {
 		return dutyService.registerDuty(params);
 	}
 	
+	/**
+	 * 근태정보 리스트 출력
+	 * @param params
+	 * @return
+	 */
 	@GetMapping(value = "/getDutyHistoryList")
 	public HashMap<String, Object> getDutyHistoryList(@ModelAttribute("params") DutyHistoryVO params){
 		return dutyService.getDutyHistoryList(params);
 	}
 	
+	/**
+	 * 마지막에 등록 한 근태정보 출력
+	 * @return
+	 */
 	@GetMapping(value = "/getLastDutyDetail")
 	public DutyHistoryDTO getLastDutyDetail() {
 		return dutyService.getLastDutyDetail();
 	}
 	
+	/**
+	 * 근태 정보 수정 (퇴근 버튼 눌렀을 때)
+	 * @param params
+	 * @return
+	 */
 	@PatchMapping(value = "/updateDuty")
 	public boolean updateDuty(@RequestBody DutyHistoryDTO params) {
 		return dutyService.updateDuty(params);

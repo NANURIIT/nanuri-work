@@ -10,6 +10,9 @@ $(function(){
     $('#attendance_date').val(new Date().getFullYear());
 });
 
+/**
+ * 근태 유형 출력
+ */
 var getCommonCode = function(){
     ajaxCall({
         method : 'GET', 
@@ -35,6 +38,9 @@ let param = {
     pageViewNo: 10
 };
 
+/**
+ * 근태 정보 리스트 출력
+ */
 var getDutyHistoryList = function(){
     ajaxCall({
         method : 'GET' , 

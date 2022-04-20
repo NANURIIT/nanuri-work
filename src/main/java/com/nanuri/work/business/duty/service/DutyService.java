@@ -25,6 +25,11 @@ public class DutyService {
 	@Autowired
 	private AuthenticationFacade facade;
 	
+	/**
+	 * 근태 등록 (출근 버튼 눌렀을 때)
+	 * @param params
+	 * @return
+	 */
 	public boolean registerDuty(DutyHistoryDTO params) {
 		int queryResult = 0;
 		
@@ -41,6 +46,11 @@ public class DutyService {
 		return (queryResult > 0);
 	}
 	
+	/**
+	 * 근태 정보 리스트 출력
+	 * @param params
+	 * @return
+	 */
 	public HashMap<String, Object> getDutyHistoryList(DutyHistoryVO params){
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
 		int dutyHistoryTotalCount = dutyMapper.selectTotalCountDutyHistory();
@@ -64,10 +74,19 @@ public class DutyService {
 		return resultMap;
 	}
 	
+	/**
+	 * 마지막에 등록한 근태 정보 출력
+	 * @return
+	 */
 	public DutyHistoryDTO getLastDutyDetail() {
 		return dutyMapper.selectLastDutyHistoryDetail(facade.getDetails().getUserId());
 	}
 	
+	/**
+	 * 근태 정보 수정(퇴근 버튼 눌렀을 때)
+	 * @param params
+	 * @return
+	 */
 	public boolean updateDuty(DutyHistoryDTO params) {
 		int queryResult = 0;
 		

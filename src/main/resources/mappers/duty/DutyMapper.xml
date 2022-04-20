@@ -95,6 +95,7 @@
 		   AND seq_no = #{seqNo}
 	</update>
 	
+	<!-- 근태 정보 갯수 출력 -->
 	<select id="selectTotalCountDutyHistory" resultType="int">
 		SELECT COUNT(*) 
 		  FROM dut_hst

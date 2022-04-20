@@ -9,15 +9,15 @@ import lombok.Setter;
 @Setter
 public class DutyHistoryVO extends CommonDTO {
 
-	private String userNm;
-	private String dtyNm;
-	private String blgNm;
-	private String basDt;
-	private String svceFormCdNm;
-	private String rgDtm;
-	private String dczStsCd;
-	private String dczStsCdnm;
-	private String dczDtm;
-	private String dczmnId;
+	private String userNm;			/* 이름 */
+	private String dtyNm;			/* 직급 */
+	private String blgNm;			/* 소속 */
+	private String basDt;			/* 기준일자 */
+	private String svceFormCdNm;	/* 근태구분 */
+	private String rgDtm;			/* 상신일시 */
+	private String dczStsCd;		/* 결재상태 */
+	private String dczStsCdnm;		/* 결재상태명 */
+	private String dczDtm;			/* 결재일시 */
+	private String dczmnId;			/* 결재자 이름 */
 	
 }
