@@ -65,7 +65,6 @@ public class MemberController {
 	public String getAdminIndexPage() {	
 		// 로그인 시 아이디와 비밀번호가 같은경우(비밀번호가 전화번호일경우) 비밀번호 페이지로 이동시켜 비밀번호 변경을 유도.
 		if(passwordEncoder.matches(facade.getDetails().getUserId(), facade.getDetails().getUserPassword())) {
-			log.debug("비밀번호페이지");
 			return "business/change_pw";
 		} else {
 			return "business/employee/index";
