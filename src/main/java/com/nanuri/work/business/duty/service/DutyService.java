@@ -1,8 +1,7 @@
 package com.nanuri.work.business.duty.service;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,7 +56,7 @@ public class DutyService {
 		paramMap.put("edDt", params.getEdDt());
 		
 		List<String> vacation = dutyMapper.calVacation(paramMap);
-		List<DutyHistoryDTO> list = new LinkedList<DutyHistoryDTO>();
+		List<DutyHistoryDTO> list = new ArrayList<DutyHistoryDTO>();
 		
 		for(int i = 0; i < vacation.size(); i++) {
 			DutyHistoryDTO duty = new DutyHistoryDTO();
