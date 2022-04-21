@@ -19,7 +19,7 @@ $(function(){
         });
     }
 
-    let regPassword = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*()/.,?])[A-Za-z\d!@#$%^&*()/.,?]{8,}$/;
+    let regPassword = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*()/.,?+])[A-Za-z\d!@#$%^&*()/.,?+]{8,}$/;
 
     // 변경 버튼 클릭
     $(document).on('click', '#change', function(){
