@@ -1,6 +1,8 @@
 package com.nanuri.work.business.duty.service;
 
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +44,38 @@ public class DutyService {
 		params.setUserId(facade.getDetails().getUserId());
 		
 		queryResult = dutyMapper.insertOnDuty(params);
+		
+		return (queryResult > 0);
+	}
+	
+	public boolean registerOffDuty(DutyHistoryDTO params) {
+		
+		int queryResult = 0;
+		
+		HashMap<String, String> paramMap = new HashMap<String, String>();
+		paramMap.put("stDt", params.getStDt());
+		paramMap.put("edDt", params.getEdDt());
+		
+		List<String> vacation = dutyMapper.calVacation(paramMap);
+		List<DutyHistoryDTO> list = new LinkedList<DutyHistoryDTO>();
+		
+		for(int i = 0; i < vacation.size(); i++) {
+			DutyHistoryDTO duty = new DutyHistoryDTO();
+			duty.setUserId(facade.getDetails().getUserId());
+			duty.setBasDt(vacation.get(i));
+			duty.setSvceFormCd(params.getSvceFormCd());
+			duty.setStDt(params.getStDt());
+			duty.setStTm(params.getStTm());
+			duty.setEdDt(params.getEdDt());
+			duty.setEdTm(params.getEdTm());
+			duty.setSbtNum(params.getSbtNum());
+			duty.setSvcePrjtTxt(params.getSvcePrjtTxt());
+			duty.setRsnTxt(params.getRsnTxt());
+			
+			list.add(duty);
+		}
+		
+		queryResult = dutyMapper.insertOffDuty(list);
 		
 		return (queryResult > 0);
 	}

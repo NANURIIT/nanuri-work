@@ -47,6 +47,7 @@ var getDutyHistoryList = function(){
         url : '/duty/getDutyHistoryList', 
         data : param, 
         success : function(object){
+            console.log(object);
             let DUTY_HISTORY_LIST_HTML = '';
             if(object.dutyHistoryList.length > 0){
                 let dutyHistoryList = object.dutyHistoryList;
@@ -60,11 +61,11 @@ var getDutyHistoryList = function(){
                     DUTY_HISTORY_LIST_HTML += ' <td>'+tmpRow.userNm+'</td>';
                     DUTY_HISTORY_LIST_HTML += ' <td>'+tmpRow.dtyNm+'</td>';
                     DUTY_HISTORY_LIST_HTML += ' <td>'+tmpRow.blgNm+'</td>';
-                    DUTY_HISTORY_LIST_HTML += ' <td>기준일자</td>';
+                    DUTY_HISTORY_LIST_HTML += ' <td>'+tmpRow.basDt+'</td>';
                     DUTY_HISTORY_LIST_HTML += ' <td>'+tmpRow.svceFormCdNm+'</td>';
                     DUTY_HISTORY_LIST_HTML += ' <td>1</td>';
                     DUTY_HISTORY_LIST_HTML += ' <td>전체 기간</td>';
-                    DUTY_HISTORY_LIST_HTML += ' <td>'+tmpRow.rgDtm+'</td>';
+                    DUTY_HISTORY_LIST_HTML += ' <td>'+tmpRow.rgDtm.substring(0, tmpRow.rgDtm.length-3)+'</td>';
                     DUTY_HISTORY_LIST_HTML += ' <td>'+tmpRow.dczStsCdnm+'</td>';
                     DUTY_HISTORY_LIST_HTML += ' <td>-</td>';
                     DUTY_HISTORY_LIST_HTML += ' <td>-</td>';

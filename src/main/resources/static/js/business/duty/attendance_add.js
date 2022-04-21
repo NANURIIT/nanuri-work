@@ -61,13 +61,14 @@ $(function(){
         let params = {
             svceFormCd : $('#dutyTypeList').val(), 
             svcePrjtTxt : $('#svcePrjtTxt').val(), 
+            basDt : $('#stDt').val(),  
             stDt : $('#stDt').val(), 
             stTm : $('#stTm').val(), 
             aawBtnClkDtm : today + ' ' + time
         };
 
-        console.log($('#dutyTypeList').find('option:selected').val());
-        //registerOnDuty(params);
+        // console.log($('#dutyTypeList').find('option:selected').val());
+        registerOnDuty(params);
     });
 
     // 퇴근버튼 클릭
@@ -98,7 +99,11 @@ $(function(){
             edTm : $('#edTm').val()
         }
 
-        console.log($('#dutyTypeList').find('option:selected').val());
+        if($('#dutyTypeList').find('option:selected').val() == 'OFF_DUTY' || $('#dutyTypeList').find('option:selected').val() == 'DESEASE'){
+            params.sbtNum = 1;
+        }
+
+        registerOffDuty(params);
     });
 });
 
@@ -227,6 +232,21 @@ var updateDuty = function(params){
     })
 }
 
+var registerOffDuty = function(params){
+    console.log(params);
+    ajaxCall({
+        method : 'POST', 
+        url : '/duty/registerOffDuty', 
+        data : params, 
+        success : function(object){
+            console.log('success registerOffDuty', object);
+        }
+    });
+}
+
+/**
+ * 근태정보 상세 출력
+ */
 var getDutyDetail = function(){
     ajaxCall({
         method : 'GET', 

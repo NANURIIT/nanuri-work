@@ -3,7 +3,7 @@
 <mapper namespace="com.nanuri.work.business.duty.mapper.DutyMapper">
 
 	<!-- 근태등록 -->
-	<insert id="insertDuty" parameterType="com.nanuri.work.business.duty.dto.DutyHistoryDTO">
+	<insert id="insertOnDuty" parameterType="com.nanuri.work.business.duty.dto.DutyHistoryDTO">
 		INSERT INTO dut_hst (
 			user_id, 
 			bas_dt, 
@@ -13,6 +13,7 @@
 			aaw_btn_clk_dtm, 
 			ed_dt, 
 			ed_tm, 
+			sbt_num, 
 			svce_prjt_txt
 		) VALUES (
 			#{userId}, 
@@ -23,9 +24,47 @@
 			#{aawBtnClkDtm}, 
 			#{edDt}, 
 			#{edTm}, 
+			#{sbtNum}
 			#{svcePrjtTxt}
 		)
 	</insert>
+	
+	<insert id="insertOffDuty" parameterType="com.nanuri.work.business.duty.dto.DutyHistoryDTO">
+		INSERT INTO dut_hst (
+			user_id, 
+			bas_dt, 
+			svce_form_cd, 
+			st_dt, 
+			st_tm, 
+			ed_dt, 
+			ed_tm, 
+			sbt_num, 
+			svce_prjt_txt, 
+			rsn_txt
+		) VALUES 
+		<foreach collection="list" item="item" separator=",">
+		(
+			#{item.userId}, 
+			#{item.basDt}, 
+			#{item.svceFormCd}, 
+			#{item.stDt}, 
+			#{item.stTm}, 
+			#{item.edDt}, 
+			#{item.edTm}, 
+			#{item.sbtNum}, 
+			#{item.svcePrjtTxt}, 
+			#{item.rsnTxt}
+		)	
+		</foreach>
+	</insert>
+	
+	<!-- 휴가 계산 -->
+	<select id="calVacation" parameterType="java.util.HashMap" resultType="string">
+		SELECT bas_dt
+		  FROM hldy_info
+		 WHERE bas_dt BETWEEN #{stDt} AND #{edDt}
+		   AND hldy_yn = 'N'
+	</select>
 	
 	<!-- 근태 조회 -->
 	<select id="selectDutyHistoryList" parameterType="string" resultType="com.nanuri.work.business.duty.vo.DutyHistoryVO">

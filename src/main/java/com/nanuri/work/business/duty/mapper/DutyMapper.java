@@ -1,5 +1,6 @@
 package com.nanuri.work.business.duty.mapper;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -15,4 +16,7 @@ public interface DutyMapper {
 	public DutyHistoryDTO selectLastDutyHistoryDetail(String userId);
 	public int updateDuty(DutyHistoryDTO params);
 	public int selectTotalCountDutyHistory();
+	
+	public int insertOffDuty(List<DutyHistoryDTO> dutyList);
+	public List<String> calVacation(HashMap<String, String> params);
 }
