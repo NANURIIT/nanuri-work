@@ -6,10 +6,14 @@
 	<select id="selectCommonCodeList" parameterType="com.nanuri.work.business.member.dto.CommonCodeDTO" resultType="com.nanuri.work.business.member.dto.CommonCodeDTO">
 		SELECT ds_cd,
 			   dtl_cd,
+			   dtl_ds_cd, 
 			   ds_cd_nm,
 			   dtl_cnm
 		  FROM comn_cd
     	 WHERE ds_cd = #{dsCd}
+    	 <if test="dtlDsCd != null and dtlDsCd != ''">
+    	 	AND dtl_ds_cd = #{dtlDsCD}
+    	 </if>
 	  ORDER BY sort_seqn
 	</select>
 	

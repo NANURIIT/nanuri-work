@@ -107,5 +107,5 @@ var changePassword = function(params){
                 });
             }
         }
-    })
+    });
 }
