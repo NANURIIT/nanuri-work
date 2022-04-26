@@ -100,9 +100,26 @@
 	 		 WHERE ds_cd = 'CONFIRM'
 	 		) T04
 	 		ON T01.dcz_sts_cd = T04.dtl_cd
+	 		WHERE 1=1
 	 		<if test="userId != null and userId != ''">
-	 			WHERE T01.user_id = #{userId}
+	 			AND T01.user_id = #{userId}
 	 		</if> 
+	 		<!-- 근무 형태 검색 -->
+	 		<if test="searchType != null and searchType != ''">
+	 			AND T01.svce_form_cd = #{searchType}
+	 		</if>
+	 		<!-- 직원명 검색 -->
+	 		<if test="searchKeyword != null and searchKeyword != ''">
+	 			AND T02.user_nm = #{searchKeyword}
+	 		</if>
+	 		<!-- 기준 년도 검색 -->
+	 		<if test="searchDate != null and searchDate != ''">
+	 			AND DATE_FORMAT(T01.bas_dt, '%Y') = #{searchDate}
+	 		</if>
+	 		<!-- 기준 년도 올해 default -->
+	 		<if test="searchDate == null or searchDate == ''">
+	 			AND DATE_FORMAT(T01.bas_dt, '%Y') = DATE_FORMAT(NOW(), '%Y')
+	 		</if>
 	  ORDER BY T01.seq_no DESC
 	</select>
 

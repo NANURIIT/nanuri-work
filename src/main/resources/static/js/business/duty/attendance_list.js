@@ -5,9 +5,25 @@
 $(function(){
 
     getCommonCode();
-    getDutyHistoryList();
+    getDutyHistoryList(1);
 
     $('#attendance_date').val(new Date().getFullYear());
+
+    // 검색 버튼 클릭
+    $(document).on('click', '#dutySearch', function() {
+        // 근무형태가 전체가 아닐경우에만 값을 전달
+        if($('#dutyTypeList').val() != 'ALL'){
+            param.searchType = $('#dutyTypeList').val();
+        }
+        param.searchKeyword = $('#employee_name').val();
+        param.searchDate = $('#attendance_date').val();
+
+        getDutyHistoryList(1);
+
+        delete param.searchType;
+        delete param.searchKeyword;
+        delete param.searchDate;
+    }); 
 });
 
 /**
@@ -41,7 +57,8 @@ let param = {
 /**
  * 근태 정보 리스트 출력
  */
-var getDutyHistoryList = function(){
+var getDutyHistoryList = function(pageNo){
+    param.thisPageNo = pageNo;
     ajaxCall({
         method : 'GET' , 
         url : '/duty/getDutyHistoryList', 
