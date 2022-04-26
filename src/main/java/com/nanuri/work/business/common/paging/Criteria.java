@@ -25,8 +25,8 @@ public class Criteria {
 	/** 검색 유형 */
 	private String searchType;
 	
-	/** 검색 날짜 유형 */
-	private String searchDateType;
+	/** 검색 날짜 */
+	private String searchDate;
 	
 	public Criteria() {
 		this.thisPageNo = 1;

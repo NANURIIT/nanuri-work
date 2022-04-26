@@ -5,16 +5,24 @@
 $(function(){
 
     getCommonCode();
-    getDutyHistoryList();
+    getDutyHistoryList(1);
 
     $('#attendance_date').val(new Date().getFullYear());
 
     // 검색 버튼 클릭
     $(document).on('click', '#dutySearch', function() {
-        param.searchType = $('#dutyTypeList').val();
-        param.searchKeword = $('#attendance_date').val();
-        
+        // 근무형태가 전체가 아닐경우에만 값을 전달
+        if($('#dutyTypeList').val() != 'ALL'){
+            param.searchType = $('#dutyTypeList').val();
+        }
+        param.searchKeyword = $('#employee_name').val();
+        param.searchDate = $('#attendance_date').val();
+
         getDutyHistoryList(1);
+
+        delete param.searchType;
+        delete param.searchKeyword;
+        delete param.searchDate;
     }); 
 });
 
@@ -49,7 +57,8 @@ let param = {
 /**
  * 근태 정보 리스트 출력
  */
-var getDutyHistoryList = function(){
+var getDutyHistoryList = function(pageNo){
+    param.thisPageNo = pageNo;
     ajaxCall({
         method : 'GET' , 
         url : '/duty/getDutyHistoryList', 
@@ -68,7 +77,7 @@ var getDutyHistoryList = function(){
                     DUTY_HISTORY_LIST_HTML += ' <td>'+tmpRow.userNm+'</td>';
                     DUTY_HISTORY_LIST_HTML += ' <td>'+tmpRow.dtyNm+'</td>';
                     DUTY_HISTORY_LIST_HTML += ' <td>'+tmpRow.blgNm+'</td>';
-                    DUTY_HISTORY_LIST_HTML += ' <td>기준일자</td>';
+                    DUTY_HISTORY_LIST_HTML += ' <td>'+tmpRow.basDt+'</td>';
                     DUTY_HISTORY_LIST_HTML += ' <td>'+tmpRow.svceFormCdNm+'</td>';
                     DUTY_HISTORY_LIST_HTML += ' <td>1</td>';
                     DUTY_HISTORY_LIST_HTML += ' <td>전체 기간</td>';

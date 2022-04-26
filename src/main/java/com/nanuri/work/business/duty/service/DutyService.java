@@ -60,6 +60,7 @@ public class DutyService {
 		
 		params.setPaginationInfo(paginationInfo);
 		
+		// 관리자 혹은 경영지원팀이 아니면
 		if(facade.getDetails().getUserAutrNm() != MemberLevelCode.ADMIN &&
 				facade.getDetails().getUserAutrNm() != MemberLevelCode.ASSISTANT) {
 			params.setUserId(facade.getDetails().getUserId());

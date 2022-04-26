@@ -5,6 +5,17 @@
 $(function () {
     getCommonCode();
     getDutyHistoryList();
+
+    // 검색 버튼 클릭
+    $(document).on('click', '#dutySearch', function(){
+        // 근무 형태가 전체가 아닐경우에만 값을 전달
+        if($('#dutyTypeList').val() != 'ALL'){
+            param.searchType = $('#dutyTypeList').val();
+        }
+        getDutyHistoryList(1);
+
+        delete param.searchType;
+    })
 });
 
 /**
@@ -83,9 +94,16 @@ var getDutyHistoryList = function () {
                     }
                     
                     DUTY_HISTORY_LIST_HTML += '</tr>';
+                    
+                    $('#dutyHistoryList').html(DUTY_HISTORY_LIST_HTML);
+                    setPage(param);
                 }
+            } else {
+                DUTY_HISTORY_LIST_HTML += '<tr>'
+                DUTY_HISTORY_LIST_HTML += ' <td colspan="12">조회된 정보가 없습니다.</td>';
+                DUTY_HISTORY_LIST_HTML += '</tr>'
                 $('#dutyHistoryList').html(DUTY_HISTORY_LIST_HTML);
-                setPage(param);
+                $('#list_pagination').empty();
             }
         }
     })
