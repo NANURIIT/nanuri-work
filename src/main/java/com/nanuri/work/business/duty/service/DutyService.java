@@ -59,6 +59,7 @@ public class DutyService {
 		List<DutyHistoryDTO> list = new ArrayList<DutyHistoryDTO>();
 		
 		for(int i = 0; i < vacation.size(); i++) {
+			
 			DutyHistoryDTO duty = new DutyHistoryDTO();
 			duty.setUserId(facade.getDetails().getUserId());
 			duty.setBasDt(vacation.get(i));

@@ -67,8 +67,13 @@ $(function(){
             aawBtnClkDtm : today + ' ' + time
         };
 
-        // console.log($('#dutyTypeList').find('option:selected').val());
-        registerOnDuty(params);
+        if($('#dutyTypeList').find('option:selected').val() == 'FIRST_DUTY' || $('#dutyTypeList').find('option:selected').val() == 'SECOND_DUTY'){
+            params.sbtNum = 0.5;
+        }
+        
+        console.log('params', params);
+
+        // registerOnDuty(params);
     });
 
     // 퇴근버튼 클릭
@@ -239,7 +244,14 @@ var registerOffDuty = function(params){
         url : '/duty/registerOffDuty', 
         data : params, 
         success : function(object){
-            console.log('success registerOffDuty', object);
+            openPopup({
+                title : '성공', 
+                text : '근태 등록을 성공하셨습니다.', 
+                type : 'success', 
+                callback : function(){
+                    location.href = '/admin/dutyList';
+                }
+            });
         }
     });
 }

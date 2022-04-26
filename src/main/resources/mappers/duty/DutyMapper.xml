@@ -24,7 +24,7 @@
 			#{aawBtnClkDtm}, 
 			#{edDt}, 
 			#{edTm}, 
-			#{sbtNum}
+			#{sbtNum}, 
 			#{svcePrjtTxt}
 		)
 	</insert>
@@ -131,7 +131,8 @@
 		   SET svce_form_cd = #{svceFormCd},
 		   	   ed_dt = #{edDt}, 
 		   	   ed_tm = #{edTm}, 
-		   	   ckof_btn_clk_dtm = #{ckofBtnClkDtm}
+		   	   ckof_btn_clk_dtm = #{ckofBtnClkDtm}, 
+		   	   sbt_num = #{sbtNum}
 		 WHERE user_id = #{userId}
 		   AND seq_no = #{seqNo}
 	</update>
