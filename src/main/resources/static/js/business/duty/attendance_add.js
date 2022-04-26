@@ -70,10 +70,8 @@ $(function(){
         if($('#dutyTypeList').find('option:selected').val() == 'FIRST_DUTY' || $('#dutyTypeList').find('option:selected').val() == 'SECOND_DUTY'){
             params.sbtNum = 0.5;
         }
-        
-        console.log('params', params);
 
-        // registerOnDuty(params);
+        registerOnDuty(params);
     });
 
     // 퇴근버튼 클릭

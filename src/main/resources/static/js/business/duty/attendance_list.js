@@ -54,6 +54,8 @@ let param = {
     pageViewNo: 10
 };
 
+const WEEKDAY = ['일', '월', '화', '수', '목', '금', '토'];
+
 /**
  * 근태 정보 리스트 출력
  */
@@ -64,7 +66,6 @@ var getDutyHistoryList = function(pageNo){
         url : '/duty/getDutyHistoryList', 
         data : param, 
         success : function(object){
-            console.log(object);
             let DUTY_HISTORY_LIST_HTML = '';
             if(object.dutyHistoryList.length > 0){
                 let dutyHistoryList = object.dutyHistoryList;
@@ -74,15 +75,27 @@ var getDutyHistoryList = function(pageNo){
                     let tmpRow = dutyHistoryList[i];
 
                     DUTY_HISTORY_LIST_HTML += '<tr>';
-                    DUTY_HISTORY_LIST_HTML += ' <td>사번</td>';
+                    DUTY_HISTORY_LIST_HTML += ' <td>'+tmpRow.telNo.substring(3, tmpRow.telNo.length)+'</td>';
                     DUTY_HISTORY_LIST_HTML += ' <td>'+tmpRow.userNm+'</td>';
                     DUTY_HISTORY_LIST_HTML += ' <td>'+tmpRow.dtyNm+'</td>';
                     DUTY_HISTORY_LIST_HTML += ' <td>'+tmpRow.blgNm+'</td>';
                     DUTY_HISTORY_LIST_HTML += ' <td>'+tmpRow.basDt+'</td>';
                     DUTY_HISTORY_LIST_HTML += ' <td>'+tmpRow.svceFormCdNm+'</td>';
-                    DUTY_HISTORY_LIST_HTML += ' <td>1</td>';
-                    DUTY_HISTORY_LIST_HTML += ' <td>전체 기간</td>';
-                    DUTY_HISTORY_LIST_HTML += ' <td>'+tmpRow.rgDtm.substring(0, tmpRow.rgDtm.length-3)+'</td>';
+                    if(tmpRow.svceFormCd == 'OFF_DUTY' || tmpRow.svceFormCd == 'FIRST_DUTY' || tmpRow.svceFormCd == 'SECOND_DUTY'){
+                        if(tmpRow.sbtAftVctnDys % 1 === 0){
+                            DUTY_HISTORY_LIST_HTML += ' <td>'+tmpRow.sbtAftVctnDys.substring(0, tmpRow.sbtAftVctnDys.length - 3)+'</td>';
+                        } else {
+                            DUTY_HISTORY_LIST_HTML += ' <td>'+tmpRow.sbtAftVctnDys.substring(0, tmpRow.sbtAftVctnDys.length - 1)+'</td>';
+                        }
+                    } else {
+                        DUTY_HISTORY_LIST_HTML += ' <td> - </td>'
+                    }
+                    if((isEmpty(tmpRow.edDt) && isEmpty(tmpRow.edTm)) == false){
+                        DUTY_HISTORY_LIST_HTML += ' <td>'+tmpRow.stDt + '('+WEEKDAY[new Date(tmpRow.stDt).getDay()]+')' +  ' ' + tmpRow.stTm.substring(0, tmpRow.stTm.length - 3) + ' ~ ' + '<br>' + tmpRow.edDt + '('+WEEKDAY[new Date(tmpRow.edDt).getDay()]+')' +  ' ' + tmpRow.edTm.substring(0, tmpRow.edTm.length - 3) + ', '+tmpRow.prd+'일' +'</td>';
+                    } else {
+                        DUTY_HISTORY_LIST_HTML += ' <td>'+tmpRow.stDt+ '('+WEEKDAY[new Date(tmpRow.stDt).getDay()]+')' +  ' ' +tmpRow.stTm.substring(0, tmpRow.stTm.length - 3) + ' ~ ' + '</td>'
+                    }
+                    DUTY_HISTORY_LIST_HTML += ' <td>'+tmpRow.rgDtm.substring(0, 10) + '('+WEEKDAY[new Date(tmpRow.rgDtm.substring(0, 10)).getDay()]+')' + '<br>' + tmpRow.rgDtm.substring(11, tmpRow.rgDtm.length - 3) + '</td>';
                     DUTY_HISTORY_LIST_HTML += ' <td>'+tmpRow.dczStsCdnm+'</td>';
                     DUTY_HISTORY_LIST_HTML += ' <td>-</td>';
                     DUTY_HISTORY_LIST_HTML += ' <td>-</td>';

@@ -57,6 +57,7 @@ var getDutyHistoryList = function () {
         url: '/duty/getDutyHistoryList',
         data: param,
         success: function (object) {
+            console.log(object);
             let DUTY_HISTORY_LIST_HTML = '';
             if (object.dutyHistoryList.length > 0) {
                 let dutyHistoryList = object.dutyHistoryList;
@@ -79,8 +80,17 @@ var getDutyHistoryList = function () {
                     DUTY_HISTORY_LIST_HTML += ' <td>전체 기간</td>';
                     DUTY_HISTORY_LIST_HTML += ' <td>' + tmpRow.rgDtm + '</td>';
                     DUTY_HISTORY_LIST_HTML += ' <td>' + tmpRow.dczStsCdnm + '</td>';
-                    DUTY_HISTORY_LIST_HTML += ' <td>결재 일시</td>';
-                    DUTY_HISTORY_LIST_HTML += ' <td>결재자이름</td>';
+                    if(isEmpty(tmpRow.dczDtm)){
+                        DUTY_HISTORY_LIST_HTML += ' <td> - </td>';    
+                    } else {
+                        DUTY_HISTORY_LIST_HTML += ' <td>'+tmpRow.dczDtm+'</td>';    
+                    }
+                    if(isEmpty(tmpRow.dczmnId)){
+                        DUTY_HISTORY_LIST_HTML += ' <td> - </td>';
+                    } else {
+                        DUTY_HISTORY_LIST_HTML += ' <td>'+tmpRow.dczmnId+'</td>';
+                    }
+                    
 
                     if (tmpRow.dczStsCd == 'REPORT' || tmpRow.dczStsCd == 'CLEAR') {
                         DUTY_HISTORY_LIST_HTML += ' <td>';
