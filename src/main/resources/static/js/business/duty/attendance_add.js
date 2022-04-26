@@ -67,7 +67,7 @@ $(function(){
             aawBtnClkDtm : today + ' ' + time
         };
 
-        if($('#dutyTypeList').find('option:selected').val() == 'FIRST_DUTY' || $('#dutyTypeList').find('option:selected').val() == 'SECOND_DUTY'){
+        if($('#dutyTypeList').find('option:selected').val() == 'SECOND_DUTY'){
             params.sbtNum = 0.5;
         }
 
@@ -86,6 +86,10 @@ $(function(){
             edTm : $('#edTm').val(), 
             ckofBtnClkDtm : today + ' ' + time
         };
+
+        if($('#dutyTypeList').find('option:selected').val() == 'FIRST_DUTY'){
+            params.sbtNum = 0.5;
+        }
 
         updateDuty(params);
     });
@@ -206,7 +210,6 @@ var registerOnDuty = function(params){
  * @param {string} params.ckofBtnClkDtm 퇴근버튼클릭시간
  */
 var updateDuty = function(params){
-    console.log(params);
     ajaxCall({
         method : 'PATCH', 
         url : '/duty/updateDuty', 
