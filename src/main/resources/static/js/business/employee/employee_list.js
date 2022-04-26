@@ -52,7 +52,7 @@ $(function () {
         }
         getEmployeeList(1);
     });
-
+    console.log(getEmployeeList);
 });
 
 let param = {

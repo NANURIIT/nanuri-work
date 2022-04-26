@@ -55,8 +55,6 @@ public class DutyService {
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
 		int dutyHistoryTotalCount = dutyMapper.selectTotalCountDutyHistory();
 		
-		String userId = null;
-		
 		PaginationInfo paginationInfo = new PaginationInfo(params);
 		paginationInfo.setTotalRecordCount(dutyHistoryTotalCount);
 		
@@ -64,12 +62,12 @@ public class DutyService {
 		
 		if(facade.getDetails().getUserAutrNm() != MemberLevelCode.ADMIN &&
 				facade.getDetails().getUserAutrNm() != MemberLevelCode.ASSISTANT) {
-			userId = facade.getDetails().getUserId();
+			params.setUserId(facade.getDetails().getUserId());
 		}
 		
 		if(dutyHistoryTotalCount > 0) {
 			resultMap.put("dutyHistoryTotalCount", dutyHistoryTotalCount);
-			resultMap.put("dutyHistoryList", dutyMapper.selectDutyHistoryList(userId));
+			resultMap.put("dutyHistoryList", dutyMapper.selectDutyHistoryList(params));
 		}
 		return resultMap;
 	}

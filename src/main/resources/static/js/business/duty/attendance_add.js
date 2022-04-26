@@ -60,14 +60,15 @@ $(function(){
 
         let params = {
             svceFormCd : $('#dutyTypeList').val(), 
-            svcePrjtTxt : $('#svcePrjtTxt').val(), 
+            svcePrjtTxt : $('#svcePrjtTxt').val(),
+            basDt :  $('#stDt').val(), 
             stDt : $('#stDt').val(), 
             stTm : $('#stTm').val(), 
             aawBtnClkDtm : today + ' ' + time
         };
 
-        console.log($('#dutyTypeList').find('option:selected').val());
-        //registerOnDuty(params);
+        // console.log($('#dutyTypeList').find('option:selected').val());
+        registerOnDuty(params);
     });
 
     // 퇴근버튼 클릭

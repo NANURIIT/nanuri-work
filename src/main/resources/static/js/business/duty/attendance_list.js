@@ -8,6 +8,14 @@ $(function(){
     getDutyHistoryList();
 
     $('#attendance_date').val(new Date().getFullYear());
+
+    // 검색 버튼 클릭
+    $(document).on('click', '#dutySearch', function() {
+        param.searchType = $('#dutyTypeList').val();
+        param.searchKeword = $('#attendance_date').val();
+        
+        getDutyHistoryList(1);
+    }); 
 });
 
 /**

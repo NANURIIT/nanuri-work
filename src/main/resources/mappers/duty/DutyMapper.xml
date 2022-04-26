@@ -3,7 +3,7 @@
 <mapper namespace="com.nanuri.work.business.duty.mapper.DutyMapper">
 
 	<!-- 근태등록 -->
-	<insert id="insertDuty" parameterType="com.nanuri.work.business.duty.dto.DutyHistoryDTO">
+	<insert id="insertOnDuty" parameterType="com.nanuri.work.business.duty.dto.DutyHistoryDTO">
 		INSERT INTO dut_hst (
 			user_id, 
 			bas_dt, 
@@ -62,6 +62,32 @@
 	 		) T04
 	 		ON T01.dcz_sts_cd = T04.dtl_cd
 	 		<if test="userId != null and userId != ''">
+	 			<choose>
+	 				<when test="'all'.equals(searchType)">
+	 					AND A.svce_form_cd LIKE CONCAT('%' #{searchType}, '%')
+	 				</when>
+	 				<when test="'onDuty'.equals(searchType)">
+	 					AND A.svce_form_cd LIKE CONCAT('%' #{searchKeyword}, '%')
+	 				</when>
+	 				<when test="'offDuty'.equals(searchType)">
+	 					AND A.svce_form_cd LIKE CONCAT('%' #{searchKeyword}, '%')
+	 				</when>
+	 				<when test="'education'.equals(searchType)">
+	 					AND A.svce_form_cd LIKE CONCAT('%' #{searchKeyword}, '%')
+	 				</when>
+	 				<when test="'firstDuty'.equals(searchType)">
+	 					AND A.svce_form_cd LIKE CONCAT('%' #{searchKeyword}, '%')
+	 				</when>
+	 				<when test="'secondDuty'.equals(searchType)">
+	 					AND A.svce_form_cd LIKE CONCAT('%' #{searchKeyword}, '%')
+	 				</when>
+	 				<when test="'desease'.equals(searchType)">
+	 					AND A.svce_form_cd LIKE CONCAT('%' #{searchKeyword}, '%')
+	 				</when>
+	 				<when test="'event'.equals(searchType)">
+	 					AND A.svce_form_cd LIKE CONCAT('%' #{searchKeyword}, '%')
+	 				</when>	 				
+	 			</choose>
 	 			WHERE T01.user_id = #{userId}
 	 		</if> 
 	  ORDER BY T01.seq_no DESC
