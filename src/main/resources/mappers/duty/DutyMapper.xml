@@ -5,16 +5,16 @@
 	<!-- 근태등록 -->
 	<insert id="insertOnDuty" parameterType="com.nanuri.work.business.duty.dto.DutyHistoryDTO">
 		INSERT INTO dut_hst (
-			user_id, 
-			bas_dt, 
-			svce_form_cd, 
-			st_dt, 
-			st_tm, 
-			aaw_btn_clk_dtm, 
-			ed_dt, 
-			ed_tm, 
-			sbt_num, 
-			svce_prjt_txt
+			user_id, 			/* 사용자ID */
+			bas_dt, 			/* 기준일자 */
+			svce_form_cd, 		/* 근무형태코드 */
+			st_dt, 				/* 시작일자 */
+			st_tm, 				/* 시작시각 */
+			aaw_btn_clk_dtm, 	/* 출근버튼클릭일시 */
+			ed_dt, 				/* 종료일자 */
+			ed_tm, 				/* 종료시각 */
+			sbt_num, 			/* 차감숫자 */
+			svce_prjt_txt 		/* 근무프로젝트txt */
 		) VALUES (
 			#{userId}, 
 			#{basDt}, 
@@ -31,16 +31,16 @@
 	
 	<insert id="insertOffDuty" parameterType="com.nanuri.work.business.duty.dto.DutyHistoryDTO">
 		INSERT INTO dut_hst (
-			user_id, 
-			bas_dt, 
-			svce_form_cd, 
-			st_dt, 
-			st_tm, 
-			ed_dt, 
-			ed_tm, 
-			sbt_num, 
-			svce_prjt_txt, 
-			rsn_txt
+			user_id, 			/* 사용자ID */
+			bas_dt, 			/* 기준일자 */
+			svce_form_cd, 		/* 근무형태코드 */
+			st_dt, 				/* 시작일자 */
+			st_tm, 				/* 시작시각 */
+			ed_dt, 				/* 종료일자 */
+			ed_tm, 				/* 종료시각 */
+			sbt_num, 			/* 차감숫자 */
+			svce_prjt_txt, 		/* 근무프로젝트txt */
+			rsn_txt 			/* 사유 */
 		) VALUES 
 		<foreach collection="list" item="item" separator=",">
 		(
@@ -60,7 +60,7 @@
 	
 	<!-- 휴가 계산 -->
 	<select id="calVacation" parameterType="java.util.HashMap" resultType="string">
-		SELECT bas_dt
+		SELECT bas_dt 			/* 기준일자 */
 		  FROM hldy_info
 		 WHERE bas_dt BETWEEN #{stDt} AND #{edDt}
 		   AND hldy_yn = 'N'
@@ -68,27 +68,27 @@
 	
 	<!-- 근태 조회 -->
 	<select id="selectDutyHistoryList" parameterType="string" resultType="com.nanuri.work.business.duty.vo.DutyHistoryVO">
-		SELECT T01.seq_no, 
-			   T02.user_nm,
-			   T02.tel_no,  
-			   T02.dty_nm, 
-			   T02.blg_nm, 
-			   T01.bas_dt, 
-			   T01.svce_form_cd, 
-			   T03.dtl_cnm AS svce_form_cd_nm, 
-			   T01.st_dt, 
-			   T01.st_tm, 
-			   T01.ed_dt, 
-			   T01.ed_tm, 
+		SELECT T01.seq_no, 							/* 일련번호 */
+			   T02.user_nm, 						/* 사용자 이름 */
+			   T02.tel_no,  						/* 전화번호 */
+			   T02.dty_nm, 							/* 직급 */
+			   T02.blg_nm, 							/* 소속 */
+			   T01.bas_dt, 							/* 기준일자 */
+			   T01.svce_form_cd, 					/* 근무형태코드 */
+			   T03.dtl_cnm AS svce_form_cd_nm, 		/* 근무형태코드명 */
+			   T01.st_dt, 							/* 시작일자 */
+			   T01.st_tm, 							/* 시작시각 */
+			   T01.ed_dt, 							/* 종료일자 */
+			   T01.ed_tm, 							/* 종료시각 */
 			   (
 			   		SELECT COUNT(*)
 			   			   FROM hldy_info
 			   		 WHERE (bas_dt BETWEEN T01.st_dt AND T01.ed_dt)
 			   		   AND hldy_yn = 'N'
-			   ) AS prd, 						/* 전체 기간 일수 */ 
-			   T01.rg_dtm,
-			   T01.dcz_sts_cd,  
-			   T04.dtl_cnm AS dcz_sts_cd_nm,
+			   ) AS prd, 							/* 전체 기간 일수 */ 
+			   T01.rg_dtm, 							/* 상신일시 */
+			   T01.dcz_sts_cd,  					/* 결재상태 */
+			   T04.dtl_cnm AS dcz_sts_cd_nm, 		/* 결재상태명 */
 			   (
 			   		SELECT (
 			   			(SELECT asg_dys + ans_dys
@@ -102,11 +102,11 @@
 			   			     AND dcz_sts_cd = 'CONFIRM')
 			   		)
 			   		  FROM DUAL
-			   ) AS sbt_aft_vctn_dys, 
-			   T01.dcz_dtm, 
-			   T01.dczmn_id
-		  FROM dut_hst T01
-	 LEFT JOIN mem_bsc_info T02
+			   ) AS sbt_aft_vctn_dys, 				/* 차감 후 휴가 일수 -> (올해 사용 가능한 휴가 일수) - (승인받은 휴가일수) */
+			   T01.dcz_dtm,  						/* 결재일시 */
+			   T01.dczmn_id 						/* 결재자이름 */
+		  FROM dut_hst T01 							/* 근태기록 */
+	 LEFT JOIN mem_bsc_info T02 					/* 기본정보 */
 	 		ON T01.user_id = T02.user_id
 	 LEFT JOIN (
 	 		SELECT ds_cd, 
@@ -117,7 +117,7 @@
 	 		  FROM comn_cd
 	 		 WHERE ds_cd = 'DUTY'
 	 		) T03
-	 		ON T01.svce_form_cd = T03.dtl_cd
+	 		ON T01.svce_form_cd = T03.dtl_cd 		/* 근무 형태 코드 */
 	 LEFT JOIN (
 	 		SELECT ds_cd, 
 	 			   dtl_cd, 
@@ -125,7 +125,7 @@
 	 		  FROM comn_cd
 	 		 WHERE ds_cd = 'CONFIRM'
 	 		) T04
-	 		ON T01.dcz_sts_cd = T04.dtl_cd
+	 		ON T01.dcz_sts_cd = T04.dtl_cd 			/* 결재 상태 코드 */
 	 		WHERE 1=1
 	 		<if test="userId != null and userId != ''">
 	 			AND T01.user_id = #{userId}
@@ -152,16 +152,16 @@
 
 	<!-- 마지막 근태기록 조회 -->
 	<select id="selectLastDutyHistoryDetail" parameterType="string" resultType="com.nanuri.work.business.duty.dto.DutyHistoryDTO">
-		SELECT seq_no,
-			   bas_dt, 
-			   svce_form_cd, 
-			   st_dt, 
-			   st_tm, 
-			   ed_dt, 
-			   ed_tm, 
-			   svce_prjt_txt
-		  FROM dut_hst T01
-	 LEFT JOIN comn_cd T02
+		SELECT seq_no, 							/* 일련번호 */
+			   bas_dt, 							/* 기준일자 */
+			   svce_form_cd, 					/* 근무형태코드 */
+			   st_dt, 							/* 시작일자 */
+			   st_tm, 							/* 시작시각 */
+			   ed_dt, 							/* 종료일자 */
+			   ed_tm, 							/* 종료시각 */
+			   svce_prjt_txt 					/* 근무프로젝트txt */
+		  FROM dut_hst T01 						/* 근태기록 */
+	 LEFT JOIN comn_cd T02 						/* 공통코드 */
 	 		ON T01.svce_form_cd = T02.dtl_cd
 		 WHERE user_id = #{userId}
 		   AND T02.dtl_ds_cd = 'ON_DUTY'
