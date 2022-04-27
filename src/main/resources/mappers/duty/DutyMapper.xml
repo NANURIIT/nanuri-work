@@ -82,7 +82,7 @@
 			   T01.ed_tm, 							/* 종료시각 */
 			   (
 			   		SELECT COUNT(*)
-			   			   FROM hldy_info
+			   		  FROM hldy_info
 			   		 WHERE (bas_dt BETWEEN T01.st_dt AND T01.ed_dt)
 			   		   AND hldy_yn = 'N'
 			   ) AS prd, 							/* 전체 기간 일수 */ 
@@ -95,14 +95,13 @@
 			   			   FROM vctn_asg
 			   			  WHERE bas_yy = DATE_FORMAT(NOW(), '%Y')
 			   			    AND user_id = T01.user_id) - 
-			   			 (SELECT SUM(sbt_num)
-			   			    FROM dut_hst
-			   			   WHERE sbt_num != 0
-			   			     AND user_id = T01.user_id
-			   			     AND dcz_sts_cd = 'CONFIRM')
-			   		)
-			   		  FROM DUAL
-			   ) AS sbt_aft_vctn_dys, 				/* 차감 후 휴가 일수 -> (올해 사용 가능한 휴가 일수) - (승인받은 휴가일수) */
+			   			(SELECT SUM(sbt_num)
+			   			   FROM dut_hst
+			   			  WHERE sbt_num != 0
+			   			    AND user_id = T01.user_id
+			   			    AND dcz_sts_cd = 'CONFIRM')
+			   		) FROM DUAL
+			   ) AS sbt_aft_vctn_dys, 				/* 차감 후 휴가 일수 = (올해 사용 가능한 휴가 일수) - (승인받은 휴가일수) */
 			   T01.dcz_dtm,  						/* 결재일시 */
 			   T01.dczmn_id 						/* 결재자이름 */
 		  FROM dut_hst T01 							/* 근태기록 */
