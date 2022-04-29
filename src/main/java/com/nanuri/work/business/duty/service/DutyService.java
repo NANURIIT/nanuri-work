@@ -141,4 +141,16 @@ public class DutyService {
 		return (queryResult > 0);
 	}
 	
+	public boolean allPayment(List<DutyHistoryDTO> params) {
+		
+		int queryResult = 0;
+		
+		for(int i = 0; i < params.size(); i++) {
+			params.get(i).setDczmnId(facade.getDetails().getUserId());
+			queryResult += dutyMapper.allPayment(params.get(i));
+		}
+		
+		return (queryResult > 0);
+	}
+	
 }

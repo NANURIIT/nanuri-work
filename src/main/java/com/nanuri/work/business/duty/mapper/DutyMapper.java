@@ -19,4 +19,6 @@ public interface DutyMapper {
 	
 	public int insertOffDuty(List<DutyHistoryDTO> dutyList);
 	public List<String> calVacation(HashMap<String, String> params);
+	
+	public int allPayment(DutyHistoryDTO params);
 }

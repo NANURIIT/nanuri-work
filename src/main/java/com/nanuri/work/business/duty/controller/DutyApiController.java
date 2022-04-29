@@ -1,6 +1,7 @@
 package com.nanuri.work.business.duty.controller;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -67,6 +68,11 @@ public class DutyApiController {
 	@PatchMapping(value = "/updateDuty")
 	public boolean updateDuty(@RequestBody DutyHistoryDTO params) {
 		return dutyService.updateDuty(params);
+	}
+	
+	@PatchMapping(value = "/allPayment")
+	public boolean allPayment(@RequestBody List<DutyHistoryDTO> params) {
+		return dutyService.allPayment(params);
 	}
 	
 }

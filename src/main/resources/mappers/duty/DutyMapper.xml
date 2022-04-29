@@ -54,7 +54,7 @@
 			#{item.sbtNum}, 
 			#{item.svcePrjtTxt}, 
 			#{item.rsnTxt}
-		)	
+		)
 		</foreach>
 	</insert>
 	
@@ -67,7 +67,7 @@
 	</select>
 	
 	<!-- 근태 조회 -->
-	<select id="selectDutyHistoryList" parameterType="string" resultType="com.nanuri.work.business.duty.vo.DutyHistoryVO">
+	<select id="selectDutyHistoryList" parameterType="com.nanuri.work.business.duty.vo.DutyHistoryVO" resultType="com.nanuri.work.business.duty.vo.DutyHistoryVO">
 		SELECT T01.seq_no, 							/* 일련번호 */
 			   T02.user_nm, 						/* 사용자 이름 */
 			   T02.tel_no,  						/* 전화번호 */
@@ -192,5 +192,13 @@
 	 		AND user_id = #{userId}
 	 	</if>  -->
 	</select>
+	
+	<update id="allPayment" parameterType="com.nanuri.work.business.duty.dto.DutyHistoryDTO" >
+		UPDATE dut_hst
+		   SET dcz_sts_cd = #{dczStsCd}, 
+		   	   dczmn_id = #{dczmnId}, 
+		 	   dcz_dtm = now()
+		 WHERE seq_no = #{seqNo}
+	</update>
 
 </mapper>
