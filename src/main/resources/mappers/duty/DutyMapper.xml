@@ -119,5 +119,14 @@
 		SELECT COUNT(*) 
 		  FROM dut_hst
 	</select>
-
+	
+	<!-- 근태결재 결재 -->
+	<update id="updateDutyConfirm" parameterType="com.nanuri.work.business.duty.dto.DutyHistoryDTO">
+		UPDATE dut_hst 
+   		   SET dcz_sts_cd = #{dczStsCd},
+       		   dczmn_id = #{dczmnId},
+       		   dcz_dtm = #{dczDtm}
+       	 WHERE user_id = #{userId}	   
+	</update>
+	
 </mapper>

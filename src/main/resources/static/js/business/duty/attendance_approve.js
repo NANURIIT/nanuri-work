@@ -7,15 +7,20 @@ $(function () {
     getDutyHistoryList();
 
     // 검색 버튼 클릭
-    $(document).on('click', '#dutySearch', function(){
+    $(document).on('click', '#dutySearch', function () {
         // 근무 형태가 전체가 아닐경우에만 값을 전달
-        if($('#dutyTypeList').val() != 'ALL'){
+        if ($('#dutyTypeList').val() != 'ALL') {
             param.searchType = $('#dutyTypeList').val();
         }
         getDutyHistoryList(1);
 
         delete param.searchType;
     })
+
+    $(document).on('click', '.attendance_button', function () {
+        console.log($(this).attr('id'));
+        console.log($(this).parent().parent().attr('id'));
+    });
 });
 
 /**
@@ -65,7 +70,7 @@ var getDutyHistoryList = function () {
                 for (let i = 0; i < dutyHistoryList.length; i++) {
                     let tmpRow = dutyHistoryList[i];
 
-                    DUTY_HISTORY_LIST_HTML += '<tr id="'+tmpRow.seqNo+'">';
+                    DUTY_HISTORY_LIST_HTML += '<tr id="' + tmpRow.seqNo + '">';
                     DUTY_HISTORY_LIST_HTML += ' <td>';
                     DUTY_HISTORY_LIST_HTML += '     <input type="checkbox">';
                     DUTY_HISTORY_LIST_HTML += ' </td>';
@@ -84,17 +89,17 @@ var getDutyHistoryList = function () {
 
                     if (tmpRow.dczStsCd == 'REPORT' || tmpRow.dczStsCd == 'CLEAR') {
                         DUTY_HISTORY_LIST_HTML += ' <td>';
-                        DUTY_HISTORY_LIST_HTML += '     <button class="attendance_button approval_button">결재</button>';
-                        DUTY_HISTORY_LIST_HTML += '     <button class="attendance_button reject_button">부결</button>';
+                        DUTY_HISTORY_LIST_HTML += '     <button class="attendance_button approval_button" id="CONFIRM">결재</button>';
+                        DUTY_HISTORY_LIST_HTML += '     <button class="attendance_button reject_button" id="REJECT">부결</button>';
                         DUTY_HISTORY_LIST_HTML += ' </td>';
                     } else if (tmpRow.dczStsCd == 'CONFIRM' || tmpRow.dczStsCd == 'REJECT') {
                         DUTY_HISTORY_LIST_HTML += ' <td>';
                         DUTY_HISTORY_LIST_HTML += '     <button class="attendance_button reject_button">결재취소</button>';
                         DUTY_HISTORY_LIST_HTML += ' </td>';
                     }
-                    
+
                     DUTY_HISTORY_LIST_HTML += '</tr>';
-                    
+
                     $('#dutyHistoryList').html(DUTY_HISTORY_LIST_HTML);
                     setPage(param);
                 }
@@ -108,3 +113,5 @@ var getDutyHistoryList = function () {
         }
     })
 }
+
+
