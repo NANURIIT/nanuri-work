@@ -29,7 +29,7 @@
                                     <input type="password" name="pwd" placeholder="비밀번호" value="Asdf1234!@">
                                 </div>
                                 <div class="login_button">
-                                    <a onclick="document.getElementById('loginForm').submit();">로그인</a>
+                                    <a id="loginBtn" style="cursor: pointer;">로그인</a>
                                 </div>
                             </div>
                         </form>
@@ -39,5 +39,18 @@
         </div>
     </div>
 </body>
+<script>
+    $(function () {
+        $(document).on('keyup', function(key) {
+            if (key.keyCode == 13) {
+                $('#loginForm').submit();
+            }
+        });
+
+        $(document).on('click', '#loginBtn', function(){
+            $('#loginForm').submit();
+        });
+    });
+</script>
 
 </html>

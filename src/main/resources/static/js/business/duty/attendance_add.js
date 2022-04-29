@@ -60,14 +60,17 @@ $(function(){
 
         let params = {
             svceFormCd : $('#dutyTypeList').val(), 
-            svcePrjtTxt : $('#svcePrjtTxt').val(),
-            basDt :  $('#stDt').val(), 
+            svcePrjtTxt : $('#svcePrjtTxt').val(), 
+            basDt : $('#stDt').val(),  
             stDt : $('#stDt').val(), 
             stTm : $('#stTm').val(), 
             aawBtnClkDtm : today + ' ' + time
         };
 
-        // console.log($('#dutyTypeList').find('option:selected').val());
+        if($('#dutyTypeList').find('option:selected').val() == 'SECOND_DUTY'){
+            params.sbtNum = 0.5;
+        }
+
         registerOnDuty(params);
     });
 
@@ -84,6 +87,10 @@ $(function(){
             ckofBtnClkDtm : today + ' ' + time
         };
 
+        if($('#dutyTypeList').find('option:selected').val() == 'FIRST_DUTY'){
+            params.sbtNum = 0.5;
+        }
+
         updateDuty(params);
     });
 
@@ -99,7 +106,11 @@ $(function(){
             edTm : $('#edTm').val()
         }
 
-        console.log($('#dutyTypeList').find('option:selected').val());
+        if($('#dutyTypeList').find('option:selected').val() == 'OFF_DUTY' || $('#dutyTypeList').find('option:selected').val() == 'DESEASE'){
+            params.sbtNum = 1;
+        }
+
+        registerOffDuty(params);
     });
 });
 
@@ -199,7 +210,6 @@ var registerOnDuty = function(params){
  * @param {string} params.ckofBtnClkDtm 퇴근버튼클릭시간
  */
 var updateDuty = function(params){
-    console.log(params);
     ajaxCall({
         method : 'PATCH', 
         url : '/duty/updateDuty', 
@@ -228,6 +238,28 @@ var updateDuty = function(params){
     })
 }
 
+var registerOffDuty = function(params){
+    console.log(params);
+    ajaxCall({
+        method : 'POST', 
+        url : '/duty/registerOffDuty', 
+        data : params, 
+        success : function(object){
+            openPopup({
+                title : '성공', 
+                text : '근태 등록을 성공하셨습니다.', 
+                type : 'success', 
+                callback : function(){
+                    location.href = '/admin/dutyList';
+                }
+            });
+        }
+    });
+}
+
+/**
+ * 근태정보 상세 출력
+ */
 var getDutyDetail = function(){
     ajaxCall({
         method : 'GET', 

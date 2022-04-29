@@ -15,12 +15,41 @@ $(function () {
         getDutyHistoryList(1);
 
         delete param.searchType;
-    })
-
-    $(document).on('click', '.attendance_button', function () {
-        console.log($(this).attr('id'));
-        console.log($(this).parent().parent().attr('id'));
     });
+
+    $(document).on('click', '.allConfirm', function(){
+
+        let isChecked = $('input:checkbox[name=checkbox]:checked');
+
+        let param = [];
+
+        if(isChecked.length < 1){
+            openPopup({
+                title : '실패', 
+                text : '한개이상 체크해주세요', 
+                type : 'error'
+            });
+        } else {
+            for(let i = 0; i <isChecked.length; i++){
+                // let CONFIRM = isChecked[i].parentNode.parentNode.childNodes[21].getAttribute('id');
+                // if(CONFIRM == $(this).attr('id')){
+                //     openPopup({
+                //         title : '실패', 
+                //         text : '', 
+                //         type : 'error'
+                //     })
+                //     break;
+                // }
+                param.push({
+                    seqNo : isChecked[i].value, 
+                    dczStsCd : $(this).attr('id')
+                });
+            } 
+
+            allPayment(param);
+        }
+    });
+
 });
 
 /**
@@ -32,15 +61,13 @@ var getCommonCode = function () {
         url: '/employee/getCommonCode',
         data: { dsCd: 'DUTY' },
         success: function (object) {
-            {
-                let COMMON_CODE_HTML = '';
-                COMMON_CODE_HTML += '<option value="ALL">전체</option>'
-                for (let i = 0; i < object.length; i++) {
-                    let tmpRow = object[i];
-                    COMMON_CODE_HTML += '<option value="' + tmpRow.dtlCd + '">' + tmpRow.dtlCnm + '</option>'
-                }
-                $('#dutyTypeList').html(COMMON_CODE_HTML);
+            let COMMON_CODE_HTML = '';
+            COMMON_CODE_HTML += '<option value="ALL">전체</option>'
+            for (let i = 0; i < object.length; i++) {
+                let tmpRow = object[i];
+                COMMON_CODE_HTML += '<option value="' + tmpRow.dtlCd + '">' + tmpRow.dtlCnm + '</option>'
             }
+            $('#dutyTypeList').html(COMMON_CODE_HTML);
         }
     });
 }
@@ -62,6 +89,7 @@ var getDutyHistoryList = function () {
         url: '/duty/getDutyHistoryList',
         data: param,
         success: function (object) {
+            console.log(object);
             let DUTY_HISTORY_LIST_HTML = '';
             if (object.dutyHistoryList.length > 0) {
                 let dutyHistoryList = object.dutyHistoryList;
@@ -72,7 +100,7 @@ var getDutyHistoryList = function () {
 
                     DUTY_HISTORY_LIST_HTML += '<tr id="' + tmpRow.seqNo + '">';
                     DUTY_HISTORY_LIST_HTML += ' <td>';
-                    DUTY_HISTORY_LIST_HTML += '     <input type="checkbox">';
+                    DUTY_HISTORY_LIST_HTML += '     <input type="checkbox" name="checkbox" value="'+tmpRow.seqNo+'">';
                     DUTY_HISTORY_LIST_HTML += ' </td>';
                     DUTY_HISTORY_LIST_HTML += ' <td>사번</td>';
                     DUTY_HISTORY_LIST_HTML += ' <td>' + tmpRow.userNm + '</td>';
@@ -83,14 +111,22 @@ var getDutyHistoryList = function () {
                     DUTY_HISTORY_LIST_HTML += ' <td>차감후 휴가일수</td>';
                     DUTY_HISTORY_LIST_HTML += ' <td>전체 기간</td>';
                     DUTY_HISTORY_LIST_HTML += ' <td>' + tmpRow.rgDtm + '</td>';
-                    DUTY_HISTORY_LIST_HTML += ' <td>' + tmpRow.dczStsCdnm + '</td>';
-                    DUTY_HISTORY_LIST_HTML += ' <td>결재 일시</td>';
-                    DUTY_HISTORY_LIST_HTML += ' <td>결재자이름</td>';
+                    DUTY_HISTORY_LIST_HTML += ' <td id="'+tmpRow.dczStsCd+'">' + tmpRow.dczStsCdnm + '</td>';
+                    if (isEmpty(tmpRow.dczDtm)) {
+                        DUTY_HISTORY_LIST_HTML += ' <td> - </td>';
+                    } else {
+                        DUTY_HISTORY_LIST_HTML += ' <td>' + tmpRow.dczDtm + '</td>';
+                    }
+                    if (isEmpty(tmpRow.dczmnId)) {
+                        DUTY_HISTORY_LIST_HTML += ' <td> - </td>';
+                    } else {
+                        DUTY_HISTORY_LIST_HTML += ' <td>' + tmpRow.dczmnId + '</td>';
+                    }
 
                     if (tmpRow.dczStsCd == 'REPORT' || tmpRow.dczStsCd == 'CLEAR') {
                         DUTY_HISTORY_LIST_HTML += ' <td>';
-                        DUTY_HISTORY_LIST_HTML += '     <button class="attendance_button approval_button" id="CONFIRM">결재</button>';
-                        DUTY_HISTORY_LIST_HTML += '     <button class="attendance_button reject_button" id="REJECT">부결</button>';
+                        DUTY_HISTORY_LIST_HTML += '     <button class="attendance_button approval_button">결재</button>';
+                        DUTY_HISTORY_LIST_HTML += '     <button class="attendance_button reject_button">부결</button>';
                         DUTY_HISTORY_LIST_HTML += ' </td>';
                     } else if (tmpRow.dczStsCd == 'CONFIRM' || tmpRow.dczStsCd == 'REJECT') {
                         DUTY_HISTORY_LIST_HTML += ' <td>';
@@ -111,7 +147,14 @@ var getDutyHistoryList = function () {
                 $('#list_pagination').empty();
             }
         }
-    })
+    });
 }
 
-
+var allPayment = function(param){
+    ajaxCall({
+        method : 'PATCH', 
+        url : '/duty/allPayment', 
+        data : param, 
+        success : getDutyHistoryList
+    });
+}
