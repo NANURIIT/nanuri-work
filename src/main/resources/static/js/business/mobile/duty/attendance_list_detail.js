@@ -31,10 +31,12 @@ var getDutyHistoryDetail = function(seqNo){
             $('#basDt').val(object.basDt);
             $('#svceFormCdNm').val(object.svceFormCdNm);
 
-            if(object.sbtAftVctnDys % 1 === 0){
-                $('#sbtAftVctnDys').val(object.sbtAftVctnDys.substring(0, object.sbtAftVctnDys.length - 3));
-            } else {
-                $('#sbtAftVctnDys').val(object.sbtAftVctnDys.substring(0, object.sbtAftVctnDys.length - 1));
+            if(isEmpty(object.sbtAftVctnDys) == false){
+                if(object.sbtAftVctnDys % 1 === 0){
+                    $('#sbtAftVctnDys').val(object.sbtAftVctnDys.substring(0, object.sbtAftVctnDys.length - 3));
+                } else {
+                    $('#sbtAftVctnDys').val(object.sbtAftVctnDys.substring(0, object.sbtAftVctnDys.length - 1));
+                }
             }
             
             $('#stDt').val(object.stDt + '('+WEEKDAY[new Date(object.stDt.substring(0, 10)).getDay()]+')');

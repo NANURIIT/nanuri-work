@@ -68,7 +68,7 @@ var getDutyHistoryList = function(pageNo){
         data : param, 
         success : function(object){
             let DUTY_HISTORY_LIST_HTML = '';
-            if(object.dutyHistoryList.length > 0){
+            if(!isEmpty(object)){
                 let dutyHistoryList = object.dutyHistoryList;
                 param.totalDataNum = object.dutyHistoryTotalCount;
 

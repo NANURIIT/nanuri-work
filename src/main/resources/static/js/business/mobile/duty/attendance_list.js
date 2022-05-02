@@ -5,6 +5,17 @@
 $(function(){
     getCommonCode();
     getDutyHistoryList(1);
+
+    $(document).on('click', '#dutySearch', function(){
+        // 근무형태가 전체가 아닐경우에만 값을 전달
+        if($('#dutyTypeList').val() != 'ALL'){
+            param.searchType = $('#dutyTypeList').val();
+        }
+
+        getDutyHistoryList(1);
+
+        delete param.searchType;
+    })
 });
 
 /**
@@ -32,8 +43,7 @@ let param = {
     functionNm: 'getDutyHistoryList',
     htmlNm: 'pagination_wrap',
     pageDivNo: 10,
-    pageViewNo: 10, 
-    searchDate : '2022'
+    pageViewNo: 10
 };
 
 const WEEKDAY = ['일', '월', '화', '수', '목', '금', '토'];
@@ -45,9 +55,8 @@ var getDutyHistoryList = function(pageNo){
         url : '/duty/getDutyHistoryList', 
         data : param, 
         success : function(object){
-            console.log(object);
             let DUTY_HISTORY_LIST_HTML = '';
-            if(object.dutyHistoryList.length > 0){
+            if(!isEmpty(object)){
                 let dutyHistoryList = object.dutyHistoryList;
                 param.totalDataNum = object.dutyHistoryTotalCount;
 
@@ -69,6 +78,13 @@ var getDutyHistoryList = function(pageNo){
                     $('#dutyHistoryList').html(DUTY_HISTORY_LIST_HTML);
                     setMobilePage(param);
                 }
+            } else {
+                DUTY_HISTORY_LIST_HTML += '<tr>';
+                DUTY_HISTORY_LIST_HTML += ' <td colspan="3">조회된 정보가 없습니다.</td>';
+                DUTY_HISTORY_LIST_HTML += '</tr>';
+
+                $('#dutyHistoryList').html(DUTY_HISTORY_LIST_HTML);
+                $('.pagination_wrap').empty();
             }
         }
     })
