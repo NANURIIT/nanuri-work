@@ -1,16 +1,12 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"/>
-    <title>나누리</title>
-    <link rel="stylesheet" href="../../css/reset.css">
-    <link rel="stylesheet" href="../../css/common.css">
-    <link rel="stylesheet" href="../../css/notice.css">
-    <link rel="stylesheet" href="../../css/attendance.css">
 
-    <script src="../../js/jquery-3.6.0.min.js"></script>
-</head>
+<!-- 공통헤드 -->
+<head th:replace="layout/mobile/notice/head :: headFragment"></head>
+
+<link rel="stylesheet" th:href="@{/sample/nanuri_project/css/attendance.css}">
+<link rel="stylesheet" th:href="@{/sample/nanuri_project/css/notice.css}">
+
 <body>
 <div class="mo_wrapper">
     <div class="submain">

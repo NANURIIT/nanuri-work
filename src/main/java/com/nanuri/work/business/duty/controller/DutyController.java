@@ -28,6 +28,29 @@ public class DutyController {
 	
 	/* mobile */
 	
+	@GetMapping(value = "/mobile/dutyList")
+	public String getMobileDutyListPage() {
+		return "/business/mobile/duty/attendance_list";
+	}
 	
+	@GetMapping(value = "/mobile/dutyListDetail")
+	public String getMobileDutyListDetailPage() {
+		return "/business/mobile/duty/attendance_list_detail";
+	}
+	
+	@GetMapping(value = "/mobile/dutyWrite")
+	public String getMobileDutyWritePage() {
+		return "/business/mobile/duty/attendance_add";
+	}
+	
+	@GetMapping(value = "/mobile/dutyConfirm")
+	public String getMobileDutyConfirmPage() {
+		return "/business/mobile/duty/attendance_approve";
+	}
+	
+	@GetMapping(value = "/mobile/dutyConfirmDetail")
+	public String getMobileDutyConfirmDetailPage() {
+		return "/business/mobile/duty/attendance_approve_detail";
+	}
 	
 }
