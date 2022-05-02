@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -49,6 +50,11 @@ public class DutyApiController {
 	@GetMapping(value = "/getDutyHistoryList")
 	public HashMap<String, Object> getDutyHistoryList(@ModelAttribute("params") DutyHistoryVO params){
 		return dutyService.getDutyHistoryList(params);
+	}
+	
+	@GetMapping(value = "/getDutyHistoryDetail/{seqNo}")
+	public DutyHistoryVO getDutyHistoryDetail(@PathVariable(value = "seqNo", required = true) Long seqNo) {
+		return dutyService.getDutyHistoryDetail(seqNo);
 	}
 	
 	/**

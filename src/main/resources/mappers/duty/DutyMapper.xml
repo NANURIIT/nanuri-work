@@ -144,6 +144,71 @@
 	  ORDER BY T01.seq_no DESC
 	  <include refid="CommonMapper.paging" />
 	</select>
+	
+	<select id="selectDutyHistoryDetail" parameterType="long" resultType="com.nanuri.work.business.duty.vo.DutyHistoryVO">
+		SELECT T01.seq_no,
+			   T02.tel_no,  
+			   T02.user_nm, 
+			   T02.dty_nm, 
+			   T02.blg_nm, 
+			   T01.bas_dt, 
+			   T03.dtl_cnm AS svce_form_cd_nm, 
+			   T01.rg_dtm,
+			   (
+			       SELECT COUNT(*) 
+			         FROM hldy_info 
+			        WHERE (bas_dt BETWEEN T01.st_dt AND T01.ed_dt) 
+			          AND hldy_yn = 'N'
+			   ) AS prd, 
+			   (
+			       SELECT (
+			           (SELECT asg_dys + ans_dys 
+			              FROM vctn_asg 
+			             WHERE bas_yy = DATE_FORMAT(NOW(), '%Y') 
+			               AND user_id = T01.user_id) - 
+			           (SELECT SUM(sbt_num) 
+			              FROM dut_hst 
+			             WHERE sbt_num != 0 
+			               AND user_id = T01.user_id 
+			               AND dcz_sts_cd = 'CONFIRM'
+			           )
+			         ) 
+			         FROM dual
+			   ) AS sbt_aft_vctn_dys, 
+			   T01.st_dt, 
+			   T01.st_tm, 
+			   T01.ed_dt, 
+			   T01.ed_tm, 
+			   T01.dcz_sts_cd,  
+			   T04.dtl_cnm AS dcz_sts_cd_nm, 
+			   T01.dcz_dtm, 
+			   T05.user_nm AS dczmnNm
+		  FROM dut_hst T01
+	 LEFT JOIN mem_bsc_info T02
+	 		ON T01.user_id = T02.user_id
+	 LEFT JOIN (
+	 		SELECT ds_cd, 
+	 			   dtl_ds_cd, 
+	 			   dtl_cd, 
+	 			   dtl_ds_cd_nm, 
+	 			   dtl_cnm
+	 		  FROM comn_cd
+	 		 WHERE ds_cd = 'DUTY'
+	 		) T03
+	 		ON T01.svce_form_cd = T03.dtl_cd
+	 LEFT JOIN (
+	 		SELECT ds_cd, 
+	 			   dtl_cd, 
+	 			   dtl_cnm
+	 		  FROM comn_cd
+	 		 WHERE ds_cd = 'CONFIRM'
+	 		) T04
+	 		ON T01.dcz_sts_cd = T04.dtl_cd
+	 LEFT JOIN mem_bsc_info T05
+	 		ON T01.dczmn_id = T05.user_id
+	 		WHERE seq_no = #{seqNo}
+	  ORDER BY T01.seq_no DESC
+	</select>
 
 	<!-- 마지막 근태기록 조회 -->
 	<select id="selectLastDutyHistoryDetail" parameterType="string" resultType="com.nanuri.work.business.duty.dto.DutyHistoryDTO">
@@ -177,16 +242,16 @@
 	</update>
 	
 	<!-- 근태 정보 갯수 출력 -->
-	<select id="selectTotalCountDutyHistory" resultType="int">
+	<select id="selectTotalCountDutyHistory" parameterType="com.nanuri.work.business.duty.vo.DutyHistoryVO" resultType="int">
 		SELECT COUNT(*) 
 		  FROM dut_hst
 		 WHERE 1=1
 		<if test="searchDate == null or searchDate == ''">
 	 		AND DATE_FORMAT(bas_dt, '%Y') = DATE_FORMAT(NOW(), '%Y')
 	 	</if>
-	 	<!-- <if test="userId != null and userId != ''">
+	 	<if test="userId != null and userId != ''">
 	 		AND user_id = #{userId}
-	 	</if>  -->
+	 	</if>
 	</select>
 	
 	<update id="allPayment" parameterType="com.nanuri.work.business.duty.dto.DutyHistoryDTO" >

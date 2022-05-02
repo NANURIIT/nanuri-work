@@ -28,6 +28,6 @@ public class DutyHistoryVO extends CommonDTO {
 	private String dczStsCd;		/* 결재상태 */
 	private String dczStsCdnm;		/* 결재상태명 */
 	private String dczDtm;			/* 결재일시 */
-	private String dczmnId;			/* 결재자 이름 */
+	private String dczmnNm;			/* 결재자 이름 */
 	
 }

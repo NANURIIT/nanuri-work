@@ -67,7 +67,6 @@ var getDutyHistoryList = function(pageNo){
         url : '/duty/getDutyHistoryList', 
         data : param, 
         success : function(object){
-            console.log(object);
             let DUTY_HISTORY_LIST_HTML = '';
             if(object.dutyHistoryList.length > 0){
                 let dutyHistoryList = object.dutyHistoryList;

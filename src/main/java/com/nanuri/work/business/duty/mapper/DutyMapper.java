@@ -13,9 +13,10 @@ public interface DutyMapper {
 
 	public int insertOnDuty(DutyHistoryDTO params);
 	public List<DutyHistoryVO> selectDutyHistoryList(DutyHistoryVO params);
+	public DutyHistoryVO selectDutyHistoryDetail(Long seqNo);
 	public DutyHistoryDTO selectLastDutyHistoryDetail(String userId);
 	public int updateDuty(DutyHistoryDTO params);
-	public int selectTotalCountDutyHistory();
+	public int selectTotalCountDutyHistory(DutyHistoryVO params);
 	
 	public int insertOffDuty(List<DutyHistoryDTO> dutyList);
 	public List<String> calVacation(HashMap<String, String> params);
