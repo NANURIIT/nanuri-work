@@ -153,4 +153,8 @@ public class DutyService {
 		return (queryResult > 0);
 	}
 	
+	public boolean attendance(List<DutyHistoryDTO> params) {
+		return false;
+		
+	}
 }

@@ -57,6 +57,17 @@ $(function () {
         }
     });
 
+    // 결재, 부결, 결재취소
+    $(document).on('click', '.attendance_button', function () {
+        let attendance = $(this).attr('class').split(' ')[2];
+        let param = {
+            dczStsCd : $('#dczStsCd').val() 
+        }
+        attendance();
+        //let attendance = $(this).attr('class').split(' ')[2];
+        // console.log($(this).attr('class'));
+        // console.log($(this).attr('class').split(' ')[2]);
+    });
 });
 
 /**
@@ -131,12 +142,12 @@ var getDutyHistoryList = function () {
 
                     if (tmpRow.dczStsCd == 'REPORT' || tmpRow.dczStsCd == 'CLEAR') {
                         DUTY_HISTORY_LIST_HTML += ' <td>';
-                        DUTY_HISTORY_LIST_HTML += '     <button class="attendance_button approval_button">결재</button>';
-                        DUTY_HISTORY_LIST_HTML += '     <button class="attendance_button reject_button">부결</button>';
+                        DUTY_HISTORY_LIST_HTML += '     <button class="attendance_button approval_button CONFIRM">결재</button>';
+                        DUTY_HISTORY_LIST_HTML += '     <button class="attendance_button reject_button REJECT">부결</button>';
                         DUTY_HISTORY_LIST_HTML += ' </td>';
                     } else if (tmpRow.dczStsCd == 'CONFIRM' || tmpRow.dczStsCd == 'REJECT') {
                         DUTY_HISTORY_LIST_HTML += ' <td>';
-                        DUTY_HISTORY_LIST_HTML += '     <button class="attendance_button reject_button">결재취소</button>';
+                        DUTY_HISTORY_LIST_HTML += '     <button class="attendance_button reject_button CLEAR">결재취소</button>';
                         DUTY_HISTORY_LIST_HTML += ' </td>';
                     }
 
@@ -166,6 +177,18 @@ var allPayment = function(param){
         method : 'PATCH', 
         url : '/duty/allPayment', 
         data : param, 
+        success : getDutyHistoryList
+    });
+}
+
+/**
+ * 결재, 부결, 결재취소
+ */
+var attendance = function(param) {
+    ajaxCall({
+        method : 'PATCH',
+        url : '/duty/attendance',
+        data : param,
         success : getDutyHistoryList
     });
 }
