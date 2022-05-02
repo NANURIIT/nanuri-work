@@ -3,6 +3,7 @@
 
 /** onload **/
 $(function () {
+    
     getCommonCode();
     getDutyHistoryList();
 
@@ -18,9 +19,8 @@ $(function () {
     });
 
     $(document).on('click', '.allConfirm', function(){
-
+        let flag = true;            // 중복 결재 내용이 있으면 false 없으면 true
         let isChecked = $('input:checkbox[name=checkbox]:checked');
-
         let param = [];
 
         if(isChecked.length < 1){
@@ -30,23 +30,30 @@ $(function () {
                 type : 'error'
             });
         } else {
+            let existedCode = '';   // 중복 결재 내용
+
             for(let i = 0; i <isChecked.length; i++){
-                // let CONFIRM = isChecked[i].parentNode.parentNode.childNodes[21].getAttribute('id');
-                // if(CONFIRM == $(this).attr('id')){
-                //     openPopup({
-                //         title : '실패', 
-                //         text : '', 
-                //         type : 'error'
-                //     })
-                //     break;
-                // }
+                if($(isChecked[i]).parent().parent().children('.confirmCode').attr('id') == $(this).attr('id')){
+                    flag = false;
+                    existedCode = $(isChecked[i]).parent().parent().children('.confirmCode').text();
+                    break;
+                }
                 param.push({
                     seqNo : isChecked[i].value, 
                     dczStsCd : $(this).attr('id')
                 });
             } 
 
-            allPayment(param);
+            if(flag){
+                allPayment(param);
+            } else {
+                openPopup({
+                    title : '실패', 
+                    text : existedCode + '인 근태가 있습니다.', 
+                    type : 'error'
+                });
+            }
+            
         }
     });
 
@@ -89,7 +96,6 @@ var getDutyHistoryList = function () {
         url: '/duty/getDutyHistoryList',
         data: param,
         success: function (object) {
-            console.log(object);
             let DUTY_HISTORY_LIST_HTML = '';
             if (object.dutyHistoryList.length > 0) {
                 let dutyHistoryList = object.dutyHistoryList;
@@ -111,7 +117,7 @@ var getDutyHistoryList = function () {
                     DUTY_HISTORY_LIST_HTML += ' <td>차감후 휴가일수</td>';
                     DUTY_HISTORY_LIST_HTML += ' <td>전체 기간</td>';
                     DUTY_HISTORY_LIST_HTML += ' <td>' + tmpRow.rgDtm + '</td>';
-                    DUTY_HISTORY_LIST_HTML += ' <td id="'+tmpRow.dczStsCd+'">' + tmpRow.dczStsCdnm + '</td>';
+                    DUTY_HISTORY_LIST_HTML += ' <td class="confirmCode" id="'+tmpRow.dczStsCd+'">' + tmpRow.dczStsCdnm + '</td>';
                     if (isEmpty(tmpRow.dczDtm)) {
                         DUTY_HISTORY_LIST_HTML += ' <td> - </td>';
                     } else {
@@ -150,6 +156,11 @@ var getDutyHistoryList = function () {
     });
 }
 
+/**
+ * 일괄결재
+ * @param {string} param.seqNo 일련번호
+ * @param {string} param.dczStsCd 결재코드
+ */
 var allPayment = function(param){
     ajaxCall({
         method : 'PATCH', 

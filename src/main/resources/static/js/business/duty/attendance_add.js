@@ -11,10 +11,13 @@ $(function(){
     $(document).on('change', '#dutyTypeList', function(){
         if($(this).find('option:selected').attr('class') == 'ON_DUTY'){
             let BUTTON_HTML = '';
-
-            BUTTON_HTML += '<button id="attendance">출근</button>';
-            BUTTON_HTML += '<button id="leaveWork">퇴근</button>';
-            BUTTON_HTML += '<button class="cancel_button">취소</button>';
+            if(isEmpty(param.edDt) && isEmpty(param.edTm)){
+                BUTTON_HTML += '<button id="leaveWork">퇴근</button>';
+                BUTTON_HTML += '<button class="cancel_button">취소</button>';    
+            } else {
+                BUTTON_HTML += '<button id="attendance">출근</button>';    
+                BUTTON_HTML += '<button class="cancel_button">취소</button>';
+            }
 
             $('#reason').remove();
             $('.join_agree_button').html(BUTTON_HTML);
@@ -43,7 +46,7 @@ $(function(){
 
     /* start 시작일시, 종료일시를 현재시간으로 세팅 */ 
     let date = new Date();
-    let today = date.getFullYear() + '-' + (date.getMonth() + 1 < 10 ? ('0' + (date.getMonth() + 1)) : (date.getMonth() + 1)) + '-' + date.getDate();
+    let today = date.getFullYear() + '-' + (date.getMonth() + 1 < 10 ? ('0' + (date.getMonth() + 1)) : (date.getMonth() + 1)) + '-' + (date.getDate() < 10 ? ('0' + date.getDate()) : date.getDate());
     let time = date.getHours() + ':' + (date.getMinutes() < 10 ? ('0' + date.getMinutes()) : date.getMinutes());
     
     $('#stDt').val(today);
@@ -239,7 +242,6 @@ var updateDuty = function(params){
 }
 
 var registerOffDuty = function(params){
-    console.log(params);
     ajaxCall({
         method : 'POST', 
         url : '/duty/registerOffDuty', 
@@ -257,6 +259,8 @@ var registerOffDuty = function(params){
     });
 }
 
+let param = {};
+
 /**
  * 근태정보 상세 출력
  */
@@ -265,16 +269,24 @@ var getDutyDetail = function(){
         method : 'GET', 
         url : '/duty/getLastDutyDetail', 
         success : function(object){
+            param = object;
+            let BUTTON_HTML = '';
             if(isEmpty(object) == false){
                 if(isEmpty(object.edDt) && isEmpty(object.edTm)){
                     $('#dutyTypeList').val(object.svceFormCd);
                     $('#svcePrjtTxt').val(object.svcePrjtTxt);
                     $('#stDt').val(object.stDt);
                     $('#stTm').val(object.stTm.substring(0, 5));
+                    
+                    BUTTON_HTML += '<button id="leaveWork">퇴근</button>';
+                    BUTTON_HTML += '<button class="cancel_button">취소</button>';
                 } else {
                     $('#svcePrjtTxt').val(object.svcePrjtTxt);
+                    BUTTON_HTML += '<button id="attendance">출근</button>';
+                    BUTTON_HTML += '<button class="cancel_button">취소</button>';
                 }
+                $('.join_agree_button').html(BUTTON_HTML);
             }
         }
-    })
+    });
 }

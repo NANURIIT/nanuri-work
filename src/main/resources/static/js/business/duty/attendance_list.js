@@ -51,7 +51,8 @@ let param = {
     functionNm: 'getDutyHistoryList',
     htmlNm: 'list_pagination',
     pageDivNo: 10,
-    pageViewNo: 10
+    pageViewNo: 10, 
+    searchDate : '2022'
 };
 
 const WEEKDAY = ['일', '월', '화', '수', '목', '금', '토'];
