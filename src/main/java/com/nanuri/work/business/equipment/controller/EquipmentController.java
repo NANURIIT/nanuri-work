@@ -18,15 +18,6 @@ public class EquipmentController {
     public String getEquipmentWrite() { 
     	return "business/equipment/equipment_add"; 
     }
-    
-	/**
-	 * 장비정보 리스트
-	 * @return
-	 */
-	@GetMapping(value = "/admin/equipmentList")
-	public String getEquipmentList() {
-		return "business/equipment/equipment_add";		
-	}
 	
 	/* mobile */
 	@GetMapping(value = "/mobile/equipmentWrite")
