@@ -3,43 +3,41 @@
 
 /** onload **/
 $(function(){
-
     getCommonCode();
     getDutyDetail();
 
     /* start 근태유형에 따라 사유 input box 추가 & 버튼 형태 변경 */ 
     $(document).on('change', '#dutyTypeList', function(){
+        let BUTTON_HTML = '';
         if($(this).find('option:selected').attr('class') == 'ON_DUTY'){
-            let BUTTON_HTML = '';
             if(isEmpty(param.edDt) && isEmpty(param.edTm)){
-                BUTTON_HTML += '<button id="leaveWork">퇴근</button>';
+                BUTTON_HTML += '<button class="save_button" id="leaveWork">퇴근</button>';
                 BUTTON_HTML += '<button class="cancel_button">취소</button>';    
             } else {
-                BUTTON_HTML += '<button id="attendance">출근</button>';    
+                BUTTON_HTML += '<button class="save_button" id="attendance">출근</button>';    
                 BUTTON_HTML += '<button class="cancel_button">취소</button>';
             }
-
             $('#reason').remove();
-            $('.join_agree_button').html(BUTTON_HTML);
+            $('.button_box').html(BUTTON_HTML);
 
         } else if($(this).find('option:selected').attr('class') == 'OFF_DUTY'){
             let REASON_HTML = '';
-            let BUTTON_HTML = '';
-
-            REASON_HTML += '<div id="reason" class="attendance_list">';
-            REASON_HTML += '    <div class="attendance_title">사유</div>';
-            REASON_HTML += '    <div class="attendance_box attendance_reason">';
-            REASON_HTML += '        <input id="rsnTxt" type="text" placeholder="사유 입력">';
+            
+            REASON_HTML += '<div id="reason" class="form_box">';
+            REASON_HTML += '    <div class="form_title">사유</div>';
+            REASON_HTML += '    <div>';
+            REASON_HTML += '        <input class="input_box" id="rsnTxt" type="text"  placeholder="사유 입력">';
             REASON_HTML += '    </div>';
             REASON_HTML += '</div>';
 
-            BUTTON_HTML += '<button id="confirm">상신</button>';
+            BUTTON_HTML += '<button class="save_button" id="confirm">상신</button>';
             BUTTON_HTML += '<button class="cancel_button">취소</button>';
 
             if(isEmpty($('#reason'))){
-                $('.join_detail_wrap > form > :nth-child(2)').after(REASON_HTML);
+                $('.wrap > form > :nth-child(2)').after(REASON_HTML);
             }
-            $('.join_agree_button').html(BUTTON_HTML);
+
+            $('.button_box').html(BUTTON_HTML);
         }
     });
     /* end 근태유형에 따라 사유 input box 추가 & 버튼 형태 변경 */ 
@@ -48,7 +46,7 @@ $(function(){
     let date = new Date();
     let today = date.getFullYear() + '-' + (date.getMonth() + 1 < 10 ? ('0' + (date.getMonth() + 1)) : (date.getMonth() + 1)) + '-' + (date.getDate() < 10 ? ('0' + date.getDate()) : date.getDate());
     let time = date.getHours() + ':' + (date.getMinutes() < 10 ? ('0' + date.getMinutes()) : date.getMinutes());
-    
+
     $('#stDt').val(today);
     $('#edDt').val(today);
     $('#stTm').val(time);
@@ -73,7 +71,7 @@ $(function(){
         if($('#dutyTypeList').find('option:selected').val() == 'SECOND_DUTY'){
             params.sbtNum = 0.5;
         }
-
+        
         registerOnDuty(params);
     });
 
@@ -119,12 +117,13 @@ $(function(){
     $(document).on('click', '.cancel_button', function(){
         history.go(-1);
     });
+
 });
 
 /**
  * 근태유형 호출
  */
-var getCommonCode = function(){
+ var getCommonCode = function(){
     ajaxCall({
         method : 'GET', 
         url : '/employee/getCommonCode', 
@@ -148,7 +147,7 @@ var getCommonCode = function(){
  * @param {string} params.stTm 시작시각
  * @param {string} params.aawBtnClkDtm 출근버튼클릭시간
  */
-var registerOnDuty = function(params){
+ var registerOnDuty = function(params){
     if(isEmpty(params.svcePrjtTxt)){
         openPopup({
             title : '실패', 
@@ -194,7 +193,7 @@ var registerOnDuty = function(params){
                         text : '근태 등록을 성공하셨습니다.', 
                         type : 'success', 
                         callback : function(){
-                            location.href = '/admin/dutyList';
+                            location.href = '/mobile/dutyList';
                         }
                     });
                 } else {
@@ -216,7 +215,7 @@ var registerOnDuty = function(params){
  * @param {string} params.edTm 종료시각
  * @param {string} params.ckofBtnClkDtm 퇴근버튼클릭시간
  */
-var updateDuty = function(params){
+ var updateDuty = function(params){
     ajaxCall({
         method : 'PATCH', 
         url : '/duty/updateDuty', 
@@ -228,7 +227,7 @@ var updateDuty = function(params){
                     text : '근태 등록을 성공하셨습니다.', 
                     type : 'success', 
                     callback : function(){
-                        location.href = '/admin/dutyList';
+                        location.href = '/mobile/dutyList';
                     }
                 });
             } else {
@@ -254,7 +253,7 @@ var updateDuty = function(params){
  * @param {string} params.edDt 종료일자
  * @param {string} params.edTm 종료시각
  */
-var registerOffDuty = function(params){
+ var registerOffDuty = function(params){
     ajaxCall({
         method : 'POST', 
         url : '/duty/registerOffDuty', 
@@ -265,7 +264,7 @@ var registerOffDuty = function(params){
                 text : '근태 등록을 성공하셨습니다.', 
                 type : 'success', 
                 callback : function(){
-                    location.href = '/admin/dutyList';
+                    location.href = '/mobile/dutyList';
                 }
             });
         }
@@ -277,7 +276,7 @@ let param = {};
 /**
  * 근태정보 상세 출력
  */
-var getDutyDetail = function(){
+ var getDutyDetail = function(){
     ajaxCall({
         method : 'GET', 
         url : '/duty/getLastDutyDetail', 
@@ -290,15 +289,16 @@ var getDutyDetail = function(){
                     $('#svcePrjtTxt').val(object.svcePrjtTxt);
                     $('#stDt').val(object.stDt);
                     $('#stTm').val(object.stTm.substring(0, 5));
-                    
-                    BUTTON_HTML += '<button id="leaveWork">퇴근</button>';
+
+                    BUTTON_HTML += '<button class="save_button" id="leaveWork">퇴근</button>';
                     BUTTON_HTML += '<button class="cancel_button">취소</button>';
                 } else {
                     $('#svcePrjtTxt').val(object.svcePrjtTxt);
-                    BUTTON_HTML += '<button id="attendance">출근</button>';
+
+                    BUTTON_HTML += '<button class="save_button" id="attendance">출근</button>';
                     BUTTON_HTML += '<button class="cancel_button">취소</button>';
                 }
-                $('.join_agree_button').html(BUTTON_HTML);
+                $('.button_box').html(BUTTON_HTML);
             }
         }
     });
