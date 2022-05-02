@@ -67,6 +67,7 @@ var getDutyHistoryList = function(pageNo){
         url : '/duty/getDutyHistoryList', 
         data : param, 
         success : function(object){
+            console.log(object);
             let DUTY_HISTORY_LIST_HTML = '';
             if(object.dutyHistoryList.length > 0){
                 let dutyHistoryList = object.dutyHistoryList;
@@ -98,8 +99,12 @@ var getDutyHistoryList = function(pageNo){
                     }
                     DUTY_HISTORY_LIST_HTML += ' <td>'+tmpRow.rgDtm.substring(0, 10) + '('+WEEKDAY[new Date(tmpRow.rgDtm.substring(0, 10)).getDay()]+')' + '<br>' + tmpRow.rgDtm.substring(11, tmpRow.rgDtm.length - 3) + '</td>';
                     DUTY_HISTORY_LIST_HTML += ' <td>'+tmpRow.dczStsCdnm+'</td>';
-                    DUTY_HISTORY_LIST_HTML += ' <td>-</td>';
-                    DUTY_HISTORY_LIST_HTML += ' <td>-</td>';
+                    if(isEmpty(tmpRow.dczDtm)){
+                        DUTY_HISTORY_LIST_HTML += ' <td>-</td>';
+                    } else {
+                        DUTY_HISTORY_LIST_HTML += ' <td>'+tmpRow.dczDtm.substring(0, 10)+'<br>'+tmpRow.dczDtm.substring(11, tmpRow.dczDtm.length - 3)+'</td>';
+                    }
+                    
                     DUTY_HISTORY_LIST_HTML += '</tr>';
 
                     $('#dutyHistoryList').html(DUTY_HISTORY_LIST_HTML);

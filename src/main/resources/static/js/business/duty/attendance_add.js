@@ -115,6 +115,10 @@ $(function(){
 
         registerOffDuty(params);
     });
+
+    $(document).on('click', '.cancel_button', function(){
+        history.go(-1);
+    });
 });
 
 /**
