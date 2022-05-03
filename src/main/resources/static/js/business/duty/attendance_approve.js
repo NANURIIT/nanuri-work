@@ -58,15 +58,12 @@ $(function () {
     });
 
     // 결재, 부결, 결재취소
-    $(document).on('click', '.attendance_button', function () {
-        let attendance = $(this).attr('class').split(' ')[2];
-        let param = {
-            dczStsCd : $('#dczStsCd').val() 
+    $(document).on('click', '.attendance_button', function () {    
+        let params = {
+            dczStsCd : $(this).attr('class').split(' ')[2],
+            seqNo : $(this).parent().parent().attr('id')
         }
-        attendance();
-        //let attendance = $(this).attr('class').split(' ')[2];
-        // console.log($(this).attr('class'));
-        // console.log($(this).attr('class').split(' ')[2]);
+        attendance(params);
     });
 });
 
@@ -172,11 +169,11 @@ var getDutyHistoryList = function () {
  * @param {string} param.seqNo 일련번호
  * @param {string} param.dczStsCd 결재코드
  */
-var allPayment = function(param){
+var allPayment = function(params){
     ajaxCall({
         method : 'PATCH', 
         url : '/duty/allPayment', 
-        data : param, 
+        data : params, 
         success : getDutyHistoryList
     });
 }
@@ -184,11 +181,12 @@ var allPayment = function(param){
 /**
  * 결재, 부결, 결재취소
  */
-var attendance = function(param) {
+var attendance = function(params) {
+    console.log(params);
     ajaxCall({
         method : 'PATCH',
         url : '/duty/attendance',
-        data : param,
+        data : params,
         success : getDutyHistoryList
     });
 }
