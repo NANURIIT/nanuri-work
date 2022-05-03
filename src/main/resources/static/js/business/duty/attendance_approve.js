@@ -182,7 +182,7 @@ var allPayment = function(params){
     ajaxCall({
         method : 'PATCH', 
         url : '/duty/allPayment',
-        data : param, 
+        data : params, 
         success : getDutyHistoryList(1)
     });
 }
@@ -198,4 +198,5 @@ var attendance = function(params) {
         data : params,
         success : getDutyHistoryList
     });
+    // FIXME -> getDutyHistoryList(param.thisPageNo)
 }

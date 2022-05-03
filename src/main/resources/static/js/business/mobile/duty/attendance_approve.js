@@ -149,5 +149,6 @@ var getDutyHistoryList = function(pageNo){
         data : params,
         success : getDutyHistoryList(1)
     });
-    console.log('thisPageNo', param.thisPageNo);
+    // FIXME -> getDutyHistoryList(param.thisPageNo)
+    // 
 }
