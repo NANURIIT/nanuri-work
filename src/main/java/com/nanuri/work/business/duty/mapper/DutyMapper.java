@@ -22,4 +22,5 @@ public interface DutyMapper {
 	public List<String> calVacation(HashMap<String, String> params);
 	
 	public int allPayment(DutyHistoryDTO params);
+	public int attendance(DutyHistoryDTO params);
 }

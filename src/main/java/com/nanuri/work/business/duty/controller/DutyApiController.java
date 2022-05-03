@@ -81,4 +81,11 @@ public class DutyApiController {
 		return dutyService.allPayment(params);
 	}
 	
+	/*
+	 * 근태 결재, 부결, 결재취소 
+	 */
+	@PatchMapping(value="/attendance")
+	public boolean attendance(@RequestBody DutyHistoryDTO params) {
+		return dutyService.attendance(params);
+	}
 }

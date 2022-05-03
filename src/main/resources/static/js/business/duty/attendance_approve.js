@@ -57,6 +57,14 @@ $(function () {
         }
     });
 
+    // 결재, 부결, 결재취소
+    $(document).on('click', '.attendance_button', function () {    
+        let params = {
+            dczStsCd : $(this).attr('class').split(' ')[2],
+            seqNo : $(this).parent().parent().attr('id')
+        }
+        attendance(params);
+    });
 });
 
 /**
@@ -140,12 +148,12 @@ var getDutyHistoryList = function (pageNo) {
                     }
                     if (tmpRow.dczStsCd == 'REPORT' || tmpRow.dczStsCd == 'CLEAR') {
                         DUTY_HISTORY_LIST_HTML += ' <td>';
-                        DUTY_HISTORY_LIST_HTML += '     <button class="attendance_button approval_button">결재</button>';
-                        DUTY_HISTORY_LIST_HTML += '     <button class="attendance_button reject_button">부결</button>';
+                        DUTY_HISTORY_LIST_HTML += '     <button class="attendance_button approval_button CONFIRM">결재</button>';
+                        DUTY_HISTORY_LIST_HTML += '     <button class="attendance_button reject_button REJECT">부결</button>';
                         DUTY_HISTORY_LIST_HTML += ' </td>';
                     } else if (tmpRow.dczStsCd == 'CONFIRM' || tmpRow.dczStsCd == 'REJECT') {
                         DUTY_HISTORY_LIST_HTML += ' <td>';
-                        DUTY_HISTORY_LIST_HTML += '     <button class="attendance_button reject_button">결재취소</button>';
+                        DUTY_HISTORY_LIST_HTML += '     <button class="attendance_button reject_button CLEAR">결재취소</button>';
                         DUTY_HISTORY_LIST_HTML += ' </td>';
                     }
 
@@ -170,11 +178,24 @@ var getDutyHistoryList = function (pageNo) {
  * @param {string} param.seqNo 일련번호
  * @param {string} param.dczStsCd 결재코드
  */
-var allPayment = function(param){
+var allPayment = function(params){
     ajaxCall({
         method : 'PATCH', 
-        url : '/duty/allPayment', 
+        url : '/duty/allPayment',
         data : param, 
         success : getDutyHistoryList(1)
+    });
+}
+
+/**
+ * 결재, 부결, 결재취소
+ */
+var attendance = function(params) {
+    console.log(params);
+    ajaxCall({
+        method : 'PATCH',
+        url : '/duty/attendance',
+        data : params,
+        success : getDutyHistoryList
     });
 }

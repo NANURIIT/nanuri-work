@@ -162,5 +162,15 @@ public class DutyService {
 
 		return (queryResult > 0);
 	}
-
+	
+	public boolean attendance(DutyHistoryDTO params) {
+		
+		int queryResult = 0;
+		
+		params.setDczmnId(facade.getDetails().getUserId());
+		
+		queryResult = dutyMapper.attendance(params);
+		
+		return (queryResult > 0);
+	}
 }
