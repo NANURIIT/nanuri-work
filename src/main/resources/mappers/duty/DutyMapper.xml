@@ -95,7 +95,7 @@
 			   			   FROM vctn_asg
 			   			  WHERE bas_yy = DATE_FORMAT(NOW(), '%Y')
 			   			    AND user_id = T01.user_id) - 
-			   			(SELECT SUM(sbt_num)
+			   			(SELECT IFNULL(SUM(sbt_num), 0)
 			   			   FROM dut_hst
 			   			  WHERE sbt_num != 0
 			   			    AND user_id = T01.user_id
