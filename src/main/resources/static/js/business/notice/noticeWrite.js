@@ -96,7 +96,6 @@ var getBoardDetail = function(seqNo){
         method : 'GET', 
         url : '/admin/boardDetail/' + seqNo, 
         success : function(object){
-            console.log(object);
             $('#noticeTitle').val(object.bultTitlNm);
             $('#noticeContent').val(object.brcn);
             if(object.opnpEstNm == 'ALL'){

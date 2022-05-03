@@ -48,6 +48,7 @@ var getCommonCode = function () {
     ajaxCall({
         method: 'GET',
         url: '/employee/getCommonCode',
+        async : false, 
         data: { dsCd: 'CERTIFICATE' },
         success: function (object) {
             let COMMON_CODE_HTML = '';

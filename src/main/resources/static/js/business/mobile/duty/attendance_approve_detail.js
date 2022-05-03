@@ -36,7 +36,6 @@ var getDutyHistoryDetail = function(seqNo){
         method : 'GET', 
         url : '/duty/getDutyHistoryDetail/' + seqNo, 
         success : function(object){
-            console.log(object);
             $('#empNo').val(object.telNo.substring(3, object.telNo.length));
             $('#userNm').val(object.userNm);
             $('#dtyNm').val(object.dtyNm);

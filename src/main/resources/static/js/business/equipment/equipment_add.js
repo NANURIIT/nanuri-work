@@ -4,7 +4,6 @@
 /** onload **/
 $(function() {
     let pageInfo = getPageInfo();
-    console.log(pageInfo);
     let seqNo = pageInfo.seqNo;
     let pathname = pageInfo.pathname;
     let mode = pageInfo.mode;
@@ -45,6 +44,7 @@ $(function() {
     ajaxCall({
         method: 'GET',
         url: '/employee/getCommonCode',
+        async : false, 
         data: { dsCd: 'EQUIPMENT' },
         success: function (object) {
             let COMMON_CODE_HTML = '';

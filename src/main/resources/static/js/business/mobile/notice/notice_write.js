@@ -6,8 +6,6 @@ $(function(){
     let seqNo = new URL(document.location.href).searchParams.get('seqNo'); // seqNo세팅
     let mode = seqNo != null ? 'M' : 'W';                                  // 작성인지 수정인지 모드 설정
 
-    console.log('mode', mode);
-
     if(mode == 'W'){
         $('#notice_public_check').prop('checked', true);
     }
@@ -97,7 +95,6 @@ var getBoardDetail = function(seqNo){
         method : 'GET', 
         url : '/admin/boardDetail/' + seqNo, 
         success : function(object){
-            console.log(object);
             $('#noticeTitle').val(object.bultTitlNm);
             $('#noticeContent').val(object.brcn);
             if(object.opnpEstNm == 'ALL'){

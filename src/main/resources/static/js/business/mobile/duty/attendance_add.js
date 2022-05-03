@@ -127,6 +127,7 @@ $(function(){
     ajaxCall({
         method : 'GET', 
         url : '/employee/getCommonCode', 
+        async : false, 
         data : { dsCd : 'DUTY'}, 
         success : function(object){
             let COMMON_CODE_HTML = '';
@@ -237,9 +238,6 @@ $(function(){
                     type : 'error'
                 });
             }
-        }, 
-        fail : function(){
-            console.log(1);
         }
     })
 }

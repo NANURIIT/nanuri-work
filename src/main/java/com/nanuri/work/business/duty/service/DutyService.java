@@ -48,6 +48,11 @@ public class DutyService {
 		return (queryResult > 0);
 	}
 
+	/**
+	 * 근태 버튼 클릭(상신버튼 눌렀을 때)
+	 * @param params
+	 * @return
+	 */
 	public boolean registerOffDuty(DutyHistoryDTO params) {
 
 		int queryResult = 0;
@@ -110,13 +115,17 @@ public class DutyService {
 		return resultMap;
 	}
 
+	/**
+	 * 근태정보 상세조회
+	 * @param seqNo
+	 * @return
+	 */
 	public DutyHistoryVO getDutyHistoryDetail(Long seqNo) {
 		return dutyMapper.selectDutyHistoryDetail(seqNo);
 	}
 
 	/**
 	 * 마지막에 등록한 근태 정보 출력
-	 * 
 	 * @return
 	 */
 	public DutyHistoryDTO getLastDutyDetail() {
@@ -150,6 +159,11 @@ public class DutyService {
 		return (queryResult > 0);
 	}
 
+	/**
+	 * 근태 일괄결재
+	 * @param params
+	 * @return
+	 */
 	public boolean allPayment(List<DutyHistoryDTO> params) {
 
 		int queryResult = 0;
@@ -163,6 +177,11 @@ public class DutyService {
 		return (queryResult > 0);
 	}
 	
+	/**
+	 * 근태 단일결재
+	 * @param params
+	 * @return
+	 */
 	public boolean attendance(DutyHistoryDTO params) {
 		
 		int queryResult = 0;

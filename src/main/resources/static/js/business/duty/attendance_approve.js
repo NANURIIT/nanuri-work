@@ -5,7 +5,7 @@
 $(function () {
     
     getCommonCode();
-    getDutyHistoryList();
+    getDutyHistoryList(1);
 
     // 검색 버튼 클릭
     $(document).on('click', '#dutySearch', function () {
@@ -108,10 +108,9 @@ var getDutyHistoryList = function (pageNo) {
         data: param,
         success: function (object) {
             let DUTY_HISTORY_LIST_HTML = '';
-            if (object.dutyHistoryList.length > 0) {
+            if (!isEmpty(object)) {
                 let dutyHistoryList = object.dutyHistoryList;
                 param.totalDataNum = object.dutyHistoryTotalCount;
-                console.log(dutyHistoryList);
                 for (let i = 0; i < dutyHistoryList.length; i++) {
                     let tmpRow = dutyHistoryList[i];
 
@@ -183,7 +182,7 @@ var allPayment = function(params){
         method : 'PATCH', 
         url : '/duty/allPayment',
         data : params, 
-        success : getDutyHistoryList(1)
+        success : getDutyHistoryList(param.thisPageNo)
     });
 }
 
@@ -191,12 +190,10 @@ var allPayment = function(params){
  * 결재, 부결, 결재취소
  */
 var attendance = function(params) {
-    console.log(params);
     ajaxCall({
         method : 'PATCH',
         url : '/duty/attendance',
         data : params,
-        success : getDutyHistoryList
+        success : getDutyHistoryList(param.thisPageNo)
     });
-    // FIXME -> getDutyHistoryList(param.thisPageNo)
 }

@@ -129,6 +129,7 @@ var getCommonCode = function(){
         method : 'GET', 
         url : '/employee/getCommonCode', 
         data : { dsCd : 'DUTY'}, 
+        async : false, 
         success : function(object){
             let COMMON_CODE_HTML = '';
             for (let i = 0; i < object.length; i++) {
@@ -238,9 +239,6 @@ var updateDuty = function(params){
                     type : 'error'
                 });
             }
-        }, 
-        fail : function(){
-            console.log(1);
         }
     })
 }

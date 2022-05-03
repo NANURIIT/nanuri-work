@@ -37,6 +37,11 @@ public class DutyApiController {
 		return dutyService.registerOnDuty(params);
 	}
 	
+	/**
+	 * 근태 등록(상신 버튼 눌렀을 때)
+	 * @param params
+	 * @return
+	 */
 	@PostMapping(value = "/registerOffDuty")
 	public boolean registerOffDuty(@RequestBody DutyHistoryDTO params) {
 		return dutyService.registerOffDuty(params);
@@ -52,6 +57,11 @@ public class DutyApiController {
 		return dutyService.getDutyHistoryList(params);
 	}
 	
+	/**
+	 * 근태정보 상세조회
+	 * @param seqNo
+	 * @return
+	 */
 	@GetMapping(value = "/getDutyHistoryDetail/{seqNo}")
 	public DutyHistoryVO getDutyHistoryDetail(@PathVariable(value = "seqNo", required = true) Long seqNo) {
 		return dutyService.getDutyHistoryDetail(seqNo);
@@ -76,13 +86,20 @@ public class DutyApiController {
 		return dutyService.updateDuty(params);
 	}
 	
+	/**
+	 * 일괄결재
+	 * @param params
+	 * @return
+	 */
 	@PatchMapping(value = "/allPayment")
 	public boolean allPayment(@RequestBody List<DutyHistoryDTO> params) {
 		return dutyService.allPayment(params);
 	}
 	
-	/*
-	 * 근태 결재, 부결, 결재취소 
+	/**
+	 * 근태정보 단일결재
+	 * @param params
+	 * @return
 	 */
 	@PatchMapping(value="/attendance")
 	public boolean attendance(@RequestBody DutyHistoryDTO params) {
