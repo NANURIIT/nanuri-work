@@ -26,7 +26,7 @@ $(function () {
         if(isChecked.length < 1){
             openPopup({
                 title : '실패', 
-                text : '한개이상 체크해주세요', 
+                text : '체크된 항목이 없습니다.', 
                 type : 'error'
             });
         } else {
@@ -49,7 +49,7 @@ $(function () {
             } else {
                 openPopup({
                     title : '실패', 
-                    text : existedCode + '인 근태가 있습니다.', 
+                    text : existedCode + '인 항목이 있습니다.', 
                     type : 'error'
                 });
             }
@@ -92,7 +92,8 @@ const WEEKDAY = ['일', '월', '화', '수', '목', '금', '토'];
 /**
  * 근태 정보 리스트 출력
  */
-var getDutyHistoryList = function () {
+var getDutyHistoryList = function (pageNo) {
+    param.thisPageNo = pageNo;
     ajaxCall({
         method: 'GET',
         url: '/duty/getDutyHistoryList',

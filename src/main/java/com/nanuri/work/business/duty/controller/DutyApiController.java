@@ -48,7 +48,7 @@ public class DutyApiController {
 	 * @return
 	 */
 	@GetMapping(value = "/getDutyHistoryList")
-	public HashMap<String, Object> getDutyHistoryList(@ModelAttribute("params") DutyHistoryVO params){
+	public HashMap<String, Object> getDutyHistoryList(@ModelAttribute("param") DutyHistoryVO params){
 		return dutyService.getDutyHistoryList(params);
 	}
 	

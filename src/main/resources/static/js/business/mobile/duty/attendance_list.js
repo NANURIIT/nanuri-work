@@ -15,7 +15,7 @@ $(function(){
         getDutyHistoryList(1);
 
         delete param.searchType;
-    })
+    });
 });
 
 /**
@@ -87,5 +87,5 @@ var getDutyHistoryList = function(pageNo){
                 $('.pagination_wrap').empty();
             }
         }
-    })
+    });
 }

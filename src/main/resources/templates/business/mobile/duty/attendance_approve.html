@@ -6,6 +6,7 @@
 
 <link rel="stylesheet" th:href="@{/sample/nanuri_project/css/attendance.css}">
 <link rel="stylesheet" th:href="@{/sample/nanuri_project/css/notice.css}">
+<script th:src="@{/js/business/mobile/duty/attendance_approve.js}"></script>
 
 <body>
 <div class="mo_wrapper">
@@ -20,90 +21,36 @@
                             <col style="width: 50%">
                             <col style="width: 20%">
                         </colgroup>
-                        <tr>
-                            <th>선택</th>
-                            <th>이름</th>
-                            <th>전체기간</th>
-                            <th>결재상태</th>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input type="checkbox">
-                            </td>
-                            <td>
-                                <a href="attendance_approve_detail.html" title="#">홍길동</a>
-                            </td>
-                            <td>2022-04-14(목) ~<br/>2022-04-18(월) 18:00, 3일</td>
-                            <td>상신</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input type="checkbox">
-                            </td>
-                            <td>
-                                <a href="                                                  attendance_approve_detail.html" title="#">홍길동</a>
-                            </td>
-                            <td>2022-04-14(목) ~<br/>2022-04-18(월) 18:00, 3일</td>
-                            <td>상신</td>
-                        </tr>
+                        <thead>
+                            <tr>
+                                <th>선택</th>
+                                <th>이름</th>
+                                <th>전체기간</th>
+                                <th>결재상태</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dutyHistoryList">
+                            <!-- dutyHistoryList -->
+                        </tbody>
                     </table>
                 </div>
                 <div class="com_pagination">
                     <div class="pagination_wrap">
-                        <ul>
-                            <li class="pagination_prev">
-                                <a href="#">
-                                    <
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">1</a>
-                            </li>
-                            <li class="select">
-                                <a href="#">2</a>
-                            </li>
-                            <li>
-                                <a href="#">3</a>
-                            </li>
-                            <li>
-                                <a href="#">4</a>
-                            </li>
-                            <li>
-                                <a href="#">5</a>
-                            </li>
-                            <li>
-                                ...
-                            </li>
-                            <li>
-                                <a href="#">51</a>
-                            </li>
-                            <li class="pagination_next">
-                                <a href="#">
-                                    >
-                                </a>
-                            </li>
-                        </ul>
+                        <!-- pagination -->
                     </div>
                 </div>
                 <div class="notice_search attendance_search">
                     <div class="approve_box">
-                        <button>일괄결재</button>
-                        <button>일괄부결</button>
-                        <button>결재취소</button>
+                        <button class="allConfirm" id="CONFIRM">일괄결재</button>
+                        <button class="allConfirm" id="REJECT">일괄부결</button>
+                        <button class="allConfirm" id="CLEAR">결재취소</button>
                     </div>
                     <form action="#">
                         <div class="notice_search_box">
-                            <select name="date">
-                                <option value="전체">전체</option>
-                                <option value="근무">근무</option>
-                                <option value="휴가">휴가</option>
-                                <option value="교육">교육</option>
-                                <option value="오후반차">오후반차</option>
-                                <option value="오전반차">오전반차</option>
-                                <option value="병가">병가</option>
-                                <option value="경조휴가">경조휴가</option>
+                            <select id="dutyTypeList" name="date">
+                                <!-- dutyTypeList -->
                             </select>
-                            <a href="#">검색</a>
+                            <a id="dutySearch">검색</a>
                         </div>
                     </form>
                 </div>
