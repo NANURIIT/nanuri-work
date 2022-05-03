@@ -158,6 +158,7 @@ public class DutyService {
 			params.get(i).setDczmnId(facade.getDetails().getUserId());
 			queryResult += dutyMapper.allPayment(params.get(i));
 		}
+		
 
 		return (queryResult > 0);
 	}

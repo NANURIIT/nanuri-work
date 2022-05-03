@@ -98,7 +98,7 @@ var getDutyHistoryList = function(pageNo){
     ajaxCall({
         method : 'GET', 
         url : '/duty/getDutyHistoryList', 
-        data : param, 
+        data : param,
         success : function(object){
             let DUTY_HISTORY_LIST_HTML = '';
             if(!isEmpty(object)){
@@ -142,12 +142,12 @@ var getDutyHistoryList = function(pageNo){
  * @param {string} param.seqNo 일련번호
  * @param {string} param.dczStsCd 결재코드
  */
- var allPayment = function(param){
-     console.log(param);
+ var allPayment = function(params){
     ajaxCall({
         method : 'PATCH', 
         url : '/duty/allPayment', 
-        data : param, 
+        data : params,
         success : getDutyHistoryList(1)
     });
+    console.log('thisPageNo', param.thisPageNo);
 }

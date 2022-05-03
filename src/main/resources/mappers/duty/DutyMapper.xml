@@ -271,7 +271,7 @@
 	<update id="allPayment" parameterType="com.nanuri.work.business.duty.dto.DutyHistoryDTO" >
 		UPDATE dut_hst
 		   SET dcz_sts_cd = #{dczStsCd}, 
-		   	   dczmn_id = #{dczmnId}, 
+		  	   dczmn_id = #{dczmnId}, 
 		 	   dcz_dtm = now()
 		 WHERE seq_no = #{seqNo}
 	</update>

@@ -38,6 +38,7 @@ $(function() {
  * @param {string} option.method ajax 전송방식
  * @param {string} option.url ajax 전송위치
  * @param {string} option.data ajax 데이터
+ * @param {boolean} option.async 비동기식 처리 여부(default true)
  * @param {boolean} option.errPopShow callback Error 팝업 표출 여부 (default true)
  * @param {function} option.success ajax 전송 성공시 처리
  * @param {function} option.fail ajax 전송 실패시 처리
@@ -56,12 +57,17 @@ var ajaxCall = function (option) {
 		option.data = JSON.stringify(option.data);
 	}
 
+	if(option.async == undefined || option.async == null){
+		option.async = true;
+	}
+
 	$.ajax({
 	    method: option.method,
 	    url: option.url,
 	    data: option.data,
 	    cache: false,
 	    datatype: "JSON",
+		async : option.async, 
 	    contentType: "application/json; charset=UTF-8",
 	    beforeSend : function(xhr, opt) {
 	        openPopup({type:"loding",show:true});
