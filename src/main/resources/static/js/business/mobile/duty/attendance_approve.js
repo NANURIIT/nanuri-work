@@ -144,35 +144,12 @@ var getDutyHistoryList = function(pageNo){
         method : 'PATCH', 
         url : '/duty/allPayment', 
         data : params,
-        success : allPaymentCB(params)
+        success : openPopup({
+            title : '성공', 
+            type : 'success', 
+            success : $(document).on('click', '.confirm', function(){
+                getDutyHistoryList(params.thisPageNo)
+            })
+        })
     });
-}
-
-/**
- * 일괄결재 콜백
- * 여러 항목을 업데이트후 리스트를 재 호출하는 형식으로 구현했으나
- * 항목이 2개라면 update -> select -> update 순서로 호출이 돼서
- * 화면상에 정보 갱신이 1개밖에 이루어지지않아
- * 리스트를 재 호출하는 형식이 아닌
- * 화면에 있는 텍스트를 바꾸는 형식으로 구현함
- * 더 좋은방법이 있으면 수정 요함.
- * @param {string} param.seqNo 일련번호
- * @param {string} param.dczStsCd 결재코드
- */
-var allPaymentCB = function(params){
-    let checkList = $('input:checkbox[name=checkbox]:checked');
-    let dczStsCd = params[0].dczStsCd;
-    let dczStsCdNm = '';
-    if(dczStsCd == 'CLEAR') {
-        dczStsCdNm = '결재취소';
-    } else if(dczStsCd == 'REJECT'){
-        dczStsCdNm = '부결';
-    } else if(dczStsCd == 'CONFIRM'){
-        dczStsCdNm = '승인';
-    }
-    for(let i = 0; i < checkList.length; i++){
-        $(checkList[i]).parent().parent().children('.confirmCode').text(dczStsCdNm);
-        $(checkList[i]).parent().parent().children('.confirmCode').attr('id', dczStsCd);
-    }
-    $(checkList).prop('checked', false);
 }

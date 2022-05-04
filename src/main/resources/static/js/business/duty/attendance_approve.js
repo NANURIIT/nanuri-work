@@ -3,7 +3,7 @@
 
 /** onload **/
 $(function () {
-    
+
     getCommonCode();
     getDutyHistoryList(1);
 
@@ -18,50 +18,50 @@ $(function () {
         delete param.searchType;
     });
 
-    $(document).on('click', '.allConfirm', function(){
+    $(document).on('click', '.allConfirm', function () {
         let flag = true;            // 중복 결재 내용이 있으면 false 없으면 true
         let isChecked = $('input:checkbox[name=checkbox]:checked');
         let param = [];
 
-        if(isChecked.length < 1){
+        if (isChecked.length < 1) {
             openPopup({
-                title : '실패', 
-                text : '체크된 항목이 없습니다.', 
-                type : 'error'
+                title: '실패',
+                text: '체크된 항목이 없습니다.',
+                type: 'error'
             });
         } else {
             let existedCode = '';   // 중복 결재 내용
 
-            for(let i = 0; i <isChecked.length; i++){
-                if($(isChecked[i]).parent().parent().children('.confirmCode').attr('id') == $(this).attr('id')){
+            for (let i = 0; i < isChecked.length; i++) {
+                if ($(isChecked[i]).parent().parent().children('.confirmCode').attr('id') == $(this).attr('id')) {
                     flag = false;
                     existedCode = $(isChecked[i]).parent().parent().children('.confirmCode').text();
                     break;
                 }
                 param.push({
-                    seqNo : isChecked[i].value, 
-                    dczStsCd : $(this).attr('id')
+                    seqNo: isChecked[i].value,
+                    dczStsCd: $(this).attr('id')
                 });
-            } 
+            }
 
-            if(flag){
+            if (flag) {
                 allPayment(param);
             } else {
                 openPopup({
-                    title : '실패', 
-                    text : existedCode + '인 항목이 있습니다.', 
-                    type : 'error'
+                    title: '실패',
+                    text: existedCode + '인 항목이 있습니다.',
+                    type: 'error'
                 });
             }
-            
+
         }
     });
 
     // 결재, 부결, 결재취소
-    $(document).on('click', '.attendance_button', function () {    
+    $(document).on('click', '.attendance_button', function () {
         let params = {
-            dczStsCd : $(this).attr('class').split(' ')[2],
-            seqNo : $(this).parent().parent().attr('id')
+            dczStsCd: $(this).attr('class').split(' ')[2],
+            seqNo: $(this).parent().parent().attr('id')
         }
         attendance(params);
     });
@@ -114,42 +114,42 @@ var getDutyHistoryList = function (pageNo) {
 
                     DUTY_HISTORY_LIST_HTML += '<tr id="' + tmpRow.seqNo + '">';
                     DUTY_HISTORY_LIST_HTML += ' <td>';
-                    DUTY_HISTORY_LIST_HTML += '     <input type="checkbox" name="checkbox" value="'+tmpRow.seqNo+'">';
+                    DUTY_HISTORY_LIST_HTML += '     <input type="checkbox" name="checkbox" value="' + tmpRow.seqNo + '">';
                     DUTY_HISTORY_LIST_HTML += ' </td>';
-                    DUTY_HISTORY_LIST_HTML += ' <td>'+tmpRow.telNo.substring(3, tmpRow.telNo.length)+'</td>';
+                    DUTY_HISTORY_LIST_HTML += ' <td>' + tmpRow.telNo.substring(3, tmpRow.telNo.length) + '</td>';
                     DUTY_HISTORY_LIST_HTML += ' <td>' + tmpRow.userNm + '</td>';
                     DUTY_HISTORY_LIST_HTML += ' <td>' + tmpRow.dtyNm + '</td>';
                     DUTY_HISTORY_LIST_HTML += ' <td>' + tmpRow.blgNm + '</td>';
-                    DUTY_HISTORY_LIST_HTML += ' <td>'+tmpRow.basDt+'</td>';
+                    DUTY_HISTORY_LIST_HTML += ' <td>' + tmpRow.basDt + '</td>';
                     DUTY_HISTORY_LIST_HTML += ' <td>' + tmpRow.svceFormCdNm + '</td>';
-                    if((tmpRow.svceFormCd == 'OFF_DUTY' || tmpRow.svceFormCd == 'FIRST_DUTY' || tmpRow.svceFormCd == 'SECOND_DUTY') && !isEmpty(tmpRow.sbtAftVctnDys)){
-                        if(tmpRow.sbtAftVctnDys % 1 === 0){
-                            DUTY_HISTORY_LIST_HTML += ' <td>'+tmpRow.sbtAftVctnDys.substring(0, tmpRow.sbtAftVctnDys.length - 3)+'</td>';
+                    if ((tmpRow.svceFormCd == 'OFF_DUTY' || tmpRow.svceFormCd == 'FIRST_DUTY' || tmpRow.svceFormCd == 'SECOND_DUTY') && !isEmpty(tmpRow.sbtAftVctnDys)) {
+                        if (tmpRow.sbtAftVctnDys % 1 === 0) {
+                            DUTY_HISTORY_LIST_HTML += ' <td>' + tmpRow.sbtAftVctnDys.substring(0, tmpRow.sbtAftVctnDys.length - 3) + '</td>';
                         } else {
-                            DUTY_HISTORY_LIST_HTML += ' <td>'+tmpRow.sbtAftVctnDys.substring(0, tmpRow.sbtAftVctnDys.length - 1)+'</td>';
+                            DUTY_HISTORY_LIST_HTML += ' <td>' + tmpRow.sbtAftVctnDys.substring(0, tmpRow.sbtAftVctnDys.length - 1) + '</td>';
                         }
                     } else {
                         DUTY_HISTORY_LIST_HTML += ' <td> - </td>'
                     }
-                    if((isEmpty(tmpRow.edDt) && isEmpty(tmpRow.edTm)) == false){
-                        DUTY_HISTORY_LIST_HTML += ' <td>'+tmpRow.stDt + '('+WEEKDAY[new Date(tmpRow.stDt).getDay()]+')' +  ' ' + tmpRow.stTm.substring(0, tmpRow.stTm.length - 3) + ' ~ ' + '<br>' + tmpRow.edDt + '('+WEEKDAY[new Date(tmpRow.edDt).getDay()]+')' +  ' ' + tmpRow.edTm.substring(0, tmpRow.edTm.length - 3) + ', '+tmpRow.prd+'일' +'</td>';
+                    if ((isEmpty(tmpRow.edDt) && isEmpty(tmpRow.edTm)) == false) {
+                        DUTY_HISTORY_LIST_HTML += ' <td>' + tmpRow.stDt + '(' + WEEKDAY[new Date(tmpRow.stDt).getDay()] + ')' + ' ' + tmpRow.stTm.substring(0, tmpRow.stTm.length - 3) + ' ~ ' + '<br>' + tmpRow.edDt + '(' + WEEKDAY[new Date(tmpRow.edDt).getDay()] + ')' + ' ' + tmpRow.edTm.substring(0, tmpRow.edTm.length - 3) + ', ' + tmpRow.prd + '일' + '</td>';
                     } else {
-                        DUTY_HISTORY_LIST_HTML += ' <td>'+tmpRow.stDt+ '('+WEEKDAY[new Date(tmpRow.stDt).getDay()]+')' +  ' ' +tmpRow.stTm.substring(0, tmpRow.stTm.length - 3) + ' ~ ' + '</td>'
+                        DUTY_HISTORY_LIST_HTML += ' <td>' + tmpRow.stDt + '(' + WEEKDAY[new Date(tmpRow.stDt).getDay()] + ')' + ' ' + tmpRow.stTm.substring(0, tmpRow.stTm.length - 3) + ' ~ ' + '</td>'
                     }
-                    DUTY_HISTORY_LIST_HTML += ' <td>'+tmpRow.rgDtm.substring(0, 10) + '('+WEEKDAY[new Date(tmpRow.rgDtm.substring(0, 10)).getDay()]+')' + '<br>' + tmpRow.rgDtm.substring(11, tmpRow.rgDtm.length - 3) + '</td>';
-                    DUTY_HISTORY_LIST_HTML += ' <td class="confirmCode" id="'+tmpRow.dczStsCd+'">' + tmpRow.dczStsCdnm + '</td>';
+                    DUTY_HISTORY_LIST_HTML += ' <td>' + tmpRow.rgDtm.substring(0, 10) + '(' + WEEKDAY[new Date(tmpRow.rgDtm.substring(0, 10)).getDay()] + ')' + '<br>' + tmpRow.rgDtm.substring(11, tmpRow.rgDtm.length - 3) + '</td>';
+                    DUTY_HISTORY_LIST_HTML += ' <td class="confirmCode" id="' + tmpRow.dczStsCd + '">' + tmpRow.dczStsCdnm + '</td>';
                     if (isEmpty(tmpRow.dczDtm)) {
                         DUTY_HISTORY_LIST_HTML += ' <td> - </td>';
                     } else {
-                        DUTY_HISTORY_LIST_HTML += ' <td>' + tmpRow.dczDtm.substring(0, 10) + '<br>'+tmpRow.dczDtm.substring(11, tmpRow.dczDtm.length - 3)+'</td>';
+                        DUTY_HISTORY_LIST_HTML += ' <td>' + tmpRow.dczDtm.substring(0, 10) + '<br>' + tmpRow.dczDtm.substring(11, tmpRow.dczDtm.length - 3) + '</td>';
                     }
                     if (tmpRow.dczStsCd == 'REPORT' || tmpRow.dczStsCd == 'CLEAR') {
-                        DUTY_HISTORY_LIST_HTML += ' <td>';
+                        DUTY_HISTORY_LIST_HTML += ' <td class="confirm_button">';
                         DUTY_HISTORY_LIST_HTML += '     <button class="attendance_button approval_button CONFIRM">결재</button>';
                         DUTY_HISTORY_LIST_HTML += '     <button class="attendance_button reject_button REJECT">부결</button>';
                         DUTY_HISTORY_LIST_HTML += ' </td>';
                     } else if (tmpRow.dczStsCd == 'CONFIRM' || tmpRow.dczStsCd == 'REJECT') {
-                        DUTY_HISTORY_LIST_HTML += ' <td>';
+                        DUTY_HISTORY_LIST_HTML += ' <td class="confirm_button">';
                         DUTY_HISTORY_LIST_HTML += '     <button class="attendance_button reject_button CLEAR">결재취소</button>';
                         DUTY_HISTORY_LIST_HTML += ' </td>';
                     }
@@ -175,23 +175,29 @@ var getDutyHistoryList = function (pageNo) {
  * @param {string} param.seqNo 일련번호
  * @param {string} param.dczStsCd 결재코드
  */
-var allPayment = function(params){
+var allPayment = function (params) {
     ajaxCall({
-        method : 'PATCH', 
-        url : '/duty/allPayment',
-        data : params, 
-        success : getDutyHistoryList(param.thisPageNo)
+        method: 'PATCH',
+        url: '/duty/allPayment',
+        data: params,
+        success: openPopup({
+            title: '성공',
+            type: 'success',
+            success: $(document).on('click', '.confirm', function () {
+                getDutyHistoryList(param.thisPageNo);
+            })
+        })
     });
 }
 
 /**
  * 결재, 부결, 결재취소
  */
-var attendance = function(params) {
+var attendance = function (params) {
     ajaxCall({
-        method : 'PATCH',
-        url : '/duty/attendance',
-        data : params,
-        success : getDutyHistoryList(param.thisPageNo)
+        method: 'PATCH',
+        url: '/duty/attendance',
+        data: params,
+        success: getDutyHistoryList(param.thisPageNo)
     });
 }
