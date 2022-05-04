@@ -46,8 +46,6 @@ let param = {
     pageViewNo: 10
 };
 
-const WEEKDAY = ['일', '월', '화', '수', '목', '금', '토'];
-
 var getDutyHistoryList = function(pageNo){
     param.thisPageNo = pageNo;
     ajaxCall({

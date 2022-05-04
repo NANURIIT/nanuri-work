@@ -12,8 +12,6 @@ $(function(){
     });
 });
 
-const WEEKDAY = ['일', '월', '화', '수', '목', '금', '토'];
-
 /**
  * 근태 상세정보 호출
  * @param {Number} seqNo 일련번호

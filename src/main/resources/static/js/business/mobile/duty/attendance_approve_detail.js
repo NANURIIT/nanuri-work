@@ -29,8 +29,6 @@ $(function(){
     });
 });
 
-const WEEKDAY = ['일', '월', '화', '수', '목', '금', '토'];
-
 var getDutyHistoryDetail = function(seqNo){
     ajaxCall({
         method : 'GET', 

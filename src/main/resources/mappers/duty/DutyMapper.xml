@@ -149,21 +149,6 @@
 	 		ON T01.dcz_sts_cd = T04.dtl_cd 			/* 결재 상태 코드 */
 	 		WHERE 1=1
 	 		<include refid="dutySearch" />
-	 		<!-- <if test="userId != null and userId != ''">
-	 			AND T01.user_id = #{userId}
-	 		</if> 
-	 		근무 형태 검색
-	 		<if test="searchType != null and searchType != ''">
-	 			AND T01.svce_form_cd = #{searchType}
-	 		</if>
-	 		직원명 검색
-	 		<if test="searchKeyword != null and searchKeyword != ''">
-	 			AND T02.user_nm = #{searchKeyword}
-	 		</if>
-	 		기준 년도 검색
-	 		<if test="searchDate != null and searchDate != ''">
-	 			AND DATE_FORMAT(T01.bas_dt, '%Y') = #{searchDate}
-	 		</if> -->
 	  ORDER BY T01.seq_no DESC
 	  <include refid="CommonMapper.paging" />
 	</select>
@@ -228,9 +213,14 @@
 	 		 WHERE ds_cd = 'CONFIRM'
 	 		) T04 	 												/* 결재 상태 코드 */
 	 		ON T01.dcz_sts_cd = T04.dtl_cd
-	 LEFT JOIN mem_bsc_info T05 									/* 결재자 정보 */
+	 LEFT JOIN (
+	 				SELECT user_id, 
+	 					   user_nm
+	 				  FROM mem_bsc_info
+	 				 WHERE blg_ds_cd IN ('ADMIN', 'ASSISTANT')
+	 		   ) T05 			 									/* 결재자 정보 */
 	 		ON T01.dczmn_id = T05.user_id
-	 		WHERE seq_no = #{seqNo}
+	 	 WHERE seq_no = #{seqNo}
 	  ORDER BY T01.seq_no DESC
 	</select>
 
@@ -273,24 +263,6 @@
 	 		ON T01.user_id = T02.user_id
 		 WHERE 1=1
 		 <include refid="dutySearch" />
-		<!-- <if test="searchDate == null or searchDate == ''">
-	 		AND DATE_FORMAT(bas_dt, '%Y') = DATE_FORMAT(NOW(), '%Y')
-	 	</if>
-	 	<if test="userId != null and userId != ''">
-	 		AND T01.user_id = #{userId}
-	 	</if> 
-	 	근무 형태 검색
-	 	<if test="searchType != null and searchType != ''">
-	 		AND T01.svce_form_cd = #{searchType}
-	 	</if>
-	 	직원명 검색
-	 	<if test="searchKeyword != null and searchKeyword != ''">
-	 		AND T02.user_nm = #{searchKeyword}
-	 	</if>
-	 	기준 년도 검색
-	 	<if test="searchDate != null and searchDate != ''">
-	 		AND DATE_FORMAT(T01.bas_dt, '%Y') = #{searchDate}
-	 	</if> -->
 	</select>
 	
 	<!-- 근태 일괄결재 -->
