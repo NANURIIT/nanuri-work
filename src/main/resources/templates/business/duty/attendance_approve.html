@@ -24,7 +24,7 @@
                                     <select id="dutyTypeList" name="date">
                                         <!-- dutyTypeList -->
                                     </select>
-                                    <a href="#">검색</a>
+                                    <a id="dutySearch">검색</a>
                                 </div>
                             </form>
                         </div>
@@ -34,9 +34,9 @@
                     </div>
                     <div class="notice_list file_down_list">
                         <div class="file_down_wrap">
-                            <button>일괄결재</button>
-                            <button>일괄부결</button>
-                            <button>결재취소</button>
+                            <button class="allConfirm" id="CONFIRM">일괄결재</button>
+                            <button class="allConfirm" id="REJECT">일괄부결</button>
+                            <button class="allConfirm" id="CLEAR">결재취소</button>
                         </div>
                         <table>
                             <colgroup>
@@ -52,7 +52,6 @@
                                 <col style="width: 10%;">
                                 <col style="width: 5%;">
                                 <col style="width: 8%;">
-                                <col style="width: 5%;">
                                 <col style="width: 10%;">
                             </colgroup>
                             <thead>
@@ -69,106 +68,16 @@
                                     <th>상신일시</th>
                                     <th>결재상태</th>
                                     <th>결재일시</th>
-                                    <th>결재자<br/>이름</th>
                                     <th>결재</th>
                                 </tr>
                             </thead>
                             <tbody id="dutyHistoryList">
-                                <tr>
-                                    <td>
-                                        <input type="checkbox">
-                                    </td>
-                                    <td>123</td>
-                                    <td>홍길동</td>
-                                    <td>차장</td>
-                                    <td>나누리아이티</td>
-                                    <td>2022-04-14</td>
-                                    <td>휴가</td>
-                                    <td>1</td>
-                                    <td>2022-04-14(목) 09:00 ~<br/>2022-04-18(월) 18:00, 3일</td>
-                                    <td>2022-04-15(금)<br/>19:59</td>
-                                    <td>상신</td>
-                                    <td>2022-04-16<br/>08:00</td>
-                                    <td>홍길동</td>
-                                    <td>
-                                        <button class="attendance_button approval_button">결재</button>
-                                        <button class="attendance_button reject_button">부결</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <input type="checkbox">
-                                    </td>
-                                    <td>123</td>
-                                    <td>홍길동</td>
-                                    <td>차장</td>
-                                    <td>나누리아이티</td>
-                                    <td>2022-04-15</td>
-                                    <td>휴가</td>
-                                    <td>0</td>
-                                    <td>2022-04-14(목) ~<br/>2022-04-18(월) 18:00, 3일</td>
-                                    <td>2022-04-15(금)<br/>19:59</td>
-                                    <td>승인</td>
-                                    <td>2022-04-16<br/>08:00</td>
-                                    <td>홍길동</td>
-                                    <td>
-                                        <button class="attendance_button reject_button">결재취소</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <input type="checkbox">
-                                    </td>
-                                    <td>123</td>
-                                    <td>홍길동</td>
-                                    <td>차장</td>
-                                    <td>나누리아이티</td>
-                                    <td>2022-04-15</td>
-                                    <td>근무</td>
-                                    <td>-</td>
-                                    <td>2022-04-14(목) ~<br/>2022-04-18(월) 18:00, 3일</td>
-                                    <td>2022-04-15(금)<br/>19:59</td>
-                                    <td>결재취소</td>
-                                    <td>2022-04-16<br/>08:00</td>
-                                    <td>홍길동</td>
-                                    <td>
-                                        <button class="attendance_button approval_button">결재</button>
-                                        <button class="attendance_button reject_button">부결</button>
-                                    </td>
-                                </tr>
+                                <!-- dutyList -->
                             </tbody>
                         </table>
                     </div>
                     <div id="list_pagination" class="list_pagination">
-                        <a class="list_prev" href="#">
-                            <
-                        </a>
-                        <ul>
-                            <li>
-                                <a href="#">1</a>
-                            </li>
-                            <li>
-                                <a href="#">2</a>
-                            </li>
-                            <li>
-                                <a href="#">3</a>
-                            </li>
-                            <li>
-                                <a href="#">4</a>
-                            </li>
-                            <li>
-                                <a href="#">5</a>
-                            </li>
-                            <li>
-                                <a href="#">...</a>
-                            </li>
-                            <li>
-                                <a href="#">51</a>
-                            </li>
-                        </ul>
-                        <a class="product_list_next" href="#">
-                            >
-                        </a>
+                        <!-- pagination -->
                     </div>
                 </div>
             </div>

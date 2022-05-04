@@ -28,7 +28,7 @@ public class AdminAuthenticationProvider implements AuthenticationProvider {
 		String password = authentication.getCredentials().toString();
 
 		UserDetailsVO user = adminLoginService.loadUserByUsername(name);
-
+		
 		if (user == null) {
 			throw new UsernameNotFoundException("아이디 또는 비밀번호가 맞지 않습니다.");
 

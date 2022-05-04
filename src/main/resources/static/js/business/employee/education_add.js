@@ -48,6 +48,7 @@ var getCommonCode = function () {
         method: 'GET',
         url: '/employee/getCommonCode',
         data: { dsCd: 'SCHOOLCAREER' },
+        async : false, 
         success: function (object) {
             let COMMON_CODE_HTML = '';
             for (let i = 0; i < object.length; i++) {

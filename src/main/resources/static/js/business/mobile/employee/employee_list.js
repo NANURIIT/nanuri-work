@@ -17,8 +17,6 @@ $(function () {
     $(document).on('click', '#userNm', function(){
         let userNm = $(this).text();
         let telNo = $(this).parent().parent().children('.telNo').text().replaceAll('-', '');
-        console.log(userNm);
-        console.log(telNo);
         let param = {
             userNm : userNm, 
             telNo : telNo

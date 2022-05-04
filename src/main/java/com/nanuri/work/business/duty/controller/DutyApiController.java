@@ -1,11 +1,13 @@
 package com.nanuri.work.business.duty.controller;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,8 +33,18 @@ public class DutyApiController {
 	 * @return
 	 */
 	@PostMapping(value = "/registerOnDuty")
-	public boolean registerDuty(@RequestBody DutyHistoryDTO params) {
+	public boolean registerOnDuty(@RequestBody DutyHistoryDTO params) {
 		return dutyService.registerOnDuty(params);
+	}
+	
+	/**
+	 * 근태 등록(상신 버튼 눌렀을 때)
+	 * @param params
+	 * @return
+	 */
+	@PostMapping(value = "/registerOffDuty")
+	public boolean registerOffDuty(@RequestBody DutyHistoryDTO params) {
+		return dutyService.registerOffDuty(params);
 	}
 	
 	/**
@@ -41,8 +53,18 @@ public class DutyApiController {
 	 * @return
 	 */
 	@GetMapping(value = "/getDutyHistoryList")
-	public HashMap<String, Object> getDutyHistoryList(@ModelAttribute("params") DutyHistoryVO params){
+	public HashMap<String, Object> getDutyHistoryList(@ModelAttribute("param") DutyHistoryVO params){
 		return dutyService.getDutyHistoryList(params);
+	}
+	
+	/**
+	 * 근태정보 상세조회
+	 * @param seqNo
+	 * @return
+	 */
+	@GetMapping(value = "/getDutyHistoryDetail/{seqNo}")
+	public DutyHistoryVO getDutyHistoryDetail(@PathVariable(value = "seqNo", required = true) Long seqNo) {
+		return dutyService.getDutyHistoryDetail(seqNo);
 	}
 	
 	/**
@@ -64,4 +86,23 @@ public class DutyApiController {
 		return dutyService.updateDuty(params);
 	}
 	
+	/**
+	 * 일괄결재
+	 * @param params
+	 * @return
+	 */
+	@PatchMapping(value = "/allPayment")
+	public boolean allPayment(@RequestBody List<DutyHistoryDTO> params) {
+		return dutyService.allPayment(params);
+	}
+	
+	/**
+	 * 근태정보 단일결재
+	 * @param params
+	 * @return
+	 */
+	@PatchMapping(value="/attendance")
+	public boolean attendance(@RequestBody DutyHistoryDTO params) {
+		return dutyService.attendance(params);
+	}
 }

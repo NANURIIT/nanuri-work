@@ -48,6 +48,7 @@ var getCommonCode = function () {
     ajaxCall({
         method: 'GET',
         url: '/employee/getCommonCode',
+        async : false, 
         data: { dsCd: 'CERTIFICATE' },
         success: function (object) {
             let COMMON_CODE_HTML = '';
@@ -131,14 +132,24 @@ var registerCertificate = function (params, pathname) {
             method: 'POST',
             url: '/employee/certificateWrite',
             data: params,
-            success: openPopup({
-                title: '성공',
-                text: '자격증 등록에 성공했습니다.',
-                type: 'success',
-                callback: function () {
-                    location.href = '/'+pathname+'/index';
+            success: function(object){
+                if(isEmpty(object)){
+                    openPopup({
+                        title: '성공',
+                        text: '자격증 등록에 성공했습니다.',
+                        type: 'success',
+                        callback: function () {
+                            location.href = '/'+pathname+'/index';
+                        }
+                    })
+                } else {
+                    openPopup({
+                        title: '실패',
+                        text: object,
+                        type: 'error'
+                    })
                 }
-            })
+            }
         });
     }
 }

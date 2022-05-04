@@ -8,10 +8,6 @@ $(function () {
 
     let pathname = pageInfo.pathname;
 
-    console.log(pageInfo);
-    console.log(pathname);
-    let uri = new URL(document.location.href).pathname;
-
     // 기본정보 호출
     getBasicInfoDetail();
 

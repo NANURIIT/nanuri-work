@@ -52,7 +52,6 @@ $(function () {
         }
         getEmployeeList(1);
     });
-
 });
 
 let param = {

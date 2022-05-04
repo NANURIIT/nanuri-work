@@ -11,13 +11,13 @@ import lombok.Setter;
 public class Criteria {
 	
 	/** 현재 페이지 번호 */
-	private int thisPageNo;	//currentPageNo
+	private int thisPageNo;
 
 	/** 페이지당 출력할 데이터 개수 */
-	private int pageDivNo;	//recordsPerPage
+	private int pageDivNo;
 
 	/** 화면 하단에 출력할 페이지 사이즈 */
-	private int pageViewNo;		//pageSize
+	private int pageViewNo;
 
 	/** 검색 키워드 */
 	private String searchKeyword;
@@ -25,8 +25,11 @@ public class Criteria {
 	/** 검색 유형 */
 	private String searchType;
 	
-	/** 검색 날짜 유형 */
+	/** 게시판 검색 날짜 유형 */
 	private String searchDateType;
+	
+	/** 근태 검색 기준년도 */
+	private String searchDate;
 	
 	public Criteria() {
 		this.thisPageNo = 1;
