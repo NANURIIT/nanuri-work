@@ -185,6 +185,7 @@ var allPayment = function (params) {
             type: 'success',
             success: $(document).on('click', '.confirm', function () {
                 getDutyHistoryList(param.thisPageNo);
+                $('#dutyTypeList').val('ALL');
             })
         })
     });

@@ -148,7 +148,8 @@ var getDutyHistoryList = function(pageNo){
             title : '성공', 
             type : 'success', 
             success : $(document).on('click', '.confirm', function(){
-                getDutyHistoryList(params.thisPageNo)
+                getDutyHistoryList(params.thisPageNo);
+                $('#dutyTypeList').val('ALL');
             })
         })
     });
