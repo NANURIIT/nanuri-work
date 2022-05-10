@@ -15,7 +15,7 @@ public class BoardController {
 	 * 공지사항 리스트
 	 * @return
 	 */
-	@GetMapping(value = "/admin/notice")
+	@GetMapping(value = "admin/notice")
 	public String getNoticePage() {
 		return "business/board/notice";
 	}
