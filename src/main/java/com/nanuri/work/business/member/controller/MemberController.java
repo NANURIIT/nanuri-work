@@ -61,13 +61,13 @@ public class MemberController {
 	 * 회원정보 출력
 	 * @return
 	 */
-	@GetMapping(value = "admin/index")
+	@GetMapping(value = "/admin/index")
 	public String getAdminIndexPage() {	
 		// 로그인 시 아이디와 비밀번호가 같은경우(비밀번호가 전화번호일경우) 비밀번호 페이지로 이동시켜 비밀번호 변경을 유도.
 		if(passwordEncoder.matches(facade.getDetails().getUserId(), facade.getDetails().getUserPassword())) {
 			return "business/change_pw";
 		} else {
-			return "/home/nanuri/actions-runner/_work/nanuri-work/nanuri-work/src/main/resources/templates/business/employee/index";
+			return "business/employee/index";
 		}
 	}
 	
