@@ -25,10 +25,10 @@ public class MemberController {
 	 * root url로 접속시도시 /admin/index 페이지로 redirection시킴
 	 * @return
 	 */
-	@GetMapping(value = "/")
-	public String getIndexPage() {
-		return "redirect:/admin/index";
-	}
+//	@GetMapping(value = "/")
+//	public String getIndexPage() {
+//		return "redirect:/admin/index";
+//	}
 	
 	/**
 	 * 비밀번호 변경 페이지
