@@ -63,7 +63,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     	http.addFilterBefore(filter, CsrfFilter.class);
 
     	http.authorizeRequests()
-    			.antMatchers("/login").permitAll()
+    			.antMatchers("login").permitAll()
     			.antMatchers("/admin/employeeAdd").hasAnyRole("ADMIN", "ASSISTANT", "EMPLOYEE")
     			.antMatchers("/admin/employeeList").hasAnyRole("ADMIN", "EMPLOYEE", "ASSISTANT")
     			.antMatchers("/admin/noticeWrite").hasAnyRole("ADMIN", "EMPLOYEE", "ASSISTANT")
@@ -76,7 +76,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     			.antMatchers("**").authenticated()
     			.and()
     		.formLogin()
-    			.loginPage("/login")
+    			.loginPage("login")
     			.defaultSuccessUrl("/admin/index", true)
     			.usernameParameter("loginId").passwordParameter("pwd")
     			.successHandler(customSuccessHandler)
@@ -85,7 +85,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     			.and()
     		.logout()
 	    		.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-	            .logoutSuccessUrl("/login")
+	            .logoutSuccessUrl("login")
     			.invalidateHttpSession(true);
     	//hasAnyAuthority("OP") //권한정책 필요시
     	//.logoutSuccessHandler(customLogoutSuccessHandler) //로그아웃 성공시 handler
@@ -93,7 +93,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     	http.csrf().disable();
 
     	http.sessionManagement()
-			.invalidSessionUrl("/login");
+			.invalidSessionUrl("login");
 
     	// 인증 거부 관련 처리
         http.exceptionHandling().accessDeniedHandler(accessDeniedHandler());

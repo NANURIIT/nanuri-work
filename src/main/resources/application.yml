@@ -37,7 +37,7 @@ spring:
       minimum-idle: 1
   thymeleaf:
     cache: false
-    prefix: classpath:/templates
+    prefix: classpath:/templates/
 
   mvc:
     hiddenmethod:
