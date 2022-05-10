@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"/>
+    <title>나누리</title>
+
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <script src="../js/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<div class="main">
+    <div class="wrap">
+        <form>
+            <div class="form_box">
+                <div class="form_title">소속구분</div>
+                <!--20220325 수정 s-->
+                <div>
+                    <select class="form_select" name="division_name">
+                        <option value="나누리직원" selected>나누리직원</option>
+                        <option value="프리랜서">프리랜서</option>
+                        <option value="협력업체">협력업체</option>
+                        <!--20220407 수정 s-->
+                        <option value="운영자">운영자</option>
+                        <option value="경영지원">경영지원</option>
+                        <!--20220407 수정 f-->
+                        <option value="기타">기타</option>
+                    </select>
+                </div>
+                <!--20220325 수정 f-->
+            </div>
+            <div class="form_box">
+                <div class="form_title">소속</div>
+                <div>
+                    <input class="input_box" type="text" name="department_name" placeholder="소속 입력">
+                </div>
+            </div>
+            <!--20220325 수정 s-->
+            <div class="form_box">
+                <div class="form_title">우편번호</div>
+                <div>
+                    <input class="input_box" type="text" name="zip_code" placeholder="우편번호 입력">
+                </div>
+            </div>
+            <!--20220325 수정 f-->
+            <div class="form_box">
+                <div class="form_title">주소</div>
+                <div>
+                    <input class="input_box" type="text" name="address_name" placeholder="주소 입력">
+                </div>
+            </div>
+            <div class="form_box">
+                <div class="form_title">이름</div>
+                <div>
+                    <input class="input_box" type="text" name="user_name" placeholder="이름 입력">
+                </div>
+            </div>
+            <div class="form_box">
+                <div class="form_title">직급</div>
+                <div>
+                    <input class="input_box" type="text" name="rank_name" placeholder="직급 입력">
+                </div>
+            </div>
+            <div class="form_box">
+                <div class="form_title">전화번호</div>
+                <div>
+                    <input class="input_box" type="tel" name="phone_num" placeholder="전화번호 입력">
+                </div>
+            </div>
+            <div class="form_box">
+                <div class="form_title">주민등록번호</div>
+                <div>
+                    <input class="input_box" type="text" name="registration_number" placeholder="주민등록번호 입력">
+                </div>
+            </div>
+            <div class="form_box">
+                <div class="form_title">직무</div>
+                <div>
+                    <input class="input_box" type="text" name="job_name" placeholder="직무 입력">
+                </div>
+            </div>
+            <div class="form_box">
+                <div class="form_title">E-mail</div>
+                <div>
+                    <input class="input_box" type="email" name="email_address" placeholder="이메일 입력">
+                </div>
+            </div>
+        </form>
+        <!--20220407 수정 s-->
+        <div class="save_box">
+            <div class="button_box">
+                <button class="save_button">저장</button>
+                <button class="cancel_button" onclick="history.back()">취소</button>
+            </div>
+        </div>
+        <!--20220407 수정 f-->
+    </div>
+</div>
+</body>
+</html>

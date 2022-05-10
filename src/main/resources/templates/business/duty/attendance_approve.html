@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<!-- 공통헤드 -->
+<head th:replace="layout/notice/head :: headFragment"></head>
+
+<link rel="stylesheet" th:href="@{/sample/admin/css/notice.css}">
+<link rel="stylesheet" th:href="@{/sample/admin/css/attendance.css}">
+
+<script th:src="@{https://code.jquery.com/ui/1.13.1/jquery-ui.js}"></script>
+<script th:src="@{/js/business/duty/attendance_approve.js}"></script>
+
+<body>
+    <div class="wrapper">
+        <header th:replace="/layout/notice/header :: headerFragment"></header>
+
+        <div class="submain_wrap">
+            <div class="sub_wrap notice_wrap">
+                <div class="sub_container notice_container">
+                    <div class="condition_wrap">
+                        <div class="notice_search notice_search_option">
+                            <form action="#">
+                                <div class="notice_search_box">
+                                    <select id="dutyTypeList" name="date">
+                                        <!-- dutyTypeList -->
+                                    </select>
+                                    <a id="dutySearch">검색</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="submain_title notice_title">
+                        근태결재
+                    </div>
+                    <div class="notice_list file_down_list">
+                        <div class="file_down_wrap">
+                            <button class="allConfirm" id="CONFIRM">일괄결재</button>
+                            <button class="allConfirm" id="REJECT">일괄부결</button>
+                            <button class="allConfirm" id="CLEAR">결재취소</button>
+                        </div>
+                        <table>
+                            <colgroup>
+                                <col style="width: 5%;">
+                                <col style="width: 5%;">
+                                <col style="width: 5%;">
+                                <col style="width: 5%;">
+                                <col style="width: 8%;">
+                                <col style="width: 7%;">
+                                <col style="width: 5%;">
+                                <col style="width: 7%;">
+                                <col style="width: 15%;">
+                                <col style="width: 10%;">
+                                <col style="width: 5%;">
+                                <col style="width: 8%;">
+                                <col style="width: 10%;">
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th scope="col">선택</th>
+                                    <th scope="col">사번번호</th>
+                                    <th scope="col">이름</th>
+                                    <th scope="col">직급</th>
+                                    <th>소속</th>
+                                    <th>기준일자</th>
+                                    <th>근태구분</th>
+                                    <th>차감후<br/>휴가일수</th>
+                                    <th>전체 기간</th>
+                                    <th>상신일시</th>
+                                    <th>결재상태</th>
+                                    <th>결재일시</th>
+                                    <th>결재</th>
+                                </tr>
+                            </thead>
+                            <tbody id="dutyHistoryList">
+                                <!-- dutyList -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="list_pagination" class="list_pagination">
+                        <!-- pagination -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

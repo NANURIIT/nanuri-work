@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko">
+<!-- 공통헤드 -->
+<head th:replace="layout/notice/head :: headFragment"></head>
+
+<link rel="stylesheet" th:href="@{/sample/admin/css/info.css}">
+
+<script th:src="@{/js/business/equipment/equipment_add.js}"></script>
+
+<body>
+    <div class="wrapper">
+        <header th:replace="/layout/notice/header :: headerFragment"></header>
+        <div class="submain_wrap">
+            <div class="sub_wrap">
+                <div class="sub_container">
+                    <div class="submain_title">
+                        장비 등록
+                    </div>
+                    <div class="join_detail_wrap">
+                        <form>
+                            <table class="join_table1">
+                                <colgroup>
+                                    <col style="width:200px;">
+                                    <col style="width:auto;">
+                                </colgroup>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">
+                                            장비종류
+                                        </th>
+                                        <td>
+                                            <div class="join_input">
+                                                <select class="form_select" id="eqpmKdCd" name="equipment_type">
+                                                    <!-- <option value="나누리직원" selected>모니터</option>
+                                                    <option value="프리랜서">노트북</option>
+                                                    <option value="협력업체">PC</option> -->
+                                                </select>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">
+                                            모델명
+                                        </th>
+                                        <td>
+                                            <div class="join_input">
+                                                <input class="input_box" id="modlNm" name="model_name" placeholder="모델명 입력">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">
+                                            시리얼번호
+                                        </th>
+                                        <td>
+                                            <div class="join_input">
+                                                <input class="input_box" id="srlNo" name="model_num" placeholder="시리얼번호 입력">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">
+                                            지급일자
+                                        </th>
+                                        <td>
+                                            <div class="join_input">
+                                                <input class="input_box" id="pyDt" name="supply_date" placeholder="지급일자 입력">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>
+                    <div th:replace="layout/employee/footer :: saveBoxFragment"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

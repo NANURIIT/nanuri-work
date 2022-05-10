@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<!-- 공통헤드 -->
+<head th:replace="layout/notice/head :: headFragment"></head>
+
+<link rel="stylesheet" th:href="@{/sample/admin/css/notice.css}">
+<script th:src="@{/js/business/notice/notice.js}"></script>
+
+<body>
+    <div class="wrapper">
+        <header th:replace="/layout/notice/header :: headerFragment"></header>
+
+        <div class="submain_wrap">
+            <div class="sub_wrap notice_wrap">
+                <div class="sub_container notice_container">
+                    <div class="submain_title notice_title">
+                        공지사항
+                    </div>
+                    <div class="notice_list">
+                        <table>
+                            <colgroup>
+                                <col style="width: 100px;">
+                                <col style="width: 800px;">
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th scope="col">번호</th>
+                                    <th scope="col">제목</th>
+                                    <th scope="col">작성자</th>
+                                    <th scope="col">작성일</th>
+                                </tr>
+                            </thead>
+                            <!-- 공지사항 리스트 -->
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="list_pagination" id="list_pagination">
+                        <!-- pagination -->
+                    </div>
+                    <div class="notice_search">
+                        <form action="#">
+                            <div class="notice_search_box">
+                                <select id="notice_search_date_type" name="date">
+                                    <option value="1we">일주일</option>
+                                    <option value="1m">한달</option>
+                                    <option value="3m">세달</option>
+                                    <option value="all">전체</option>
+                                </select>
+                                <select id="notice_search_type" name="date">
+                                    <option value="title">제목</option>
+                                    <option value="content">내용</option>
+                                    <option value="writer">글쓴이</option>
+                                    <!-- <option value="id">아이디</option> -->
+                                </select>
+                                <input name="notice_search" id="notice_search_keyword" type="text">
+                                <a id="noticeSearch">검색</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

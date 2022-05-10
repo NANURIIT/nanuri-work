@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CommonMapper">
+
+	<!-- MySQL 페이징 -->
+	<sql id="paging">
+		LIMIT #{paginationInfo.firstRecordIndex}, #{pageDivNo} 
+	</sql>
+
+	<!-- MySQL 검색 -->
+	<sql id="search">
+		<!-- 검색 키워드가 있을 때 -->
+		<if test="searchKeyword != null and searchKeyword != ''">
+			<choose>
+				<!-- 검색 유형이 있을 때 -->
+				<when test="searchType != null and searchType != ''">
+					<choose>
+						<when test="'title'.equals(searchType)">						
+							AND bult_titl_nm LIKE CONCAT('%', #{searchKeyword}, '%')
+						</when>
+						<when test="'content'.equals(searchType)">
+							AND brcn LIKE CONCAT('%', #{searchKeyword}, '%')
+						</when>
+						<when test="'writer'.equals(searchType)">
+							AND rgmn_nm LIKE CONCAT('%', #{searchKeyword}, '%')
+						</when>
+						<!-- <when test="'id'.equals(searchType)">
+							writer LIKE CONCAT('%', #{searchKeyword}, '%')
+						</when> -->
+						<!-- <when test="'name'.equals(searchType)">
+							AND T01.user_nm LIKE CONCAT('%' #{searchKeyword}, '%')
+						</when>
+						<when test="'telNo'.equals(searchType)">
+							AND T01.tel_no LIKE CONCAT('%' #{searchKeyword}, '%')
+						</when>
+						<when test="'emailAddr'.equals(searchType)">
+							AND T01.email_addr LIKE CONCAT('%' #{searchKeyword}, '%')
+						</when> -->
+					</choose>
+				</when>
+				<!-- 검색 유형이 없을 때 -->
+				<otherwise>
+					AND (
+						   title LIKE CONCAT('%', #{searchKeyword}, '%')
+						OR content LIKE CONCAT('%', #{searchKeyword}, '%')
+						OR writer LIKE CONCAT('%', #{searchKeyword}, '%')
+					)
+				</otherwise>
+			</choose>
+		</if>
+		<!-- 날짜 검색 유형이 있을 때 -->
+		<if test="searchDateType != null and searchDateType != ''">
+			<choose>
+				<when test="'1we'.equals(searchDateType)">
+					AND rg_dtm <![CDATA[>]]> DATE_FORMAT(DATE_ADD(now(), interval -7 day), '%Y%m%d')	
+				</when>
+				<when test="'1m'.equals(searchDateType)">
+					AND rg_dtm <![CDATA[>]]> DATE_FORMAT(DATE_ADD(now(), interval -1 month), '%Y%m%d')
+				</when>
+				<when test="'3m'.equals(searchDateType)">
+					AND rg_dtm <![CDATA[>]]> DATE_FORMAT(DATE_ADD(now(), interval -3 month), '%Y%m%d')
+				</when>
+			</choose>
+		</if>
+	</sql>
+	
+</mapper>

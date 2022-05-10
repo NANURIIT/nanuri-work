@@ -2,53 +2,55 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <head>
+    <meta charset="UTF-8">
+    <title>나누리</title>
 
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- <link rel="stylesheet" th:href="@{/sample/admin/css/swiper.css}"> -->
+    <link rel="stylesheet" th:href="@{/sample/admin/css/reset.css}">
+    <link rel="stylesheet" th:href="@{/sample/admin/css/common.css}">
+    <link rel="stylesheet" th:href="@{/sample/admin/css/login.css}">
 
-	<title>MSP - 관리자 | 로그인</title>
-
-	<!-- css -->
-	<link th:href="@{/css/plugins/bootstrap/bootstrap.min.css}" rel="stylesheet">
-	<link th:href="@{/css/plugins/font-awesome/css/font-awesome.css}" rel="stylesheet">
-	<link th:href="@{/css/plugins/animate/animate.css}" rel="stylesheet">
-	<link th:href="@{/css/style.css}" rel="stylesheet">
-	<link th:href="@{/css/common.css}" rel="stylesheet">
-
-	<!-- scripts -->
-	<script th:src="@{/js/plugins/jquery/jquery-3.6.0.min.js}"></script>
-	<script th:src="@{/js/plugins/bootstrap/bootstrap.js}"></script>
-
+    <script th:src="@{/js/plugins/jquery/jquery-3.6.0.min.js}"></script>
 </head>
 
-<body class="gray-bg" onkeyup="if (window.event.keyCode == 13) { $('#login-btn').click(); }">
-	<!-- 로그인 st -->
-	<div class="loginscreen middle-box center text-center pt-0 animated fadeInDown">
-		<form method="post" action="/login" style="transform: translate(-50%, -50%);" >
-			<div class="form-group">
-				<input type="text" name="loginId" class="form-control" value="testAdmin" placeholder="아이디" required>
-			</div>
-			<div class="form-group">
-				<input type="password" name="pwd" class="form-control" value="Asdf1234!@" placeholder="비밀번호" required>
-			</div>
-			<p class="text-muted">
-				아이디 및 비밀번호를 잊은 경우,<br> 관리자에게 문의해주세요.
-			</p>
-			<button type="submit" class="btn btn-primary btn-lg w-100" id="login-btn">로그인</button>
-
-			<div th:if="${param.error}" class="mt-3" >
-				<p th:if="${param.msgType.toString().equals('1')}" class="alert alert-danger">존재하지 않는 아이디 입니다.</p>
-				<p th:if="${param.msgType.toString().equals('2')}" class="alert alert-danger">아이디 또는 비밀번호가 일치하지 않습니다.</p>
-				<p th:if="${param.msgType.toString().equals('3')}" class="alert alert-danger">승인대기 상태 입니다.<br>가입승인 후 로그인 할 수 있습니다.</p>
-				<p th:if="${param.msgType.toString().equals('4')}" class="alert alert-danger">로그인 단계에서 문제가 발생하였습니다.<br> 사유 : <span th:text="${param.massage}"></span></p>
-				<p th:if="${param.msgType.toString().equals('5')}" class="alert alert-danger">서비스 종료된 아이디 입니다.</p>
-			</div>
-
-		</form>
-	</div>
-	<!-- 로그인 ed -->
-
+<body>
+    <div class="wrapper">
+        <div class="submain_wrap">
+            <div class="sub_wrap login_wrap">
+                <div class="sub_container login_container">
+                    <div class="submain_title login_title">
+                        로그인
+                    </div>
+                    <div class="normal_wrap">
+                        <form id="loginForm" method="post" action="/login">
+                            <div class="login_input_wrap">
+                                <div class="login_input">
+                                    <input type="text" name="loginId" placeholder="아이디">
+                                    <input type="password" name="pwd" placeholder="비밀번호">
+                                </div>
+                                <div class="login_button">
+                                    <a id="loginBtn" style="cursor: pointer;">로그인</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
+<script>
+    $(function () {
+        $(document).on('keyup', function(key) {
+            if (key.keyCode == 13) {
+                $('#loginForm').submit();
+            }
+        });
+
+        $(document).on('click', '#loginBtn', function(){
+            $('#loginForm').submit();
+        });
+    });
+</script>
 
 </html>

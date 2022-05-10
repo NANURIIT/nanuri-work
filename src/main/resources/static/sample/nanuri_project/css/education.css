@@ -1,0 +1,27 @@
+.form_box .school_box {
+    position: relative;
+}
+.form_box .school_period::after {
+    content: '';
+    display: block;
+    clear: both;
+}
+.form_box .school_period .period_box .input_line {
+    float: left;
+    width: 24%;
+}
+.form_box .school_period .period_box .input_line > select {
+    width: 100%;
+    height: 40px;
+    padding: 0;
+}
+.form_box .school_period .period_box .input_line + .input_line {
+    margin-left: -1px;
+}
+.form_box .school_period span {
+    display: inline-block;
+    width: 4%;
+    float: left;
+    padding-top: 11px;
+    text-align: center;
+}

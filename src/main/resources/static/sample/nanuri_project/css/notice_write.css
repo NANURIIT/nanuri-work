@@ -1,0 +1,120 @@
+.submain_contents .qna_contents_wrap {
+    border: 1px solid #ccc;
+    border-bottom: none;
+    padding: 10px;
+}
+.submain_contents .qna_contents_wrap .product_qna_info {
+    display: flex;
+    padding: 15px 0;
+    border-bottom: 1px solid #ccc;
+}
+.submain_contents .qna_contents_wrap .product_qna_info .qna_info_img {
+    width: 88px;
+    height: 90px;
+    border: 1px solid #ccc;
+}
+.submain_contents .qna_contents_wrap .product_qna_info .qna_info_img > img {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+.submain_contents .qna_contents_wrap .product_qna_info .qna_info_list {
+    padding-left: 10px;
+}
+.submain_contents .qna_contents_wrap .product_qna_info .qna_info_list > div {
+    padding-bottom: 15px;
+}
+.submain_contents .qna_contents_wrap .product_qna_info .qna_info_list .info_list_title {
+    font-size: 1rem;
+    font-weight: bold;
+}
+.submain_contents .qna_contents_wrap .product_qna_info .qna_info_list .info_list_price {
+    font-size: 0.9rem;
+}
+.submain_contents .qna_contents_wrap .product_qna_info .info_list_link > a {
+    display: inline-block;
+    padding: 10px;
+    font-size: 0.9rem;
+    background: #777;
+    color: #fff;
+}
+.submain_contents .qna_contents_wrap .product_qna_contents .product_qna_box {
+    padding: 15px 0;
+}
+.submain_contents .qna_contents_wrap .product_qna_contents .product_qna_box table {
+    width: 100%;
+}
+.submain_contents .qna_contents_wrap .product_qna_contents .product_qna_box table tr th {
+    width: 80px;
+    text-align: left;
+    font-size: 14px;
+}
+.submain_contents .qna_contents_wrap .product_qna_contents .product_qna_box table tr td .qna_select select {
+    width: 100%;
+    padding: 8px 5px;
+    margin: 0 2px 8px 0;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+}
+.submain_contents .qna_contents_wrap .product_qna_contents .product_qna_box table tr td .qna_title input {
+    width: 100%;
+    padding: 8px 5px;
+    margin-bottom: 8px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+}
+.submain_contents .qna_contents_wrap .product_qna_contents .product_qna_box table tr td textarea {
+    width: 100%;
+    min-height: 200px;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    resize: none;
+    padding: 8px 5px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    font-size: 0.9rem;
+}
+.submain_contents .qna_contents_wrap .product_qna_contents .product_qna_box table tr td .qna_input_pw {
+    width: 100%;
+    padding: 8px 5px;
+    margin-bottom: 8px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+}
+.submain_contents .qna_contents_wrap .product_qna_contents .product_qna_box table tr td.qna_secret_radio {
+    padding: 10px 0 15px;
+}
+.submain_contents .qna_contents_wrap .product_qna_contents .product_qna_box table tr td.qna_secret_radio input {
+    margin-right: 3px;
+}
+.submain_contents .qna_contents_wrap .product_qna_contents .product_qna_box table tr td.qna_secret_radio label {
+    margin-right: 10px;
+    font-size: 14px;
+}
+.submain_contents .qna_button_box .qna_register_link {
+    font-size: 0;
+    padding: 20px 0 30px;
+    border-top: 1px solid #ccc;
+}
+.submain_contents .qna_button_box .qna_register_link a {
+    display: inline-block;
+    width: calc(50% - 4px);
+    padding: 13px 0;
+    font-size: 14px;
+    color: #333;
+    text-align: center;
+    border: 1px solid #ccc;
+}
+.submain_contents .qna_button_box .qna_register_link a.qna_register {
+    margin-right: 8px;
+    background: #2a2a2a;
+    border: 1px solid #2a2a2a;
+    color: #fff;
+}
+
+.qna_fileup .file_up {
+    width: 100%;
+    margin: 15px 0;
+    border: none;
+}

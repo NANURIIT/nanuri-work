@@ -1,0 +1,190 @@
+.submain_wrap .notice_wrap .notice_container .notice_list {
+    padding: 0 0 50px;
+}
+.submain_wrap .notice_wrap .notice_container .notice_list > table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 0 auto;
+    table-layout:fixed;
+}
+.submain_wrap .notice_wrap .notice_container .notice_list > table > thead > tr > th {
+    background: #f2f2f2;
+    font-size: 14px;
+    font-weight: bold;
+    border-top: 1px solid #ddd;
+    padding: 15px 0;
+}
+.submain_wrap .notice_wrap .notice_container .notice_list > table > tbody > tr > td {
+    font-size: 14px;
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+    padding: 15px 0;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.submain_wrap .notice_wrap .notice_container .file_down_list > table > tbody > tr > td {
+    vertical-align: middle;
+}
+.submain_wrap .notice_wrap .notice_container .notice_list > table > tbody > tr .notice_text {
+    text-align: left;
+}
+.submain_wrap .notice_wrap .notice_container .notice_list > table > tbody > tr .notice_text > a {
+    color: #333;
+}
+.submain_wrap .notice_wrap .notice_container .notice_list > table > tbody > tr .notice_top > a {
+    font-weight: bold;
+}
+.submain_wrap .notice_wrap .notice_container .notice_list > table > tbody > tr .notice_text > a:hover,
+.submain_wrap .notice_wrap .notice_container .notice_list > table > tbody > tr .notice_top > a:hover {
+    text-decoration: underline;
+}
+
+
+
+/*------------공지 디테일 영역------------*/
+.submain_wrap .notice_wrap .notice_container .notice_detail > table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 0 auto;
+    table-layout:fixed;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
+.submain_wrap .notice_wrap .notice_container .notice_detail > table > tbody > tr .notice_detail_title {
+    font-size: 17px;
+    font-weight: bold;
+    padding: 30px 0 10px;
+}
+.submain_wrap .notice_wrap .notice_container .notice_detail > table > tbody > tr .notice_detail_info {
+    padding: 20px 0 30px;
+    border-bottom: 1px solid #ddd;
+}
+.submain_wrap .notice_wrap .notice_container .notice_detail > table > tbody > tr .notice_detail_info > ul > li {
+    display: inline-block;
+    padding-right: 20px;
+}
+.submain_wrap .notice_wrap .notice_container .notice_detail > table > tbody > tr .notice_detail_info::after {
+    content: '';
+    display: block;
+    clear: both;
+}
+.submain_wrap .notice_wrap .notice_container .notice_detail > table > tbody > tr .notice_detail_info > ul .notice_detail_line {
+    position: relative;
+}
+.submain_wrap .notice_wrap .notice_container .notice_detail > table > tbody > tr .notice_detail_info > ul .notice_detail_line::after {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    top: 3px;
+    right: 7px;
+    width: 1px;
+    height: 13px;
+    border-right: 1px solid #ddd;
+}
+.submain_wrap .notice_wrap .notice_container .notice_detail > table > tbody > tr .notice_detail_info > ul .notice_detail_count {
+    float: right;
+}
+.submain_wrap .notice_wrap .notice_container .notice_detail > table > tbody > tr .notice_detail_desc {
+    padding: 30px 0;
+}
+.submain_wrap .notice_wrap .notice_container .notice_link {
+    text-align: right;
+}
+.submain_wrap .notice_wrap .notice_container .notice_link > a {
+    display: inline-block;
+    padding: 10px 30px;
+    margin-top: 20px;
+    border: 1px solid #d1d1d1;
+    font-size: 13px;
+    text-align: center;
+    color: #000;
+    background-color: #fff;
+}
+
+/*------------공지 검색 영역------------*/
+.submain_wrap .notice_wrap .notice_container .notice_search form .notice_search_box {
+    text-align: center;
+    margin-top: 80px;
+}
+.submain_wrap .notice_wrap .notice_container .notice_search_option form .notice_search_box {
+    margin-top: 0;
+}
+.submain_wrap .notice_wrap .notice_container .notice_search form > div > select {
+    width: 100px;
+    height: 38px;
+    font-size: 14px;
+    border: 1px solid #dbdbdb;
+}
+.submain_wrap .notice_wrap .notice_container .notice_search form > div > input {
+    height: 38px;
+    padding: 0 0 0 10px;
+    font-size: 14px;
+    border: 1px solid #dbdbdb;
+}
+.submain_wrap .notice_wrap .notice_container .notice_search form > div > a {
+    display: inline-block;
+    padding: 13px 25px;
+    font-size: 13px;
+    text-align: center;
+    color: #fff;
+    background-color: #888;
+}
+.submain_wrap .notice_wrap .notice_container .notice_search form > div > a:hover {
+    background-color: #777;
+}
+
+
+.submain_wrap .notice_wrap .notice_container .notice_detail > table > tbody > tr .event_detail_desc {
+    text-align: center;
+}
+
+
+.file_down_wrap {
+    padding-bottom: 20px;
+    text-align: right;
+}
+.file_down_wrap button {
+    border: 1px solid #333;
+    padding: 5px 10px;
+    margin-left: 5px;
+}
+
+.condition_wrap {
+    padding-bottom: 50px;
+}
+.condition_wrap .condition_input > label {
+    display: inline-block;
+    margin-right: 10px;
+}
+.condition_wrap input[type=text] {
+    height: 38px;
+    padding: 0 0 0 5px;
+    font-size: 14px;
+    border: 1px solid #dbdbdb;
+}
+.condition_wrap select {
+    height: 38px;
+    font-size: 14px;
+    border: 1px solid #dbdbdb;
+}
+.employee_search {
+    display: inline-block;
+}
+.employee_search_box {
+    margin-top: 10px !important;
+}
+.file_down_list a {
+    color: #333;
+}
+
+.download_link {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+}
+.download_link img {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+}

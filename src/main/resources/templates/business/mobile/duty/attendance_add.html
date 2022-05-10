@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- 공통헤드 -->
+<head th:replace="layout/mobile/notice/head :: headFragment"></head>
+<script th:src="@{/js/business/mobile/duty/attendance_add.js}"></script>
+
+<body>
+<div class="main">
+    <div class="wrap">
+        <form>
+            <div class="form_box">
+                <div class="form_title">근태유형</div>
+                <div>
+                    <select class="form_select" id="dutyTypeList">
+                        <!-- dutyTypeList -->
+                    </select>
+                </div>
+            </div>
+            <div class="form_box">
+                <div class="form_title">근무프로젝트</div>
+                <div>
+                    <input class="input_box" id="svcePrjtTxt" type="text" placeholder="근무프로젝트 입력">
+                </div>
+            </div>
+            <div class="form_box">
+                <div class="form_title">시작일시</div>
+                <div class="form_ex">
+                    <input class="input_box2" id="stDt" type="text" placeholder="시작일자 입력">
+                    <input class="input_box2 input_3" id="stTm" type="text" placeholder="시간 입력">
+                </div>
+            </div>
+            <div class="form_box">
+                <div class="form_title">종료일시</div>
+                <div class="form_ex">
+                    <input class="input_box2" id="edDt" type="text" placeholder="종료일자 입력">
+                    <input class="input_box2 input_3" id="edTm" type="text" placeholder="시간 입력">
+                </div>
+            </div>
+        </form>
+        
+        <div class="save_box">
+            <div class="button_box">
+                <!-- button list -->
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

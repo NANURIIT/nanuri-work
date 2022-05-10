@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nanuri.work.business.duty.mapper.DutyMapper">
+
+	<sql id="dutySearch">
+		<if test="searchDate == null or searchDate == ''">
+	 		AND DATE_FORMAT(bas_dt, '%Y') = DATE_FORMAT(NOW(), '%Y')
+	 	</if>
+	 	<if test="userId != null and userId != ''">
+	 		AND T01.user_id = #{userId}
+	 	</if> 
+	 	<!-- 근무 형태 검색 -->
+	 	<if test="searchType != null and searchType != ''">
+	 		AND T01.svce_form_cd = #{searchType}
+	 	</if>
+	 	<!-- 직원명 검색 -->
+	 	<if test="searchKeyword != null and searchKeyword != ''">
+	 		AND T02.user_nm = #{searchKeyword}
+	 	</if>
+	 	<!-- 기준 년도 검색 -->
+	 	<if test="searchDate != null and searchDate != ''">
+	 		AND DATE_FORMAT(T01.bas_dt, '%Y') = #{searchDate}
+	 	</if>
+	</sql>
+
+	<!-- 근태등록(출근버튼 눌렀을 때) -->
+	<insert id="insertOnDuty" parameterType="com.nanuri.work.business.duty.dto.DutyHistoryDTO">
+		INSERT INTO dut_hst (
+			user_id, 			/* 사용자ID */
+			bas_dt, 			/* 기준일자 */
+			svce_form_cd, 		/* 근무형태코드 */
+			st_dt, 				/* 시작일자 */
+			st_tm, 				/* 시작시각 */
+			aaw_btn_clk_dtm, 	/* 출근버튼클릭일시 */
+			ed_dt, 				/* 종료일자 */
+			ed_tm, 				/* 종료시각 */
+			sbt_num, 			/* 차감숫자 */
+			svce_prjt_txt 		/* 근무프로젝트txt */
+		) VALUES (
+			#{userId}, 
+			#{basDt}, 
+			#{svceFormCd}, 
+			#{stDt}, 
+			#{stTm}, 
+			#{aawBtnClkDtm}, 
+			#{edDt}, 
+			#{edTm}, 
+			#{sbtNum}, 
+			#{svcePrjtTxt}
+		)
+	</insert>
+	
+	<!-- 근태등록 (상신버튼 눌렀을 때) -->
+	<insert id="insertOffDuty" parameterType="com.nanuri.work.business.duty.dto.DutyHistoryDTO">
+		INSERT INTO dut_hst (
+			user_id, 			/* 사용자ID */
+			bas_dt, 			/* 기준일자 */
+			svce_form_cd, 		/* 근무형태코드 */
+			st_dt, 				/* 시작일자 */
+			st_tm, 				/* 시작시각 */
+			ed_dt, 				/* 종료일자 */
+			ed_tm, 				/* 종료시각 */
+			sbt_num, 			/* 차감숫자 */
+			svce_prjt_txt, 		/* 근무프로젝트txt */
+			rsn_txt 			/* 사유 */
+		) VALUES 
+		<foreach collection="list" item="item" separator=",">
+		(
+			#{item.userId}, 
+			#{item.basDt}, 
+			#{item.svceFormCd}, 
+			#{item.stDt}, 
+			#{item.stTm}, 
+			#{item.edDt}, 
+			#{item.edTm}, 
+			#{item.sbtNum}, 
+			#{item.svcePrjtTxt}, 
+			#{item.rsnTxt}
+		)
+		</foreach>
+	</insert>
+	
+	<!-- 휴가 계산 -->
+	<select id="calVacation" parameterType="java.util.HashMap" resultType="string">
+		SELECT bas_dt 			/* 기준일자 */
+		  FROM hldy_info
+		 WHERE bas_dt BETWEEN #{stDt} AND #{edDt}
+		   AND hldy_yn = 'N'
+	</select>
+	
+	<!-- 근태 조회 -->
+	<select id="selectDutyHistoryList" parameterType="com.nanuri.work.business.duty.vo.DutyHistoryVO" resultType="com.nanuri.work.business.duty.vo.DutyHistoryVO">
+		SELECT T01.seq_no, 							/* 일련번호 */
+			   T02.user_nm, 						/* 사용자 이름 */
+			   T02.tel_no,  						/* 전화번호 */
+			   T02.dty_nm, 							/* 직급 */
+			   T02.blg_nm, 							/* 소속 */
+			   T01.bas_dt, 							/* 기준일자 */
+			   T01.svce_form_cd, 					/* 근무형태코드 */
+			   T03.dtl_cnm AS svce_form_cd_nm, 		/* 근무형태코드명 */
+			   T01.st_dt, 							/* 시작일자 */
+			   T01.st_tm, 							/* 시작시각 */
+			   T01.ed_dt, 							/* 종료일자 */
+			   T01.ed_tm, 							/* 종료시각 */
+			   (
+			   		SELECT COUNT(*)
+			   		  FROM hldy_info
+			   		 WHERE (bas_dt BETWEEN T01.st_dt AND T01.ed_dt)
+			   		   AND hldy_yn = 'N'
+			   ) AS prd, 							/* 전체 기간 일수 */ 
+			   T01.rg_dtm, 							/* 상신일시 */
+			   T01.dcz_sts_cd,  					/* 결재상태 */
+			   T04.dtl_cnm AS dcz_sts_cd_nm, 		/* 결재상태명 */
+			   (
+			   		SELECT (
+			   			(SELECT asg_dys + ans_dys
+			   			   FROM vctn_asg
+			   			  WHERE bas_yy = DATE_FORMAT(NOW(), '%Y')
+			   			    AND user_id = T01.user_id) - 
+			   			(SELECT IFNULL(SUM(sbt_num), 0)
+			   			   FROM dut_hst
+			   			  WHERE sbt_num != 0
+			   			    AND user_id = T01.user_id
+			   			    AND dcz_sts_cd = 'CONFIRM')
+			   		) FROM DUAL
+			   ) AS sbt_aft_vctn_dys, 				/* 차감 후 휴가 일수 = (올해 사용 가능한 휴가 일수) - (승인받은 휴가일수) */
+			   T01.dcz_dtm,  						/* 결재일시 */
+			   T01.dczmn_id 						/* 결재자이름 */
+		  FROM dut_hst T01 							/* 근태기록 */
+	 LEFT JOIN mem_bsc_info T02 					/* 기본정보 */
+	 		ON T01.user_id = T02.user_id
+	 LEFT JOIN (
+	 		SELECT ds_cd, 
+	 			   dtl_ds_cd, 
+	 			   dtl_cd, 
+	 			   dtl_ds_cd_nm, 
+	 			   dtl_cnm
+	 		  FROM comn_cd
+	 		 WHERE ds_cd = 'DUTY'
+	 		) T03
+	 		ON T01.svce_form_cd = T03.dtl_cd 		/* 근무 형태 코드 */
+	 LEFT JOIN (
+	 		SELECT ds_cd, 
+	 			   dtl_cd, 
+	 			   dtl_cnm
+	 		  FROM comn_cd
+	 		 WHERE ds_cd = 'CONFIRM'
+	 		) T04
+	 		ON T01.dcz_sts_cd = T04.dtl_cd 			/* 결재 상태 코드 */
+	 		WHERE 1=1
+	 		<include refid="dutySearch" />
+	  ORDER BY T01.seq_no DESC
+	  <include refid="CommonMapper.paging" />
+	</select>
+	
+	<!-- 근태정보 상세보기 -->
+	<select id="selectDutyHistoryDetail" parameterType="long" resultType="com.nanuri.work.business.duty.vo.DutyHistoryVO">
+		SELECT T01.seq_no,											/* 일련번호 */				
+			   T02.tel_no,  										/* 전화번호 */
+			   T02.user_nm, 										/* 전화번호 */
+			   T02.dty_nm, 											/* 직급 */
+			   T02.blg_nm, 											/* 소속 */
+			   T01.bas_dt, 											/* 기준일자 */
+			   T03.dtl_cnm AS svce_form_cd_nm, 						/* 근무형태코드명 */
+			   T01.rg_dtm,											/* 상신일시 */
+			   (
+			       SELECT COUNT(*) 
+			         FROM hldy_info 
+			        WHERE (bas_dt BETWEEN T01.st_dt AND T01.ed_dt) 
+			          AND hldy_yn = 'N'
+			   ) AS prd, 											/* 기간 */
+			   (
+			       SELECT (
+			           (SELECT asg_dys + ans_dys 
+			              FROM vctn_asg 
+			             WHERE bas_yy = DATE_FORMAT(NOW(), '%Y') 
+			               AND user_id = T01.user_id) - 
+			           (SELECT IFNULL(SUM(sbt_num), 0) 
+			              FROM dut_hst 
+			             WHERE sbt_num != 0 
+			               AND user_id = T01.user_id 
+			               AND dcz_sts_cd = 'CONFIRM'
+			           )
+			         ) 
+			         FROM dual
+			   ) AS sbt_aft_vctn_dys, 								/* 차감 후 휴가 일수 = (올해 사용 가능한 휴가 일수) - (승인받은 휴가일수) */
+			   T01.st_dt, 											/* 시작일자 */
+			   T01.st_tm, 											/* 시작시각 */
+			   T01.ed_dt, 											/* 종료일자 */
+			   T01.ed_tm, 											/* 종료시각 */
+			   T01.dcz_sts_cd,  									/* 결재상태 */
+			   T04.dtl_cnm AS dcz_sts_cd_nm, 						/* 결재상태명 */
+			   T01.dcz_dtm, 										/* 결재일시 */
+			   T05.user_nm AS dczmnNm 								/* 결재상태명 */
+		  FROM dut_hst T01 											/* 근태기록 */
+	 LEFT JOIN mem_bsc_info T02 									/* 기본정보 */
+	 		ON T01.user_id = T02.user_id
+	 LEFT JOIN (
+	 		SELECT ds_cd, 
+	 			   dtl_ds_cd, 
+	 			   dtl_cd, 
+	 			   dtl_ds_cd_nm, 
+	 			   dtl_cnm
+	 		  FROM comn_cd
+	 		 WHERE ds_cd = 'DUTY'
+	 		) T03 													/* 근무 형태 코드 */
+	 		ON T01.svce_form_cd = T03.dtl_cd
+	 LEFT JOIN (
+	 		SELECT ds_cd, 
+	 			   dtl_cd, 
+	 			   dtl_cnm
+	 		  FROM comn_cd
+	 		 WHERE ds_cd = 'CONFIRM'
+	 		) T04 	 												/* 결재 상태 코드 */
+	 		ON T01.dcz_sts_cd = T04.dtl_cd
+	 LEFT JOIN (
+	 				SELECT user_id, 
+	 					   user_nm
+	 				  FROM mem_bsc_info
+	 				 WHERE blg_ds_cd IN ('ADMIN', 'ASSISTANT')
+	 		   ) T05 			 									/* 결재자 정보 */
+	 		ON T01.dczmn_id = T05.user_id
+	 	 WHERE seq_no = #{seqNo}
+	  ORDER BY T01.seq_no DESC
+	</select>
+
+	<!-- 마지막 근태기록 조회 -->
+	<select id="selectLastDutyHistoryDetail" parameterType="string" resultType="com.nanuri.work.business.duty.dto.DutyHistoryDTO">
+		SELECT seq_no, 							/* 일련번호 */
+			   bas_dt, 							/* 기준일자 */
+			   svce_form_cd, 					/* 근무형태코드 */
+			   st_dt, 							/* 시작일자 */
+			   st_tm, 							/* 시작시각 */
+			   ed_dt, 							/* 종료일자 */
+			   ed_tm, 							/* 종료시각 */
+			   svce_prjt_txt 					/* 근무프로젝트txt */
+		  FROM dut_hst T01 						/* 근태기록 */
+	 LEFT JOIN comn_cd T02 						/* 공통코드 */
+	 		ON T01.svce_form_cd = T02.dtl_cd
+		 WHERE user_id = #{userId}
+		   AND T02.dtl_ds_cd = 'ON_DUTY'
+	  ORDER BY T01.rg_dtm DESC
+	     LIMIT 1
+	</select>
+	
+	<!-- 퇴근등록 -->
+	<update id="updateDuty" parameterType="com.nanuri.work.business.duty.dto.DutyHistoryDTO">
+		UPDATE dut_hst
+		   SET svce_form_cd = #{svceFormCd},
+		   	   ed_dt = #{edDt}, 
+		   	   ed_tm = #{edTm}, 
+		   	   ckof_btn_clk_dtm = #{ckofBtnClkDtm}, 
+		   	   sbt_num = #{sbtNum}
+		 WHERE user_id = #{userId}
+		   AND seq_no = #{seqNo}
+	</update>
+	
+	<!-- 근태 정보 갯수 출력 -->
+	<select id="selectTotalCountDutyHistory" parameterType="com.nanuri.work.business.duty.vo.DutyHistoryVO" resultType="int">
+		SELECT COUNT(*) 
+		  FROM dut_hst T01
+	 LEFT JOIN mem_bsc_info T02
+	 		ON T01.user_id = T02.user_id
+		 WHERE 1=1
+		 <include refid="dutySearch" />
+	</select>
+	
+	<!-- 근태 일괄결재 -->
+	<update id="allPayment" parameterType="com.nanuri.work.business.duty.dto.DutyHistoryDTO" >
+		UPDATE dut_hst
+		   SET dcz_sts_cd = #{dczStsCd}, 
+		  	   dczmn_id = #{dczmnId}, 
+		 	   dcz_dtm = now()
+		 WHERE seq_no = #{seqNo}
+	</update>
+	
+	<!-- 근태 단일결재 -->
+	<update id="attendance" parameterType="com.nanuri.work.business.duty.dto.DutyHistoryDTO">
+		UPDATE dut_hst
+		   SET dcz_sts_cd = #{dczStsCd},
+		   	   dczmn_id = #{dczmnId},
+		   	   dcz_dtm = now()
+		 WHERE seq_no = #{seqNo} 	   
+	</update>
+</mapper>

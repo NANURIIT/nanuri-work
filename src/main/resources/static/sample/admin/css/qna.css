@@ -1,0 +1,97 @@
+.product_qna_wrap .product_qna_info {
+    padding: 30px;
+    background: #f3f3f3;
+}
+.product_qna_wrap .product_qna_info > div {
+    display: inline-block;
+    vertical-align: top;
+}
+.product_qna_wrap .product_qna_info .qna_info_img {
+    width: 90px;
+    height: 90px;
+    border: 1px solid #ddd;
+}
+.product_qna_wrap .product_qna_info .qna_info_img > img {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+}
+.product_qna_wrap .product_qna_info .qna_info_list > div {
+    padding: 5px 0 5px 15px;
+    font-size: 14px;
+    font-weight: bold;
+}
+.product_qna_wrap .product_qna_info .qna_info_list .info_list_link > a {
+    display: inline-block;
+    padding: 10px;
+    margin-top: 3px;
+    font-size: 13px;
+    background: #777;
+    color: #fff;
+}
+.product_qna_wrap .product_qna_contents .product_qna_box form table {
+    width: 100%;
+    margin-top: 30px;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
+.product_qna_wrap .product_qna_contents .product_qna_box form table tr th {
+    width: 120px;
+    padding: 15px 0;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    font-size: 15px;
+}
+.product_qna_wrap .product_qna_contents .product_qna_box form table tr td {
+    padding: 15px 0;
+    border-bottom: 1px solid #ddd;
+    font-size: 14px;
+}
+.product_qna_wrap .product_qna_contents .product_qna_box form table tr td > select {
+    border: 1px solid #dbdbdb;
+    padding: 8px 5px;
+}
+.product_qna_wrap .product_qna_contents .product_qna_box form table tr td > input {
+    border: 1px solid #dbdbdb;
+    padding: 8px 5px;
+}
+.product_qna_wrap .product_qna_contents .product_qna_box form table tr td > textarea {
+    resize: none;
+    border: 1px solid #dbdbdb;
+    padding: 20px;
+    box-sizing: border-box;
+}
+.product_qna_wrap .product_qna_contents .product_qna_box form table tr td > input.qna_input_title {
+    width: calc(100% - 19px);
+}
+.product_qna_wrap .product_qna_contents .product_qna_box form table tr td > input.qna_input_pw {
+    width: 200px;
+}
+.product_qna_wrap .product_qna_contents .product_qna_box form table tr td.qna_fileup > input {
+    border: none;
+}
+.product_qna_wrap .product_qna_contents .product_qna_box .qna_button_box::after {
+    content: '';
+    display: block;
+    clear: both;
+}
+.product_qna_wrap .product_qna_contents .product_qna_box .qna_button_box {
+    margin-top: 30px;
+}
+.product_qna_wrap .product_qna_contents .product_qna_box .qna_button_box > div > a {
+    display: inline-block;
+    padding: 12px 35px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    color: #333;
+}
+.product_qna_wrap .product_qna_contents .product_qna_box .qna_button_box .qna_list_link {
+    float: left;
+}
+.product_qna_wrap .product_qna_contents .product_qna_box .qna_button_box .qna_register_link {
+    float: right;
+}
+.product_qna_wrap .product_qna_contents .product_qna_box .qna_button_box .qna_register_link .qna_register {
+    background: #777;
+    color: #fff;
+}

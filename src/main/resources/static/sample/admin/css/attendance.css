@@ -1,0 +1,141 @@
+.wrap {
+    padding: 80px 15px 50px 15px;
+    width: 700px;
+    height: 100%;
+    box-sizing: border-box;
+    margin: 0 auto;
+}
+.submain {
+    padding: 80px 15px 50px 15px;
+}
+.blind {
+    overflow: hidden;
+    border: 0;
+    clip: rect(1px, 1px, 1px, 1px);
+    clip-path: inset(50%);
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    position: absolute;
+    top: -99999px;
+}
+
+
+/*공통 페이지네이션*/
+.com_pagination .pagination_wrap {
+    text-align: center;
+    padding: 30px 0;
+    border-top: 1px solid #e1e1e1;
+    border-bottom: 1px solid #e1e1e1;
+}
+.com_pagination .pagination_wrap > ul {
+    display: inline-block;
+}
+.com_pagination .pagination_wrap > ul::after {
+    content: '';
+    display: block;
+    clear: both;
+}
+.com_pagination .pagination_wrap > ul > li {
+    float: left;
+    padding: 0 3px 5px;
+    margin: 0 5px;
+}
+.com_pagination .pagination_wrap > ul > li > a {
+    color: #333;
+    font-size: 1.1rem;
+    padding-bottom: 3px;
+}
+.com_pagination .pagination_wrap > ul > li.select {
+    border-bottom: 1px solid #333;
+}
+.com_pagination .pagination_wrap > ul .pagination_prev,
+.com_pagination .pagination_wrap > ul .pagination_next {
+    position: relative;
+    margin: 0 10px;
+}
+
+.join_detail_wrap {
+    width: 900px;
+    margin: 0 auto;
+    padding-top: 20px;
+}
+.attendance_list {
+    display: flex;
+    padding: 20px 0;
+    align-items: center;
+    border-bottom: 1px solid #f4f4f4;
+}
+.attendance_list:first-child {
+    border-top: 1px solid #ccc;
+}
+.attendance_list:last-child {
+    border-bottom: 1px solid #ccc;
+}
+.attendance_title {
+    width: 200px;
+    font-size: 15px;
+}
+.attendance_box > select,
+.attendance_box > input {
+    width: 150px;
+    height: 45px;
+    line-height: 45px;
+    border: 1px solid #333;
+    padding: 0 10px;
+    font-size: 15px;
+}
+.attendance_reason > input {
+    width: 310px;
+}
+.attendance_box2 > input {
+    margin-left: 10px;
+}
+.join_agree_wrap {
+    padding-top: 50px;
+}
+.join_agree_wrap .join_agree_button {
+    text-align: center;
+    padding: 0 0 20px;
+}
+.join_agree_wrap .join_agree_button > button {
+    display: inline-block;
+    width: 200px;
+    height: 50px;
+    margin: 0 15px;
+    background: #333;
+    border: 1px solid #333;
+    color: #fff;
+    font-size: 18px;
+    text-align: center;
+}
+.join_agree_wrap .join_agree_button .cancel_button {
+    background: #fff;
+    color: #333;
+}
+
+
+/*결재 리스트*/
+.submain_wrap .notice_wrap .notice_container .notice_list .file_down_wrap > button {
+    border: 1px solid #333;
+    padding: 5px 10px;
+    background: #333;
+    color: #fff;
+}
+.submain_wrap .notice_wrap .notice_container .notice_list > table > thead > tr > th {
+    vertical-align: middle;
+    line-height: 1.2;
+}
+.submain_wrap .notice_wrap .notice_container .notice_list > table > tbody > tr > td {
+    line-height: 1.2;
+}
+.attendance_button {
+    border: 1px solid #333;
+    padding: 5px 10px;
+    background: #333;
+    color: #fff;
+}
+.submain_wrap .notice_wrap .notice_container .notice_search form > div > input {
+    width: 100px;
+}

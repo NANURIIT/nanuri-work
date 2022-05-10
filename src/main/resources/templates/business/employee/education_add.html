@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<!-- 공통헤드 -->
+<head th:replace="layout/notice/head :: headFragment"></head>
+
+<link rel="stylesheet" th:href="@{/sample/admin/css/info.css}">
+
+<script th:src="@{/js/business/employee/education_add.js}"></script>
+
+<body>
+    <div class="wrapper">
+        <header th:replace="/layout/notice/header :: headerFragment"></header>
+
+        <div class="submain_wrap">
+            <div class="sub_wrap">
+                <div class="sub_container">
+                    <div class="submain_title">
+                        학력
+                    </div>
+                    <div class="join_detail_wrap">
+                        <form>
+                            <table class="join_table1">
+                                <colgroup>
+                                    <col style="width:200px;">
+                                    <col style="width:auto;">
+                                </colgroup>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">
+                                            학력구분
+                                        </th>
+                                        <td>
+                                            <div class="join_input">
+                                                <select class="form_select" id="sccaDsCd" name="education">
+                                                    <!-- 학력코드 list -->
+                                                </select>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">
+                                            학교명
+                                        </th>
+                                        <td>
+                                            <div class="join_input">
+                                                <input class="input_box" id="schlNm" type="text" name="school_name" placeholder="학교명 입력">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">
+                                            입학년월
+                                        </th>
+                                        <td>
+                                            <div class="join_input">
+                                                <input class="input_box" id="etisYm" type="text" name="school_period" placeholder="YYYYMM">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">
+                                            졸업년월
+                                        </th>
+                                        <td>
+                                            <div class="join_input">
+                                                <input class="input_box" id="grduYm" type="text" name="school_period" placeholder="YYYYMM">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">
+                                            전공
+                                        </th>
+                                        <td>
+                                            <div class="join_input">
+                                                <input class="input_box" id="majrNm" type="text" name="major" placeholder="전공학과 입력">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>
+                    <div th:replace="layout/employee/footer :: saveBoxFragment"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

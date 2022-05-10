@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<!-- 공통헤드 -->
+<head th:replace="layout/notice/head :: headFragment"></head>
+
+<link rel="stylesheet" th:href="@{/sample/admin/css/notice.css}">
+<script th:src="@{/js/business/notice/noticeDetail.js}"></script>
+<body>
+    <div class="wrapper">
+        <header th:replace="/layout/notice/header :: headerFragment"></header>
+
+        <div class="submain_wrap">
+            <div class="sub_wrap notice_wrap">
+                <div class="sub_container notice_container">
+                    <div class="submain_title notice_title">
+                        공지사항
+                    </div>
+                    <div class="notice_detail">
+                        <table>
+                            <tbody>
+                                <!-- <tr>
+                                    <td class="notice_detail_title">안녕하세요. 공지 제목입니다.</td>
+                                </tr>
+                                <tr>
+                                    <td class="notice_detail_info">
+                                        <ul>
+                                            <li class="notice_detail_line">작성자</li>
+                                            <li>2021-12-06</li>
+                                            <li class="notice_detail_count">조회수 8</li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td  class="notice_detail_desc">공지 내용입니다.</td>
+                                </tr> -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="notice_link">
+                        <a id="deleteBoard" sec:authorize="hasAnyRole('ADMIN', 'ASSISTANT', 'EMPLOYEE')">삭제</a>
+                        <a id="modifyBoard" sec:authorize="hasAnyRole('ADMIN', 'ASSISTANT', 'EMPLOYEE')">수정</a>
+                        <a href="/admin/notice">목록</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

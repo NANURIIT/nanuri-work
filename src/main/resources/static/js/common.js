@@ -38,6 +38,7 @@ $(function() {
  * @param {string} option.method ajax 전송방식
  * @param {string} option.url ajax 전송위치
  * @param {string} option.data ajax 데이터
+ * @param {boolean} option.async 비동기식 처리 여부(default true)
  * @param {boolean} option.errPopShow callback Error 팝업 표출 여부 (default true)
  * @param {function} option.success ajax 전송 성공시 처리
  * @param {function} option.fail ajax 전송 실패시 처리
@@ -56,12 +57,17 @@ var ajaxCall = function (option) {
 		option.data = JSON.stringify(option.data);
 	}
 
+	if(option.async == undefined || option.async == null){
+		option.async = true;
+	}
+
 	$.ajax({
 	    method: option.method,
 	    url: option.url,
 	    data: option.data,
 	    cache: false,
 	    datatype: "JSON",
+		async : option.async, 
 	    contentType: "application/json; charset=UTF-8",
 	    beforeSend : function(xhr, opt) {
 	        openPopup({type:"loding",show:true});
@@ -237,18 +243,94 @@ var setPage = function (option) {
 		pageNext = totalPageNo;
 	}
 
-	pageHtml += '<button type="button" class="btn btn-white pagePrev" onclick="'+option.functionNm+'('+pagePrev+');"><i class="fa fa-chevron-left"></i></button>';
+	pageHtml += '<a class="list_prev" href="#" onclick="'+option.functionNm+'('+pagePrev+');"><</a>';
+	pageHtml += '<ul>'
+	
 	for(var i=forStartNo; i<forEndNo; i++){
 		if((i+1) == option.thisPageNo){
-			pageHtml += '<button class="btn btn-primary active" onclick="'+option.functionNm+'('+(i+1)+');">'+(i+1)+'</button>';
+			pageHtml += '<li><a onclick="'+option.functionNm+'('+(i+1)+');">'+(i+1)+'</a></li>';
 		}else{
-			pageHtml += '<button class="btn btn-primary" onclick="'+option.functionNm+'('+(i+1)+');">'+(i+1)+'</button>';
+			pageHtml += '<li><a onclick="'+option.functionNm+'('+(i+1)+');">'+(i+1)+'</a></li>';
 		}
 	}
-	pageHtml += '<button type="button" class="btn btn-white pageNext"  onclick="'+option.functionNm+'('+pageNext+');"><i class="fa fa-chevron-right"></i></button>';
+	pageHtml += '</ul>'
+	pageHtml += '<a class="product_list_next" onclick="'+option.functionNm+'('+pageNext+');" href="#">></a>';
 
 	$('#'+option.htmlNm).html(pageHtml);
 	$('#'+option.htmlNm).show();
+};
+
+/**
+ * 모바일화면 페이지 함수
+ * @param {number} option.thisPageNo 현재 페이지 번호
+ * @param {number} option.totalDataNum 전체 데이터 개수
+ * @param {string} option.functionNm 페이지 callback function명
+ * @param {string} option.htmlNm 타겟html ID명
+ * @param {number} option.pageDivNo 페이지 나누는 개수 (default 50)
+ * @param {number} option.pageViewNo 페이지 표시 개수 (default 5)
+ */
+ var setMobilePage = function (option) {
+
+	if (!optionObjChk(option)) {
+		return;
+	}
+
+	// 미입력시 default값 세팅
+	if(isEmpty(option.pageDivNo)){
+		option.pageDivNo = 50;
+	}
+	if (isEmpty(option.thisPageNo)) {
+		option.thisPageNo = 1;
+	}
+	if (isEmpty(option.pageViewNo)) {
+		option.pageViewNo = 5;
+	}
+	if (isEmpty(option.functionNm)) {
+		option.functionNm = "void";
+	}
+	if (isEmpty(option.totalDataNum)) {
+		option.totalDataNum = 0;
+	}
+
+	let pageHtml = "";
+	let forStartNo = 0;
+	let forEndNo = 0;
+	let pagePrev = 0;
+	let pageNext = 0;
+	let totalPageNo = 0;
+
+	pagePrev = Math.floor((option.thisPageNo-1)/option.pageDivNo)*option.pageDivNo; // 이전페이지
+	pageNext = ((Math.floor((option.thisPageNo-1)/option.pageDivNo)+1)*option.pageDivNo)+1; // 이후페이지
+	totalPageNo = Math.ceil(option.totalDataNum/option.pageDivNo); // 총페이지
+	forStartNo = Math.floor((option.thisPageNo-1)/option.pageViewNo)*option.pageViewNo; // 페이지시작 (ex] 1~5 / 6~10 - 0 5)
+	forEndNo = Math.floor((option.thisPageNo-1)/option.pageViewNo)*option.pageViewNo + option.pageViewNo; // 페이지 종료 (- 5 10)
+
+	if(forEndNo > totalPageNo){
+		forEndNo = totalPageNo;
+	}
+	if(pagePrev <= 0){
+		pagePrev = 1;
+	}
+	if(pageNext > totalPageNo){
+		pageNext = totalPageNo;
+	}
+
+	pageHtml += '<ul>'
+	pageHtml += '<li class="pagination_prev"><a onclick="'+option.functionNm+'('+pagePrev+');"><</a></li>';
+	
+	for(var i=forStartNo; i<forEndNo; i++){
+		if((i+1) == option.thisPageNo){
+			pageHtml += '<li class="select"><a onclick="'+option.functionNm+'('+(i+1)+');">'+(i+1)+'</a></li>';
+		}else{
+			pageHtml += '<li><a onclick="'+option.functionNm+'('+(i+1)+');">'+(i+1)+'</a></li>';
+		}
+	}
+
+	pageHtml += '<li class="pagination_next"><a onclick="'+option.functionNm+'('+pageNext+');">></a></li>';
+	pageHtml += '</ul>'
+
+	$('.'+option.htmlNm).html(pageHtml);
+	$('.'+option.htmlNm).show();
 };
 
 /**

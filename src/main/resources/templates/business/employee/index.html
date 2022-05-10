@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<!-- 공통헤드 -->
+<head th:replace="layout/notice/head :: headFragment"></head>
+
+<link rel="stylesheet" th:href="@{/sample/admin/css/style.css}">
+<script th:src="@{/js/business/employee/index.js}"></script>
+
+<body>
+    <div class="wrapper">
+        <header th:replace="/layout/notice/header :: headerFragment"></header>
+
+        <div class="submain_wrap">
+            <div class="wrap">
+                <div class="submain_title">
+                    마이페이지
+                </div>
+                <section class="list_container">
+                    <div class="list_title">
+                        <div class="list_title_text">기본정보</div>
+                        <a href="/admin/basicInfoWrite" title="#" class="list_title_add list_title_edit">
+                            <span class="blind">추가</span>
+                        </a>
+                    </div>
+                    <div id="basicInfo">
+                        <!-- basicInfo -->
+                    </div>
+                </section>
+                <section class="list_container">
+                    <div class="list_title">
+                        <div class="list_title_text">장비</div>
+                        <a href="/admin/equipmentWrite" title="#" class="list_title_add list_title_edit">
+                            <span class="blind">추가</span>
+                        </a>
+                    </div>
+                    <div id="equipmentList">
+                        <!-- equipment -->
+                    </div>
+                </section>
+                <!--20220411 수정 f-->
+                <section class="list_container">
+                    <div class="list_title">
+                        <div class="list_title_text">학력</div>
+                        <a href="/admin/schoolCareerWrite" title="#" class="list_title_add">
+                            <span class="blind">추가</span>
+                        </a>
+                    </div>
+                    <div id="schoolCareerList">
+                        <!-- schoolCareerList -->
+                    </div>
+                </section>
+                <section class="list_container">
+                    <div class="list_title">
+                        <div class="list_title_text">자격증</div>
+                        <a href="/admin/certificateWrite" title="#" class="list_title_add">
+                            <span class="blind">추가</span>
+                        </a>
+                    </div>
+                    <div id="certificateList">
+                        <!-- certificateList -->
+                    </div>
+                </section>
+                <section class="list_container">
+                    <div class="list_title">
+                        <div class="list_title_text">회사소속이력<span id="totalPeriod"></span></div>
+                        <a href="/admin/workhistoryWrite" title="#" class="list_title_add">
+                            <span class="blind">추가</span>
+                        </a>
+                    </div>
+                    <div id="workhistoryList">
+                        <!-- workhistoryList -->
+                    </div>
+                </section>
+                <section class="list_container">
+                    <div class="list_title">
+                        <div class="list_title_text">교육이수</div>
+                        <a href="/admin/educationWrite" title="#" class="list_title_add">
+                            <span class="blind">추가</span>
+                        </a>
+                    </div>
+
+                    <div id="educationList">
+                        <!-- educationList -->
+                    </div>
+                    
+                </section>
+                <section class="list_container">
+                    <div class="list_title">
+                        <div class="list_title_text">대내외 수상경력</div>
+                        <a href="/admin/awardWrite" title="#" class="list_title_add">
+                            <span class="blind">추가</span>
+                        </a>
+                    </div>
+                    <div id="awardList">
+                        <!-- awardList -->
+                    </div>
+                </section>
+                <section class="list_container">
+                    <div class="list_title">
+                        <div class="list_title_text">외국어 능력</div>
+                        <a href="/admin/languageWrite" title="#" class="list_title_add">
+                            <span class="blind">추가</span>
+                        </a>
+                    </div>
+                    <div id="languageList">
+                        <!-- languageList -->
+                    </div>
+                </section>
+                <section class="list_container">
+                    <div class="list_title">
+                        <div class="list_title_text">사용가능기술(언어)</div>
+                        <a href="/admin/skillWrite" title="#" class="list_title_add">
+                            <span class="blind">추가</span>
+                        </a>
+                    </div>
+                    <div id="skillList">
+                        <!-- skillList -->
+                    </div>
+                </section>
+                <section class="list_container">
+                    <div class="list_title">
+                        <div class="list_title_text">프로젝트이력</div>
+                        <a href="/admin/careerhistoryWrite" title="#" class="list_title_add">
+                            <span class="blind">추가</span>
+                        </a>
+                    </div>
+                    <div id="careerhistoryList">
+                        <!-- careerhistoryList -->
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

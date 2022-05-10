@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<!-- 공통헤드 -->
+<head th:replace="layout/mobile/notice/head :: headFragment"></head>
+
+<link rel="stylesheet" th:href="@{/sample/nanuri_project/css/notice.css}">
+<script th:src="@{/js/business/mobile/duty/attendance_list.js}"></script>
+
+<body>
+<div class="mo_wrapper">
+    <div class="submain">
+        <div class="submain_contents">
+            <div class="notice_contents_wrap">
+                <div class="employee_contents_box">
+                    <table>
+                        <colgroup>
+                            <col style="width: 25%">
+                            <col style="width: 50%">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th>이름</th>
+                                <th>전체기간</th>
+                                <th>결재상태</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dutyHistoryList">
+                            <tr>
+                                <td colspan="3">조회된 정보가 없습니다.</td>
+                            </tr>
+                        </tbody>
+                        
+                    </table>
+                </div>
+                <div class="com_pagination">
+                    <div class="pagination_wrap">
+                        <!-- pagination List -->
+                    </div>
+                </div>
+                <div class="notice_search attendance_search">
+                    <form action="#">
+                        <div class="notice_search_box">
+                            <select id="dutyTypeList" name="dutyType">
+                                <!-- dutyType List -->
+                            </select>
+                            <a id="dutySearch">검색</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

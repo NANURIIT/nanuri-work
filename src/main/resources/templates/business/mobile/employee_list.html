@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<!-- 공통헤드 -->
+
+<head th:replace="layout/mobile/notice/head :: headFragment"></head>
+
+<link rel="stylesheet" th:href="@{/sample/nanuri_project/css/notice.css}">
+
+<script th:src="@{/js/business/mobile/employee/employee_list.js}"></script>
+
+<body>
+    <div class="mo_wrapper">
+        <div class="submain">
+            <div class="submain_contents">
+                <div class="notice_contents_wrap">
+                    <div class="employee_contents_box">
+                        <table>
+                            <colgroup>
+                                <col style="width: 22%">
+                                <col style="width: 30%">
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th>이름</th>
+                                    <th>전화번호</th>
+                                    <th>이메일</th>
+                                </tr>
+                            </thead>
+                            <tbody id="employeeList">
+                                <!-- employeeList -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="com_pagination">
+                        <div class="pagination_wrap">
+                           <!-- pagination -->
+                        </div>
+                    </div>
+                    <div class="notice_search employee_search">
+                        <form action="#">
+                            <div class="notice_search_box">
+                                <select id="employee_search_type" name="date">
+                                    <option value="name">이름</option>
+                                    <option value="telNo">전화번호</option>
+                                    <option value="emailAddr">이메일</option>
+                                </select>
+                                <input id="employee_search_keyword" name="notice_search" type="text">
+                                <a id="employeeSearch">검색</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

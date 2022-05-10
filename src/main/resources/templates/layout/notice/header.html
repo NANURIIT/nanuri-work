@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+    <header class="header" th:fragment="headerFragment">
+        <div class="top_area main_top_area">
+            <!--<div class="logo_wrap">
+                <div class="main_logo">
+                    <a href="#">
+                        로고영역
+                        &lt;!&ndash;<img src="" alt="logo">&ndash;&gt;
+                    </a>
+                </div>
+            </div>-->
+            <div class="gnb_wrap">
+                <div class="main_gnb">
+                    <ul>
+                        <li class="gnb_menu" sec:authorize="hasAnyRole('ADMIN', 'ASSISTANT', 'EMPLOYEE')">
+                            <a href="/admin/employeeAdd">직원 등록</a>
+                        </li>
+                        <li class="gnb_menu">
+                            <a href="/admin/index">마이페이지</a>
+                        </li>
+                        <li class="gnb_menu" sec:authorize="hasAnyRole('ADMIN', 'ASSISTANT', 'EMPLOYEE')">
+                            <a href="/admin/employeeList">직원 목록</a>
+                        </li>
+                        <li class="gnb_menu">
+                            <a href="/admin/notice">공지사항</a>
+                        </li>
+                        <li class="gnb_menu" sec:authorize="hasAnyRole('ADMIN', 'ASSISTANT', 'EMPLOYEE')">
+                            <a href="/admin/noticeWrite">공지사항 등록</a>
+                        </li>
+                        <li class="gnb_menu">
+                            <a href="/admin/dutyWrite">근태 등록</a>
+                        </li>
+                        <li class="gnb_menu">
+                            <a href="/admin/dutyList">근태 조회</a>
+                        </li>
+                        <li class="gnb_menu" sec:authorize="hasAnyRole('ADMIN', 'ASSISTANT')">
+                            <a href="/admin/dutyConfirm">근태 결재</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="logout_button">
+                    <button onclick="location.href='/admin/changePassword'">비밀번호 변경</button>
+                    <button onclick="location.href='/logout'">로그아웃</button>
+                </div>
+            </div>
+        </div>
+    </header>
+</html>

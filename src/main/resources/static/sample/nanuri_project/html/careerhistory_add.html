@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"/>
+    <title>나누리</title>
+
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <script src="../js/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<div class="main">
+    <div class="wrap">
+        <form>
+            <div class="form_box">
+                <div class="form_title">사업명</div>
+                <div>
+                    <input class="input_box" type="text" name="project_name" placeholder="사업명 입력">
+                </div>
+            </div>
+            <div class="form_box">
+                <div class="form_title">사업시작년월</div>
+                <div>
+                    <input class="input_box" type="text" name="project_start" placeholder="사업시작년월 입력">
+                </div>
+            </div>
+            <div class="form_box">
+                <div class="form_title">사업종료년월</div>
+                <div>
+                    <input class="input_box" type="text" name="project_end" placeholder="사업종료년월 입력">
+                </div>
+            </div>
+            <div class="form_box">
+                <div class="form_title">발주사</div>
+                <div>
+                    <input class="input_box" type="text" name="order_company" placeholder="발주사 입력">
+                </div>
+            </div>
+            <div class="form_box">
+                <div class="form_title">사업내용</div>
+                <div>
+                    <input class="input_box" type="text" name="project_contents" placeholder="사업내용 입력">
+                </div>
+            </div>
+            <div class="form_box">
+                <div class="form_title">소속회사</div>
+                <div>
+                    <input class="input_box" type="text" name="affiliated_company" placeholder="소속회사 입력">
+                </div>
+            </div>
+            <div class="form_box">
+                <div class="form_title">역할</div>
+                <div>
+                    <select class="form_select" name="part_name">
+                        <option value="컨설팅" selected>컨설팅</option>
+                        <option value="개발">개발</option>
+                        <option value="모듈매니저">모듈매니저</option>
+                        <option value="분석및설계">분석및설계</option>
+                        <option value="설계및개발">설계및개발</option>
+                        <option value="PM">PM</option>
+                        <option value="업무PM">업무PM</option>
+                        <option value="공통및기술지원">공통및기술지원</option>
+                        <option value="PL">PL</option>
+                        <option value="DBA">DBA</option>
+                        <option value="QA">QA</option>
+                        <option value="모델러">모델러</option>
+                        <option value="테스트">테스트</option>
+                        <option value="안정화">안정화</option>
+                        <option value="유지보수">유지보수</option>
+                        <option value="운영">운영</option>
+                        <option value="현업">현업</option>
+                        <option value="디자인">디자인</option>
+                        <option value="기타">기타</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form_box">
+                <div class="form_title">담당업무</div>
+                <div>
+                    <input class="input_box" type="text" name="task_input" placeholder="담당업무 입력">
+                </div>
+            </div>
+            <div class="form_box">
+                <div class="form_title">사용언어</div>
+                <div>
+                    <input class="input_box" type="text" name="use_language" placeholder="사용언어 입력">
+                </div>
+            </div>
+            <div class="form_box">
+                <div class="form_title">사용DB</div>
+                <div>
+                    <input class="input_box" type="text" name="use_db" placeholder="사용DB 입력">
+                </div>
+            </div>
+            <div class="form_box">
+                <div class="form_title">사용OS</div>
+                <div>
+                    <input class="input_box" type="text" name="use_os" placeholder="사용OS 입력">
+                </div>
+            </div>
+            <div class="form_box">
+                <div class="form_title">사용프레임워크</div>
+                <div>
+                    <input class="input_box" type="text" name="use_framework" placeholder="사용프레임워크 입력">
+                </div>
+            </div>
+            <div class="form_box">
+                <div class="form_title">사용방법론</div>
+                <div>
+                    <input class="input_box" type="text" name="use_how" placeholder="사용방법론 입력">
+                </div>
+            </div>
+            <div class="form_box">
+                <div class="form_title">사용기타</div>
+                <div>
+                    <input class="input_box" type="text" name="use_etc" placeholder="사용기타 입력">
+                </div>
+            </div>
+        </form>
+        <!--20220407 수정 s-->
+        <div class="save_box">
+            <div class="button_box">
+                <button class="save_button">저장</button>
+                <button class="cancel_button" onclick="history.back()">취소</button>
+            </div>
+        </div>
+        <!--20220407 수정 f-->
+    </div>
+</div>
+</body>
+</html>

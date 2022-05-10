@@ -51,6 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
     public void configure(WebSecurity web) {
 		//web.ignoring().mvcMatchers("/therapist/signup");
+		web.ignoring().mvcMatchers("/sample/**");
 		web.ignoring().requestMatchers(PathRequest.toStaticResources().atCommonLocations());
 	}
 
@@ -63,11 +64,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     	http.authorizeRequests()
     			.antMatchers("/login").permitAll()
+    			.antMatchers("/admin/employeeAdd").hasAnyRole("ADMIN", "ASSISTANT", "EMPLOYEE")
+    			.antMatchers("/admin/employeeList").hasAnyRole("ADMIN", "EMPLOYEE", "ASSISTANT")
+    			.antMatchers("/admin/noticeWrite").hasAnyRole("ADMIN", "EMPLOYEE", "ASSISTANT")
+    			.antMatchers("/admin/dutyConfirm").hasAnyRole("ADMIN", "ASSISTANT")
+    			.antMatchers("/mobile/employeeAdd").hasAnyRole("ADMIN", "ASSISTANT", "EMPLOYEE")
+    			.antMatchers("/mobile/employeeList").hasAnyRole("ADMIN", "EMPLOYEE", "ASSISTANT")
+    			.antMatchers("/mobile/noticeWrite").hasAnyRole("ADMIN", "EMPLOYEE", "ASSISTANT")
+    			.antMatchers("/mobile/dutyConfirm").hasAnyRole("ADMIN", "ASSISTANT")
+    			.antMatchers("/mobile/dutyConfirmDetail").hasAnyRole("ADMIN", "ASSISTANT")
     			.antMatchers("**").authenticated()
     			.and()
     		.formLogin()
     			.loginPage("/login")
-    			.defaultSuccessUrl("/dashboard/view", true)
+    			.defaultSuccessUrl("/admin/index", true)
     			.usernameParameter("loginId").passwordParameter("pwd")
     			.successHandler(customSuccessHandler)
     			.failureHandler(customFailureHandler)

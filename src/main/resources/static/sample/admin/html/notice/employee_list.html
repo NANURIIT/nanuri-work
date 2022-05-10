@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>나누리</title>
+    <link rel="stylesheet" href="../../css/reset.css">
+    <link rel="stylesheet" href="../../css/common.css">
+    <link rel="stylesheet" href="../../css/header.css">
+    <link rel="stylesheet" href="../../css/notice.css">
+    <!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css"> -->
+
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+</head>
+<body>
+    <div class="wrapper">
+        <header class="header">
+            <div class="top_area main_top_area">
+                <!--<div class="logo_wrap">
+                    <div class="main_logo">
+                        <a href="#">
+                            로고영역
+                            &lt;!&ndash;<img src="" alt="logo">&ndash;&gt;
+                        </a>
+                    </div>
+                </div>-->
+                <div class="gnb_wrap">
+                    <div class="main_gnb">
+                        <ul>
+                            <li class="gnb_menu">
+                                <a href="employee_list.html">직원 목록</a>
+                            </li>
+                            <li class="gnb_menu">
+                                <a href="notice.html">공지사항</a>
+                            </li>
+                            <li class="gnb_menu">
+                                <a href="notice_write.html">공지사항 등록</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="submain_wrap">
+            <div class="sub_wrap notice_wrap">
+                <div class="sub_container notice_container">
+                    <div class="condition_wrap">
+                        <!--<div class="condition_input">
+                            <input type="checkbox" id="check1"><label for="check1">조건1</label>
+                            <input type="checkbox" id="check2"><label for="check2">조건2</label>
+                            <input type="checkbox" id="check3"><label for="check3">조건3</label>
+                            <input type="checkbox" id="check4"><label for="check4">조건4</label>
+                            <input type="checkbox" id="check5"><label for="check5">조건5</label>
+                        </div>
+                        <div>
+                            <select name="date">
+                                <option value="1we">일주일</option>
+                                <option value="1m">한달</option>
+                                <option value="3m">세달</option>
+                                <option value="all">전체</option>
+                            </select>
+                            <select name="date">
+                                <option value="1we">제목</option>
+                                <option value="1m">내용</option>
+                                <option value="3m">글쓴이</option>
+                                <option value="all">아이디</option>
+                            </select>
+                            <input type="text" id="datepicker" placeholder="날짜 선택">
+                            <div class="notice_search employee_search">
+                                <form action="#">
+                                    <div class="notice_search_box employee_search_box">
+                                        <input name="notice_search" type="text">
+                                        <a href="#">검색</a>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>-->
+                        <div class="notice_search notice_search_option">
+                            <form action="#">
+                                <div class="notice_search_box">
+                                    <select name="date">
+                                        <option value="이름">이름</option>
+                                        <option value="전화번호">전화번호</option>
+                                        <option value="이메일">이메일</option>
+                                        <option value="최종등록일">최종등록일</option>
+                                    </select>
+                                    <input name="notice_search" type="text">
+                                    <a href="#">검색</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="submain_title notice_title">
+                        직원목록
+                    </div>
+                    <div class="notice_list file_down_list">
+                        <div class="file_down_wrap">
+                            <button>전체 프로필파일 다운로드</button>
+                            <button>선택 프로필파일 다운로드</button>
+                        </div>
+                        <table>
+                            <colgroup>
+                                <col style="width: 5%;">
+                                <col style="width: 5%;">
+                                <col style="width: 5%;">
+                                <col style="width: 10%;">
+                                <col style="width: 15%;">
+                                <col style="width: 10%;">
+                                <col style="width: auto;">
+                                <col style="width: 10%;">
+                                <col style="width: 10%;">
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th scope="col">선택</th>
+                                    <th scope="col">이름</th>
+                                    <th scope="col">직급</th>
+                                    <th>전화번호</th>
+                                    <th>이메일</th>
+                                    <th>최종학력</th>
+                                    <th>주소</th>
+                                    <th>최종등록일</th>
+                                    <th>프로필 파일</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <input type="checkbox">
+                                    </td>
+                                    <td>홍길동</td>
+                                    <td>사원</td>
+                                    <td>010-1234-5678</td>
+                                    <td>nanuri@nanuri.com</td>
+                                    <td>대학교</td>
+                                    <td>서울시 영등포구 선유로 49길 4 SK1타워 805호</td>
+                                    <td>2022-03-23</td>
+                                    <td>
+                                        <a class="download_link" href="#" download="">
+                                            <img src="../../images/ico_download.png" alt="">
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input type="checkbox">
+                                    </td>
+                                    <td>홍길동</td>
+                                    <td>사원</td>
+                                    <td>010-1234-5678</td>
+                                    <td>nanuri@nanuri.com</td>
+                                    <td>대학교</td>
+                                    <td>서울시 영등포구 선유로 49길 4 SK1타워 805호</td>
+                                    <td>2022-03-23</td>
+                                    <td>
+                                        <a class="download_link" href="#" download="">
+                                            <img src="../../images/ico_download.png" alt="">
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input type="checkbox">
+                                    </td>
+                                    <td>홍길동</td>
+                                    <td>사원</td>
+                                    <td>010-1234-5678</td>
+                                    <td>nanuri@nanuri.com</td>
+                                    <td>대학교</td>
+                                    <td>서울시 영등포구 선유로 49길 4 SK1타워 805호</td>
+                                    <td>2022-03-23</td>
+                                    <td>
+                                        <a class="download_link" href="#" download="">
+                                            <img src="../../images/ico_download.png" alt="">
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="list_pagination">
+                        <a class="list_prev" href="#">
+                            <
+                        </a>
+                        <ul>
+                            <li>
+                                <a href="#">1</a>
+                            </li>
+                            <li>
+                                <a href="#">2</a>
+                            </li>
+                            <li>
+                                <a href="#">3</a>
+                            </li>
+                            <li>
+                                <a href="#">4</a>
+                            </li>
+                            <li>
+                                <a href="#">5</a>
+                            </li>
+                            <li>
+                                <a href="#">...</a>
+                            </li>
+                            <li>
+                                <a href="#">51</a>
+                            </li>
+                        </ul>
+                        <a class="product_list_next" href="#">
+                            >
+                        </a>
+                    </div>
+                    <!--<div class="notice_search">
+                        <form action="#">
+                            <div class="notice_search_box">
+                                <select name="date">
+                                    <option value="1we">일주일</option>
+                                    <option value="1m">한달</option>
+                                    <option value="3m">세달</option>
+                                    <option value="all">전체</option>
+                                </select>
+                                <select name="date">
+                                    <option value="1we">제목</option>
+                                    <option value="1m">내용</option>
+                                    <option value="3m">글쓴이</option>
+                                    <option value="all">아이디</option>
+                                </select>
+                                <input name="notice_search" type="text">
+                                <a href="#">검색</a>
+                            </div>
+                        </form>
+                    </div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $.datepicker.setDefaults({
+            dateFormat: 'yymmdd',
+            prevText: '이전 달',
+            nextText: '다음 달',
+            monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+            monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+            dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+            dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+            dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+            showMonthAfterYear: true,
+            yearSuffix: '년'
+        });
+
+        $( function() {
+            $( "#datepicker" ).datepicker({
+                changeMonth: true,
+                changeYear: true,
+                dateFormat: 'yy-mm-dd'
+            });
+        } );
+    </script>
+</body>
+</html>

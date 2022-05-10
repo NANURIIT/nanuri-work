@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<!-- 공통헤드 -->
+<head th:replace="layout/mobile/notice/head :: headFragment"></head>
+
+<link rel="stylesheet" th:href="@{/sample/nanuri_project/css/attendance.css}">
+<link rel="stylesheet" th:href="@{/sample/nanuri_project/css/notice.css}">
+<script th:src="@{/js/business/mobile/duty/attendance_approve.js}"></script>
+
+<body>
+<div class="mo_wrapper">
+    <div class="submain">
+        <div class="submain_contents">
+            <div class="notice_contents_wrap">
+                <div class="employee_contents_box">
+                    <table>
+                        <colgroup>
+                            <col style="width: 12%">
+                            <col style="width: 18%">
+                            <col style="width: 50%">
+                            <col style="width: 20%">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th>선택</th>
+                                <th>이름</th>
+                                <th>전체기간</th>
+                                <th>결재상태</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dutyHistoryList">
+                            <!-- dutyHistoryList -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="com_pagination">
+                    <div class="pagination_wrap">
+                        <!-- pagination -->
+                    </div>
+                </div>
+                <div class="notice_search attendance_search">
+                    <div class="approve_box">
+                        <button class="allConfirm" id="CONFIRM">일괄결재</button>
+                        <button class="allConfirm" id="REJECT">일괄부결</button>
+                        <button class="allConfirm" id="CLEAR">결재취소</button>
+                    </div>
+                    <form action="#">
+                        <div class="notice_search_box">
+                            <select id="dutyTypeList" name="date">
+                                <!-- dutyTypeList -->
+                            </select>
+                            <a id="dutySearch">검색</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

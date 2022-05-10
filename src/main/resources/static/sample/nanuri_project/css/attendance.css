@@ -1,0 +1,35 @@
+.attendance_search select {
+    width: 30%;
+}
+.attendance_search .approve_box {
+    padding: 0 0 15px 0;
+}
+.attendance_search .approve_box > button {
+    padding: 5px 7px;
+    border:  1px solid #333;
+    margin-left: 5px;
+    background: #333;
+    color: #fff;
+}
+.attendance_search .approve_box > button:first-child {
+    margin-left: 0;
+}
+.button_box2 > button {
+    background: #333;
+    color: #fff;
+}
+.cancel_box {
+    padding-top: 15px;
+}
+.cancel_container {
+    padding-top: 40px;
+}
+.cancel_box .cancel_button {
+    width: 100%;
+    padding: 10px 0;
+    border: 1px solid #333;
+}
+.cancel_container .cancel_button {
+    background: #333;
+    color: #fff;
+}

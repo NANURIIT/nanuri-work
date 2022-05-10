@@ -3,13 +3,14 @@
 <mapper namespace="com.nanuri.work.com.login.mapper.LoginMapper">
 
 	<!-- 로그인 회원정보 -->
-	<select id="getLoginUserDetailsVO" parameterType="String" resultType="com.nanuri.work.com.login.vo.UserDetailsVO">
+	<select id="getLoginUserDetailsVO" parameterType="String" resultType="com.nanuri.work.business.member.dto.MemberDTO">
 		SELECT user_id				/* ID */
-		     , user_name			/* 이름 */
-		     , user_phone_no		/* 휴대전화번호 */
-		     , user_password		/* 비밀번호 */
+		     , user_nm				/* 이름 */
+		     , tel_no				/* 휴대전화번호 */
+		     , user_password 		/* 비밀번호 */
+		     , user_autr_nm 		/*  */
 		     , account_activ_yn		/* 계정활성화여부 */
-		  FROM tb_user_mm
+		  FROM mem_bsc_info
 		 WHERE user_id = #{userId}
 	</select>
 

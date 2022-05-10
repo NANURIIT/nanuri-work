@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nanuri.work.business.equipment.mapper.EquipmentMapper">
+	
+    <!-- 장비 정보 -->
+
+    <!-- 장비 정보 등록 -->
+    <insert id="insertEquipment" parameterType="com.nanuri.work.business.equipment.dto.EquipmentDTO">
+   		INSERT INTO eqpm_info(
+   			rgmn_nm,				/* 등록자 */
+   			user_id,				/* 사용자ID */
+			modl_nm,				/* 모델명 */	
+			eqpm_kd_cd, 			/* 장비종류코드 */
+			srl_no,					/* 시리얼번호 */
+			py_dt					/* 지급일자 */
+		) VALUES (
+			#{rgmnNm},
+			#{userId},
+			#{modlNm},
+			#{eqpmKdCd},
+			#{srlNo},
+			#{pyDt}
+		)  
+    </insert>
+    
+    <!-- 장비 정보 리스트 출력 -->
+    <select id="selectEquipmentList" parameterType="String" resultType="com.nanuri.work.business.equipment.vo.EquipmentVO">
+		SELECT T01.seq_no,							/* 일련번호 */
+			   T01.mdfp_nm,							/* 수정자 */
+			   T02.dtl_cnm 			AS eq_type, 	/* 상세코드명 */
+			   T01.modl_nm,							/* 모델명 */
+	   		   T01.srl_no,							/* 시리얼번호 */
+	   	   	   T01.py_dt,							/* 지급일자 */
+	   	   	   T01.wdrw_yn, 						/* 회수여부 */
+	   	   	   T01.wdrw_dt	   	   	   				/* 회수일자 */
+  	 	  FROM eqpm_info			AS T01
+	 LEFT JOIN comn_cd 				AS T02
+			ON T01.eqpm_kd_cd 		= T02.dtl_cd
+		 WHERE T01.user_id 			= #{userId}
+		   AND wdrw_yn 				= 'N'
+    </select>
+    
+    <!-- 장비 정보 상세 출력 -->
+    <select id="selectEquipmentDetail" parameterType="long" resultType="com.nanuri.work.business.equipment.dto.EquipmentDTO">
+    SELECT T01.seq_no,							/* 일련번호 */
+    	   T01.mdfp_nm,							/* 수정자 */
+    	   T02.dtl_cnm 			AS eq_type, 	/* 상세코드명 */
+    	   T01.eqpm_kd_cd, 
+		   T01.modl_nm,							/* 모델명 */
+	   	   T01.srl_no,							/* 시리얼번호 */
+	   	   T01.py_dt,							/* 지급일자 */
+	   	   T01.wdrw_yn, 						/* 회수여부 */
+	   	   T01.wdrw_dt	   	   	   				/* 회수일자 */
+  	  FROM eqpm_info			AS T01
+ LEFT JOIN comn_cd 				AS T02
+		ON T01.eqpm_kd_cd 		= T02.dtl_cd
+	 WHERE T01.seq_no 			= #{seqNo}
+	   AND wdrw_yn 				= 'N'
+    
+    </select>
+    
+    <!-- 장비 정보 수정 -->
+    <update id="updateEquipment" parameterType="com.nanuri.work.business.equipment.dto.EquipmentDTO" >
+		UPDATE eqpm_info 
+   		   SET mdfp_nm = #{mdfpNm},				/* 수정자 */
+   		   	   modl_nm = #{modlNm},				/* 모델명 */	
+	   		   eqpm_kd_cd = #{eqpmKdCd}, 		/* 장비종류코드 */
+	   		   srl_no = #{srlNo},				/* 시리얼번호 */
+	   		   py_dt = #{pyDt}					/* 지급일자 */
+ 		 WHERE seq_no = #{seqNo}  
+    </update>
+
+    <!-- 장비 정보 삭제 -->
+    <update id="deleteEquipment" parameterType="com.nanuri.work.business.equipment.dto.EquipmentDTO">
+		UPDATE eqpm_info
+ 		   SET wdrw_yn = 'Y',
+ 			   mdfp_nm = #{mdfpNm},
+ 			   wdrw_dt = DATE_FORMAT(now(), '%Y%m%d')
+  		 WHERE seq_no = #{seqNo}	
+    </update>
+</mapper>
