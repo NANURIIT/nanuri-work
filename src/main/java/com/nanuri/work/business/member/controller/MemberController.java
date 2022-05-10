@@ -67,7 +67,7 @@ public class MemberController {
 		if(passwordEncoder.matches(facade.getDetails().getUserId(), facade.getDetails().getUserPassword())) {
 			return "business/change_pw";
 		} else {
-			return "business/employee/index";
+			return "/home/nanuri/actions-runner/_work/nanuri-work/nanuri-work/src/main/resources/templates/business/employee/index";
 		}
 	}
 	
