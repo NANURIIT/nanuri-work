@@ -37,6 +37,9 @@
                         <li class="gnb_menu" sec:authorize="hasAnyRole('ADMIN', 'ASSISTANT')">
                             <a href="/admin/dutyConfirm">근태 결재</a>
                         </li>
+                        <li class="gnb_menu" sec:authorize="hasAnyRole('ADMIN', 'EMPLOYEE')">
+                            <a href="/admin/payslip">급여 명세서</a>
+                        </li>
                     </ul>
                 </div>
                 <div class="logout_button">
