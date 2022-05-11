@@ -35,9 +35,6 @@ spring:
     hikari:
       maximum-pool-size: 5
       minimum-idle: 1
-  thymeleaf:
-    cache: false
-    prefix: classpath:/templates/
 
   mvc:
     hiddenmethod:
