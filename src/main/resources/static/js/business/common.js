@@ -5,26 +5,9 @@ const WEEKDAY = ['일', '월', '화', '수', '목', '금', '토'];
  * @param {string} date 날짜
  * @return {boolean} 유효성 검사 결과
  */
- var dateValidation = function (date) {
-
-    if(isEmpty(date)){
-        return false;
-    } else if(isNaN(date)){
-        return false;
-    } else if(date.length == 8){
-        if(date.substring(4, 6) < 0 || date.substring(4, 6) > 12){
-            return false;
-        } else if(date.substring(6, 8) < 0 || date.substring(6, 8) > 31){
-            return false;
-        }
-    } else if(date.length == 6){
-        if(date.substring(4, date.length) < 0 || date.substring(4, date.length) > 12){
-            return false;
-        }
-    } else {
-        return false;
-    }
-     return true;
+var dateValidation = function (date) {
+    let regex = RegExp(/^\d{4}(0[1-9]|1[012])$/);  // ex) 202201
+    return regex.test(date);
 }
 
 /**
@@ -33,20 +16,20 @@ const WEEKDAY = ['일', '월', '화', '수', '목', '금', '토'];
  * @returns pathname : admin or mobile -> pc화면인지 모바일화면인지 구분
  * @returns mode : 작성인지 수정인지 모드 설정
  */
-var getPageInfo = function(){
-    let seqNo = new URL(document.location.href).searchParams.get('seqNo'); 
-    let pathname = new URL(document.location.href).pathname.split('/')[1]; 
-    let mode = seqNo != null ? 'M' : 'W';                                  
+var getPageInfo = function () {
+    let seqNo = new URL(document.location.href).searchParams.get('seqNo');
+    let pathname = new URL(document.location.href).pathname.split('/')[1];
+    let mode = seqNo != null ? 'M' : 'W';
 
     let param = {
-        seqNo : seqNo, 
-        pathname : pathname, 
-        mode : mode
+        seqNo: seqNo,
+        pathname: pathname,
+        mode: mode
     }
 
     return param;
 }
 
-var goToIndex = function(pathname){
+var goToIndex = function (pathname) {
     location.href = '/' + pathname + '/index';
 }
