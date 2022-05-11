@@ -112,7 +112,7 @@ $(function(){
         if($('#dutyTypeList').find('option:selected').val() == 'OFF_DUTY' || $('#dutyTypeList').find('option:selected').val() == 'DESEASE'){
             params.sbtNum = 1;
         }
-
+        
         registerOffDuty(params);
     });
 

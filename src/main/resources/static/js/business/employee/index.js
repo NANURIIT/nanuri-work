@@ -3,7 +3,7 @@
 
 /** onload **/
 $(function () {
-    
+
     let pageInfo = getPageInfo();
 
     let pathname = pageInfo.pathname;
@@ -40,47 +40,47 @@ $(function () {
 
     // 학력 수정
     $(document).on('click', '.updateSchoolCareer', function () {
-        location.href = '/'+pathname+'/schoolCareerWrite?seqNo=' + $(this).attr('id');
+        location.href = '/' + pathname + '/schoolCareerWrite?seqNo=' + $(this).attr('id');
     });
 
     // 자격증 수정
-    $(document).on('click', '.updateCertificate', function(){
-        location.href = '/'+pathname+'/certificateWrite?seqNo=' + $(this).attr('id');
+    $(document).on('click', '.updateCertificate', function () {
+        location.href = '/' + pathname + '/certificateWrite?seqNo=' + $(this).attr('id');
     });
 
     // 회사소속이력 수정
-    $(document).on('click', '.updateWorkhistory', function(){
-        location.href = '/'+pathname+'/workhistoryWrite?seqNo=' + $(this).attr('id');
+    $(document).on('click', '.updateWorkhistory', function () {
+        location.href = '/' + pathname + '/workhistoryWrite?seqNo=' + $(this).attr('id');
     });
 
     // 교육이수 수정
-    $(document).on('click', '.updateEducation', function(){
-        location.href = '/'+pathname+'/educationWrite?seqNo=' + $(this).attr('id');
+    $(document).on('click', '.updateEducation', function () {
+        location.href = '/' + pathname + '/educationWrite?seqNo=' + $(this).attr('id');
     });
 
     // 대내외 수상경력 수정
-    $(document).on('click', '.updateAward', function(){
-        location.href = '/'+pathname+'/awardWrite?seqNo=' + $(this).attr('id');
+    $(document).on('click', '.updateAward', function () {
+        location.href = '/' + pathname + '/awardWrite?seqNo=' + $(this).attr('id');
     });
 
     // 외국어 능력 수정
-    $(document).on('click', '.updateLanguage', function(){
-        location.href = '/'+pathname+'/languageWrite?seqNo=' + $(this).attr('id');
+    $(document).on('click', '.updateLanguage', function () {
+        location.href = '/' + pathname + '/languageWrite?seqNo=' + $(this).attr('id');
     });
 
     // 사용가능기술(언어) 수정
-    $(document).on('click', '.updateSkill', function(){
-        location.href = '/'+pathname+'/skillWrite?seqNo=' + $(this).attr('id');
+    $(document).on('click', '.updateSkill', function () {
+        location.href = '/' + pathname + '/skillWrite?seqNo=' + $(this).attr('id');
     });
 
     // 프로젝트이력 수정
-    $(document).on('click', '.updateCareerhistory', function(){
-        location.href = '/'+pathname+'/careerhistoryWrite?seqNo=' + $(this).attr('id');
+    $(document).on('click', '.updateCareerhistory', function () {
+        location.href = '/' + pathname + '/careerhistoryWrite?seqNo=' + $(this).attr('id');
     });
 
     // 장비 정보 수정
-    $(document).on('click', '.updateEquipment', function(){
-        location.href = '/'+pathname+'/equipmentWrite?seqNo=' + $(this).attr('id');
+    $(document).on('click', '.updateEquipment', function () {
+        location.href = '/' + pathname + '/equipmentWrite?seqNo=' + $(this).attr('id');
     });
 
     // 학력 삭제
@@ -207,7 +207,7 @@ var getCertificateList = function () {
                 CERTIFICATE_HTML += '   <div class="list_info_desc">' + addDot(tmpRow.acqDt) + '</div>';
                 CERTIFICATE_HTML += '   <div class="list_info_desc">' + tmpRow.pbcplNm + '</div>';
                 CERTIFICATE_HTML += '   <div class="list_info_set">';
-                CERTIFICATE_HTML += '       <button class="updateCertificate" id="'+tmpRow.seqNo+'">수정</button>';
+                CERTIFICATE_HTML += '       <button class="updateCertificate" id="' + tmpRow.seqNo + '">수정</button>';
                 CERTIFICATE_HTML += '       <button class="deleteCertificate" id="' + tmpRow.seqNo + '">삭제</button>';
                 CERTIFICATE_HTML += '   </div>';
                 CERTIFICATE_HTML += '</div>';
@@ -246,17 +246,23 @@ var getWorkhistoryList = function () {
             for (let i = 0; i < object.length; i++) {
                 let tmpRow = object[i];
                 let period = getPeriod(addDot(tmpRow.encoYm), addDot(tmpRow.rtrmYm));
-
+                console.log(tmpRow);
                 WORK_HISTORY_HTML += '<div class="list_info">';
                 WORK_HISTORY_HTML += '  <div class="list_info_title">' + tmpRow.wrkplNm + '</div>';
-                WORK_HISTORY_HTML += '  <div class="list_info_desc">' + addDot(tmpRow.encoYm) + ' ~ ' + addDot(tmpRow.rtrmYm) + '</div>';
-                if (period.month <= 0) {
+                if(tmpRow.rtrmYm == '999912'){
+                    WORK_HISTORY_HTML += '  <div class="list_info_desc">' + addDot(tmpRow.encoYm) + ' ~ </div>';
+                } else {
+                    WORK_HISTORY_HTML += '  <div class="list_info_desc">' + addDot(tmpRow.encoYm) + ' ~ ' + addDot(tmpRow.rtrmYm) + '</div>';
+                }
+                if(period.year == 0){
+                    WORK_HISTORY_HTML += '  <div class="list_info_desc">경력 ' + period.month + '개월, ' + tmpRow.dtyNm + '</div>';
+                } else if (period.month <= 0) {
                     WORK_HISTORY_HTML += '  <div class="list_info_desc">경력 ' + period.year + '년, ' + tmpRow.dtyNm + '</div>';
                 } else {
                     WORK_HISTORY_HTML += '  <div class="list_info_desc">경력 ' + period.year + '년' + period.month + '개월, ' + tmpRow.dtyNm + '</div>';
                 }
                 WORK_HISTORY_HTML += '  <div class="list_info_set">';
-                WORK_HISTORY_HTML += '      <button class="updateWorkhistory" id="'+tmpRow.seqNo+'">수정</button>';
+                WORK_HISTORY_HTML += '      <button class="updateWorkhistory" id="' + tmpRow.seqNo + '">수정</button>';
                 WORK_HISTORY_HTML += '      <button class="deleteWorkhistory" id="' + tmpRow.seqNo + '">삭제</button>';
                 WORK_HISTORY_HTML += '  </div>';
                 WORK_HISTORY_HTML += '</div>';
@@ -269,7 +275,10 @@ var getWorkhistoryList = function () {
             totalPeriod.month = totalPeriod.month % 12;
 
             if (totalPeriod.month + totalPeriod.year > 0) {
-                if (totalPeriod.month > 0) {
+                if(totalPeriod.year == 0){
+                    console.log(1);
+                    TOTAL_PERIOD_HTML += '<span class="title_total">총 경력 ' + totalPeriod.month + '개월</span>'
+                } else if (totalPeriod.month > 0) {
                     TOTAL_PERIOD_HTML += '<span class="title_total">총 경력 ' + totalPeriod.year + '년 ' + totalPeriod.month + '개월</span>'
                 } else {
                     TOTAL_PERIOD_HTML += '<span class="title_total">총 경력 ' + totalPeriod.year + '년</span>'
@@ -313,7 +322,7 @@ var getEducationList = function () {
                 EDUCATION_HTML += ' <div class="list_info_desc">' + addDot(tmpRow.stDt.substring(0, 6)) + ' ~ ' + addDot(tmpRow.edDt.substring(0, 6)) + '</div>';
                 EDUCATION_HTML += ' <div class="list_info_desc">' + tmpRow.orgNm + '</div>';
                 EDUCATION_HTML += ' <div class="list_info_set">';
-                EDUCATION_HTML += '     <button class="updateEducation" id="'+tmpRow.seqNo+'">수정</button>';
+                EDUCATION_HTML += '     <button class="updateEducation" id="' + tmpRow.seqNo + '">수정</button>';
                 EDUCATION_HTML += '     <button class="deleteEducation" id="' + tmpRow.seqNo + '">삭제</button>';
                 EDUCATION_HTML += ' </div>';
                 EDUCATION_HTML += '</div>';
@@ -354,7 +363,7 @@ var getAwardList = function () {
                 AWARD_HTML += ' <div class="list_info_desc">' + addDot(tmpRow.przDt.substring(0, 6)) + '</div>';
                 AWARD_HTML += ' <div class="list_info_desc">' + tmpRow.etcNm + '</div>';
                 AWARD_HTML += ' <div class="list_info_set">';
-                AWARD_HTML += '     <button class="updateAward" id="'+tmpRow.seqNo+'">수정</button>';
+                AWARD_HTML += '     <button class="updateAward" id="' + tmpRow.seqNo + '">수정</button>';
                 AWARD_HTML += '     <button class="deleteAward" id="' + tmpRow.seqNo + '">삭제</button>';
                 AWARD_HTML += ' </div>';
                 AWARD_HTML += '</div>';
@@ -396,7 +405,7 @@ var getLanguageList = function () {
                 LANGUAGE_HTML += '  <div class="list_info_desc">' + tmpRow.prfcnNm + '</div>';
                 LANGUAGE_HTML += '  <div class="list_info_desc">' + tmpRow.etcNm + '</div>';
                 LANGUAGE_HTML += '  <div class="list_info_set">';
-                LANGUAGE_HTML += '      <button class="updateLanguage" id="'+tmpRow.seqNo+'">수정</button>';
+                LANGUAGE_HTML += '      <button class="updateLanguage" id="' + tmpRow.seqNo + '">수정</button>';
                 LANGUAGE_HTML += '      <button class="deleteLanguage" id="' + tmpRow.seqNo + '">삭제</button>';
                 LANGUAGE_HTML += '  </div>';
                 LANGUAGE_HTML += '</div>';
@@ -437,7 +446,7 @@ var getSkillList = function () {
                 SKILL_HTML += ' <div class="list_info_desc">' + tmpRow.prfcnNm + '</div>';
                 SKILL_HTML += ' <div class="list_info_desc">' + tmpRow.etcNm + '</div>';
                 SKILL_HTML += ' <div class="list_info_set">';
-                SKILL_HTML += '     <button class="updateSkill" id="'+tmpRow.seqNo+'">수정</button>';
+                SKILL_HTML += '     <button class="updateSkill" id="' + tmpRow.seqNo + '">수정</button>';
                 SKILL_HTML += '     <button class="deleteSkill" id="' + tmpRow.seqNo + '">삭제</button>';
                 SKILL_HTML += ' </div>';
                 SKILL_HTML += '</div>';
@@ -476,7 +485,7 @@ var getCareerhistoryList = function () {
                 CAREER_HISTORY_HTML += '    <div class="list_info_desc">' + addDot(tmpRow.bzStYm) + ' ~ ' + addDot(tmpRow.bzEdYm) + '</div>';
                 CAREER_HISTORY_HTML += '    <div class="list_info_desc">' + tmpRow.dtlCnm + ', ' + tmpRow.chrgBsnNm + '</div>';
                 CAREER_HISTORY_HTML += '    <div class="list_info_set">';
-                CAREER_HISTORY_HTML += '        <button class="updateCareerhistory" id="'+tmpRow.seqNo+'">수정</button>';
+                CAREER_HISTORY_HTML += '        <button class="updateCareerhistory" id="' + tmpRow.seqNo + '">수정</button>';
                 CAREER_HISTORY_HTML += '        <button class="deleteCareerhistory" id="' + tmpRow.seqNo + '">삭제</button>';
                 CAREER_HISTORY_HTML += '    </div>';
                 CAREER_HISTORY_HTML += '</div>';
@@ -503,7 +512,7 @@ var deleteCareerhistory = function (params) {
 /**
  * 장비 정보 리스트 함수
  */
- var getEquipmentList = function() {
+var getEquipmentList = function () {
     ajaxCall({
         method: 'GET',
         url: '/equipment/equipmentList',
@@ -516,7 +525,7 @@ var deleteCareerhistory = function (params) {
                 EQUIPMENT_HTML += '     <div class="list_info_title">' + tmpRow.eqType + '</div>';
                 EQUIPMENT_HTML += '     <div class="list_info_desc">' + tmpRow.srlNo + ', ' + tmpRow.pyDt + '</div>';
                 EQUIPMENT_HTML += '     <div class="list_info_set">';
-                EQUIPMENT_HTML += '         <button class="updateEquipment" id="'+tmpRow.seqNo+'">수정</button>';
+                EQUIPMENT_HTML += '         <button class="updateEquipment" id="' + tmpRow.seqNo + '">수정</button>';
                 EQUIPMENT_HTML += '         <button class="deleteEquipment" id="' + tmpRow.seqNo + '">삭제</button>';
                 EQUIPMENT_HTML += '     </div>';
                 EQUIPMENT_HTML += '</div>';
@@ -524,13 +533,13 @@ var deleteCareerhistory = function (params) {
             $('#equipmentList').html(EQUIPMENT_HTML);
         }
     })
- }
+}
 
- /**
- * 장비 정보 삭제 함수
- * @param {number} params.seqNo 일련번호
- */
-  var deleteEquipment = function (params) {
+/**
+* 장비 정보 삭제 함수
+* @param {number} params.seqNo 일련번호
+*/
+var deleteEquipment = function (params) {
     ajaxCall({
         method: 'DELETE',
         url: '/equipment/equipmentDelete',
@@ -598,8 +607,15 @@ var addDot = function (date) {
 var getPeriod = function (d1, d2) {
     let date1 = d1.split('.');
     let date2 = d2.split('.');
+    if (date2[0] == 9999) {
+        let date = new Date();
+        let today = date.getFullYear() + '.' + (date.getMonth() + 1 < 10 ? ('0' + (date.getMonth() + 1)) : (date.getMonth() + 1));
+        date2 = today.split('.');
+    }
+
     let year = (date2[0] - date1[0]);
     let month = (date2[1] - date1[1]);
+
     if (month < 0) {
         month += 12;
         year--;
