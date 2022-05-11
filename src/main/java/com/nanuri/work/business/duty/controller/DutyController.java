@@ -17,7 +17,7 @@ public class DutyController {
 	 */
 	@GetMapping(value = "/admin/dutyList")
 	public String getAdminDutyListPage() {
-		return "/business/duty/attendance_list";
+		return "business/duty/attendance_list";
 	}
 	
 	/**
@@ -26,7 +26,7 @@ public class DutyController {
 	 */
 	@GetMapping(value = "/admin/dutyWrite")
 	public String getAdminDutyWritePage() {
-		return  "/business/duty/attendance_add";
+		return  "business/duty/attendance_add";
 	}
 	
 	/**
@@ -35,7 +35,7 @@ public class DutyController {
 	 */
 	@GetMapping(value = "/admin/dutyConfirm")
 	public String getAdminDutyConfirmPage() {
-		return "/business/duty/attendance_approve";
+		return "business/duty/attendance_approve";
 	}
 	
 	/* mobile */
@@ -46,7 +46,7 @@ public class DutyController {
 	 */
 	@GetMapping(value = "/mobile/dutyList")
 	public String getMobileDutyListPage() {
-		return "/business/mobile/duty/attendance_list";
+		return "business/mobile/duty/attendance_list";
 	}
 	
 	/**
@@ -55,7 +55,7 @@ public class DutyController {
 	 */
 	@GetMapping(value = "/mobile/dutyListDetail")
 	public String getMobileDutyListDetailPage() {
-		return "/business/mobile/duty/attendance_list_detail";
+		return "business/mobile/duty/attendance_list_detail";
 	}
 	
 	/**
@@ -64,7 +64,7 @@ public class DutyController {
 	 */
 	@GetMapping(value = "/mobile/dutyWrite")
 	public String getMobileDutyWritePage() {
-		return "/business/mobile/duty/attendance_add";
+		return "business/mobile/duty/attendance_add";
 	}
 	
 	/**
@@ -73,7 +73,7 @@ public class DutyController {
 	 */
 	@GetMapping(value = "/mobile/dutyConfirm")
 	public String getMobileDutyConfirmPage() {
-		return "/business/mobile/duty/attendance_approve";
+		return "business/mobile/duty/attendance_approve";
 	}
 	
 	/**
@@ -82,7 +82,7 @@ public class DutyController {
 	 */
 	@GetMapping(value = "/mobile/dutyConfirmDetail")
 	public String getMobileDutyConfirmDetailPage() {
-		return "/business/mobile/duty/attendance_approve_detail";
+		return "business/mobile/duty/attendance_approve_detail";
 	}
 	
 }
