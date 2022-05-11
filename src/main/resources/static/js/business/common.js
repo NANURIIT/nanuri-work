@@ -54,10 +54,13 @@ var getPageInfo = function () {
     return param;
 }
 
+<<<<<<< HEAD
 /**
  * index화면으로 이동
  * @param {string} pathname admin or mobile
  */
+=======
+>>>>>>> b20b998 ([FIX] 회사 소속 이력에 현재 재직시 총 경력 및 재직 기간이 비정상적으로 출력되는 현상 수정)
 var goToIndex = function (pathname) {
     location.href = '/' + pathname + '/index';
 }

@@ -73,7 +73,7 @@ var getDutyHistoryList = function (pageNo) {
                 let dutyHistoryList = object.dutyHistoryList;
                 param.totalDataNum = object.dutyHistoryTotalCount;
 
-                for(let i = 0; i < dutyHistoryList.length; i++){
+                for (let i = 0; i < dutyHistoryList.length; i++) {
                     let tmpRow = dutyHistoryList[i];
                     
                     DUTY_HISTORY_LIST_HTML += '<tr>';
@@ -83,7 +83,11 @@ var getDutyHistoryList = function (pageNo) {
                     DUTY_HISTORY_LIST_HTML += ' <td>' + tmpRow.blgNm + '</td>';
                     DUTY_HISTORY_LIST_HTML += ' <td>' + tmpRow.basDt + '</td>';
                     DUTY_HISTORY_LIST_HTML += ' <td>' + tmpRow.svceFormCdNm + '</td>';
+<<<<<<< HEAD
                     if (tmpRow.svceFormCd == 'OFF_DUTY' || tmpRow.svceFormCd == 'FIRST_DUTY' || tmpRow.svceFormCd == 'SECOND_DUTY' && !isEmpty(tmpRow.sbtAftVctnDys)) {
+=======
+                    if (tmpRow.svceFormCd == 'OFF_DUTY' || tmpRow.svceFormCd == 'FIRST_DUTY' || tmpRow.svceFormCd == 'SECOND_DUTY') {
+>>>>>>> b20b998 ([FIX] 회사 소속 이력에 현재 재직시 총 경력 및 재직 기간이 비정상적으로 출력되는 현상 수정)
                         if (tmpRow.sbtAftVctnDys % 1 === 0) {
                             DUTY_HISTORY_LIST_HTML += ' <td>' + tmpRow.sbtAftVctnDys.substring(0, tmpRow.sbtAftVctnDys.length - 3) + '</td>';
                         } else {
