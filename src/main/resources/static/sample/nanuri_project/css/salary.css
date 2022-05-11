@@ -1,0 +1,105 @@
+.pop_main {
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+}
+.pop_main .pop_wrap {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 90%;
+    z-index: 999;
+    background: #fff;
+    transform: translate(-50%, -50%);
+}
+.pop_on {
+    display: block;
+}
+.bg-overlay {
+    background: #000;
+    opacity: 0.7;
+    position: fixed;
+    top: -1px;
+    left: -1px;
+    width: 101%;
+    height: 101%;
+}
+.pop_main .pop_wrap .close_btn {
+    display: inline-block;
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 15px;
+    height: 15px;
+    font-size: 25px;
+    cursor: pointer;
+    background: url("../images/ico_close.png") no-repeat 50%;
+}
+.pop_main .pop_wrap .pop_container {
+    padding: 30px 15px;
+}
+.pop_main .pop_wrap .pop_container .pop_content {
+    width: 100%;
+    height: 500px;
+    overflow-y: scroll;
+}
+.salary_title {
+    font-weight: bold;
+    font-size: 16px;
+}
+.salary_info {
+    padding: 15px 0 10px;
+}
+.salary_info > div {
+    font-weight: bold;
+    font-size: 14px;
+    padding: 5px 0;
+}
+.salary_table {
+    border-collapse: collapse;
+    width: 100%;
+    text-align: center;
+    font-size: 12px;
+}
+.salary_table tr th,
+.salary_table tr td {
+    min-width: 55px;
+    border: 1px solid #333;
+    padding: 10px 0;
+    vertical-align: middle;
+    word-break: keep-all;
+}
+.salary_table .th_back {
+    background: #ddd;
+    font-weight: bold;
+}
+.salary_table tr .desc {
+    padding: 30px 0 !important;
+}
+.salary_table tr .desc > div {
+    padding: 5px 0;
+    font-size: 13px;
+}
+.pop_open {
+    cursor: pointer;
+}
+.salary_search .salary_search_box {
+    font-size: 14px;
+}
+.salary_search .salary_search_box input {
+    width: 27%;
+    margin: 0;
+    padding: 0 3px;
+}
+.hiddenTxt {
+    overflow: hidden;
+    text-indent: -99999px;
+    position: absolute;
+    left: -9999px;
+    top: -999999px;
+}
