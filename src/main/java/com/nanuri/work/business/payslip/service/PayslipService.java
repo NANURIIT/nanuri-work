@@ -1,6 +1,6 @@
 package com.nanuri.work.business.payslip.service;
 
-import java.util.List;
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +22,10 @@ public class PayslipService {
 	private AuthenticationFacade facade;
 	
 	/* 급여 명세서 리스트 */
-	public List<PayslipDTO> getPayslipList() {
-		return payslipMapper.selectPayslipList(facade.getDetails().getUserId());
+	public HashMap<String, Object> getPayslipList(PayslipDTO params) {
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+
+		return resultMap;
+		
 	}
 }
