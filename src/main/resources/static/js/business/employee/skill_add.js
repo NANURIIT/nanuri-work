@@ -91,10 +91,8 @@ var getSkillDetail = function(seqNo){
     ajaxCall({
         method : 'GET', 
         url : '/employee/skillDetail/'+seqNo, 
-        success : function(object){
-            $('#langFeldNm').val(object.langFeldNm);
-            $('#prfcnNm').val(object.prfcnNm);
-            $('#etcNm').val(object.etcNm);
+        success : function(skill){
+            fillValue(skill);
         }
     });
 }

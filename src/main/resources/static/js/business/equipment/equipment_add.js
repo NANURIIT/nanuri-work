@@ -123,11 +123,8 @@ var getEquipmentDetail = function(seqNo) {
     ajaxCall({
         method: 'GET',
         url: '/equipment/equipmentDetail/' + seqNo,
-        success: function (object) {
-            $('#eqpmKdCd').val(object.eqpmKdCd);
-            $('#modlNm').val(object.modlNm);
-            $('#srlNo').val(object.srlNo);
-            $('#pyDt').val(object.pyDt);
+        success: function (equipment) {
+            fillValue(equipment);
         }
     });
 }

@@ -129,12 +129,8 @@ var getWorkhistoryDetail = function (seqNo) {
     ajaxCall({
         method: 'GET',
         url: '/employee/workhistoryDetail/' + seqNo,
-        success: function (object) {
-            $('#wrkplNm').val(object.wrkplNm);
-            $('#encoYm').val(object.encoYm);
-            $('#rtrmYm').val(object.rtrmYm);
-            $('#dtyNm').val(object.dtyNm);
-            $('#chrgBsnNm').val(object.chrgBsnNm);
+        success: function (workHistory) {
+            fillValue(workHistory);
         }
     })
 }

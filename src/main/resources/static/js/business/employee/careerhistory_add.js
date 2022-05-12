@@ -250,27 +250,14 @@ var registerCareerhistory = function(params, pathname){
 
 /**
  * 프로젝트 이력 상세조회
- * @param {number seqNo 일련번호
+ * @param {number} seqNo 일련번호
  */
 var getCareerhistoryDetail = function(seqNo){
     ajaxCall({
         method : 'GET', 
         url : '/employee/careerhistoryDetail/'+seqNo, 
-        success : function(object){
-            $('#bzNm').val(object.bzNm);
-            $('#bzStYm').val(object.bzStYm);
-            $('#bzEdYm').val(object.bzEdYm);
-            $('#ordrNm').val(object.ordrNm);
-            $('#bzCntn').val(object.bzCntn);
-            $('#blgCoNm').val(object.blgCoNm);
-            $('#rolCd').val(object.rolCd);
-            $('#chrgBsnNm').val(object.chrgBsnNm);
-            $('#langNm').val(object.langNm);
-            $('#dbNm').val(object.dbNm);
-            $('#osNm').val(object.osNm);
-            $('#useFrmwkNm').val(object.useFrmwkNm);
-            $('#mthNm').val(object.mthNm);
-            $('#etcCapaNm').val(object.etcCapaNm);
+        success : function(careerHistory){
+            fillValue(careerHistory);
         }
     });
 }

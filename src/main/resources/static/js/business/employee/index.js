@@ -246,7 +246,7 @@ var getWorkhistoryList = function () {
             for (let i = 0; i < object.length; i++) {
                 let tmpRow = object[i];
                 let period = getPeriod(addDot(tmpRow.encoYm), addDot(tmpRow.rtrmYm));
-                console.log(tmpRow);
+
                 WORK_HISTORY_HTML += '<div class="list_info">';
                 WORK_HISTORY_HTML += '  <div class="list_info_title">' + tmpRow.wrkplNm + '</div>';
                 if(tmpRow.rtrmYm == '999912'){
@@ -276,7 +276,6 @@ var getWorkhistoryList = function () {
 
             if (totalPeriod.month + totalPeriod.year > 0) {
                 if(totalPeriod.year == 0){
-                    console.log(1);
                     TOTAL_PERIOD_HTML += '<span class="title_total">총 경력 ' + totalPeriod.month + '개월</span>'
                 } else if (totalPeriod.month > 0) {
                     TOTAL_PERIOD_HTML += '<span class="title_total">총 경력 ' + totalPeriod.year + '년 ' + totalPeriod.month + '개월</span>'
@@ -284,6 +283,8 @@ var getWorkhistoryList = function () {
                     TOTAL_PERIOD_HTML += '<span class="title_total">총 경력 ' + totalPeriod.year + '년</span>'
                 }
                 $('#totalPeriod').html(TOTAL_PERIOD_HTML);
+            } else {
+                $('#totalPeriod').empty();
             }
 
             $('#workhistoryList').html(WORK_HISTORY_HTML);
@@ -607,18 +608,22 @@ var addDot = function (date) {
 var getPeriod = function (d1, d2) {
     let date1 = d1.split('.');
     let date2 = d2.split('.');
-    if (date2[0] == 9999) {
+
+    const year = 0;
+    const month = 1;
+
+    if (date2[year] == 9999) {
         let date = new Date();
         let today = date.getFullYear() + '.' + (date.getMonth() + 1 < 10 ? ('0' + (date.getMonth() + 1)) : (date.getMonth() + 1));
         date2 = today.split('.');
     }
 
-    let year = (date2[0] - date1[0]);
-    let month = (date2[1] - date1[1]);
+    let totalYear = (date2[year] - date1[year]);
+    let totalMonth = (date2[month] - date1[month]);
 
-    if (month < 0) {
-        month += 12;
-        year--;
+    if (totalMonth < 0) {
+        totalMonth += 12;
+        totalYear--;
     }
-    return { year: year, month: month };
+    return { year: totalYear, month: totalMonth };
 }

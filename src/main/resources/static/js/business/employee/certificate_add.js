@@ -162,13 +162,8 @@ var getCertificateDetail = function(seqNo){
     ajaxCall({
         method : 'GET', 
         url : '/employee/certificateDetail/'+seqNo, 
-        success : function(object){
-            $('#qlfcDsCd').val(object.qlfcDsCd);
-            $('#qlfcNm').val(object.qlfcNm);
-            $('#pbcplNm').val(object.pbcplNm);
-            $('#acqDt').val(object.acqDt);
-            $('#vldDt').val(object.vldDt);
-            $('#updtDt').val(object.updtDt);
+        success : function(cerfiticate){
+            fillValue(cerfiticate);
         }
     });
 }

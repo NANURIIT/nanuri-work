@@ -6,7 +6,12 @@ const WEEKDAY = ['일', '월', '화', '수', '목', '금', '토'];
  * @return {boolean} 유효성 검사 결과
  */
 var dateValidation = function (date) {
-    let regex = RegExp(/^\d{4}(0[1-9]|1[012])$/);  // ex) 202201
+    let regex = '';
+    if(date.length == 6){
+        regex = RegExp(/^\d{4}(0[1-9]|1[012])$/);  // ex) 202201
+    } else if(date.length == 8){
+        regex = RegExp(/^\d{4}(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01])$/); // ex) 20220101
+    }
     return regex.test(date);
 }
 
@@ -30,6 +35,20 @@ var getPageInfo = function () {
     return param;
 }
 
+/**
+ * index화면으로 이동
+ * @param {string} pathname admin or mobile
+ */
 var goToIndex = function (pathname) {
     location.href = '/' + pathname + '/index';
+}
+
+/**
+ * 객체값을 input box에 입력하는 함수
+ * @param {object} object 서버에서 온 객체
+ */
+var fillValue = function (object) {
+    for (let id in object) {
+        $('#' + id).val(object[id]);
+    }
 }

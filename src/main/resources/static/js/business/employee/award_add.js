@@ -105,11 +105,8 @@ var getAwardDetail = function(seqNo){
     ajaxCall({
         method : 'GET', 
         url : '/employee/awardDetail/' + seqNo, 
-        success : function(object){
-            $('#przNm').val(object.przNm);
-            $('#przDt').val(object.przDt);
-            $('#przOrgNm').val(object.przOrgNm);
-            $('#etcNm').val(object.etcNm);
+        success : function(award){
+            fillValue(award);
         }
     });
 }
