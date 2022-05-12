@@ -73,15 +73,24 @@ var registerNotice = function(params){
             method: 'POST',
             url: '/admin/boardWrite',
             data: params,
-            success: openPopup({
-                title: '성공',
-                text: '공지사항 등록에 성공했습니다.',
-                type: 'success',
-                callback: function () {
-                    location.href = '/mobile/notice';
+            success: function(message){
+                if(isEmpty(message)){
+                    openPopup({
+                        title: '성공',
+                        text: '공지사항 등록에 성공했습니다.',
+                        type: 'success',
+                        callback: function () {
+                            location.href = '/mobile/notice';
+                        }
+                    })
+                } else {
+                    openPopup({
+                        title : '실패', 
+                        text : message, 
+                        type : 'error'
+                    })
                 }
-            })
-
+            }
         });
     }
 }

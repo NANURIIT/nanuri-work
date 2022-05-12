@@ -49,20 +49,32 @@ $(function () {
  * @param {string} pathname admin or mobile
  */
 var registerWorkhistory = function (params, pathname) {
-    console.log(isValid(params));
-    // ajaxCall({
-    //     method: 'POST',
-    //     url: '/employee/workhistoryWrite',
-    //     data: params,
-    //     success: openPopup({
-    //         title: '성공',
-    //         text: '회사소속이력 등록에 성공했습니다.',
-    //         type: 'success',
-    //         callback: function () {
-    //             location.href = '/' + pathname + '/index';
-    //         }
-    //     })
-    // });
+    if(isValid(params)){
+        ajaxCall({
+            method: 'POST',
+            url: '/employee/workhistoryWrite',
+            data: params,
+            success: function(message){
+                if(isEmpty(message)){
+                    openPopup({
+                        title: '성공',
+                        text: '회사소속이력 등록에 성공했습니다.',
+                        type: 'success',
+                        callback: function () {
+                            location.href = '/' + pathname + '/index';
+                        }
+                    });
+                } else {
+                    openPopup({
+                        title : '실패', 
+                        text : message, 
+                        type : 'error'
+                    })
+                }
+            }
+        });
+    }
+    
 }
 
 /**
