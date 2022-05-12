@@ -411,14 +411,24 @@ var updateEmployee = function(param, pathname){
             method: 'PATCH',
             url: '/employee/updateEmployee',
             data: param,
-            success: openPopup({
-                title: '성공',
-                text: '직원 정보 수정에 성공했습니다.',
-                type: 'success',
-                callback: function () {
-                    location.href = '/' + pathname + '/employeeList'
+            success: function(message){
+                if(isEmpty(message)){
+                    openPopup({
+                        title: '성공',
+                        text: '직원 정보 수정에 성공했습니다.',
+                        type: 'success',
+                        callback: function () {
+                            location.href = '/' + pathname + '/employeeList'
+                        }
+                    })
+                } else {
+                    openPopup({
+                        title : '실패', 
+                        text : message, 
+                        type : 'error'
+                    })
                 }
-            })
+            }
         });
     }
 }
