@@ -61,7 +61,7 @@ var getBasicInfoDetail = function () {
         method: 'GET',
         url: '/employee/basicInfoDetail',
         success: function (basicInfo) {
-            fillValue(basicInfo);
+            fillInputValue(basicInfo);
         }
     });
 }

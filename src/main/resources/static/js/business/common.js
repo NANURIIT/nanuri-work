@@ -46,8 +46,6 @@ var goToIndex = function (pathname) {
  * @param {object} object 서버에서 온 객체
  */
 var fillInputValue = function (object) {
-    console.log('common.js fillValue');
-    console.log(object);
     for (let id in object) {
         $('#' + id).val(object[id]);
     }
