@@ -52,16 +52,28 @@ var registerAward = function(params, pathname){
             method : 'POST', 
             url : '/employee/awardWrite', 
             data : params, 
-            success: openPopup({
-                title: '성공',
-                text: '대내외 수상경력 등록에 성공했습니다.',
-                type: 'success',
-                callback: function () {
-                    location.href = '/'+pathname+'/index';
+            success: function(message){
+                if(isEmpty(message)){
+                    openPopup({
+                        title: '성공',
+                        text: '대내외 수상경력 등록에 성공했습니다.',
+                        type: 'success',
+                        callback: function () {
+                            location.href = '/'+pathname+'/index';
+                        }
+                    })
+                } else {
+                    openPopup({
+                        title : '실패', 
+                        text : message, 
+                        type : 'error'
+                    })
                 }
-            })
+            }
         });
     }
+
+    
 }
 
 /**

@@ -77,8 +77,8 @@ var registerCertificate = function (params, pathname) {
             method: 'POST',
             url: '/employee/certificateWrite',
             data: params,
-            success: function(object){
-                if(isEmpty(object)){
+            success: function(message){
+                if(isEmpty(message)){
                     openPopup({
                         title: '성공',
                         text: '자격증 등록에 성공했습니다.',
@@ -90,7 +90,7 @@ var registerCertificate = function (params, pathname) {
                 } else {
                     openPopup({
                         title: '실패',
-                        text: object,
+                        text: message,
                         type: 'error'
                     })
                 }

@@ -65,6 +65,50 @@ $(function() {
  * @param {number} params.seqNo 일련번호 -> 수정일때만 존재
  */
 var registerEquipment = function(params, pathname) {
+    if(isValid(params)){
+        ajaxCall({
+            method : 'POST',
+            url :'/equipment/registeEquipment',
+            data : params,
+            success : function(message){
+                if(isEmpty(message)){
+                    openPopup({
+                        title : '성공',
+                        text : '장비 등록에 성공했습니다.',
+                        type : 'success',
+                        callback : function() {
+                            location.href = '/'+pathname+'/index';
+                        }        
+                    })
+                } else {
+                    openPopup({
+                        title : '실패', 
+                        text : message, 
+                        type : 'error'
+                    })
+                }
+            }
+        });
+    }
+}
+
+/**
+ * 장비 정보 상세 조회
+ * @param {number} seqNo 일련번호
+ */ 
+var getEquipmentDetail = function(seqNo) {
+    ajaxCall({
+        method: 'GET',
+        url: '/equipment/equipmentDetail/' + seqNo,
+        success: function (equipment) {
+            fillInputValue(equipment);
+        }
+    });
+}
+
+var isValid = function(params){
+    let flag = false;
+
     if(isEmpty(params.modlNm)){
         openPopup({
             title : '실패',
@@ -99,34 +143,8 @@ var registerEquipment = function(params, pathname) {
             }
         });
     } else {
-        ajaxCall({
-            method : 'POST',
-            url :'/equipment/registeEquipment',
-            data : params,
-            success : openPopup({
-                title : '성공',
-                text : '장비 등록에 성공했습니다.',
-                type : 'success',
-                callback : function() {
-                    location.href = '/'+pathname+'/index';
-                }        
-            })
-        });
+        flag = true;
     }
-}
 
-/**
- * 장비 정보 상세 조회
- * @param {number} seqNo 일련번호
- */ 
-var getEquipmentDetail = function(seqNo) {
-    ajaxCall({
-        method: 'GET',
-        url: '/equipment/equipmentDetail/' + seqNo,
-        success: function (equipment) {
-            fillInputValue(equipment);
-        }
-    });
+    return flag;
 }
-   
-
