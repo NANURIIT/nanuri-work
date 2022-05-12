@@ -72,62 +72,7 @@ var getCommonCode = function () {
  * @param {string} params.updtDt    갱신일자
  */
 var registerCertificate = function (params, pathname) {
-    if (isEmpty(params.qlfcNm)) {
-        openPopup({
-            title: '실패',
-            text: '자격증명을 입력해주세요.',
-            type: 'error',
-            callback: function () {
-                $(document).on('click', '.confirm', function () {
-                    $('#qlfcNm').focus();
-                });
-            }
-        });
-    } else if (isEmpty(params.pbcplNm)) {
-        openPopup({
-            title: '실패',
-            text: '발행처를 입력해주세요.',
-            type: 'error',
-            callback: function () {
-                $(document).on('click', '.confirm', function () {
-                    $('#pbcplNm').focus();
-                });
-            }
-        });
-    } else if (isEmpty(params.acqDt) || dateValidation(params.acqDt) == false) {
-        openPopup({
-            title: '실패',
-            text: '취득일자를 확인해주세요.',
-            type: 'error',
-            callback: function () {
-                $(document).on('click', '.confirm', function () {
-                    $('#acqDt').focus();
-                });
-            }
-        });
-    } else if (isEmpty(params.vldDt) || dateValidation(params.vldDt) == false) {
-        openPopup({
-            title: '실패',
-            text: '유효일자를 확인해주세요.',
-            type: 'error',
-            callback: function () {
-                $(document).on('click', '.confirm', function () {
-                    $('#vldDt').focus();
-                });
-            }
-        });
-    } else if (isEmpty(params.updtDt) == false && dateValidation(params.updtDt) == false) {
-        openPopup({
-            title: '실패',
-            text: '갱신일자를 확인해주세요.',
-            type: 'error',
-            callback: function () {
-                $(document).on('click', '.confirm', function () {
-                    $('#updtDt').focus();
-                });
-            }
-        });
-    } else {
+    if(isValid(params)){
         ajaxCall({
             method: 'POST',
             url: '/employee/certificateWrite',
@@ -163,7 +108,77 @@ var getCertificateDetail = function(seqNo){
         method : 'GET', 
         url : '/employee/certificateDetail/'+seqNo, 
         success : function(cerfiticate){
-            fillValue(cerfiticate);
+            fillInputValue(cerfiticate);
         }
     });
+}
+
+/**
+ * 유효성검사
+ * @param {object} params 자격증정보
+ * @returns boolean
+ */
+var isValid = function(params){
+    let flag = false;
+
+    if (isEmpty(params.qlfcNm)) {
+        openPopup({
+            title: '실패',
+            text: '자격증명을 입력해주세요.',
+            type: 'error',
+            callback: function () {
+                $(document).on('click', '.confirm', function () {
+                    $('#qlfcNm').focus();
+                });
+            }
+        });
+    } else if (isEmpty(params.pbcplNm)) {
+        openPopup({
+            title: '실패',
+            text: '발행처를 입력해주세요.',
+            type: 'error',
+            callback: function () {
+                $(document).on('click', '.confirm', function () {
+                    $('#pbcplNm').focus();
+                });
+            }
+        });
+    } else if (dateValidation(params.acqDt) == false || params.acqDt.length != 8) {
+        openPopup({
+            title: '실패',
+            text: '취득일자를 확인해주세요.',
+            type: 'error',
+            callback: function () {
+                $(document).on('click', '.confirm', function () {
+                    $('#acqDt').focus();
+                });
+            }
+        });
+    } else if (dateValidation(params.vldDt) == false || params.vldDt.length != 8) {
+        openPopup({
+            title: '실패',
+            text: '유효일자를 확인해주세요.',
+            type: 'error',
+            callback: function () {
+                $(document).on('click', '.confirm', function () {
+                    $('#vldDt').focus();
+                });
+            }
+        });
+    } else if (isEmpty(params.updtDt) == false && (dateValidation(params.updtDt) == false || params.updtDt.length != 8)) {
+        openPopup({
+            title: '실패',
+            text: '갱신일자를 확인해주세요.',
+            type: 'error',
+            callback: function () {
+                $(document).on('click', '.confirm', function () {
+                    $('#updtDt').focus();
+                });
+            }
+        });
+    } else {
+        flag = true;
+    }
+
+    return flag;
 }

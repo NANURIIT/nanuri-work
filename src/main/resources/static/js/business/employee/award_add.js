@@ -47,40 +47,7 @@ $(function(){
  * @param {number} params.seqNo 일련번호
  */
 var registerAward = function(params, pathname){
-    if(isEmpty(params.przNm)){
-        openPopup({
-            title: '실패',
-            text: '포상명을 입력해주세요.',
-            type: 'error',
-            callback: function () {
-                $(document).on('click', '.confirm', function () {
-                    $('#przNm').focus();
-                });
-            }
-        });
-    } else if(dateValidation(params.przDt) == false){
-        openPopup({
-            title: '실패',
-            text: '포상일자를 확인해주세요.',
-            type: 'error',
-            callback: function () {
-                $(document).on('click', '.confirm', function () {
-                    $('#przDt').focus();
-                });
-            }
-        });
-    } else if(isEmpty(params.przOrgNm)){
-        openPopup({
-            title: '실패',
-            text: '포상기관을 입력해주세요.',
-            type: 'error',
-            callback: function () {
-                $(document).on('click', '.confirm', function () {
-                    $('#przOrgNm').focus();
-                });
-            }
-        });
-    } else {
+    if(isValid(params)){
         ajaxCall({
             method : 'POST', 
             url : '/employee/awardWrite', 
@@ -106,7 +73,55 @@ var getAwardDetail = function(seqNo){
         method : 'GET', 
         url : '/employee/awardDetail/' + seqNo, 
         success : function(award){
-            fillValue(award);
+            fillInputValue(award);
         }
     });
+}
+
+/**
+ * 유효성검사
+ * @param {object} params 포상정보
+ * @returns boolean
+ */
+var isValid = function(params){
+    let flag = false;
+
+    if(isEmpty(params.przNm)){
+        openPopup({
+            title: '실패',
+            text: '포상명을 입력해주세요.',
+            type: 'error',
+            callback: function () {
+                $(document).on('click', '.confirm', function () {
+                    $('#przNm').focus();
+                });
+            }
+        });
+    } else if(dateValidation(params.przDt) == false || params.przDt != 8){
+        openPopup({
+            title: '실패',
+            text: '포상일자를 확인해주세요.',
+            type: 'error',
+            callback: function () {
+                $(document).on('click', '.confirm', function () {
+                    $('#przDt').focus();
+                });
+            }
+        });
+    } else if(isEmpty(params.przOrgNm)){
+        openPopup({
+            title: '실패',
+            text: '포상기관을 입력해주세요.',
+            type: 'error',
+            callback: function () {
+                $(document).on('click', '.confirm', function () {
+                    $('#przOrgNm').focus();
+                });
+            }
+        });
+    } else {
+        flag = true;
+    }
+
+    return flag;
 }

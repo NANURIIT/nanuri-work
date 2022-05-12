@@ -45,29 +45,7 @@ $(function(){
  * @param {string} pathname pc, mobile구분자 -> admin or mobile
  */
 var registerLanguage = function(params, pathname){
-    if(isEmpty(params.frgnNm)){
-        openPopup({
-            title: '실패',
-            text: '언어를 입력해주세요.',
-            type: 'error',
-            callback: function () {
-                $(document).on('click', '.confirm', function () {
-                    $('#frgnNm').focus();
-                });
-            }
-        });
-    } else if(isEmpty(params.prfcnNm)){
-        openPopup({
-            title: '실패',
-            text: '숙련도를 입력해주세요.',
-            type: 'error',
-            callback: function () {
-                $(document).on('click', '.confirm', function () {
-                    $('#prfcnNm').focus();
-                });
-            }
-        });
-    } else {
+    if(isValid(params)){
         ajaxCall({
             method: 'POST',
             url: '/employee/languageWrite',
@@ -93,7 +71,45 @@ var getLanguageDetail = function(seqNo){
         method : 'GET', 
         url : '/employee/languageDetail/'+seqNo, 
         success : function(languageSkill){
-            fillValue(languageSkill);
+            fillInputValue(languageSkill);
         }
     });
+}
+
+/**
+ * 유효성검사
+ * @param {object} params 외국어 능력
+ * @returns boolean
+ */
+var isValid = function(params){
+    let flag = false;
+
+    console.log('isValid params', params);
+    if(isEmpty(params.frgnNm)){
+        openPopup({
+            title: '실패',
+            text: '언어를 입력해주세요.',
+            type: 'error',
+            callback: function () {
+                $(document).on('click', '.confirm', function () {
+                    $('#frgnNm').focus();
+                });
+            }
+        });
+    } else if(isEmpty(params.prfcnNm)){
+        openPopup({
+            title: '실패',
+            text: '숙련도를 입력해주세요.',
+            type: 'error',
+            callback: function () {
+                $(document).on('click', '.confirm', function () {
+                    $('#prfcnNm').focus();
+                });
+            }
+        });
+    } else {
+        flag = true;
+    }
+
+    return flag;
 }

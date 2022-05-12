@@ -46,51 +46,7 @@ $(function(){
  * @param {number} params.seqNo 일련번호
  */
 var registerEducation = function(params, pathname){
-    if(isEmpty(params.eduNm)){
-        openPopup({
-            title: '실패',
-            text: '교육명을 입력해주세요.',
-            type: 'error',
-            callback: function () {
-                $(document).on('click', '.confirm', function () {
-                    $('#eduNm').focus();
-                });
-            }
-        });
-    } else if(dateValidation(params.stDt) == false){
-        openPopup({
-            title: '실패',
-            text: '시작일을 확인해주세요.',
-            type: 'error',
-            callback: function () {
-                $(document).on('click', '.confirm', function () {
-                    $('#stDt').focus();
-                });
-            }
-        });
-    } else if(dateValidation(params.edDt) == false){
-        openPopup({
-            title: '실패',
-            text: '종료일을 확인해주세요.',
-            type: 'error',
-            callback: function () {
-                $(document).on('click', '.confirm', function () {
-                    $('#edDt').focus();
-                });
-            }
-        });
-    } else if(isEmpty(params.orgNm)){
-        openPopup({
-            title: '실패',
-            text: '기관명을 입력해주세요.',
-            type: 'error',
-            callback: function () {
-                $(document).on('click', '.confirm', function () {
-                    $('#orgNm').focus();
-                });
-            }
-        });
-    } else {
+    if(isValid(params)){
         ajaxCall({
             method : 'POST', 
             url : '/employee/educationWrite', 
@@ -122,7 +78,66 @@ var getEducationDetail = function(seqNo){
         method : 'GET', 
         url : '/employee/educationDetail/' + seqNo, 
         success : function(education){
-            fillValue(education);
+            fillInputValue(education);
         }
     });
+}
+
+/**
+ * 유효성검사
+ * @param {object} params 교육정보
+ * @returns boolean
+ */
+var isValid = function(params){
+    let flag = false;
+
+    if(isEmpty(params.eduNm)){
+        openPopup({
+            title: '실패',
+            text: '교육명을 입력해주세요.',
+            type: 'error',
+            callback: function () {
+                $(document).on('click', '.confirm', function () {
+                    $('#eduNm').focus();
+                });
+            }
+        });
+    } else if(dateValidation(params.stDt) == false || params.stDt.length != 8){
+        openPopup({
+            title: '실패',
+            text: '시작일을 확인해주세요.',
+            type: 'error',
+            callback: function () {
+                $(document).on('click', '.confirm', function () {
+                    $('#stDt').focus();
+                });
+            }
+        });
+    } else if(dateValidation(params.edDt) == false || params.edDt.length != 8){
+        openPopup({
+            title: '실패',
+            text: '종료일을 확인해주세요.',
+            type: 'error',
+            callback: function () {
+                $(document).on('click', '.confirm', function () {
+                    $('#edDt').focus();
+                });
+            }
+        });
+    } else if(isEmpty(params.orgNm)){
+        openPopup({
+            title: '실패',
+            text: '기관명을 입력해주세요.',
+            type: 'error',
+            callback: function () {
+                $(document).on('click', '.confirm', function () {
+                    $('#orgNm').focus();
+                });
+            }
+        });
+    } else {
+        flag = true;
+    }
+
+    return flag;
 }
