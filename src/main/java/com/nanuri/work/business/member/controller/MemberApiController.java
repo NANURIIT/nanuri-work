@@ -64,6 +64,7 @@ public class MemberApiController {
 			}
 		} catch (Exception e) {
 			message = "시스템에 문제가 발생하였습니다.";
+			log.error(e.getMessage());
 			e.printStackTrace();
 		}
 		
@@ -135,6 +136,7 @@ public class MemberApiController {
 			}
 		} catch (Exception e) {
 			message = "시스템에 문제가 발생하였습니다.";
+			log.error(e.getMessage());
 			e.printStackTrace();
 		}
 		
@@ -154,6 +156,7 @@ public class MemberApiController {
 			}
 		} catch (Exception e) {
 			message = "시스템에 문제가 발생하였습니다.";
+			log.error(e.getMessage());
 			e.printStackTrace();
 		}
 		
@@ -188,6 +191,7 @@ public class MemberApiController {
 			}
 		} catch (Exception e) {
 			message = "시스템에 문제가 발생하였습니다.";
+			log.error(e.getMessage());
 			e.printStackTrace();
 		}
 		
@@ -222,6 +226,7 @@ public class MemberApiController {
 			}
 		} catch (Exception e) {
 			message = "시스템에 문제가 발생하였습니다.";
+			log.error(e.getMessage());
 			e.printStackTrace();
 		}
 		
@@ -256,6 +261,7 @@ public class MemberApiController {
 			}
 		} catch (Exception e) {
 			message = "시스템에 문제가 발생하였습니다.";
+			log.error(e.getMessage());
 			e.printStackTrace();
 		}
 		
@@ -290,6 +296,7 @@ public class MemberApiController {
 			}
 		} catch (Exception e) {
 			message = "시스템에 문제가 발생하였습니다.";
+			log.error(e.getMessage());
 			e.printStackTrace();
 		}
 		
@@ -324,6 +331,7 @@ public class MemberApiController {
 			}
 		} catch (Exception e) {
 			message = "시스템에 문제가 발생하였습니다.";
+			log.error(e.getMessage());
 			e.printStackTrace();
 		}
 		
@@ -358,6 +366,7 @@ public class MemberApiController {
 			}
 		} catch (Exception e) {
 			message = "시스템에 문제가 발생하였습니다.";
+			log.error(e.getMessage());
 			e.printStackTrace();
 		}
 		
@@ -392,6 +401,7 @@ public class MemberApiController {
 			}
 		} catch (Exception e) {
 			message = "시스템에 문제가 발생하였습니다.";
+			log.error(e.getMessage());
 			e.printStackTrace();
 		}
 		

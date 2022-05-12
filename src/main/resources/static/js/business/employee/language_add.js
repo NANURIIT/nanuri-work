@@ -92,10 +92,8 @@ var getLanguageDetail = function(seqNo){
     ajaxCall({
         method : 'GET', 
         url : '/employee/languageDetail/'+seqNo, 
-        success : function(object){
-            $('#frgnNm').val(object.frgnNm);
-            $('#prfcnNm').val(object.prfcnNm);
-            $('#etcNm').val(object.etcNm);
+        success : function(languageSkill){
+            fillValue(languageSkill);
         }
     });
 }

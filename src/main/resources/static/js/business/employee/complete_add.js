@@ -121,11 +121,8 @@ var getEducationDetail = function(seqNo){
     ajaxCall({
         method : 'GET', 
         url : '/employee/educationDetail/' + seqNo, 
-        success : function(object){
-            $('#eduNm').val(object.eduNm);
-            $('#stDt').val(object.stDt);
-            $('#edDt').val(object.edDt);
-            $('#orgNm').val(object.orgNm);
+        success : function(education){
+            fillValue(education);
         }
     });
 }

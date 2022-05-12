@@ -253,21 +253,100 @@ var updateDuty = function(params){
  * @param {string} params.edTm 종료시각
  */
 var registerOffDuty = function(params){
-    ajaxCall({
-        method : 'POST', 
-        url : '/duty/registerOffDuty', 
-        data : params, 
-        success : function(object){
-            openPopup({
-                title : '성공', 
-                text : '근태 등록을 성공하셨습니다.', 
-                type : 'success', 
-                callback : function(){
-                    location.href = '/admin/dutyList';
+
+    // isValid(params);
+
+    if(isEmpty(params.svcePrjtTxt)){
+        openPopup({
+            title : '실패', 
+            text : '근무프로젝트를 입력해주세요', 
+            type : 'error', 
+            callback : function(){
+                $(document).on('click', '.confirm', function(){
+                    $('#svcePrjtTxt').focus();
+                });
+            }
+        });
+    } else if(isEmpty(params.stDt)){
+        openPopup({
+            title : '실패', 
+            text : '시작일자를 입력해주세요', 
+            type : 'error', 
+            callback : function(){
+                $(document).on('click', '.confirm', function(){
+                    $('#stDt').focus();
+                });
+            }
+        });
+    } else if(isEmpty(params.stTm)){
+        openPopup({
+            title : '실패', 
+            text : '시작시각을 입력해주세요', 
+            type : 'error', 
+            callback : function(){
+                $(document).on('click', '.confirm', function(){
+                    $('#stTm').focus();
+                });
+            }
+        });
+    } else if(isEmpty(params.edDt)){
+        openPopup({
+            title : '실패', 
+            text : '종료일자를 입력해주세요', 
+            type : 'error', 
+            callback : function(){
+                $(document).on('click', '.confirm', function(){
+                    $('#edDt').focus();
+                });
+            }
+        });
+    } else if(isEmpty(params.edTm)){
+        openPopup({
+            title : '실패', 
+            text : '종료시각을 입력해주세요', 
+            type : 'error', 
+            callback : function(){
+                $(document).on('click', '.confirm', function(){
+                    $('#edTm').focus();
+                });
+            }
+        });
+    } else if(isEmpty(params.rsnTxt)){
+        openPopup({
+            title : '실패', 
+            text : '사유를 입력해주세요', 
+            type : 'error', 
+            callback : function(){
+                $(document).on('click', '.confirm', function(){
+                    $('#rsnTxt').focus();
+                });
+            }
+        });
+    } else {
+        ajaxCall({
+            method : 'POST', 
+            url : '/duty/registerOffDuty', 
+            data : params, 
+            success : function(object){
+                if(isEmpty(object)){
+                    openPopup({
+                        title : '성공', 
+                        text : '근태 등록을 성공하셨습니다.', 
+                        type : 'success', 
+                        callback : function(){
+                            location.href = '/admin/dutyList';
+                        }
+                    });
+                } else {
+                    openPopup({
+                        title : '실패', 
+                        text : object, 
+                        type : 'error'
+                    });
                 }
-            });
-        }
-    });
+            }
+        });
+    }
 }
 
 let param = {};
@@ -300,4 +379,23 @@ var getDutyDetail = function(){
             }
         }
     });
+}
+
+/**
+ * 유효성 검사
+ * @param {object} params 서버로 전달될 객체
+ */
+var isValid = function(params){
+    console.log('isValid');
+    console.log(params);
+
+    // TODO => 05/12 유효성검사 리팩토링
+    
+    for(let id in params){
+        console.log('id : ' + id, 'value', params[id]);
+        console.log($('.' + id).text());
+        console.log($('#' + id).val());
+    }
+
+    return boolean
 }

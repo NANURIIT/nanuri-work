@@ -33,8 +33,22 @@ public class DutyApiController {
 	 * @return
 	 */
 	@PostMapping(value = "/registerOnDuty")
-	public boolean registerOnDuty(@RequestBody DutyHistoryDTO params) {
-		return dutyService.registerOnDuty(params);
+	public String registerOnDuty(@RequestBody DutyHistoryDTO params) {
+		
+		String message = "";
+		
+		try {
+			boolean isRegistered = dutyService.registerOnDuty(params);
+			if(isRegistered == false) {
+				message = "등록에 실패하였습니다.";
+			}
+		} catch (Exception e) {
+			message = "시스템에 문제가 발생하였습니다.";
+			log.error(e.getMessage());
+			e.printStackTrace();
+		}
+		
+		return message;
 	}
 	
 	/**
@@ -43,8 +57,22 @@ public class DutyApiController {
 	 * @return
 	 */
 	@PostMapping(value = "/registerOffDuty")
-	public boolean registerOffDuty(@RequestBody DutyHistoryDTO params) {
-		return dutyService.registerOffDuty(params);
+	public String registerOffDuty(@RequestBody DutyHistoryDTO params) {
+		
+		String message = "";
+		
+		try {
+			boolean isRegistered = dutyService.registerOffDuty(params);
+			if(isRegistered == false) {
+				message = "등록에 실패하였습니다.";
+			}
+		} catch (Exception e) {
+			message = "시스템에 문제가 발생하였습니다.";
+			log.error(e.getMessage());
+			e.printStackTrace();
+		}
+		
+		return message;
 	}
 	
 	/**

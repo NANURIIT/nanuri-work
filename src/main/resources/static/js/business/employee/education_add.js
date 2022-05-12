@@ -48,7 +48,7 @@ var getCommonCode = function () {
         method: 'GET',
         url: '/employee/getCommonCode',
         data: { dsCd: 'SCHOOLCAREER' },
-        async : false, 
+        async: false,
         success: function (object) {
             let COMMON_CODE_HTML = '';
             for (let i = 0; i < object.length; i++) {
@@ -124,7 +124,7 @@ var registerSchoolCareer = function (params, pathname) {
                 text: '학력 등록에 성공했습니다.',
                 type: 'success',
                 callback: function () {
-                    location.href = '/'+pathname+'/index';
+                    location.href = '/' + pathname + '/index';
                 }
             })
         });
@@ -139,12 +139,8 @@ var getSchoolCareerDetail = function (seqNo) {
     ajaxCall({
         method: 'GET',
         url: '/employee/schoolCareerDetail/' + seqNo,
-        success: function (object) {
-            $('#sccaDsCd').val(object.sccaDsCd).prop('selected', true);
-            $('#schlNm').val(object.schlNm);
-            $('#etisYm').val(object.etisYm);
-            $('#grduYm').val(object.grduYm);
-            $('#majrNm').val(object.majrNm);
+        success: function (schoolCareer) {
+            fillValue(schoolCareer);
         }
     });
 }
