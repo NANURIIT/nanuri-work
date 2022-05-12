@@ -67,54 +67,10 @@ var getCommonCode = function () {
  * @param {string} params.schlNm   학교명
  * @param {string} params.etisYm   입학년월
  * @param {string} params.grduYm   졸업년월
+ * @param {string} pathname admin or mobile
  */
 var registerSchoolCareer = function (params, pathname) {
-
-    if (isEmpty(params.schlNm)) {
-        openPopup({
-            title: '실패',
-            text: '학교명을 입력해주세요.',
-            type: 'error',
-            callback: function () {
-                $(document).on('click', '.confirm', function () {
-                    $('#schoolName').focus();
-                });
-            }
-        });
-    } else if (dateValidation(params.etisYm) == false) {
-        openPopup({
-            title: '실패',
-            text: '입학년월을 확인해주세요.',
-            type: 'error',
-            callback: function () {
-                $(document).on('click', '.confirm', function () {
-                    $('#etisYm').focus();
-                });
-            }
-        });
-    } else if (dateValidation(params.grduYm) == false) {
-        openPopup({
-            title: '실패',
-            text: '졸업년월을 확인해주세요.',
-            type: 'error',
-            callback: function () {
-                $(document).on('click', '.confirm', function () {
-                    $('#grduYm').focus();
-                });
-            }
-        });
-    } else if (params.sccaDsCd != 'HIGHSCHOOL' && isEmpty(params.majrNm)) {
-        openPopup({
-            title: '실패',
-            text: '전공을 입력해주세요.',
-            type: 'error',
-            callback: function () {
-                $(document).on('click', '.confirm', function () {
-                    $('#majrNm').focus();
-                });
-            }
-        });
-    } else {
+    if(isValid(params)){
         ajaxCall({
             method: 'POST',
             url: '/employee/schoolCareerWrite',
@@ -140,7 +96,66 @@ var getSchoolCareerDetail = function (seqNo) {
         method: 'GET',
         url: '/employee/schoolCareerDetail/' + seqNo,
         success: function (schoolCareer) {
-            fillValue(schoolCareer);
+            fillInputValue(schoolCareer);
         }
     });
+}
+
+/**
+ * 유효성검사
+ * @param {object} params 학력정보
+ * @returns boolean
+ */
+var isValid = function(params){
+    let flag = false;
+
+    if (isEmpty(params.schlNm)) {
+        openPopup({
+            title: '실패',
+            text: '학교명을 입력해주세요.',
+            type: 'error',
+            callback: function () {
+                $(document).on('click', '.confirm', function () {
+                    $('#schoolName').focus();
+                });
+            }
+        });
+    } else if (dateValidation(params.etisYm) == false || params.etisYm.length != 6) {
+        openPopup({
+            title: '실패',
+            text: '입학년월을 확인해주세요.',
+            type: 'error',
+            callback: function () {
+                $(document).on('click', '.confirm', function () {
+                    $('#etisYm').focus();
+                });
+            }
+        });
+    } else if (dateValidation(params.grduYm) == false || params.grduYm.length != 6) {
+        openPopup({
+            title: '실패',
+            text: '졸업년월을 확인해주세요.',
+            type: 'error',
+            callback: function () {
+                $(document).on('click', '.confirm', function () {
+                    $('#grduYm').focus();
+                });
+            }
+        });
+    } else if (params.sccaDsCd != 'HIGHSCHOOL' && isEmpty(params.majrNm)) {
+        openPopup({
+            title: '실패',
+            text: '전공을 입력해주세요.',
+            type: 'error',
+            callback: function () {
+                $(document).on('click', '.confirm', function () {
+                    $('#majrNm').focus();
+                });
+            }
+        });
+    } else {
+        flag = true;
+    }
+
+    return flag;
 }

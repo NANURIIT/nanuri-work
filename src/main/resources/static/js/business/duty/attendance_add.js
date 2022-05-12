@@ -254,8 +254,6 @@ var updateDuty = function(params){
  */
 var registerOffDuty = function(params){
 
-    // isValid(params);
-
     if(isEmpty(params.svcePrjtTxt)){
         openPopup({
             title : '실패', 
@@ -379,23 +377,4 @@ var getDutyDetail = function(){
             }
         }
     });
-}
-
-/**
- * 유효성 검사
- * @param {object} params 서버로 전달될 객체
- */
-var isValid = function(params){
-    console.log('isValid');
-    console.log(params);
-
-    // TODO => 05/12 유효성검사 리팩토링
-    
-    for(let id in params){
-        console.log('id : ' + id, 'value', params[id]);
-        console.log($('.' + id).text());
-        console.log($('#' + id).val());
-    }
-
-    return boolean
 }

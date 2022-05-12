@@ -44,29 +44,7 @@ $(function () {
  * @param {number} params.seqNo 일련번호
  */
 var registerSkill = function (params, pathname) {
-    if (isEmpty(params.langFeldNm)) {
-        openPopup({
-            title: '실패',
-            text: '사용가능기술(언어)를 입력해주세요.',
-            type: 'error',
-            callback: function () {
-                $(document).on('click', '.confirm', function () {
-                    $('#langFeldNm').focus();
-                });
-            }
-        });
-    } else if (isEmpty(params.prfcnNm)) {
-        openPopup({
-            title: '실패',
-            text: '숙련도를 입력해주세요.',
-            type: 'error',
-            callback: function () {
-                $(document).on('click', '.confirm', function () {
-                    $('#prfcnNm').focus();
-                });
-            }
-        });
-    } else {
+    if(isValid(params)){
         ajaxCall({
             method: 'POST',
             url: '/employee/skillWrite',
@@ -92,7 +70,44 @@ var getSkillDetail = function(seqNo){
         method : 'GET', 
         url : '/employee/skillDetail/'+seqNo, 
         success : function(skill){
-            fillValue(skill);
+            fillInputValue(skill);
         }
     });
+}
+
+/**
+ * 유효성검사
+ * @param {object} params 사용가능기술 정보
+ * @returns boolean
+ */
+var isValid = function(params){
+    let flag = false;
+
+    if (isEmpty(params.langFeldNm)) {
+        openPopup({
+            title: '실패',
+            text: '사용가능기술(언어)를 입력해주세요.',
+            type: 'error',
+            callback: function () {
+                $(document).on('click', '.confirm', function () {
+                    $('#langFeldNm').focus();
+                });
+            }
+        });
+    } else if (isEmpty(params.prfcnNm)) {
+        openPopup({
+            title: '실패',
+            text: '숙련도를 입력해주세요.',
+            type: 'error',
+            callback: function () {
+                $(document).on('click', '.confirm', function () {
+                    $('#prfcnNm').focus();
+                });
+            }
+        });
+    } else {
+        flag = true;
+    }
+
+    return flag;
 }

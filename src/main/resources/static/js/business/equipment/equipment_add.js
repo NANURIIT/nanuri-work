@@ -124,7 +124,7 @@ var getEquipmentDetail = function(seqNo) {
         method: 'GET',
         url: '/equipment/equipmentDetail/' + seqNo,
         success: function (equipment) {
-            fillValue(equipment);
+            fillInputValue(equipment);
         }
     });
 }

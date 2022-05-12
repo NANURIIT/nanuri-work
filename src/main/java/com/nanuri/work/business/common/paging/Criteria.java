@@ -1,8 +1,5 @@
 package com.nanuri.work.business.common.paging;
 
-import org.springframework.web.util.UriComponents;
-import org.springframework.web.util.UriComponentsBuilder;
-
 import lombok.Getter;
 import lombok.Setter;
 

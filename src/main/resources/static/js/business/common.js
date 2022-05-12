@@ -6,10 +6,8 @@ const WEEKDAY = ['일', '월', '화', '수', '목', '금', '토'];
  * @return {boolean} 유효성 검사 결과
  */
 var dateValidation = function (date) {
-    let regex = '';
-    if(date.length == 6){
-        regex = RegExp(/^\d{4}(0[1-9]|1[012])$/);  // ex) 202201
-    } else if(date.length == 8){
+    let regex = RegExp(/^\d{4}(0[1-9]|1[012])$/);  // ex) 202201
+    if(date.length == 8){
         regex = RegExp(/^\d{4}(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01])$/); // ex) 20220101
     }
     return regex.test(date);
@@ -47,7 +45,9 @@ var goToIndex = function (pathname) {
  * 객체값을 input box에 입력하는 함수
  * @param {object} object 서버에서 온 객체
  */
-var fillValue = function (object) {
+var fillInputValue = function (object) {
+    console.log('common.js fillValue');
+    console.log(object);
     for (let id in object) {
         $('#' + id).val(object[id]);
     }
