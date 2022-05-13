@@ -7,8 +7,7 @@ $(function () {
     let pageInfo = getPageInfo();
     
     let pathname = pageInfo.pathname;
-    let mode = pageInfo.mode;
-
+    let mode = isEmpty(localStorage) ? 'W' : 'M';
     getCommonCode();
 
     if(mode == 'M'){
@@ -248,6 +247,7 @@ var registerEmployee = function (param, pathname) {
  * @param {string} params.telNo 전화번호
  */
 var getEmployeeDetail = function(params){
+    console.log(params);
     ajaxCall({
         method : 'GET', 
         url : '/employee/getEmployeeDetail', 
