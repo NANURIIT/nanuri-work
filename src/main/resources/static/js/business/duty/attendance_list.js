@@ -72,11 +72,6 @@ var getDutyHistoryList = function (pageNo) {
             if (!isEmpty(object)) {
                 let dutyHistoryList = object.dutyHistoryList;
                 param.totalDataNum = object.dutyHistoryTotalCount;
-<<<<<<< HEAD
-
-=======
-                
->>>>>>> bf78d16 ([FIX] DB에 배정받은 휴가일수가 없는 경우 근태 조회에서 근태리스트가 정상적으로 출력되지 않는 현상 수정)
                 for (let i = 0; i < dutyHistoryList.length; i++) {
                     let tmpRow = dutyHistoryList[i];
                     
@@ -87,15 +82,8 @@ var getDutyHistoryList = function (pageNo) {
                     DUTY_HISTORY_LIST_HTML += ' <td>' + tmpRow.blgNm + '</td>';
                     DUTY_HISTORY_LIST_HTML += ' <td>' + tmpRow.basDt + '</td>';
                     DUTY_HISTORY_LIST_HTML += ' <td>' + tmpRow.svceFormCdNm + '</td>';
-<<<<<<< HEAD
-<<<<<<< HEAD
+                    
                     if (tmpRow.svceFormCd == 'OFF_DUTY' || tmpRow.svceFormCd == 'FIRST_DUTY' || tmpRow.svceFormCd == 'SECOND_DUTY' && !isEmpty(tmpRow.sbtAftVctnDys)) {
-=======
-                    if (tmpRow.svceFormCd == 'OFF_DUTY' || tmpRow.svceFormCd == 'FIRST_DUTY' || tmpRow.svceFormCd == 'SECOND_DUTY') {
->>>>>>> b20b998 ([FIX] 회사 소속 이력에 현재 재직시 총 경력 및 재직 기간이 비정상적으로 출력되는 현상 수정)
-=======
-                    if (tmpRow.svceFormCd == 'OFF_DUTY' || tmpRow.svceFormCd == 'FIRST_DUTY' || tmpRow.svceFormCd == 'SECOND_DUTY' && !isEmpty(tmpRow.sbtAftVctnDys)) {
->>>>>>> bf78d16 ([FIX] DB에 배정받은 휴가일수가 없는 경우 근태 조회에서 근태리스트가 정상적으로 출력되지 않는 현상 수정)
                         if (tmpRow.sbtAftVctnDys % 1 === 0) {
                             DUTY_HISTORY_LIST_HTML += ' <td>' + tmpRow.sbtAftVctnDys.substring(0, tmpRow.sbtAftVctnDys.length - 3) + '</td>';
                         } else {
