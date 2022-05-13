@@ -12,4 +12,5 @@ public interface PayslipMapper {
 	/* 급여 명세서 */
 	public List<PayslipDTO> selectPayslipList(PayslipDTO params);
 	public List<PayslipDTO> selectPayslipList(String userId);
+	public int selectTotalCountPayslip(PayslipDTO params);
 }

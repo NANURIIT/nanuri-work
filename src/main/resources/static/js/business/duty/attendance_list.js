@@ -69,6 +69,7 @@ var getDutyHistoryList = function(pageNo){
             if(!isEmpty(object)){
                 let dutyHistoryList = object.dutyHistoryList;
                 param.totalDataNum = object.dutyHistoryTotalCount;
+                console.log(dutyHistoryList)
 
                 for(let i = 0; i < dutyHistoryList.length; i++){
                     let tmpRow = dutyHistoryList[i];

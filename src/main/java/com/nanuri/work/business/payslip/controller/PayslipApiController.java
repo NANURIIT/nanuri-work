@@ -23,7 +23,7 @@ public class PayslipApiController {
 	private PayslipService payslipService;
 	
 	/* 급여명세서 리스트 */
-	@GetMapping(value = "/payslipList")
+	@GetMapping(value = "/getPayslipList")
 	public HashMap<String, Object> getPayslipList(@ModelAttribute("param") PayslipDTO params) {
 		return payslipService.getPayslipList(params);
 	}

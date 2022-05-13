@@ -1,16 +1,19 @@
 package com.nanuri.work.business.payslip.dto;
 
+import com.nanuri.work.business.common.paging.CommonDTO;
+
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class PayslipDTO {
+public class PayslipDTO extends CommonDTO{
 	private String userId; 			/* 사용자ID : 전화번호 */
+	private String userNm;			/* 이름 */
 	private String dtyNm;			/* 직급 */
 	private String blgNm;			/* 소속 */
 	private String slydt;			/* 급여일자 */
-	private String slyKdnm;			/* 급여종류명 */
+	private String slryKdnm;			/* 급여종류명 */
 	private String createAt;		/* 생성일시 */
 	private String updateAt;		/* 수정일시 */
 	private String pydt;			/* 지급일자 */
