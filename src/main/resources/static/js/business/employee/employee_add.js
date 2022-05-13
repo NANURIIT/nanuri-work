@@ -91,14 +91,24 @@ var registerEmployee = function (param, pathname) {
             method: 'POST',
             url: '/employee/registerEmployee',
             data: param,
-            success: openPopup({
-                title: '성공',
-                text: '신규 직원 등록에 성공했습니다.',
-                type: 'success',
-                callback: function () {
-                    location.href = '/' + pathname + '/employeeList'
+            success: function(message){
+                if(isEmpty(message)){
+                    openPopup({
+                        title: '성공',
+                        text: '신규 직원 등록에 성공했습니다.',
+                        type: 'success',
+                        callback: function () {
+                            location.href = '/' + pathname + '/employeeList'
+                        }
+                    });
+                } else {
+                    openPopup({
+                        title : '실패', 
+                        text : message, 
+                        type : 'error'
+                    });
                 }
-            })
+            }
         });
     }
 }
@@ -120,6 +130,11 @@ var getEmployeeDetail = function(params){
     })
 }
 
+/**
+ * 직원정보 수정
+ * @param {object} param 직원정보
+ * @param {string} pathname admin or mobile 
+ */
 var updateEmployee = function(param, pathname){
     if(isValid(param)){
         ajaxCall({
