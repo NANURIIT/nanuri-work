@@ -109,7 +109,7 @@ var isValid = function(params){
                 });
             }
         });
-    } else if(dateValidation(params.przDt) == false || params.przDt != 8){
+    } else if(dateValidation(params.przDt) == false || params.przDt.length != 8){
         openPopup({
             title: '실패',
             text: '포상일자를 확인해주세요.',

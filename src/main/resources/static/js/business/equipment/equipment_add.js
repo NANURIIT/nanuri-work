@@ -131,7 +131,7 @@ var isValid = function(params){
                 });
             }
         });
-    } else if(isEmpty(params.pyDt)) {
+    } else if(dateValidation(params.pyDt) || params.pyDt.length != 8) {
         openPopup({
             title : '실패',
             text : '지급일자를 입력해주세요.',

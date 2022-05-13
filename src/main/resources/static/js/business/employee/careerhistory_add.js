@@ -88,7 +88,6 @@ var getCommonCode = function () {
  * @param {string} params.etcCapaNm 사용기타
  */
 var registerCareerhistory = function (params, pathname) {
-    console.log(isValid(params));
 
     if (isValid(params)) {
         ajaxCall({
@@ -133,7 +132,7 @@ var getCareerhistoryDetail = function (seqNo) {
 
 var isValid = function (params) {
     let flag = false;
-
+    
     if (isEmpty(params.bzNm)) {
         openPopup({
             title: '실패',
@@ -145,7 +144,7 @@ var isValid = function (params) {
                 });
             }
         });
-    } else if (dateValidation(params.bzStYm) == false || params.bzStYm != 6) {
+    } else if (dateValidation(params.bzStYm) == false || params.bzStYm.length != 6) {
         openPopup({
             title: '실패',
             text: '사업시작년월을 확인해주세요.',
@@ -156,7 +155,7 @@ var isValid = function (params) {
                 });
             }
         });
-    } else if (dateValidation(params.bzEdYm) == false || params.bzEdYm != 6) {
+    } else if (dateValidation(params.bzEdYm) == false || params.bzEdYm.length != 6) {
         openPopup({
             title: '실패',
             text: '사업종료년월을 확인해주세요.',
@@ -263,17 +262,6 @@ var isValid = function (params) {
             callback: function () {
                 $(document).on('click', '.confirm', function () {
                     $('#useFrmwkNm').focus();
-                });
-            }
-        });
-    } else if (isEmpty(params.mthNm)) {
-        openPopup({
-            title: '실패',
-            text: '사용방법론을 입력해주세요.',
-            type: 'error',
-            callback: function () {
-                $(document).on('click', '.confirm', function () {
-                    $('#mthNm').focus();
                 });
             }
         });
