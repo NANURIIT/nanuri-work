@@ -44,6 +44,55 @@ $(function () {
  * @param {number} params.seqNo 일련번호
  */
 var registerSkill = function (params, pathname) {
+    if(isValid(params)){
+        ajaxCall({
+            method: 'POST',
+            url: '/employee/skillWrite',
+            data: params,
+            success: function(message){
+                if(isEmpty(message)){
+                    openPopup({
+                        title: '성공',
+                        text: '사용가능기술(언어) 등록에 성공했습니다.',
+                        type: 'success',
+                        callback: function () {
+                            location.href = '/'+pathname+'/index';
+                        }
+                    })
+                } else {
+                    openPopup({
+                        title : '실패', 
+                        text : message, 
+                        type : 'error'
+                    })
+                }
+            }
+        });
+    }
+}
+
+/**
+ * 사용가능기술(언어) 상세 조회
+ * @param {number} seqNo 일련번호
+ */
+var getSkillDetail = function(seqNo){
+    ajaxCall({
+        method : 'GET', 
+        url : '/employee/skillDetail/'+seqNo, 
+        success : function(skill){
+            fillInputValue(skill);
+        }
+    });
+}
+
+/**
+ * 유효성검사
+ * @param {object} params 사용가능기술 정보
+ * @returns boolean
+ */
+var isValid = function(params){
+    let flag = false;
+
     if (isEmpty(params.langFeldNm)) {
         openPopup({
             title: '실패',
@@ -67,34 +116,8 @@ var registerSkill = function (params, pathname) {
             }
         });
     } else {
-        ajaxCall({
-            method: 'POST',
-            url: '/employee/skillWrite',
-            data: params,
-            success: openPopup({
-                title: '성공',
-                text: '사용가능기술(언어) 등록에 성공했습니다.',
-                type: 'success',
-                callback: function () {
-                    location.href = '/'+pathname+'/index';
-                }
-            })
-        });
+        flag = true;
     }
-}
 
-/**
- * 사용가능기술(언어) 상세 조회
- * @param {number} seqNo 일련번호
- */
-var getSkillDetail = function(seqNo){
-    ajaxCall({
-        method : 'GET', 
-        url : '/employee/skillDetail/'+seqNo, 
-        success : function(object){
-            $('#langFeldNm').val(object.langFeldNm);
-            $('#prfcnNm').val(object.prfcnNm);
-            $('#etcNm').val(object.etcNm);
-        }
-    });
+    return flag;
 }

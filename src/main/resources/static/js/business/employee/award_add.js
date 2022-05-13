@@ -47,6 +47,57 @@ $(function(){
  * @param {number} params.seqNo 일련번호
  */
 var registerAward = function(params, pathname){
+    if(isValid(params)){
+        ajaxCall({
+            method : 'POST', 
+            url : '/employee/awardWrite', 
+            data : params, 
+            success: function(message){
+                if(isEmpty(message)){
+                    openPopup({
+                        title: '성공',
+                        text: '대내외 수상경력 등록에 성공했습니다.',
+                        type: 'success',
+                        callback: function () {
+                            location.href = '/'+pathname+'/index';
+                        }
+                    })
+                } else {
+                    openPopup({
+                        title : '실패', 
+                        text : message, 
+                        type : 'error'
+                    })
+                }
+            }
+        });
+    }
+
+    
+}
+
+/**
+ * 대내외 수상경력 상세조회
+ * @param {number} seqNo 일련번호
+ */
+var getAwardDetail = function(seqNo){
+    ajaxCall({
+        method : 'GET', 
+        url : '/employee/awardDetail/' + seqNo, 
+        success : function(award){
+            fillInputValue(award);
+        }
+    });
+}
+
+/**
+ * 유효성검사
+ * @param {object} params 포상정보
+ * @returns boolean
+ */
+var isValid = function(params){
+    let flag = false;
+
     if(isEmpty(params.przNm)){
         openPopup({
             title: '실패',
@@ -58,7 +109,7 @@ var registerAward = function(params, pathname){
                 });
             }
         });
-    } else if(dateValidation(params.przDt) == false){
+    } else if(dateValidation(params.przDt) == false || params.przDt.length != 8){
         openPopup({
             title: '실패',
             text: '포상일자를 확인해주세요.',
@@ -81,35 +132,8 @@ var registerAward = function(params, pathname){
             }
         });
     } else {
-        ajaxCall({
-            method : 'POST', 
-            url : '/employee/awardWrite', 
-            data : params, 
-            success: openPopup({
-                title: '성공',
-                text: '대내외 수상경력 등록에 성공했습니다.',
-                type: 'success',
-                callback: function () {
-                    location.href = '/'+pathname+'/index';
-                }
-            })
-        });
+        flag = true;
     }
-}
 
-/**
- * 대내외 수상경력 상세조회
- * @param {number} seqNo 일련번호
- */
-var getAwardDetail = function(seqNo){
-    ajaxCall({
-        method : 'GET', 
-        url : '/employee/awardDetail/' + seqNo, 
-        success : function(object){
-            $('#przNm').val(object.przNm);
-            $('#przDt').val(object.przDt);
-            $('#przOrgNm').val(object.przOrgNm);
-            $('#etcNm').val(object.etcNm);
-        }
-    });
+    return flag;
 }

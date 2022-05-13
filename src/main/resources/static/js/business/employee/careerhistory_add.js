@@ -2,37 +2,37 @@
 'use strict';
 
 /** onload **/
-$(function(){
+$(function () {
 
     let pageInfo = getPageInfo();
 
     let seqNo = pageInfo.seqNo;
     let pathname = pageInfo.pathname;
     let mode = pageInfo.mode;
-    
+
     getCommonCode();
-    
+
     if (mode == 'M') {
         getCareerhistoryDetail(seqNo);
     }
 
     // 저장버튼 클릭
-    $(document).on('click', '#save', function(){
+    $(document).on('click', '#save', function () {
         let params = {
-            bzNm : $('#bzNm').val(),
-            bzStYm : $('#bzStYm').val(),
-            bzEdYm : $('#bzEdYm').val(),
-            ordrNm : $('#ordrNm').val(),
-            bzCntn : $('#bzCntn').val(),
-            blgCoNm : $('#blgCoNm').val(),
-            rolCd : $('#rolCd').val(),
-            chrgBsnNm : $('#chrgBsnNm').val(),
-            langNm : $('#langNm').val(),
-            dbNm : $('#dbNm').val(),
-            osNm : $('#osNm').val(),
-            useFrmwkNm : $('#useFrmwkNm').val(),
-            mthNm : $('#mthNm').val(),
-            etcCapaNm : $('#etcCapaNm').val()
+            bzNm: $('#bzNm').val(),
+            bzStYm: $('#bzStYm').val(),
+            bzEdYm: $('#bzEdYm').val(),
+            ordrNm: $('#ordrNm').val(),
+            bzCntn: $('#bzCntn').val(),
+            blgCoNm: $('#blgCoNm').val(),
+            rolCd: $('#rolCd').val(),
+            chrgBsnNm: $('#chrgBsnNm').val(),
+            langNm: $('#langNm').val(),
+            dbNm: $('#dbNm').val(),
+            osNm: $('#osNm').val(),
+            useFrmwkNm: $('#useFrmwkNm').val(),
+            mthNm: $('#mthNm').val(),
+            etcCapaNm: $('#etcCapaNm').val()
         }
 
         if (mode == 'W') {
@@ -40,7 +40,7 @@ $(function(){
         } else if (mode == 'M') {
             params.seqNo = seqNo;
             registerCareerhistory(params, pathname);
-        }  
+        }
     });
 
     // 취소 버튼 클릭
@@ -52,17 +52,17 @@ $(function(){
 /**
  * 공통코드 호출
  */
-var getCommonCode = function(){
+var getCommonCode = function () {
     ajaxCall({
-        method : 'GET', 
-        url : '/employee/getCommonCode', 
-        data : {dsCd : 'ROLE'}, 
-        async : false, 
-        success : function(object){
+        method: 'GET',
+        url: '/employee/getCommonCode',
+        data: { dsCd: 'ROLE' },
+        async: false,
+        success: function (object) {
             let COMMON_CODE_HTML = '';
-            for(let i = 0; i < object.length; i++){
+            for (let i = 0; i < object.length; i++) {
                 let tmpRow = object[i];
-                COMMON_CODE_HTML += '<option value="'+tmpRow.dtlCd+'">'+tmpRow.dtlCnm+'</option>';
+                COMMON_CODE_HTML += '<option value="' + tmpRow.dtlCd + '">' + tmpRow.dtlCnm + '</option>';
             }
 
             $('#rolCd').html(COMMON_CODE_HTML);
@@ -87,8 +87,53 @@ var getCommonCode = function(){
  * @param {string} params.mthNm 사용방법론
  * @param {string} params.etcCapaNm 사용기타
  */
-var registerCareerhistory = function(params, pathname){
-    if(isEmpty(params.bzNm)){
+var registerCareerhistory = function (params, pathname) {
+
+    if (isValid(params)) {
+        ajaxCall({
+            method : 'POST', 
+            url : '/employee/careerhistoryWrite', 
+            data : params, 
+            success: function(message){
+                if(isEmpty(message)){
+                    openPopup({
+                        title: '성공',
+                        text: '프로젝트이력 등록에 성공했습니다.',
+                        type: 'success',
+                        callback: function () {
+                            location.href = '/'+pathname+'/index';
+                        }
+                    });
+                } else {
+                    openPopup({
+                        title : '실패', 
+                        text : message, 
+                        type : 'error'
+                    });
+                }
+            }
+        });
+    }
+}
+
+/**
+ * 프로젝트 이력 상세조회
+ * @param {number} seqNo 일련번호
+ */
+var getCareerhistoryDetail = function (seqNo) {
+    ajaxCall({
+        method: 'GET',
+        url: '/employee/careerhistoryDetail/' + seqNo,
+        success: function (careerHistory) {
+            fillInputValue(careerHistory);
+        }
+    });
+}
+
+var isValid = function (params) {
+    let flag = false;
+    
+    if (isEmpty(params.bzNm)) {
         openPopup({
             title: '실패',
             text: '사업명을 입력해주세요.',
@@ -99,7 +144,7 @@ var registerCareerhistory = function(params, pathname){
                 });
             }
         });
-    } else if(dateValidation(params.bzStYm) == false){
+    } else if (dateValidation(params.bzStYm) == false || params.bzStYm.length != 6) {
         openPopup({
             title: '실패',
             text: '사업시작년월을 확인해주세요.',
@@ -110,7 +155,7 @@ var registerCareerhistory = function(params, pathname){
                 });
             }
         });
-    } else if(dateValidation(params.bzEdYm) == false){
+    } else if (dateValidation(params.bzEdYm) == false || params.bzEdYm.length != 6) {
         openPopup({
             title: '실패',
             text: '사업종료년월을 확인해주세요.',
@@ -121,7 +166,7 @@ var registerCareerhistory = function(params, pathname){
                 });
             }
         });
-    } else if(isEmpty(params.ordrNm)){
+    } else if (isEmpty(params.ordrNm)) {
         openPopup({
             title: '실패',
             text: '발주사를 입력해주세요.',
@@ -132,7 +177,7 @@ var registerCareerhistory = function(params, pathname){
                 });
             }
         });
-    } else if(isEmpty(params.bzCntn)){
+    } else if (isEmpty(params.bzCntn)) {
         openPopup({
             title: '실패',
             text: '사업내용을 입력해주세요.',
@@ -143,7 +188,7 @@ var registerCareerhistory = function(params, pathname){
                 });
             }
         });
-    } else if(isEmpty(params.blgCoNm)){
+    } else if (isEmpty(params.blgCoNm)) {
         openPopup({
             title: '실패',
             text: '소속회사를 입력해주세요.',
@@ -154,7 +199,7 @@ var registerCareerhistory = function(params, pathname){
                 });
             }
         });
-    } else if(isEmpty(params.rolCd)){
+    } else if (isEmpty(params.rolCd)) {
         openPopup({
             title: '실패',
             text: '역할을 입력해주세요.',
@@ -165,7 +210,7 @@ var registerCareerhistory = function(params, pathname){
                 });
             }
         });
-    } else if(isEmpty(params.chrgBsnNm)){
+    } else if (isEmpty(params.chrgBsnNm)) {
         openPopup({
             title: '실패',
             text: '담당업무를 입력해주세요.',
@@ -176,7 +221,7 @@ var registerCareerhistory = function(params, pathname){
                 });
             }
         });
-    } else if(isEmpty(params.langNm)){
+    } else if (isEmpty(params.langNm)) {
         openPopup({
             title: '실패',
             text: '사용언어를 입력해주세요.',
@@ -187,7 +232,7 @@ var registerCareerhistory = function(params, pathname){
                 });
             }
         });
-    } else if(isEmpty(params.dbNm)){
+    } else if (isEmpty(params.dbNm)) {
         openPopup({
             title: '실패',
             text: '사용DB를 입력해주세요.',
@@ -198,7 +243,7 @@ var registerCareerhistory = function(params, pathname){
                 });
             }
         });
-    } else if(isEmpty(params.osNm)){
+    } else if (isEmpty(params.osNm)) {
         openPopup({
             title: '실패',
             text: '사용OS를 입력해주세요.',
@@ -209,7 +254,7 @@ var registerCareerhistory = function(params, pathname){
                 });
             }
         });
-    } else if(isEmpty(params.useFrmwkNm)){
+    } else if (isEmpty(params.useFrmwkNm)) {
         openPopup({
             title: '실패',
             text: '사용프레임워크를 입력해주세요.',
@@ -220,57 +265,9 @@ var registerCareerhistory = function(params, pathname){
                 });
             }
         });
-    } else if(isEmpty(params.mthNm)){
-        openPopup({
-            title: '실패',
-            text: '사용방법론을 입력해주세요.',
-            type: 'error',
-            callback: function () {
-                $(document).on('click', '.confirm', function () {
-                    $('#mthNm').focus();
-                });
-            }
-        });
     } else {
-        ajaxCall({
-            method : 'POST', 
-            url : '/employee/careerhistoryWrite', 
-            data : params, 
-            success: openPopup({
-                title: '성공',
-                text: '프로젝트이력 등록에 성공했습니다.',
-                type: 'success',
-                callback: function () {
-                    location.href = '/'+pathname+'/index';
-                }
-            })
-        });
+        flag = true;
     }
-}
 
-/**
- * 프로젝트 이력 상세조회
- * @param {number seqNo 일련번호
- */
-var getCareerhistoryDetail = function(seqNo){
-    ajaxCall({
-        method : 'GET', 
-        url : '/employee/careerhistoryDetail/'+seqNo, 
-        success : function(object){
-            $('#bzNm').val(object.bzNm);
-            $('#bzStYm').val(object.bzStYm);
-            $('#bzEdYm').val(object.bzEdYm);
-            $('#ordrNm').val(object.ordrNm);
-            $('#bzCntn').val(object.bzCntn);
-            $('#blgCoNm').val(object.blgCoNm);
-            $('#rolCd').val(object.rolCd);
-            $('#chrgBsnNm').val(object.chrgBsnNm);
-            $('#langNm').val(object.langNm);
-            $('#dbNm').val(object.dbNm);
-            $('#osNm').val(object.osNm);
-            $('#useFrmwkNm').val(object.useFrmwkNm);
-            $('#mthNm').val(object.mthNm);
-            $('#etcCapaNm').val(object.etcCapaNm);
-        }
-    });
+    return flag;
 }
