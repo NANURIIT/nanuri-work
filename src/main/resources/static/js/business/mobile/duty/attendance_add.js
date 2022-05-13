@@ -10,7 +10,7 @@ $(function(){
     $(document).on('change', '#dutyTypeList', function(){
         let BUTTON_HTML = '';
         if($(this).find('option:selected').attr('class') == 'ON_DUTY'){
-            if(isEmpty(param.edDt) && isEmpty(param.edTm)){
+            if(!isEmpty(param.edDt) && !isEmpty(param.edTm)){
                 BUTTON_HTML += '<button class="save_button" id="leaveWork">퇴근</button>';
                 BUTTON_HTML += '<button class="cancel_button">취소</button>';    
             } else {

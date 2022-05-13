@@ -6,15 +6,17 @@ $(function(){
 
     getCommonCode();
     getDutyDetail();
-
+    
     /* start 근태유형에 따라 사유 input box 추가 & 버튼 형태 변경 */ 
     $(document).on('change', '#dutyTypeList', function(){
         if($(this).find('option:selected').attr('class') == 'ON_DUTY'){
             let BUTTON_HTML = '';
-            if(isEmpty(param.edDt) && isEmpty(param.edTm)){
+            if(!isEmpty(param.edDt) && !isEmpty(param.edTm)){
+                console.log(1);
                 BUTTON_HTML += '<button id="leaveWork">퇴근</button>';
                 BUTTON_HTML += '<button class="cancel_button">취소</button>';    
             } else {
+                console.log(2);
                 BUTTON_HTML += '<button id="attendance">출근</button>';    
                 BUTTON_HTML += '<button class="cancel_button">취소</button>';
             }
