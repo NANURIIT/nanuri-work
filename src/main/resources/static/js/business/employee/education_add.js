@@ -48,7 +48,7 @@ var getCommonCode = function () {
         method: 'GET',
         url: '/employee/getCommonCode',
         data: { dsCd: 'SCHOOLCAREER' },
-        async : false, 
+        async: false,
         success: function (object) {
             let COMMON_CODE_HTML = '';
             for (let i = 0; i < object.length; i++) {
@@ -67,8 +67,57 @@ var getCommonCode = function () {
  * @param {string} params.schlNm   학교명
  * @param {string} params.etisYm   입학년월
  * @param {string} params.grduYm   졸업년월
+ * @param {string} pathname admin or mobile
  */
 var registerSchoolCareer = function (params, pathname) {
+    if(isValid(params)){
+        ajaxCall({
+            method: 'POST',
+            url: '/employee/schoolCareerWrite',
+            data: params,
+            success: function(message){
+                if(isEmpty(message)){
+                    openPopup({
+                        title: '성공',
+                        text: '학력 등록에 성공했습니다.',
+                        type: 'success',
+                        callback: function () {
+                            location.href = '/' + pathname + '/index';
+                        }
+                    });
+                } else {
+                    openPopup({
+                        title : '실패', 
+                        text : message, 
+                        type : 'error'
+                    });
+                }
+            }
+        });
+    }
+}
+
+/**
+ * 학력 상세 조회
+ * @param {number} seqNo 일련번호
+ */
+var getSchoolCareerDetail = function (seqNo) {
+    ajaxCall({
+        method: 'GET',
+        url: '/employee/schoolCareerDetail/' + seqNo,
+        success: function (schoolCareer) {
+            fillInputValue(schoolCareer);
+        }
+    });
+}
+
+/**
+ * 유효성검사
+ * @param {object} params 학력정보
+ * @returns boolean
+ */
+var isValid = function(params){
+    let flag = false;
 
     if (isEmpty(params.schlNm)) {
         openPopup({
@@ -81,7 +130,7 @@ var registerSchoolCareer = function (params, pathname) {
                 });
             }
         });
-    } else if (dateValidation(params.etisYm) == false) {
+    } else if (dateValidation(params.etisYm) == false || params.etisYm.length != 6) {
         openPopup({
             title: '실패',
             text: '입학년월을 확인해주세요.',
@@ -92,7 +141,7 @@ var registerSchoolCareer = function (params, pathname) {
                 });
             }
         });
-    } else if (dateValidation(params.grduYm) == false) {
+    } else if (dateValidation(params.grduYm) == false || params.grduYm.length != 6) {
         openPopup({
             title: '실패',
             text: '졸업년월을 확인해주세요.',
@@ -115,36 +164,8 @@ var registerSchoolCareer = function (params, pathname) {
             }
         });
     } else {
-        ajaxCall({
-            method: 'POST',
-            url: '/employee/schoolCareerWrite',
-            data: params,
-            success: openPopup({
-                title: '성공',
-                text: '학력 등록에 성공했습니다.',
-                type: 'success',
-                callback: function () {
-                    location.href = '/'+pathname+'/index';
-                }
-            })
-        });
+        flag = true;
     }
-}
 
-/**
- * 학력 상세 조회
- * @param {number} seqNo 일련번호
- */
-var getSchoolCareerDetail = function (seqNo) {
-    ajaxCall({
-        method: 'GET',
-        url: '/employee/schoolCareerDetail/' + seqNo,
-        success: function (object) {
-            $('#sccaDsCd').val(object.sccaDsCd).prop('selected', true);
-            $('#schlNm').val(object.schlNm);
-            $('#etisYm').val(object.etisYm);
-            $('#grduYm').val(object.grduYm);
-            $('#majrNm').val(object.majrNm);
-        }
-    });
+    return flag;
 }

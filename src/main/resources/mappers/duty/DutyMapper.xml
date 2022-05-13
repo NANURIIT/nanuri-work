@@ -98,6 +98,7 @@
 			   T01.bas_dt, 							/* 기준일자 */
 			   T01.svce_form_cd, 					/* 근무형태코드 */
 			   T03.dtl_cnm AS svce_form_cd_nm, 		/* 근무형태코드명 */
+			   T03.dtl_ds_cd, 						/* 상세구분코드 */
 			   T01.st_dt, 							/* 시작일자 */
 			   T01.st_tm, 							/* 시작시각 */
 			   T01.ed_dt, 							/* 종료일자 */

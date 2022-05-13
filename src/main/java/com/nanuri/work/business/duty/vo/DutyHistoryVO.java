@@ -17,6 +17,7 @@ public class DutyHistoryVO extends CommonDTO {
 	private String blgNm;			/* 소속 */
 	private String basDt;			/* 기준일자 */
 	private String svceFormCd;		/* 근무형태코드 */
+	private String dtlDsCd;			/* 상세구분코드 */
 	private String svceFormCdNm;	/* 근태구분 */
 	private String sbtAftVctnDys;	/* 차감후 휴가일수 */
 	private String stDt;			/* 시작일자 */

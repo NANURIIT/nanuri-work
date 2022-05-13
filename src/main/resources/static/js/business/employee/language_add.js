@@ -45,6 +45,55 @@ $(function(){
  * @param {string} pathname pc, mobile구분자 -> admin or mobile
  */
 var registerLanguage = function(params, pathname){
+    if(isValid(params)){
+        ajaxCall({
+            method: 'POST',
+            url: '/employee/languageWrite',
+            data: params,
+            success: function(message){
+                if(isEmpty(message)){
+                    openPopup({
+                        title: '성공',
+                        text: '외국어 능력 등록에 성공했습니다.',
+                        type: 'success',
+                        callback: function () {
+                            location.href = '/'+pathname+'/index';
+                        }
+                    })
+                } else {
+                    openPopup({
+                        title : '실패', 
+                        text : message, 
+                        type : 'error'
+                    });
+                }
+            }
+        });
+    }
+}
+
+/**
+ * 외국어능력 상세 조회
+ * @param {number} seqNo 일련번호
+ */
+var getLanguageDetail = function(seqNo){
+    ajaxCall({
+        method : 'GET', 
+        url : '/employee/languageDetail/'+seqNo, 
+        success : function(languageSkill){
+            fillInputValue(languageSkill);
+        }
+    });
+}
+
+/**
+ * 유효성검사
+ * @param {object} params 외국어 능력
+ * @returns boolean
+ */
+var isValid = function(params){
+    let flag = false;
+
     if(isEmpty(params.frgnNm)){
         openPopup({
             title: '실패',
@@ -68,34 +117,8 @@ var registerLanguage = function(params, pathname){
             }
         });
     } else {
-        ajaxCall({
-            method: 'POST',
-            url: '/employee/languageWrite',
-            data: params,
-            success: openPopup({
-                title: '성공',
-                text: '외국어 능력 등록에 성공했습니다.',
-                type: 'success',
-                callback: function () {
-                    location.href = '/'+pathname+'/index';
-                }
-            })
-        });
+        flag = true;
     }
-}
 
-/**
- * 외국어능력 상세 조회
- * @param {number} seqNo 일련번호
- */
-var getLanguageDetail = function(seqNo){
-    ajaxCall({
-        method : 'GET', 
-        url : '/employee/languageDetail/'+seqNo, 
-        success : function(object){
-            $('#frgnNm').val(object.frgnNm);
-            $('#prfcnNm').val(object.prfcnNm);
-            $('#etcNm').val(object.etcNm);
-        }
-    });
+    return flag;
 }

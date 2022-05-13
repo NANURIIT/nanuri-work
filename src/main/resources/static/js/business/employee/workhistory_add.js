@@ -49,6 +49,56 @@ $(function () {
  * @param {string} pathname admin or mobile
  */
 var registerWorkhistory = function (params, pathname) {
+    if(isValid(params)){
+        ajaxCall({
+            method: 'POST',
+            url: '/employee/workhistoryWrite',
+            data: params,
+            success: function(message){
+                if(isEmpty(message)){
+                    openPopup({
+                        title: '성공',
+                        text: '회사소속이력 등록에 성공했습니다.',
+                        type: 'success',
+                        callback: function () {
+                            location.href = '/' + pathname + '/index';
+                        }
+                    });
+                } else {
+                    openPopup({
+                        title : '실패', 
+                        text : message, 
+                        type : 'error'
+                    })
+                }
+            }
+        });
+    }
+    
+}
+
+/**
+ * 회사소속이력 상세 조회
+ * @param {number} seqNo 일련번호
+ */
+var getWorkhistoryDetail = function (seqNo) {
+    ajaxCall({
+        method: 'GET',
+        url: '/employee/workhistoryDetail/' + seqNo,
+        success: function (workHistory) {
+            fillInputValue(workHistory);
+        }
+    })
+}
+
+/**
+ * 유효성검사
+ * @param {object} params 회사소속이력 정보
+ * @returns boolean
+ */
+var isValid = function(params){
+    let flag = false;
+
     if (isEmpty(params.wrkplNm)) {
         openPopup({
             title: '실패',
@@ -60,7 +110,7 @@ var registerWorkhistory = function (params, pathname) {
                 });
             }
         });
-    } else if (dateValidation(params.encoYm) == false) {
+    } else if (dateValidation(params.encoYm) == false || params.encoYm.length != 6) {
         openPopup({
             title: '실패',
             text: '입사년월을 확인해주세요.',
@@ -71,7 +121,7 @@ var registerWorkhistory = function (params, pathname) {
                 });
             }
         });
-    } else if (dateValidation(params.rtrmYm) == false) {
+    } else if (dateValidation(params.rtrmYm) == false || params.rtrmYm.length != 6) {
         openPopup({
             title: '실패',
             text: '퇴사년월을 확인해주세요.',
@@ -105,36 +155,8 @@ var registerWorkhistory = function (params, pathname) {
             }
         });
     } else {
-        ajaxCall({
-            method: 'POST',
-            url: '/employee/workhistoryWrite',
-            data: params,
-            success: openPopup({
-                title: '성공',
-                text: '회사소속이력 등록에 성공했습니다.',
-                type: 'success',
-                callback: function () {
-                    location.href = '/' + pathname + '/index';
-                }
-            })
-        });
+        flag = true;
     }
-}
 
-/**
- * 회사소속이력 상세 조회
- * @param {number} seqNo 일련번호
- */
-var getWorkhistoryDetail = function (seqNo) {
-    ajaxCall({
-        method: 'GET',
-        url: '/employee/workhistoryDetail/' + seqNo,
-        success: function (object) {
-            $('#wrkplNm').val(object.wrkplNm);
-            $('#encoYm').val(object.encoYm);
-            $('#rtrmYm').val(object.rtrmYm);
-            $('#dtyNm').val(object.dtyNm);
-            $('#chrgBsnNm').val(object.chrgBsnNm);
-        }
-    })
+    return flag;
 }
