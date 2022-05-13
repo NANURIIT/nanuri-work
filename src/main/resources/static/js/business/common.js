@@ -1,5 +1,11 @@
 const WEEKDAY = ['일', '월', '화', '수', '목', '금', '토'];
 
+$(function(){
+    $(document).on('click', '#employeeAdd', function(){
+        localStorage.clear();
+    });
+})
+
 /**
  * 날짜 유효성 검사
  * @param {string} date 날짜
