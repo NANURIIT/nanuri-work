@@ -27,6 +27,7 @@ $(function () {
             userNm : userNm, 
             telNo : telNo
         };
+        
         localStorage.clear();
         localStorage.setItem('userInfo', JSON.stringify(params));
     });
