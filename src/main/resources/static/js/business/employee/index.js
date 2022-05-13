@@ -581,6 +581,7 @@ var deleteCB = function (callback) {
         callback: function () {
             $(document).on('click', '.confirm', function () {
                 callback();
+                $('body').css('overflow', 'scroll');
             });
         }
     });
