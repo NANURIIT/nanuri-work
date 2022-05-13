@@ -222,7 +222,7 @@ var isValid = function(param){
                 });
             }
         });
-    } else if (isEmpty(param.encoDt)) {
+    } else if (dateValidation(param.encoDt) || param.encoDt.length != 8) {
         openPopup({
             title: '실패',
             text: '입사일자를 입력해주세요.',
