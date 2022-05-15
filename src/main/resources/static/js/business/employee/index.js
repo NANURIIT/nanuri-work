@@ -246,7 +246,7 @@ var getWorkhistoryList = function () {
             for (let i = 0; i < object.length; i++) {
                 let tmpRow = object[i];
                 let period = getPeriod(addDot(tmpRow.encoYm), addDot(tmpRow.rtrmYm));
-                console.log(tmpRow);
+
                 WORK_HISTORY_HTML += '<div class="list_info">';
                 WORK_HISTORY_HTML += '  <div class="list_info_title">' + tmpRow.wrkplNm + '</div>';
                 if(tmpRow.rtrmYm == '999912'){
@@ -276,10 +276,6 @@ var getWorkhistoryList = function () {
 
             if (totalPeriod.month + totalPeriod.year > 0) {
                 if(totalPeriod.year == 0){
-<<<<<<< HEAD
-=======
-                    console.log(1);
->>>>>>> b20b998 ([FIX] 회사 소속 이력에 현재 재직시 총 경력 및 재직 기간이 비정상적으로 출력되는 현상 수정)
                     TOTAL_PERIOD_HTML += '<span class="title_total">총 경력 ' + totalPeriod.month + '개월</span>'
                 } else if (totalPeriod.month > 0) {
                     TOTAL_PERIOD_HTML += '<span class="title_total">총 경력 ' + totalPeriod.year + '년 ' + totalPeriod.month + '개월</span>'
@@ -613,7 +609,6 @@ var addDot = function (date) {
 var getPeriod = function (d1, d2) {
     let date1 = d1.split('.');
     let date2 = d2.split('.');
-<<<<<<< HEAD
 
     const year = 0;
     const month = 1;
@@ -622,20 +617,6 @@ var getPeriod = function (d1, d2) {
         let date = new Date();
         let today = date.getFullYear() + '.' + (date.getMonth() + 1 < 10 ? ('0' + (date.getMonth() + 1)) : (date.getMonth() + 1));
         date2 = today.split('.');
-=======
-    if (date2[0] == 9999) {
-        let date = new Date();
-        let today = date.getFullYear() + '.' + (date.getMonth() + 1 < 10 ? ('0' + (date.getMonth() + 1)) : (date.getMonth() + 1));
-        date2 = today.split('.');
-    }
-
-    let year = (date2[0] - date1[0]);
-    let month = (date2[1] - date1[1]);
-
-    if (month < 0) {
-        month += 12;
-        year--;
->>>>>>> b20b998 ([FIX] 회사 소속 이력에 현재 재직시 총 경력 및 재직 기간이 비정상적으로 출력되는 현상 수정)
     }
 
     let totalYear = (date2[year] - date1[year]);
