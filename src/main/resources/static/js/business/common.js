@@ -19,6 +19,21 @@ var dateValidation = function (date) {
     return regex.test(date);
 }
 
+var isValidDateFormatYYYYMM = function(date){
+    let regex = RegExp(/^\d{4}(0[1-9]|1[012])$/);
+    return regex.test(date);
+}
+
+var isValidDateFormatYYYYMMDD = function(date){
+    regex = RegExp(/^\d{4}(0[1-9]|1[012])(0[1-9]|[12][0-9]|3[01])$/);
+    return regex.test(date);
+}
+
+var isValidTimeFormat = function(time){
+    regex = RegExp(/^([1-9]|[01][0-9]|2[0-3]):([0-5][0-9])$/);
+    return regex.test(time);
+}
+
 /**
  * 페이지 정보 출력
  * @returns seqNo : 일련번호

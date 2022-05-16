@@ -160,14 +160,15 @@ $(function(){
                 });
             }
         });
-    } else if(isEmpty(params.stDt)){
+    } else if(isValidDateFormatYYYYMMDD(params.stDt)){
+        console.log(params);
         openPopup({
             title : '실패', 
-            text : '시작일자를 입력해주세요', 
+            text : '시작일자를 확인해주세요', 
             type : 'error', 
             callback : function(){
                 $(document).on('click', '.confirm', function(){
-                    $('#stDt').focus();
+                    // $('#stDt').focus();
                 });
             }
         });
