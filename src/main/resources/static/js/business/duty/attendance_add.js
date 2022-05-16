@@ -190,8 +190,8 @@ var registerOnDuty = function(params){
             method : 'POST', 
             url : '/duty/registerOnDuty', 
             data : params, 
-            success : function(object){
-                if(object){
+            success : function(message){
+                if(isEmpty(message)){
                     openPopup({
                         title : '성공', 
                         text : '근태 등록을 성공하셨습니다.', 
@@ -203,7 +203,7 @@ var registerOnDuty = function(params){
                 } else {
                     openPopup({
                         title : '실패', 
-                        text : '금일 출근기록이 있습니다.', 
+                        text : message, 
                         type : 'error'
                     });
                 }
