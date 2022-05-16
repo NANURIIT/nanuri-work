@@ -163,10 +163,10 @@ var registerOnDuty = function(params){
                 });
             }
         });
-    } else if(isEmpty(params.stDt)){
+    } else if(isValidDateFormatYYYYMMDD(params.stDt)){
         openPopup({
             title : '실패', 
-            text : '시작일자를 입력해주세요', 
+            text : '시작일자를 확인해주세요', 
             type : 'error', 
             callback : function(){
                 $(document).on('click', '.confirm', function(){
@@ -174,10 +174,10 @@ var registerOnDuty = function(params){
                 });
             }
         });
-    } else if(isEmpty(params.stTm)){
+    } else if(isValidTimeFormat(params.stTm)){
         openPopup({
             title : '실패', 
-            text : '시작시각을 입력해주세요', 
+            text : '시작시각을 확인해주세요', 
             type : 'error', 
             callback : function(){
                 $(document).on('click', '.confirm', function(){
@@ -220,29 +220,65 @@ var registerOnDuty = function(params){
  * @param {string} params.ckofBtnClkDtm 퇴근버튼클릭시간
  */
 var updateDuty = function(params){
-    ajaxCall({
-        method : 'PATCH', 
-        url : '/duty/updateDuty', 
-        data : params, 
-        success : function(object){
-            if(object){
-                openPopup({
-                    title : '성공', 
-                    text : '근태 등록을 성공하셨습니다.', 
-                    type : 'success', 
-                    callback : function(){
-                        location.href = '/admin/dutyList';
-                    }
-                });
-            } else {
-                openPopup({
-                    title : '실패', 
-                    text : '출근기록이 없습니다.', 
-                    type : 'error'
+
+    if(isEmpty(params.svceFormCd)){
+        openPopup({
+            title : '실패', 
+            text : '근무프로젝트를 입력해주세요', 
+            type : 'error', 
+            callback : function(){
+                $(document).on('click', '.confirm', function(){
+                    $('#svcePrjtTxt').focus();
+                })
+            }
+        });
+    } else if(isValidDateFormatYYYYMMDD(params.edDt)){
+        openPopup({
+            title : '실패', 
+            text : '종료일자를 확인해주세요', 
+            type : 'error', 
+            callback : function(){
+                $(document).on('click', '.confirm', function(){
+                    $('#edDt').focus();
                 });
             }
-        }
-    })
+        });
+    } else if(isValidTimeFormat(params.edTm)){
+        openPopup({
+            title : '실패', 
+            text : '종료시각을 확인해주세요', 
+            type : 'error', 
+            callback : function(){
+                $(document).on('click', '.confirm', function(){
+                    $('#edTm').focus();
+                })
+            }
+        });
+    } else {
+        ajaxCall({
+            method : 'PATCH', 
+            url : '/duty/updateDuty', 
+            data : params, 
+            success : function(object){
+                if(object){
+                    openPopup({
+                        title : '성공', 
+                        text : '근태 등록을 성공하셨습니다.', 
+                        type : 'success', 
+                        callback : function(){
+                            location.href = '/admin/dutyList';
+                        }
+                    });
+                } else {
+                    openPopup({
+                        title : '실패', 
+                        text : '출근기록이 없습니다.', 
+                        type : 'error'
+                    });
+                }
+            }
+        })
+    }
 }
 
 /**
@@ -267,10 +303,10 @@ var registerOffDuty = function(params){
                 });
             }
         });
-    } else if(isEmpty(params.stDt)){
+    } else if(isValidDateFormatYYYYMMDD(params.stDt)){
         openPopup({
             title : '실패', 
-            text : '시작일자를 입력해주세요', 
+            text : '시작일자를 확인해주세요', 
             type : 'error', 
             callback : function(){
                 $(document).on('click', '.confirm', function(){
@@ -278,10 +314,10 @@ var registerOffDuty = function(params){
                 });
             }
         });
-    } else if(isEmpty(params.stTm)){
+    } else if(isValidTimeFormat(params.stTm)){
         openPopup({
             title : '실패', 
-            text : '시작시각을 입력해주세요', 
+            text : '시작시각을 확인해주세요', 
             type : 'error', 
             callback : function(){
                 $(document).on('click', '.confirm', function(){
@@ -289,10 +325,10 @@ var registerOffDuty = function(params){
                 });
             }
         });
-    } else if(isEmpty(params.edDt)){
+    } else if(isValidDateFormatYYYYMMDD(params.edDt)){
         openPopup({
             title : '실패', 
-            text : '종료일자를 입력해주세요', 
+            text : '종료일자를 확인해주세요', 
             type : 'error', 
             callback : function(){
                 $(document).on('click', '.confirm', function(){
@@ -300,10 +336,10 @@ var registerOffDuty = function(params){
                 });
             }
         });
-    } else if(isEmpty(params.edTm)){
+    } else if(isValidTimeFormat(params.edTm)){
         openPopup({
             title : '실패', 
-            text : '종료시각을 입력해주세요', 
+            text : '종료시각을 확인해주세요', 
             type : 'error', 
             callback : function(){
                 $(document).on('click', '.confirm', function(){

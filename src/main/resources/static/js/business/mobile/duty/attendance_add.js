@@ -168,14 +168,14 @@ $(function(){
             type : 'error', 
             callback : function(){
                 $(document).on('click', '.confirm', function(){
-                    // $('#stDt').focus();
+                    $('#stDt').focus();
                 });
             }
         });
-    } else if(isEmpty(params.stTm)){
+    } else if(isValidTimeFormat(params.stTm)){
         openPopup({
             title : '실패', 
-            text : '시작시각을 입력해주세요', 
+            text : '시작시각을 확인해주세요', 
             type : 'error', 
             callback : function(){
                 $(document).on('click', '.confirm', function(){
@@ -218,29 +218,64 @@ $(function(){
  * @param {string} params.ckofBtnClkDtm 퇴근버튼클릭시간
  */
  var updateDuty = function(params){
-    ajaxCall({
-        method : 'PATCH', 
-        url : '/duty/updateDuty', 
-        data : params, 
-        success : function(object){
-            if(object){
-                openPopup({
-                    title : '성공', 
-                    text : '근태 등록을 성공하셨습니다.', 
-                    type : 'success', 
-                    callback : function(){
-                        location.href = '/mobile/dutyList';
-                    }
-                });
-            } else {
-                openPopup({
-                    title : '실패', 
-                    text : '출근기록이 없습니다.', 
-                    type : 'error'
-                });
+    if(isEmpty(params.svceFormCd)){
+        openPopup({
+            title : '실패',
+            text : '근무프로젝트를 입력해주세요', 
+            type : 'error', 
+            callback : function(){
+                $(document).on('click', '.confirm', function(){
+                    $('#svcePrjtTxt').focus();
+                })
             }
-        }
-    })
+        });
+    } else if(isValidDateFormatYYYYMMDD(params.stDt)){
+        openPopup({
+            title : '실패',
+            text : '시작일자를 확인해주세요', 
+            type : 'error', 
+            callback : function(){
+                $(document).on('click', '.confirm', function(){
+                    $('#stDt').focus();
+                })
+            }
+        });
+    } else if(isValidTimeFormat(params.stTm)){
+        openPopup({
+            title : '실패',
+            text : '시작시각을 확인해주세요', 
+            type : 'error', 
+            callback : function(){
+                $(document).on('click', '.confirm', function(){
+                    $('#stTm').focus();
+                })
+            }
+        });
+    } else {
+        ajaxCall({
+            method : 'PATCH', 
+            url : '/duty/updateDuty', 
+            data : params, 
+            success : function(object){
+                if(object){
+                    openPopup({
+                        title : '성공', 
+                        text : '근태 등록을 성공하셨습니다.', 
+                        type : 'success', 
+                        callback : function(){
+                            location.href = '/mobile/dutyList';
+                        }
+                    });
+                } else {
+                    openPopup({
+                        title : '실패', 
+                        text : '출근기록이 없습니다.', 
+                        type : 'error'
+                    });
+                }
+            }
+        });
+    }
 }
 
 /**
@@ -253,21 +288,78 @@ $(function(){
  * @param {string} params.edTm 종료시각
  */
  var registerOffDuty = function(params){
-    ajaxCall({
-        method : 'POST', 
-        url : '/duty/registerOffDuty', 
-        data : params, 
-        success : function(object){
-            openPopup({
-                title : '성공', 
-                text : '근태 등록을 성공하셨습니다.', 
-                type : 'success', 
-                callback : function(){
-                    location.href = '/mobile/dutyList';
-                }
-            });
-        }
-    });
+    if(isEmpty(params.rsnTxt)){
+        openPopup({
+            title : '실패', 
+            text : '사유를 입력해주세요', 
+            type : 'error', 
+            callback : function(){
+                $(document).on('click', '.confirm', function(){
+                    $('#rsnTxt').focus();
+                })
+            }
+        });
+    } else if(isValidDateFormatYYYYMMDD(params.stDt)){
+        openPopup({
+            title : '실패',
+            text : '시작일자를 확인해주세요', 
+            type : 'error', 
+            callback : function(){
+                $(document).on('click', '.confirm', function(){
+                    $('#stDt').focus();
+                })
+            }
+        });
+    } else if(isValidTimeFormat(params.stTm)){
+        openPopup({
+            title : '실패', 
+            text : '시작시각을 확인해주세요', 
+            type : 'error', 
+            callback : function(){
+                $(document).on('click', '.confirm', function(){
+                    $('#stTm').focus();
+                })
+            }
+        });
+    } else if(isValidDateFormatYYYYMMDD(params.edDt)){
+        openPopup({
+            title : '실패', 
+            text : '종료일자를 확인해주세요', 
+            type : 'error', 
+            callback : function(){
+                $(document).on('click', '.confirm', function(){
+                    $('#edDt').focus();
+                })
+            }
+        });
+    } else if(isValidTimeFormat(params.edTm)){
+        openPopup({
+            title : '실패', 
+            text : '종료시각을 확인해주세요', 
+            type : 'error', 
+            callback : function(){
+                $(document).on('click', '.confirm', function(){
+                    $('#edTm').focus();
+                })
+            }
+        })
+    } else {
+        ajaxCall({
+            method : 'POST', 
+            url : '/duty/registerOffDuty', 
+            data : params, 
+            success : function(object){
+                openPopup({
+                    title : '성공', 
+                    text : '근태 등록을 성공하셨습니다.', 
+                    type : 'success', 
+                    callback : function(){
+                        location.href = '/mobile/dutyList';
+                    }
+                });
+            }
+        });
+    }
 }
 
 let param = {};
