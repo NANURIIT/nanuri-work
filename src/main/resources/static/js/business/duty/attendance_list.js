@@ -72,7 +72,7 @@ var getDutyHistoryList = function (pageNo) {
             if (!isEmpty(object)) {
                 let dutyHistoryList = object.dutyHistoryList;
                 param.totalDataNum = object.dutyHistoryTotalCount;
-
+                console.log('dutyHistoryList', dutyHistoryList);
                 for (let i = 0; i < dutyHistoryList.length; i++) {
                     let tmpRow = dutyHistoryList[i];
                     
@@ -83,7 +83,7 @@ var getDutyHistoryList = function (pageNo) {
                     DUTY_HISTORY_LIST_HTML += ' <td>' + tmpRow.blgNm + '</td>';
                     DUTY_HISTORY_LIST_HTML += ' <td>' + tmpRow.basDt + '</td>';
                     DUTY_HISTORY_LIST_HTML += ' <td>' + tmpRow.svceFormCdNm + '</td>';
-                    if (tmpRow.svceFormCd == 'OFF_DUTY' || tmpRow.svceFormCd == 'FIRST_DUTY' || tmpRow.svceFormCd == 'SECOND_DUTY') {
+                    if (tmpRow.svceFormCd == 'OFF_DUTY' || tmpRow.svceFormCd == 'FIRST_DUTY' || tmpRow.svceFormCd == 'SECOND_DUTY' && !isEmpty(tmpRow.sbtAftVctnDys)) {
                         if (tmpRow.sbtAftVctnDys % 1 === 0) {
                             DUTY_HISTORY_LIST_HTML += ' <td>' + tmpRow.sbtAftVctnDys.substring(0, tmpRow.sbtAftVctnDys.length - 3) + '</td>';
                         } else {

@@ -102,6 +102,7 @@
 	</update>
 	
 	<!-- 직원 정보 리스트 출력 -->
+	<!-- TODO => 마지막 수정일 쿼리 다시 작성 -->
 	<select id="selectEmployeeList" parameterType="com.nanuri.work.business.member.vo.EmployeeVO" resultType="com.nanuri.work.business.member.vo.EmployeeVO">
 		SELECT A.*
 		  FROM (
@@ -112,14 +113,17 @@
 		  		   T01.email_addr, 
 		  		   T03.dtl_cnm 												AS school_career, 
 		  		   T01.addr, 
-		  		   DATE_FORMAT(IFNULL(T04.mod_dtm, T04.rg_dtm), '%Y-%m-%d') AS last_modify_date
+		  		   DATE_FORMAT(
+	      	(SELECT IFNULL(mod_dtm, rg_dtm)
+	      	  FROM mem_carr_hst
+	      	 WHERE user_id = T01.user_id
+	      ORDER BY rg_dtm DESC 
+	         LIMIT 1), '%Y-%m-%d') 											AS last_modify_date
 		  	  FROM mem_bsc_info T01
 		 LEFT JOIN mem_scca T02
 		 		ON T01.user_id = T02.user_id
 		 LEFT JOIN comn_cd T03
 		 		ON T02.scca_ds_cd = T03.dtl_cd
-		 LEFT JOIN mem_carr_hst T04
-		 		ON T01.user_id = T04.user_id
 		 	 WHERE T01.user_autr_nm != 'ADMIN'
 		  GROUP BY T01.user_nm, 
 		  		   T03.ds_cd
