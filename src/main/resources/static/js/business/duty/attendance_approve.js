@@ -33,9 +33,17 @@ $(function () {
             let existedCode = '';   // 중복 결재 내용
 
             for (let i = 0; i < isChecked.length; i++) {
-                if ($(isChecked[i]).parent().parent().children('.confirmCode').attr('id') == $(this).attr('id')) {
+                let confirmStatus = $(isChecked[i]).parent().parent().children('.confirmCode').attr('id');
+                let confirmStatusName = $(isChecked[i]).parent().parent().children('.confirmCode').text();
+                let confirmBtnName = $(this).attr('id');
+                
+                if (confirmStatus == confirmBtnName) {
                     flag = false;
-                    existedCode = $(isChecked[i]).parent().parent().children('.confirmCode').text();
+                    existedCode = confirmStatusName + '인 항목이 있습니다.';
+                    break;
+                } else if(confirmStatus == 'CONFIRM' && confirmBtnName == 'REJECT'){
+                    flag = false;
+                    existedCode = confirmStatusName + '인 항목이 있습니다.\n 결재취소 먼저 해주세요.';
                     break;
                 }
                 param.push({
@@ -45,11 +53,11 @@ $(function () {
             }
 
             if (flag) {
-                allPayment(param);
+                // allPayment(param);
             } else {
                 openPopup({
                     title: '실패',
-                    text: existedCode + '인 항목이 있습니다.',
+                    text: existedCode,
                     type: 'error'
                 });
             }

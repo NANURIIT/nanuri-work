@@ -34,3 +34,10 @@ jobs:
       uses: gradle/gradle-build-action@0d13054264b0bb894ded474f08ebb30921341cee
       with:
         arguments: build
+
+  deploy :
+    runs-on : self-hosted
+    needs : build
+    steps : 
+      - name : Depoly
+        run : cd ~/actions-runner && RUNNER_TRACKING_ID="" && ./startNanuriWork.sh &
