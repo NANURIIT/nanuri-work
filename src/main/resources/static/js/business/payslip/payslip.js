@@ -48,6 +48,8 @@ var getPayslipList = function(pageNo) {
                 console.log(object);
                 for(let i = 0; i < payslipList.length; i++) {
                     let tmpRow = payslipList[i];
+                    console.log(tmpRow.bscAm);
+                    console.log(commaStr(tmpRow.bscAm))
                     PAYSLIP_LIST_HTML += '<tr>';
                     PAYSLIP_LIST_HTML += ' <td>'+tmpRow.userId.substring(3, tmpRow.userId.length)+'</td>';
                     PAYSLIP_LIST_HTML += ' <td>'+tmpRow.userNm+'</td>';
@@ -57,7 +59,7 @@ var getPayslipList = function(pageNo) {
                     PAYSLIP_LIST_HTML += '<a class="pop_open">' + tmpRow.slydt + '</a>';  
                     PAYSLIP_LIST_HTML += '</td>';   
                     PAYSLIP_LIST_HTML += ' <td>'+tmpRow.slryKdnm+'</td>';
-                    PAYSLIP_LIST_HTML += ' <td>'+commaStr(tmpRow.bscAm)+'</td>';
+                    PAYSLIP_LIST_HTML += ' <td>'+commaStr(Number(tmpRow.bscAm))+'</td>';
                     PAYSLIP_LIST_HTML += ' <td>'+tmpRow.pydt+'</td>';
                     PAYSLIP_LIST_HTML += '</tr>'
 
