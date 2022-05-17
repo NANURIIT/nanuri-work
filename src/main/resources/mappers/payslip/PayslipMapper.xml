@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nanuri.work.business.payslip.mapper.PayslipMapper">
+
+	<select id="selectPayslipList" parameterType="String" resultType="com.nanuri.work.business.payslip.dto.PayslipDTO">
+	 	SELECT T01.user_id,			/* 사용자ID : 전화번호 */
+		   	   T01.user_nm,			/* 이름 */
+   	   		   T01.dty_nm, 			/* 직급 */
+		   	   T01.blg_nm, 			/* 소속 */	
+		   	   T02.slydt,			/* 급여일자 */
+	 	   	   T02.slry_kdnm,		/* 급여구분 */
+	   	   	   T02.bsc_am,			/* 지급금액 */
+	   	   	   T02.pydt				/* 지급일자 */
+	  	  FROM tb_pay_im 			T02 
+ 	 LEFT JOIN mem_bsc_info 		T01
+ 			ON T02.user_id 			= T01.user_id
+	</select>
+
+	<select id="selectTotalCountPayslip" parameterType="com.nanuri.work.business.payslip.dto.PayslipDTO" resultType="int">
+		SELECT COUNT(*)
+  	  	  FROM tb_pay_im T01
+ 	 LEFT JOIN mem_bsc_info T02
+  	  	    ON T01.user_id = T02.user_id 
+ 	 	 WHERE 1=1	
+	</select>
+	
+</mapper>
+
+

@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<!-- 공통헤드 -->
+<head th:replace="layout/notice/head :: headFragment"></head>
+
+<link rel="stylesheet" th:href="@{/sample/admin/css/notice.css}">
+<link rel="stylesheet" th:href="@{/sample/admin/css/attendance.css}">
+<link rel="stylesheet" th:href="@{/sample/admin/css/salary.css}">
+
+<script th:src="@{/js/business/payslip/payslip.js}"></script>
+
+<body>
+    <div class="wrapper">
+        <header th:replace="layout/notice/header :: headerFragment"></header>
+        <div class="submain_wrap">
+            <div class="sub_wrap notice_wrap">
+                <div class="sub_container notice_container">
+                    <div class="condition_wrap">
+                        <div class="notice_search notice_search_option">
+                            <form action="#">
+                                <div class="notice_search_box">
+                                    <span>조회일자</span>
+                                    <input id="startDate" name="startDate" type="text"> ~
+                                    <input id="endDate" name="endDate" type="text">
+                                    <a id="payslipSearch" href="#">검색</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="submain_title notice_title">
+                        급여조회
+                    </div>
+                    <div class="notice_list file_down_list">
+                        <div class="file_down_wrap">
+                            <button>급여파일 다운로드</button>
+                        </div>
+                        <table>
+                            <colgroup>
+                                <col style="width: 8%;">
+                                <col style="width: 8%;">
+                                <col style="width: 8%;">
+                                <col style="width: 15%;">
+                                <col style="width: 17%;">
+                                <col style="width: 10%;">
+                                <col style="width: 17%;">
+                                <col style="width: 17%;">
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th scope="col">사번번호</th>
+                                    <th scope="col">이름</th>
+                                    <th scope="col">직급</th>
+                                    <th>소속</th>
+                                    <th>급여일자</th>
+                                    <th>급여구분</th>
+                                    <th>지급금액</th>
+                                    <th>지급일자</th>
+                                </tr>
+                            </thead>
+                            <tbody id="payslipList">
+                                 <!-- <tr>
+                                    <td>123</td>
+                                    <td>홍길동</td>
+                                    <td>차장</td>
+                                    <td>나누리아이티</td>
+                                    <td class="pop_open">2022-04-14</td>
+                                    <td>근무</td>
+                                    <td>999,999,999원</td>
+                                    <td>2022-04-14</td>
+                                </tr>
+                                <tr>
+                                    <td>123</td>
+                                    <td>홍길동</td>
+                                    <td>차장</td>
+                                    <td>나누리아이티</td>
+                                    <td class="pop_open">2022-04-14</td>
+                                    <td>근무</td>
+                                    <td>999,999,999원</td>
+                                    <td>2022-04-14</td>
+                                </tr>
+                                <tr>
+                                    <td>123</td>
+                                    <td>홍길동</td>
+                                    <td>차장</td>
+                                    <td>나누리아이티</td>
+                                    <td class="pop_open">2022-04-14</td>
+                                    <td>근무</td>
+                                    <td>999,999,999원</td>
+                                    <td>2022-04-14</td>
+                                </tr>  -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="list_pagination" class="list_pagination">
+                        <!-- <a class="list_prev" href="#">
+                            
+                        </a>
+                        <ul>
+                            <li>
+                                <a href="#">1</a>
+                            </li>
+                            <li>
+                                <a href="#">2</a>
+                            </li>
+                            <li>
+                                <a href="#">3</a>
+                            </li>
+                            <li>
+                                <a href="#">4</a>
+                            </li>
+                            <li>
+                                <a href="#">5</a>
+                            </li>
+                            <li>
+                                <a href="#">...</a>
+                            </li>
+                            <li>
+                                <a href="#">51</a>
+                            </li>
+                        </ul>
+                        <a class="product_list_next" href="#">
+                            
+                        </a> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="pop_main">
+        <div class="pop_wrap">
+            <div class="close_btn">
+                <span class="hiddenTxt">닫기</span>
+            </div>
+            <div class="pop_container">
+                <div class="pop_content">
+                    <div class="salary_title">
+                        2022년 4월 급여명세서
+                    </div>
+                    <div class="salary_info">
+                        <div>성명: 홍길동</div>
+                        <div>직책: 사원</div>
+                        <div>지급일자: 2022-04-15</div>
+                    </div>
+                    <table class="salary_table">
+                        <colgroup>
+                            <col style="width:10%">
+                            <col style="width:10%">
+                            <col style="width:30%">
+                            <col style="width:10%">
+                            <col style="width:10%">
+                            <col style="width:30%">
+                        </colgroup>
+                        <tr>
+                            <th class="th_back">지급항목</th>
+                            <th class="th_back">지급액</th>
+                            <th class="th_back">계산방법</th>
+                            <th class="th_back">공제항목</th>
+                            <th class="th_back">공제액</th>
+                            <th class="th_back">계산방법</th>
+                        </tr>
+                        <tr>
+                            <td>기본급</td>
+                            <td>0</td>
+                            <td>연봉/12개월, 전월 소급 일할</td>
+                            <td>소득세</td>
+                            <td>0</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>직책수당</td>
+                            <td>0</td>
+                            <td></td>
+                            <td>주민세</td>
+                            <td>999,999,999</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>연장수당</td>
+                            <td>0</td>
+                            <td></td>
+                            <td>국민연금</td>
+                            <td>0</td>
+                            <td>기준소득월액*4.5%</td>
+                        </tr>
+                        <tr>
+                            <td>휴일수당</td>
+                            <td>0</td>
+                            <td></td>
+                            <td>건강보험</td>
+                            <td>0</td>
+                            <td>기준소득월액*4.5%</td>
+                        </tr>
+                        <tr>
+                            <td>상여금</td>
+                            <td>0</td>
+                            <td></td>
+                            <td>장기요양</td>
+                            <td>0</td>
+                            <td>기준소득월액*4.5%</td>
+                        </tr>
+                        <tr>
+                            <td>기타</td>
+                            <td>0</td>
+                            <td></td>
+                            <td>고용보험</td>
+                            <td>0</td>
+                            <td>기준소득월액*4.5%</td>
+                        </tr>
+                        <tr>
+                            <td>식대</td>
+                            <td>0</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>교통비</td>
+                            <td>0</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>복리후생</td>
+                            <td>0</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>당월</td>
+                            <td>0</td>
+                            <td>연봉/12개월, 전월 소급 일할</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td class="th_back">공제합계</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="th_back">지급합계</td>
+                            <td>0</td>
+                            <td></td>
+                            <td class="th_back">차감 수령액</td>
+                            <td>0</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" class="desc">귀하의 노고에 감사드립니다.</td>
+                            <td colspan="3" class="desc">주식회사 나누리아이티</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="bg-overlay"></div>
+    </div>
+    <!-- <script>
+        //팝업
+        // $(".pop_open").on('click', function() {
+        //     $(".pop_main").addClass('pop_on');
+        // });
+        // $(".close_btn, .bg-overlay").click(function(){
+        //     $(".pop_main").removeClass('pop_on');
+        // });
+    </script> -->
+</body>
+</html>

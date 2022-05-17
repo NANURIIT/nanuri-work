@@ -13,7 +13,7 @@ public class PayslipDTO extends CommonDTO{
 	private String dtyNm;			/* 직급 */
 	private String blgNm;			/* 소속 */
 	private String slydt;			/* 급여일자 */
-	private String slryKdnm;			/* 급여종류명 */
+	private String slryKdnm;		/* 급여종류명 */
 	private String createAt;		/* 생성일시 */
 	private String updateAt;		/* 수정일시 */
 	private String pydt;			/* 지급일자 */
