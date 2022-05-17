@@ -22,6 +22,8 @@ public class UserDetailsVO implements UserDetails {
 	private String userPassword;			/* 비밀번호 */
 	private MemberLevelCode userAutrNm;		/* 사용자 권한 */
 	private String accountActivYn;			/* 계정활성화여부 */
+	private String deviceToken;
+	private String fcmToken;
 	private final List<GrantedAuthority> authorities;
 
     private Boolean isLocked;

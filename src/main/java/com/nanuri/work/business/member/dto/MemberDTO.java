@@ -27,5 +27,7 @@ public class MemberDTO extends CommonDTO {
 	private String emailAddr;					/* 이메일 */
 	private MemberLevelCode userAutrNm;			/* 사용자권한 */
 	private String accountActivYn;				/* 계정활성여부 */
+	private String deviceToken;
+	private String fcmToken;
 	
 }

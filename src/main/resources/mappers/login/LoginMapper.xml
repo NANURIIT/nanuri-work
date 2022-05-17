@@ -13,5 +13,16 @@
 		  FROM mem_bsc_info
 		 WHERE user_id = #{userId}
 	</select>
+	
+	<select id="getUserDetailsByToken" parameterType="String" resultType="com.nanuri.work.com.login.vo.UserDetailsVO">
+		SELECT user_id, 
+			   user_nm, 
+			   tel_no, 
+			   user_password, 
+			   user_autr_nm, 
+			   account_activ_yn
+		  FROM mem_bsc_info
+		 WHERE device_token = #{auth}
+	</select>
 
 </mapper>
